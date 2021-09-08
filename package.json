@@ -1,0 +1,33 @@
+{
+  "name": "project-catwalk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fec-bareminimum/project-catwalk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fec-bareminimum/project-catwalk/issues"
+  },
+  "homepage": "https://github.com/fec-bareminimum/project-catwalk#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "bootstrap": "^3.4.1",
+    "express": "^4.17.1",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "babel-loader": "^8.2.2",
+    "enzyme": "^3.11.0",
+    "webpack": "^5.52.0"
+  }
+}
