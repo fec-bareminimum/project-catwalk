@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -w",
     "start": "nodemon server/index.js",
-    "postinstall": "precommit install"
+    "postinstall": "pre-commit install"
   },
   "repository": {
     "type": "git",
