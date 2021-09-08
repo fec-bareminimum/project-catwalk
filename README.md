@@ -1,9 +1,7 @@
 # Project Catwalk
 
-
 **Setup tasks**
 - run `npm install` in this directory to install the dependencies.
-- run `npm run build` and `npm start` in order to setup webpack and get the server running in separate terminals.
-- Create the config file and add your github API token to  attach it in every request as an "Authorization" header.
-- Run `brew install pre-commit` and run the post install script to prevent committing and pushing the main branch
-
+- run `npm run build` and `npm start` in separate terminals to start webpack and express.
+- use the `config.example.js` file to create your own `config.js` and add your github API token to attach as an "Authorization" header in requests.
+- run `brew install pre-commit` and run `npm postinstall` to prevent committing and pushing to the main branch.
