@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const ReviewsContext = React.createContext();
 
-export const ReviewsProvider({ children }) => {
+export const ReviewsProvider ({ children }) => {
   const [reviews, setReviews] = useState({});
   const [reviewMetadata, setReviewMetadata] = useState({});
 
@@ -15,7 +15,7 @@ export const ReviewsProvider({ children }) => {
       product_id
     }
 
-    axios.get('/reviews/', fetchDetails)
+    axios.get("/reviews/", fetchDetails)
       .then((response) => {
         setReviews(response);
         callback(response);
