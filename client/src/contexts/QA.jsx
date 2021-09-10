@@ -131,7 +131,7 @@ export const QAProvider({ children }) {
   }
 
   const value = {
-    fetchAllQuestions,
+    fetchQuestions,
     fetchAnswers,
     postQuestion,
     postAnswer,
