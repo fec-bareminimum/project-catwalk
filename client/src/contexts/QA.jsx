@@ -15,13 +15,13 @@ export const QAProvider({ children }) {
     }
 
     axios.get('/qa/questions', fetchParams)
-    .then((response) => {
-      setQuestionsList(response);
-      callback(response);
-    })
-    .catch((err) => {
-      console.log('Server failed to collect Questions list');
-    })
+      .then((response) => {
+        setQuestionsList(response);
+        callback(response);
+      })
+      .catch((err) => {
+        console.log('Server failed to collect Questions list');
+      })
   }
 
   const fetchAnswers = (question_id, callback) => {
@@ -31,13 +31,13 @@ export const QAProvider({ children }) {
     }
 
     axios.get(`/qa/questions/${questionID}/answers`, fetchParams)
-    .then((response) => {
-      setAnswersList(response);
-      callback(response);
-    })
-    .catch((err) => {
-      console.log('Server failed to collect Answers list');
-    })
+      .then((response) => {
+        setAnswersList(response);
+        callback(response);
+      })
+      .catch((err) => {
+        console.log('Server failed to collect Answers list');
+      })
   }
 
   const postQuestion = (body, name, email, product_id, callback) => {
