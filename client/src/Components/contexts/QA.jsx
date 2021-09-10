@@ -74,7 +74,7 @@ export const QAProvider({ children }) {
       question_id
     }
 
-    axios.put(`/qa/questions/${question_id}/helpful`, callback)
+    axios.put(`/qa/questions/${question_id}/helpful`, markHelpfulParams)
       .then((response) => {
         callback();
       })
@@ -88,7 +88,7 @@ export const QAProvider({ children }) {
       question_id
     }
 
-    axios.put(`/qa/questions/${question_id}/report`, callback)
+    axios.put(`/qa/questions/${question_id}/report`, reportQuestionParams)
       .then((response) => {
         callback();
       })
@@ -102,7 +102,7 @@ export const QAProvider({ children }) {
       answer_id
     }
 
-    axios.put(`/qa/answers/${answer_id}/helpful`, callback)
+    axios.put(`/qa/answers/${answer_id}/helpful`, markAnswerParams)
       .then((response) => {
         callback();
       })
@@ -116,7 +116,7 @@ export const QAProvider({ children }) {
       answer_id
     }
 
-    axios.put(`/qa/answers/${answer_id}/report`, callback)
+    axios.put(`/qa/answers/${answer_id}/report`, reportAnswerParams)
       .then((response) => {
         callback();
       })
