@@ -14,7 +14,7 @@
   ],
   "overrides": [
     {
-      "files": "client/**/*.jsx",
+      "files": "client/src/*.jsx",
       "rules": {
         "import/extensions": "off",
         "react/prop-types": "off",
