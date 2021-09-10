@@ -4,10 +4,10 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "test": "npm run lint && npm run lint:fix && echo \"Error: no test specified\"",
+    "test": "echo \"Error: no test specified\"",
     "build": "webpack -w",
     "start": "nodemon server/index.js",
-    "postinstall": "pre-commit install && npx husky add .husky/pre-commit \"npm test\"",
+    "postinstall": "npx husky add .husky/pre-commit 'npm test && npm run lint && npm run lint:fix && git add .'",
     "lint:fix": "eslint client --fix --ext .js,.jsx",
     "lint": "eslint client --ext .js,.jsx",
     "prepare": "npx husky install"
