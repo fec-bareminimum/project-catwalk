@@ -10,6 +10,7 @@
 Project Catwalk is a MVP client-facing retail web-portal. Browse catalog products with a modern customer experience.
 
 ## Setup tasks
+- run `npm run prepare`.
   - run `npm install` in this directory to install the dependencies.
   - run `npm run build` and `npm start` in separate terminals to start webpack and express.
   - use the `config.example.js` file to create your own `config.js` and add your github API token to attach as an "Authorization" header in requests.
