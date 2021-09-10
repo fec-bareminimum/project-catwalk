@@ -4,6 +4,10 @@ import axios from 'axios';
 export const QAContext = React.createContext();
 
 export const QAProvider({ children }) {
+  const [questionsList, setQuestionsList] = useState([]);
+  const [answersList, setAnswersList] = useState([]);
+
+
   const fetchAllQuestions = (product_id, page, count, callback) => {
     const fetchParams = {
       product_id,
@@ -13,7 +17,8 @@ export const QAProvider({ children }) {
 
     axios.get('/qa/questions', fetchParams)
     .then((response) => {
-      callback(response)
+      setQuestionsList(response);
+      callback(response);
     })
     .catch((err) => {
       console.log('Server failed to collect Questions list');
@@ -28,6 +33,7 @@ export const QAProvider({ children }) {
 
     axios.get(`/qa/questions/${questionID}/answers`, fetchParams)
     .then((response) => {
+      setAnswersList(response);
       callback(response);
     })
     .catch((err) => {
