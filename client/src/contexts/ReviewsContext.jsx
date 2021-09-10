@@ -7,7 +7,7 @@ export const ReviewsProvider({ children }) => {
   const [reviews, setReviews] = useState({});
   const [reviewMetadata, setReviewMetadata] = useState({});
 
-  const fetchAllReviews = (page, count, sort, product_id, callback) => {
+  const fetchReviews = (page, count, sort, product_id, callback) => {
     const fetchDetails = {
       page,
       count,
@@ -103,7 +103,7 @@ export const ReviewsProvider({ children }) => {
   }
 
   const value = {
-    fetchAllReviews,
+    fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
@@ -115,7 +115,7 @@ export const ReviewsProvider({ children }) => {
 
 const useReviews = () => {
   const {
-    fetchAllReviews,
+    fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
@@ -123,7 +123,7 @@ const useReviews = () => {
    } = useContext(ReviewsContext);
 
    return {
-    fetchAllReviews,
+    fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
