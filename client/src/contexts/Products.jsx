@@ -19,7 +19,7 @@ export function ProductsContext({ children }) => {
   }
 
   const fetchProductInfo = (product_id) => {
-    axios.get('/products/:product_id')
+    axios.get(`/products/${product_id}`)
     .then(response => setProductsInfo(response))
     .catch((err) => {
       console.log('Failed to load products', err)
@@ -27,7 +27,7 @@ export function ProductsContext({ children }) => {
   }
 
   const fetchProductStyles = (product_id) => {
-    axios.get('/products/:product_id/styles')
+    axios.get(`/products/${product_id}/styles`)
     .then(response => setStyles(response))
     .catch((err) => {
       console.log('Failed to load products', err)
@@ -36,7 +36,7 @@ export function ProductsContext({ children }) => {
 
 
   const fetchProductRelatedStyles = (product_id) => {
-    axios.get('/products/:product_id/related)
+    axios.get(`/products/${product_id}/related`)
     .then(response => setRelatedProducts(response))
     .catch((err) => {
       console.log('Failed to load products', err)
