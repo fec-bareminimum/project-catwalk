@@ -10,44 +10,71 @@ export function ProductsContext({ children }) => {
   const [relatedProducts, setRelatedProducts] = useState({})
 
 
-  const fetchProducts = (page, count) => {
-    axios.get('/products')
-    .then(response => setProducts(response))
-    .catch((err) => {
-      console.log('Failed to load products', err)
-    });
+  const fetchProducts = (page, count, callback) => {
+    const productResults = {
+      page,
+      count
+    }
+
+    axios.get('/products', productResults)
+      .then((response) => {
+        setProducts(response);
+        callback(response);
+      })
+      .catch((err) => {
+        console.log('Failed to load products', err)
+      });
   }
 
+
   const fetchProductInfo = (product_id) => {
-    axios.get(`/products/${product_id}`)
-    .then(response => setProductsInfo(response))
-    .catch((err) => {
-      console.log('Failed to load products', err)
-    });
+    const productInfo = {
+      product_id
+    }
+    axios.get(`/products/${product_id}`, productInfo)
+      .then((response) => {
+        setProductsInfo(response)
+        callback(response)
+      })
+      .catch((err) => {
+        console.log('Failed to load products', err)
+      });
   }
 
   const fetchProductStyles = (product_id) => {
-    axios.get(`/products/${product_id}/styles`)
-    .then(response => setStyles(response))
-    .catch((err) => {
-      console.log('Failed to load products', err)
-    });
+    const styleDetails = {
+      product_id
+    }
+    axios.get(`/products/${product_id}/styles`, styleDetails)
+      .then((response) => {
+        setStyles(response)
+        callback(response)
+      })
+      .catch((err) => {
+        console.log('Failed to load products', err)
+      });
   }
 
 
   const fetchProductRelatedStyles = (product_id) => {
-    axios.get(`/products/${product_id}/related`)
-    .then(response => setRelatedProducts(response))
-    .catch((err) => {
-      console.log('Failed to load products', err)
-    });
+    const relatedProducts = {
+      product_id
+    }
+    axios.get(`/products/${product_id}/related`, relatedProducts)
+      .then((response) => {
+        setRelatedProducts(response)
+        callback(response)
+      })
+      .catch((err) => {
+        console.log('Failed to load products', err)
+      });
   }
 
   const value = {
-    productList,
-    productInfo,
-    styles,
-    relatedProducts
+    fetchProducts,
+    fetchProductInfo,
+    fetchProductStyles,
+    fetchProductRelatedStyles
   };
 
   return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>;
@@ -55,17 +82,17 @@ export function ProductsContext({ children }) => {
 
 const useProducts = () => {
   const {
-    productList,
-    productInfo,
-    styles,
-    relatedProducts
+    fetchProducts,
+    fetchProductInfo,
+    fetchProductStyles,
+    fetchProductRelatedStyles
   } = useContext(ProductsContext);
 
   return {
-    productList,
-    productInfo,
-    styles,
-    relatedProducts
+    fetchProducts,
+    fetchProductInfo,
+    fetchProductStyles,
+    fetchProductRelatedStyles
   };
 };
 
