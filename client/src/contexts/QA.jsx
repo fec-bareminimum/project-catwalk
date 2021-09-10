@@ -146,7 +146,7 @@ export const QAProvider({ children }) {
 
 const useQA = () => {
   const {
-    fetchAllQuestions,
+    fetchQuestions,
     fetchAnswers,
     postQuestion,
     postAnswer,
@@ -157,7 +157,7 @@ const useQA = () => {
   } = useContext(QAContext);
 
   return {
-    fetchAllQuestions,
+    fetchQuestions,
     fetchAnswers,
     postQuestion,
     postAnswer,
