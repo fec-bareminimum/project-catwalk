@@ -74,7 +74,7 @@ export const QAProvider({ children }) {
       })
   }
 
-  const markQuestionHelpful = (question_id) => {
+  const markQuestionHelpful = (question_id, callback) => {
     const markHelpfulParams = {
       question_id
     }
@@ -88,7 +88,7 @@ export const QAProvider({ children }) {
       })
   }
 
-  const reportQuestion = (question_id) => {
+  const reportQuestion = (question_id, callback) => {
     const reportQuestionParams = {
       question_id
     }
@@ -102,7 +102,7 @@ export const QAProvider({ children }) {
       })
   }
 
-  const markAnswerHelpful = (answer_id) => {
+  const markAnswerHelpful = (answer_id, callback) => {
     const markAnswerParams = {
       answer_id
     }
@@ -116,7 +116,7 @@ export const QAProvider({ children }) {
       })
   }
 
-  const reportAnswer = (answer_id) => {
+  const reportAnswer = (answer_id, callback) => {
     const reportAnswerParams = {
       answer_id
     }
