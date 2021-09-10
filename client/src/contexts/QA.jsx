@@ -3,16 +3,16 @@ import axios from 'axios';
 
 export const QAContext = React.createContext();
 
-export const QAProvider({ children }) {
+export const QAProvider = ({ children }) => {
   const [questionsList, setQuestionsList] = useState([]);
   const [answersList, setAnswersList] = useState([]);
 
-  const fetchQuestions = (product_id, page, count, callback) => {
+  const fetchQuestions = (productId, page, count, callback) => {
     const fetchParams = {
-      product_id,
+      productId,
       page,
-      count
-    }
+      count,
+    };
 
     axios.get('/qa/questions', fetchParams)
       .then((response) => {
@@ -21,14 +21,14 @@ export const QAProvider({ children }) {
       })
       .catch((err) => {
         console.log('Server failed to collect Questions list');
-      })
-  }
+      });
+  };
 
-  const fetchAnswers = (question_id, callback) => {
+  const fetchAnswers = (questionId, callback) => {
     const fetchParams = {
       page,
-      count
-    }
+      count,
+    };
 
     axios.get(`/qa/questions/${questionID}/answers`, fetchParams)
       .then((response) => {
@@ -37,16 +37,16 @@ export const QAProvider({ children }) {
       })
       .catch((err) => {
         console.log('Server failed to collect Answers list');
-      })
-  }
+      });
+  };
 
-  const postQuestion = (body, name, email, product_id, callback) => {
+  const postQuestion = (body, name, email, productId, callback) => {
     const addParams = {
       body,
       name,
       email,
-      product_id
-    }
+      productId,
+    };
 
     axios.post('/qa/questions', addParams)
       .then((response) => {
@@ -54,81 +54,81 @@ export const QAProvider({ children }) {
       })
       .catch((err) => {
         console.log('Server failed to post question');
-      })
-  }
+      });
+  };
 
-  const postAnswer = (question_id, body, name, email, photos, callback) => {
+  const postAnswer = (questionId, body, name, email, photos, callback) => {
     const addParams = {
       body,
       name,
       email,
-      photos
-    }
+      photos,
+    };
 
-    axios.post(`/qa/questions/${question_id}/answers`, addParams)
+    axios.post(`/qa/questions/${questionId}/answers`, addParams)
       .then((response) => {
         callback();
       })
       .catch((err) => {
         console.log('Server failed to post answer');
-      })
-  }
+      });
+  };
 
-  const markQuestionHelpful = (question_id, callback) => {
+  const markQuestionHelpful = (questionId, callback) => {
     const markHelpfulParams = {
-      question_id
-    }
+      questionId,
+    };
 
-    axios.put(`/qa/questions/${question_id}/helpful`, markHelpfulParams)
+    axios.put(`/qa/questions/${questionId}/helpful`, markHelpfulParams)
       .then((response) => {
         callback();
       })
       .catch((err) => {
         console.log('Server failed to update question helpfulness');
-      })
-  }
+      });
+  };
 
-  const reportQuestion = (question_id, callback) => {
+  const reportQuestion = (questionId, callback) => {
     const reportQuestionParams = {
-      question_id
-    }
+      questionId,
+    };
 
-    axios.put(`/qa/questions/${question_id}/report`, reportQuestionParams)
+    axios.put(`/qa/questions/${questionId}/report`, reportQuestionParams)
       .then((response) => {
         callback();
       })
       .catch((err) => {
         console.log('Server failed to report question');
-      })
-  }
+      });
+  };
 
-  const markAnswerHelpful = (answer_id, callback) => {
+  const markAnswerHelpful = (answerId, callback) => {
     const markAnswerParams = {
-      answer_id
-    }
+      answerId,
+    };
 
-    axios.put(`/qa/answers/${answer_id}/helpful`, markAnswerParams)
+    axios.put(`/qa/answers/${answerId}/helpful`, markAnswerParams)
       .then((response) => {
         callback();
       })
       .catch((err) => {
         console.log('Server failed to update answer helpfulness');
-      })
-  }
+      });
+  };
 
-  const reportAnswer = (answer_id, callback) => {
+  const reportAnswer = (answerId, callback) => {
     const reportAnswerParams = {
-      answer_id
-    }
+      answerId,
+    };
 
-    axios.put(`/qa/answers/${answer_id}/report`, reportAnswerParams)
+    axios.put(`/qa/answers/${answerId}/report`, reportAnswerParams)
       .then((response) => {
         callback();
       })
       .catch((err) => {
         console.log('Server failed to report answer');
-      })
-  }
+      });
+  };
 
   const value = {
     fetchQuestions,
@@ -142,7 +142,7 @@ export const QAProvider({ children }) {
   };
 
   return <QAContext.Provider value={value}>{children}</QAContext.Provider>;
-}
+};
 
 const useQA = () => {
   const {
