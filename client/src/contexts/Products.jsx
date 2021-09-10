@@ -4,10 +4,10 @@ import axios from 'axios';
 export const ProductsContext = React.createContext();
 
 export function ProductsContext({ children }) => {
-  const [loadProducts, setProducts] = useState({})
-  const [loadProductsInfo, setProductsInfo] = useState({})
-  const [loadStyles, setStyles] = useState({})
-  const [loadRelatedProducts, setRelatedProducts] = useState({})
+  const [productList, setProducts] = useState({})
+  const [productInfo, setProductsInfo] = useState({})
+  const [styles, setStyles] = useState({})
+  const [relatedProducts, setRelatedProducts] = useState({})
 
 
   const fetchProducts = (page, count) => {
@@ -44,10 +44,10 @@ export function ProductsContext({ children }) => {
   }
 
   const value = {
-    loadProducts,
-    loadProductInfo,
-    loadStyles,
-    loadRelatedProducts
+    productList,
+    productInfo,
+    styles,
+    relatedProducts
   };
 
   return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>;
@@ -55,24 +55,22 @@ export function ProductsContext({ children }) => {
 
 const useProducts = () => {
   const {
-    loadProducts,
-    loadProductInfo,
-    loadStyles,
-    loadRelatedProducts
+    productList,
+    productInfo,
+    styles,
+    relatedProducts
   } = useContext(ProductsContext);
 
   return {
-    loadProducts,
-    loadProductInfo,
-    loadStyles,
-    loadRelatedProducts
+    productList,
+    productInfo,
+    styles,
+    relatedProducts
   };
 };
 
 
 export default useProducts;
-
-
 
 
 //TBD
