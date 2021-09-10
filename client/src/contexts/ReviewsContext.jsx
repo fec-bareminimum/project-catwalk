@@ -3,19 +3,19 @@ import axios from 'axios';
 
 export const ReviewsContext = React.createContext();
 
-export const ReviewsProvider ({ children }) => {
+export const ReviewsProvider = ({ children }) => {
   const [reviews, setReviews] = useState({});
   const [reviewMetadata, setReviewMetadata] = useState({});
 
-  const fetchReviews = (page, count, sort, product_id, callback) => {
+  const fetchReviews = (page, count, sort, productId, callback) => {
     const fetchDetails = {
       page,
       count,
       sort,
-      product_id
-    }
+      productId,
+    };
 
-    axios.get("/reviews/", fetchDetails)
+    axios.get('/reviews/', fetchDetails)
       .then((response) => {
         setReviews(response);
         callback(response);
@@ -23,12 +23,12 @@ export const ReviewsProvider ({ children }) => {
       .catch((err) => {
         console.log('Server failed to fetch all reviews');
       });
-  }
+  };
 
-  const fetchReviewMetadata = (product_id, callback) => {
+  const fetchReviewMetadata = (productId, callback) => {
     const fetchDetails = {
-      product_id
-    }
+      productId,
+    };
 
     axios.get('/reviews/meta', fetchDetails)
       .then((response) => {
@@ -38,10 +38,10 @@ export const ReviewsProvider ({ children }) => {
       .catch((err) => {
         console.log('Server failed to fetch review metadata');
       });
-  }
+  };
 
   const addReview = (
-    product_id,
+    productId,
     rating,
     summary,
     body,
@@ -50,10 +50,10 @@ export const ReviewsProvider ({ children }) => {
     email,
     photos,
     characteristics,
-    callback
+    callback,
   ) => {
     const addDetails = {
-      product_id,
+      productId,
       rating,
       summary,
       body,
@@ -62,56 +62,56 @@ export const ReviewsProvider ({ children }) => {
       email,
       photos,
       characteristics,
-      callback
-    }
+      callback,
+    };
 
     axios.post('/reviews', addDetails)
       .then((response) => {
         callback(response);
-      }
+      })
       .catch((err) => {
-        console.log('Server failed to post review')
+        console.log('Server failed to post review');
       });
-  }
+  };
 
-  const markReviewHelpful = (review_id, callback) => {
+  const markReviewHelpful = (reviewId, callback) => {
     const markDetails = {
-      review_id
-    }
+      reviewId,
+    };
 
-    axios.put(`/reviews/${review_id}/helpful`, markDetails)
+    axios.put(`/reviews/${reviewId}/helpful`, markDetails)
       .then((response) => {
         callback(response);
       })
       .catch((err) => {
-        console.log('Server failed to mark review as helpful')
+        console.log('Server failed to mark review as helpful');
       });
-  }
+  };
 
-  const reportReview = (review_id, callback) => {
+  const reportReview = (reviewId, callback) => {
     const reportDetails = {
-      review_id
-    }
+      reviewId,
+    };
 
-    axios.put(`/reviews/${review_id}/report`, callback)
+    axios.put(`/reviews/${reviewId}/report`, callback)
       .then((response) => {
         callback(response);
       })
       .catch((err) => {
-        console.log('Server failed to report review')
+        console.log('Server failed to report review');
       });
-  }
+  };
 
   const value = {
     fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
-    reportReview
+    reportReview,
   };
 
-  return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
-}
+  return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>;
+};
 
 const useReviews = () => {
   const {
@@ -119,16 +119,16 @@ const useReviews = () => {
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
-    reportReview
-   } = useContext(ReviewsContext);
+    reportReview,
+  } = useContext(ReviewsContext);
 
-   return {
+  return {
     fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
-    reportReview
-   };
+    reportReview,
+  };
 };
 
 export default useReviews;
