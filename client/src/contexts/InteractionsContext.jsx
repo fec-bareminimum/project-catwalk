@@ -24,7 +24,7 @@ export const InteractionsContext ({ children }) => {
     logInteraction,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return <InteractionsContext.Provider value={value}>{children}</InteractionsContext.Provider>;
 }
 
 const useInteractions = () => {
