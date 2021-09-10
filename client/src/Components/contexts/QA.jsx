@@ -7,8 +7,7 @@ export const QAProvider({ children }) {
   const [questionsList, setQuestionsList] = useState([]);
   const [answersList, setAnswersList] = useState([]);
 
-
-  const fetchAllQuestions = (product_id, page, count, callback) => {
+  const fetchQuestions = (product_id, page, count, callback) => {
     const fetchParams = {
       product_id,
       page,
