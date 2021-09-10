@@ -9,13 +9,11 @@ export function ProductsContext({ children }) => {
   const [styles, setStyles] = useState({})
   const [relatedProducts, setRelatedProducts] = useState({})
 
-
   const fetchProducts = (page, count, callback) => {
     const productResults = {
       page,
       count
     }
-
     axios.get('/products', productResults)
       .then((response) => {
         setProducts(response);
@@ -26,8 +24,7 @@ export function ProductsContext({ children }) => {
       });
   }
 
-
-  const fetchProductInfo = (product_id) => {
+  const fetchProductInfo = (product_id, callback) => {
     const productInfo = {
       product_id
     }
@@ -41,7 +38,7 @@ export function ProductsContext({ children }) => {
       });
   }
 
-  const fetchProductStyles = (product_id) => {
+  const fetchProductStyles = (product_id, callback) => {
     const styleDetails = {
       product_id
     }
@@ -55,8 +52,7 @@ export function ProductsContext({ children }) => {
       });
   }
 
-
-  const fetchProductRelatedStyles = (product_id) => {
+  const fetchProductRelatedStyles = (product_id, callback) => {
     const relatedProducts = {
       product_id
     }
@@ -99,19 +95,3 @@ const useProducts = () => {
 
 export default useProducts;
 
-
-//TBD
-
-// const useCart = () => {
-//   const {
-//     loading,
-//     cartProducts,
-//   } = useContext(CartContext);
-
-//   return {
-//     loading,
-//     cartProducts,
-//   };
-// };
-
-// export default useCart;
