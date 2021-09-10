@@ -4,6 +4,9 @@ import axios from 'axios';
 export const ReviewsContext = React.createContext();
 
 export const ReviewsProvider({ children }) => {
+  const [reviews, setReviews] = useState({});
+  const [reviewMetadata, setReviewMetadata] = useState({});
+
   const fetchAllReviews = (page, count, sort, product_id, callback) => {
     const fetchDetails = {
       page,
@@ -14,6 +17,7 @@ export const ReviewsProvider({ children }) => {
 
     axios.get('/reviews/', fetchDetails)
       .then((response) => {
+        setReviews(response);
         callback(response);
       })
       .catch((err) => {
@@ -28,6 +32,7 @@ export const ReviewsProvider({ children }) => {
 
     axios.get('/reviews/meta', fetchDetails)
       .then((response) => {
+        setReviewMetadata(response);
         callback(response);
       })
       .catch((err) => {
@@ -69,12 +74,12 @@ export const ReviewsProvider({ children }) => {
       });
   }
 
-  const markReviewHelpful = (review_id) => {
+  const markReviewHelpful = (review_id, callback) => {
     const markDetails = {
       review_id
     }
 
-    axios.put(`/reviews/${review_id}/helpful`, callback)
+    axios.put(`/reviews/${review_id}/helpful`, markDetails)
       .then((response) => {
         callback(response);
       })
@@ -83,7 +88,7 @@ export const ReviewsProvider({ children }) => {
       });
   }
 
-  const reportReview = (review_id) => {
+  const reportReview = (review_id, callback) => {
     const reportDetails = {
       review_id
     }
@@ -115,7 +120,7 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview
-   } = useReviews(ReviewsContext);
+   } = useContext(ReviewsContext);
 
    return {
     fetchAllReviews,
