@@ -4,7 +4,6 @@ import axios from 'axios';
 export const QAContext = React.createContext();
 
 export const QAProvider({ children }) {
-
   const fetchAllQuestions = (product_id, page, count, callback) => {
     const fetchParams = {
       product_id,
@@ -12,7 +11,7 @@ export const QAProvider({ children }) {
       count
     }
 
-    axios.get('/qa/questions')
+    axios.get('/qa/questions', fetchParams)
     .then((response) => {
       callback(response)
     })
@@ -22,13 +21,12 @@ export const QAProvider({ children }) {
   }
 
   const fetchAnswers = (question_id, callback) => {
-
     const fetchParams = {
       page,
       count
     }
 
-    axios.get(`/qa/questions/${questionID}/answers`)
+    axios.get(`/qa/questions/${questionID}/answers`, fetchParams)
     .then((response) => {
       callback(response);
     })
@@ -38,7 +36,6 @@ export const QAProvider({ children }) {
   }
 
   const postQuestion = (body, name, email, product_id, callback) => {
-
     const addParams = {
       body,
       name,
@@ -56,7 +53,6 @@ export const QAProvider({ children }) {
   }
 
   const postAnswer = (question_id, body, name, email, photos, callback) => {
-
     const addParams = {
       body,
       name,
@@ -64,13 +60,13 @@ export const QAProvider({ children }) {
       photos
     }
 
-    axios.post(`/qa/questions/${question_id}/answers`, {addParams})
-    .then((response) => {
-      callback();
-    })
-    .catch((err) => {
-      console.log('Server failed to post answer');
-    })
+    axios.post(`/qa/questions/${question_id}/answers`, addParams)
+      .then((response) => {
+        callback();
+      })
+      .catch((err) => {
+        console.log('Server failed to post answer');
+      })
   }
 
   const markQuestionHelpful = (question_id) => {
@@ -79,12 +75,12 @@ export const QAProvider({ children }) {
     }
 
     axios.put(`/qa/questions/${question_id}/helpful`, callback)
-    .then((response) => {
-      callback();
-    })
-    .catch((err) => {
-      console.log('Server failed to update question helpfulness');
-    })
+      .then((response) => {
+        callback();
+      })
+      .catch((err) => {
+        console.log('Server failed to update question helpfulness');
+      })
   }
 
   const reportQuestion = (question_id) => {
@@ -93,12 +89,12 @@ export const QAProvider({ children }) {
     }
 
     axios.put(`/qa/questions/${question_id}/report`, callback)
-    .then((response) => {
-      callback();
-    })
-    .catch((err) => {
-      console.log('Server failed to report question');
-    })
+      .then((response) => {
+        callback();
+      })
+      .catch((err) => {
+        console.log('Server failed to report question');
+      })
   }
 
   const markAnswerHelpful = (answer_id) => {
@@ -107,12 +103,12 @@ export const QAProvider({ children }) {
     }
 
     axios.put(`/qa/answers/${answer_id}/helpful`, callback)
-    .then((response) => {
-      callback();
-    })
-    .catch((err) => {
-      console.log('Server failed to update answer helpfulness');
-    })
+      .then((response) => {
+        callback();
+      })
+      .catch((err) => {
+        console.log('Server failed to update answer helpfulness');
+      })
   }
 
   const reportAnswer = (answer_id) => {
@@ -121,12 +117,12 @@ export const QAProvider({ children }) {
     }
 
     axios.put(`/qa/answers/${answer_id}/report`, callback)
-    .then((response) => {
-      callback();
-    })
-    .catch((err) => {
-      console.log('Server failed to report answer');
-    })
+      .then((response) => {
+        callback();
+      })
+      .catch((err) => {
+        console.log('Server failed to report answer');
+      })
   }
 
   const value = {
@@ -137,7 +133,7 @@ export const QAProvider({ children }) {
     markQuestionHelpful,
     markAnswerHelpful,
     reportQuestion,
-    reportAnswer
+    reportAnswer,
   };
 
   return <QAContext.Provider value={value}>{children}</QAContext.Provider>;
@@ -152,7 +148,7 @@ const useQA = () => {
     markQuestionHelpful,
     markAnswerHelpful,
     reportQuestion,
-    reportAnswer
+    reportAnswer,
   } = useContext(QAContext);
 
   return {
