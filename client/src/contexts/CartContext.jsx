@@ -6,7 +6,7 @@ export const CartContext = React.createContext();
 export const CartContext ({ children }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
-  const addProductToCard = (sku_id, callback) => {
+  const addProductToCart = (sku_id, callback) => {
     axios.post('/cart', { sku_id })
       .then((response) => {
         callback();
@@ -29,7 +29,7 @@ export const CartContext ({ children }) => {
 
   const value = {
     fetchCartProducts,
-    addProductToCard,
+    addProductToCart
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
@@ -38,12 +38,12 @@ export const CartContext ({ children }) => {
 const useCart = () => {
   const {
     fetchCartProducts,
-    addProductToCard
+    addProductToCart
   } = useContext(CartContext);
 
   return {
     fetchCartProducts,
-    addProductToCard
+    addProductToCart
   };
 };
 
