@@ -6,6 +6,5 @@ function App() {
   return <div>{title}</div>;
 }
 
+
 export default App;
-
-
