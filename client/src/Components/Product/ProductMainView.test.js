@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import App from './App.jsx';
+import ProductMainView from './ProductMainView.jsx';
 // import '@testing-library/jest-dom';
 
 
@@ -18,7 +18,7 @@ describe('Product Title', () => {
 });
 
 describe('Product Price', () => {
-  test('Finds the price, () => {
+  test('Finds the price', () => {
     render(<Product />);
     expect(screen.getByText('price')).toBeInTheDocument()
   });
