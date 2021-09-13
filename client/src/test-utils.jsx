@@ -5,6 +5,7 @@ import { ReviewsProvider } from './contexts/ReviewsContext.jsx';
 import { QAProvider } from './contexts/QAContext.jsx';
 import { InteractionsProvider } from './contexts/InteractionsContext.jsx';
 import { CartProvider } from './contexts/CartContext.jsx';
+import '@testing-library/jest-dom';
 
 const AllProviders = ({ children }) => {
   return (
@@ -13,7 +14,7 @@ const AllProviders = ({ children }) => {
         <QAProvider>
           <InteractionsProvider>
             <CartProvider>
-              { children }
+              {children}
             </CartProvider>
           </InteractionsProvider>
         </QAProvider>

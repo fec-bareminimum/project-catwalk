@@ -10,7 +10,7 @@ describe('RelatedContainer', () => {
   test('displays two sets of related products', () => {
     render(<RelatedContainer />);
 
-    expect(screen.getByTestId('outfitProductsContainer')).toBeInDocument();
-    expect(screen.getByTestId('relatedProductsContainer')).toBeInDocument();
+    expect(screen.getByTestId('outfitProductsContainer')).toBeInTheDocument();
+    expect(screen.getByTestId('relatedProductsContainer')).toBeInTheDocument();
   });
 });
