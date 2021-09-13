@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render } from '../../../../test-utils.jsx';
 import ProductCard from './ProductCard.jsx';
 import sampleProduct from './sampleProduct';
 
@@ -14,7 +14,7 @@ describe('ProductCard', () => {
 
   beforeEach(() => {
     // Refresh the props object before each test
-    props = Object.assign({}, sampleProduct);
+    props = { ...sampleProduct };
   });
 
   test('renders ProductCard component', () => {
@@ -24,9 +24,9 @@ describe('ProductCard', () => {
   test('renders product details from props', () => {
     render(<ProductCard {...props} />);
 
-    expect(screen.getByText('Camo Onesie')).toBeTruthy();
-    expect(screen.getByText('Jackets')).toBeTruthy();
-    expect(screen.getByText('$140')).toBeTruthy();
-    expect(screen.getByRole('img')).toBeTruthy();
+    expect(screen.getByText('Camo Onesie')).toBeInDocument();
+    expect(screen.getByText('Jackets')).toBeInDocument();
+    expect(screen.getByText('$140')).toBeInDocument();
+    expect(screen.getByRole('img')).toBeInDocument();
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import CardList from '../CardList/CardList';
+import CardList from '../CardList/CardList.jsx';
 
 const RelatedProducts = () => {
   // will access the state for products in PRODUCTS
