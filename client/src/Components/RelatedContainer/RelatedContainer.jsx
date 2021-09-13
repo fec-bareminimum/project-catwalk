@@ -4,7 +4,7 @@ import OutfitProducts from './OutfitProducts/OutfitProducts.jsx';
 
 const RelatedContainer = () => {
   return (
-    <div>
+    <div className="relatedContainer">
       <RelatedProducts />
 
       <OutfitProducts />

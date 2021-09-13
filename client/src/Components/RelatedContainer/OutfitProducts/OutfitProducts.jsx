@@ -1,15 +1,15 @@
 import React from 'react';
-import CardList from '../CardList/CardList.jsx';
+import CardList from '../CardList/CardList';
 
 const OutfitProducts = () => {
   // will access the state for products in CART
   // will render the card list for that array
 
   return (
-    <div className="outfitProductsContainer">
+    <section data-testid="outfitProductsContainer">
       <p>under construction</p>
       <CardList />
-    </div>
+    </section>
   );
 };
 
