@@ -7,20 +7,16 @@
     "react/jsx-no-undef": 2,
     "func-names": 0,
     "new-cap": 0,
-    "no-undef": 0
+    "no-undef": 0,
+    "import/extensions": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "no-console": "off",
+    "import/no-unresolved": "off",
+    "react/jsx-filename-extension": "off",
+    "arrow-body-style": "off"
   },
   "plugins": [
     "react"
-  ],
-  "overrides": [
-    {
-      "files": "client/src/*.jsx",
-      "rules": {
-        "import/extensions": "off",
-        "react/prop-types": "off",
-        "no-unused-vars": "off",
-        "no-console": "off"
-      }
-    }
   ]
 }
