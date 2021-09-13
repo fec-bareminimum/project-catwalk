@@ -19,7 +19,7 @@ const AllProviders = ({ children }) => {
         </QAProvider>
       </ReviewsProvider>
     </ProductsProvider>
-  )
+  );
 };
 
 const customRender = (ui, options) =>
