@@ -14,7 +14,7 @@
     "no-console": "off",
     "import/no-unresolved": "off",
     "react/jsx-filename-extension": "off",
-    "arrow-body-style"
+    "arrow-body-style": "off"
   },
   "plugins": [
     "react"
