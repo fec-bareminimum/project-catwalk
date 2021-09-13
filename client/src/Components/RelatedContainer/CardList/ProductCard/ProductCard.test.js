@@ -24,9 +24,9 @@ describe('ProductCard', () => {
   test('renders product details from props', () => {
     render(<ProductCard {...props} />);
 
-    expect(screen.getByText('Camo Onesie')).toBeInDocument();
-    expect(screen.getByText('Jackets')).toBeInDocument();
-    expect(screen.getByText('$140')).toBeInDocument();
-    expect(screen.getByRole('img')).toBeInDocument();
+    expect(screen.getByText('Camo Onesie')).toBeInTheDocument();
+    expect(screen.getByText('Jackets')).toBeInTheDocument();
+    expect(screen.getByText('$140')).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 });
