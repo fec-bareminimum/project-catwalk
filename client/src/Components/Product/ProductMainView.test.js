@@ -1,25 +1,25 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import ProductMainView from './ProductMainView.jsx';
-// import '@testing-library/jest-dom';
+import '@testing-library/jest-dom';
+import ProductMainView from './ProductMainView.jsx'
 
 
 describe('Product', () => {
   test('renders Product component', () => {
-    render(<Product />);
+    render(<ProductMainView />);
   });
 });
 
 describe('Product Title', () => {
   test('Finds the Project Title', () => {
-    render(<Product />);
+    render(<ProductMainView />);
     expect(screen.getByRole('header')).toBeInTheDocument()
   });
 });
 
 describe('Product Price', () => {
   test('Finds the price', () => {
-    render(<Product />);
+    render(<ProductMainView />);
     expect(screen.getByText('price')).toBeInTheDocument()
   });
 });
@@ -27,7 +27,7 @@ describe('Product Price', () => {
 
 describe('Ratings', () => {
   test('Ratings', () => {
-    render(<Product />);
+    render(<ProductMainView />);
     expect(screen.getByText('ratings')).toBeInTheDocument()
   });
 });
@@ -35,14 +35,14 @@ describe('Ratings', () => {
 
 describe('Cart exists', () => {
   test('Finds the cart', () => {
-    render(<Product />);
+    render(<ProductMainView />);
     expect(screen.getByRole('Cart')).toBeInTheDocument() ||  expect(screen.getByRole('Bag')).toBeInTheDocument()
   });
 });
 
 describe('Quantity selector works', () => {
   test('Quantity selector works', () => {
-    render(<Product />);
+    render(<ProductMainView />);
     expect(screen.getByText('button')).toBeInTheDocument()
   });
 });

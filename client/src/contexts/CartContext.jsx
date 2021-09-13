@@ -31,7 +31,6 @@ export const CartProvider = ({ children }) => {
     fetchCartProducts,
     addProductToCart,
   };
-
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 

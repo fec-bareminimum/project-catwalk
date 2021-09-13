@@ -1,19 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import ProductCarousel from './ProductCarousel.jsx'
+import ProductDetails from './ProductDetails.jsx'
+import ProductDescription from './ProductDescription.jsx'
+import * as ProductsProvider from '../../contexts/ProductsContext/jsx'
+
 
 // Main Product Page
 
-// get request to the product based on ID - useEffect
-// render name, description, category, default price
-// ratings, selectedStyle, selectedPhoto
 
-// depending on what style is chosen, conditionally render the style page, do 1 by default
-// read all reviews and put in star form
-// pass styles data into the styles file
-// Pulls data from reviews and puts it in the star value
-// add to Bag/Cart button, star button, share on social media
 
-// Next to it is a button for Read all reviews
-// Product Name
+function ProductMainView(props) {
+  const [styles, setStyles] = useState([])
+  const [style, setStyle] = useState(null)
+  const [info, setInfo] = useState(null)
 
-// Selected Style
+  useEffect(() => {
+    ProductsProvider.fetchProductStyles(props.id, (response) => {
+      setStyles(response.data)
+    })
+    ProductsProvider.fetchProductInfo(props.id, (response) => {
+      setInfo(response.data)
+    })
+  }, [])
+
+
+
+  const updateStyleHandler = (selectedStyle) => {
+    setStyle(selectedStyle);
+  }
+
+
+  return (
+    <div>
+      <div>
+        <ProductCarousel styleData={style} />
+        <ProductDetails stylesData={styles} infoData={info} setStyle={updateStyleHandler}/>
+      </div>
+      <ProductDescription productInfo={info} />
+    </div>
+  )
+}
+
+//make requests to api
+
+//get styles data -> pass down into carousel - one component
+//import carousel - pass down props (images) to carousel
+//get the state of styles
+
+//import details (title, price, styles, form for size/bags/qty) (folder)
+//styles is a component of details
+//form is inside
+//change state of styles using hooks,
+
+//import bottom product description/slogan - one component
+
 export default ProductMainView;
