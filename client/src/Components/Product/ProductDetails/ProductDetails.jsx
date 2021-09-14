@@ -1,9 +1,15 @@
 
 
 
-//image gallery
-//style selectors
-//size/quantity dropdowns
+
+//category <h3>
+//title <h1>
+//<p> price
+
+//call Styles component
+
+//ProductForm
+
 
 
 

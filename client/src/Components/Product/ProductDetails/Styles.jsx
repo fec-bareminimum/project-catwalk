@@ -2,8 +2,9 @@ import React from 'react'
 
 
 
-//make the dropdowns here (size/quantity/selectedstyle)
-//map down the style data to stylePictures
+
+//styles thumbnails, selected styles
+//grab the state of selected style (might be another form)
 
 
 

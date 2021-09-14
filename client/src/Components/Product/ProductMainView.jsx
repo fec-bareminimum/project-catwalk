@@ -7,8 +7,6 @@ import * as ProductsProvider from '../../contexts/ProductsContext/jsx'
 
 // Main Product Page
 
-
-
 function ProductMainView(props) {
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState(null)
@@ -24,13 +22,12 @@ function ProductMainView(props) {
   }, [])
 
 
-
   const updateStyleHandler = (selectedStyle) => {
     setStyle(selectedStyle);
   }
 
 
-  return (
+  return ( //replace divs with containers (layout), columns
     <div>
       <div>
         <ProductCarousel styleData={style} />
