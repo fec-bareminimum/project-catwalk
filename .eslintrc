@@ -1,23 +1,34 @@
 {
-  "extends": "airbnb",
-  "rules": {
-    "valid-jsdoc": 2,
-    "no-var": 0,
-    "react/jsx-uses-react": 1,
-    "react/jsx-no-undef": 2,
-    "func-names": 0,
-    "new-cap": 0,
-    "no-undef": 0,
-    "import/extensions": "off",
-    "react/prop-types": "off",
-    "no-unused-vars": "off",
-    "no-console": "off",
-    "import/no-unresolved": "off",
-    "react/jsx-filename-extension": "off",
-    "arrow-body-style": "off",
-    "react/jsx-props-no-spreading": "off"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
   "plugins": [
-    "react"
-  ]
+    "react",
+    "prettier"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "import/first": "error",
+    "react/prop-types": 0,
+    "prettier/prettier": "error",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off"
+  }
 }
