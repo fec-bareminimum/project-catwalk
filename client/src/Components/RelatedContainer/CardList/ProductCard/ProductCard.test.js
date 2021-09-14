@@ -5,6 +5,10 @@ import { ProductsContext } from '../../../../contexts/ProductsContext.jsx';
 import sampleProduct from './sampleProduct';
 
 describe('ProductCard', () => {
+  // TODO:
+  //  - 1.4.1.1.1: conditional render for SALE price
+  //  - 1.4.1.1.4: test rendering for star reviews
+
   let props;
   beforeEach(() => {
     props = { ...sampleProduct };
