@@ -1,6 +1,6 @@
-import React from 'react';
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
-import OutfitProducts from './OutfitProducts/OutfitProducts.jsx';
+import React from "react"
+import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
+import OutfitProducts from "./OutfitProducts/OutfitProducts.jsx"
 
 const RelatedContainer = () => {
   return (
@@ -9,7 +9,7 @@ const RelatedContainer = () => {
 
       <OutfitProducts />
     </div>
-  );
-};
+  )
+}
 
-export default RelatedContainer;
+export default RelatedContainer
