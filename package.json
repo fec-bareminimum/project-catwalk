@@ -8,9 +8,10 @@
     "test:watch": "npm run test",
     "build": "webpack -w",
     "start": "nodemon server/index.js",
-    "postinstall": "pre-commit install",
-    "lint:fix": "eslint client --fix --ext .js,.jsx",
-    "lint": "eslint client --ext .js,.jsx"
+    "postinstall": "pre-commit install && npx husky add .husky/pre-commit 'npm test && npm run lint && npm run lint:fix && git add .'",
+    "lint:fix": "eslint client/src --fix --ext .js,.jsx",
+    "lint": "eslint client/src --ext .js,.jsx",
+    "prepare": "npx husky install"
   },
   "repository": {
     "type": "git",

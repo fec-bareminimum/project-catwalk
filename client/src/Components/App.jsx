@@ -1,26 +1,29 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { ProductsProvider } from '../contexts/ProductsContext.jsx';
+import { ReviewsProvider } from '../contexts/ReviewsContext.jsx';
+import { QAProvider } from '../contexts/QAContext.jsx';
+import { InteractionsProvider } from '../contexts/InteractionsContext.jsx';
+import { CartProvider } from '../contexts/CartContext.jsx';
 import RelatedContainer from './RelatedContainer/RelatedContainer.jsx';
 
 function App() {
   return (
-    <div>
-      <RelatedContainer />
-      <Card style={{ width: '22rem' }}>
-        <Card.Body>
-          <Card.Title style={{ color: 'green' }}>GEEKSFORGEEKS</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            One Stop For all CS subjects
-          </Card.Subtitle>
-          <Card.Text>
-            GeeksforGeeks provides a platform for all the students to study
-            about all the subjects in CSE.
-          </Card.Text>
-          <Card.Link href="#"> For Students</Card.Link>
-        </Card.Body>
-      </Card>
-    </div>
+    <React.Fragment>
+      <ProductsProvider>
+        <ReviewsProvider>
+          <QAProvider>
+            <InteractionsProvider>
+              <CartProvider>
+                <RelatedContainer />
+                {/* <QAContainer /> */}
+                {/* <OverviewContainer /> */}
+                {/* <ReviewsContainer /> */}
+              </CartProvider>
+            </InteractionsProvider>
+          </QAProvider>
+        </ReviewsProvider>
+      </ProductsProvider>
+    </React.Fragment>
   );
 }
 
