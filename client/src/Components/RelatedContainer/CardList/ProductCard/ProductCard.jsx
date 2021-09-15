@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
+import React, { useState, useEffect } from "react"
+import Card from "react-bootstrap/Card"
 
-const placeholderImg = 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081';
+const placeholderImg =
+  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081"
 
 const ProductCard = (props) => {
   /* ******************************************************************
@@ -36,10 +37,11 @@ const ProductCard = (props) => {
   ****************************************************************** */
 
   // 140.00 (integer) => "$140" (string)
-  const formattedPriceStr = '$' + (Number(props['default_price'])).toFixed(0).toLocaleString()
+  const formattedPriceStr =
+    "$" + Number(props["default_price"]).toFixed(0).toLocaleString()
 
   return (
-    <Card style={{ width: '18rem' }} className="productCard">
+    <Card style={{ width: "18rem" }} className="productCard">
       <Card.Img variant="top" src={placeholderImg} />
       <Card.Body>
         <Card.Subtitle>{props.category}</Card.Subtitle>
@@ -48,7 +50,7 @@ const ProductCard = (props) => {
         {/* <ProductRating /> */}
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default ProductCard;
+export default ProductCard

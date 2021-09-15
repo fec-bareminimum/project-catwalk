@@ -1,17 +1,7 @@
 {
   "name": "project-catwalk",
   "version": "1.0.0",
-  "description": "",
-  "main": "server/index.js",
-  "scripts": {
-    "test": "jest --config ./jest.config.js --watchAll",
-    "test:watch": "npm run test",
-    "build": "webpack -w",
-    "start": "nodemon server/index.js",
-    "postinstall": "pre-commit install",
-    "lint:fix": "eslint client --fix --ext .js,.jsx",
-    "lint": "eslint client --ext .js,.jsx"
-  },
+  "description": "MPV online-retail frontend client",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fec-bareminimum/project-catwalk.git"
@@ -23,6 +13,33 @@
     "url": "https://github.com/fec-bareminimum/project-catwalk/issues"
   },
   "homepage": "https://github.com/fec-bareminimum/project-catwalk#readme",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "jest --config ./jest.config.js",
+    "test:watch": "jest --config ./jest.config.js --watchAll",
+    "build": "webpack -w",
+    "start": "nodemon server/index.js",
+    "pre-commit": "lint-staged",
+    "create-hook": "husky add .husky/pre-commit 'npm run pre-commit && git add .'",
+    "postinstall": "husky install && npm run create-hook"
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "*.+(json|css|md)": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "dependencies": {
     "@testing-library/react": "^12.1.0",
     "axios": "^0.21.4",
@@ -31,7 +48,8 @@
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -39,14 +57,16 @@
     "@babel/preset-react": "^7.14.5",
     "@testing-library/jest-dom": "^5.14.1",
     "babel-loader": "^8.2.2",
-    "enzyme": "^3.11.0",
     "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
     "jest": "^27.1.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   }
