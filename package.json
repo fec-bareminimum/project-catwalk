@@ -20,7 +20,7 @@
     "start": "nodemon server/index.js",
     "pre-commit": "lint-staged",
     "create-hook": "husky add .husky/pre-commit 'npm run pre-commit && git add .'",
-    "postinstall": "pre-commit install && husky install && npm run create-hook"
+    "postinstall": "husky install && npm run create-hook"
   },
   "lint-staged": {
     "*.+(js|jsx)": [
