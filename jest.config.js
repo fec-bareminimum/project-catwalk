@@ -19,6 +19,11 @@ module.exports = {
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
 
+  moduleNameMapper: {
+    "\\.(css|less)$": "<rootDir>/client/src/__mocks__/styleMock.js",
+    "\\.(png|gif|ttf|eot|svg)$": "<rootDir>/client/src/__mocks__/fileMock.js",
+  },
+
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
 
@@ -191,4 +196,4 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-};
+}
