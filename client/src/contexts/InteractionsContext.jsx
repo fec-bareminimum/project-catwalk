@@ -8,7 +8,7 @@ export const InteractionsProvider = ({ children }) => {
     const logDetails = {
       element,
       widget,
-      time: new Date().toString(),
+      time: JSON.stringify(new Date()),
     }
 
     axios

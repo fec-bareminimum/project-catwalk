@@ -1,6 +1,6 @@
 # Project Catwalk
 
-![CircleCI](https://circleci.com/gh/fec-bareminimum/project-catwalk/tree/main.svg?style=svg)
+![CircleCI](https://circleci.com/gh/fec-bareminimum/project-catwalk/tree/main.svg?style=shield)
 
 ## Table of Contents
 
@@ -20,8 +20,8 @@ Project Catwalk is a MVP client-facing retail web-portal. Browse catalog product
 - use the `config.example.js` file to create your own `config.js` and add your github API token to attach as an "Authorization" header in requests.
 
 =======
-- run `brew install pre-commit` to prevent committing and pushing to the main branch.
 
+- run `brew install pre-commit` to prevent committing and pushing to the main branch.
 
 ## Tests
 

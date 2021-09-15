@@ -1,33 +1,58 @@
-const express = require('express');
-const path = require('path');
-const axios = require('axios');
-const config = require('../config');
+const express = require("express")
+const path = require("path")
+const axios = require("axios")
+const morgan = require("morgan")
+const { createProxyMiddleware } = require("http-proxy-middleware")
 
-const app = express();
-const port = 3000;
+const config = require("../config")
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
-app.use(express.json());
+const app = express()
+const port = 3000
 
-app.get('/*', (req, res) => {
+// Apply middleware
+app.use(morgan("tiny"))
+app.use(express.static(path.join(__dirname, "../client/dist")))
+app.use(express.json())
+
+// Configure Proxy
+app.get("/*", (req, res) => {
   axios({
     url: req.url,
     // method: req.method,
-    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax',
+    baseURL: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax",
     headers: {
       Authorization: config.API_TOKEN,
     },
     data: req.data,
   })
     .then((results) => {
-      res.status(200).send(results.data);
+      res.status(200).send(results.data)
     })
     .catch((err) => {
-      console.log(err);
-      res.status(400).send(err);
-    });
-});
+      console.log(err)
+      res.status(400).send(err)
+    })
+})
+
+app.post("/*", (req, res) => {
+  axios({
+    url: req.url,
+    method: req.method,
+    baseURL: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax",
+    headers: {
+      Authorization: config.API_TOKEN,
+    },
+    data: req.body,
+  })
+    .then((results) => {
+      res.status(201).send(results.data)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
 
 app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
-});
+  console.log(`Listening at http://localhost:${port}`)
+})
