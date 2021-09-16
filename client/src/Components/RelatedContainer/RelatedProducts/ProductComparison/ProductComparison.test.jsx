@@ -4,15 +4,30 @@ import ProductComparison from "./ProductComparison.jsx"
 import { ProductsContext } from "../../../../contexts/ProductsContext.jsx"
 import sampleProductList from "sampleProductList"
 
+const addComparisonCombinations = (productA, productB) => {
+  const extendedA = Object.assign({}, productA)
+  const extendedB = Object.assign({}, productB)
+
+  // add a, b
+  // add a, not b
+  // add not a, b
+
+  return [extendedA, extendedB]
+}
+
 describe("ProductComparison", () => {
-  const productA = sampleProductList[0]
-  const productB = sampleProductList[1]
+  // Have two mock product objects with characteristics to compare
+  const [productA, productB] = addComparisonCombinations(
+    sampleProductList[0],
+    sampleProductList[1]
+  )
+  let container
 
   beforeEach(() => {
     const mockContext = {
       displayedProduct: productA,
     }
-    render(
+    container = render(
       <ProductsContext.Provider value={mockContext}>
         <ProductComparison productToCompare={productB} />
       </ProductsContext.Provider>
@@ -24,43 +39,54 @@ describe("ProductComparison", () => {
   })
 
   test("renders a figure", () => {
-    render(<ProductComparison />)
     expect(screen.getByRole("figure")).toBeInTheDocument()
   })
 
   test("renders 'COMPARING' header text", () => {
-    expect(false).toBe(true)
+    expect(screen.getByText("COMPARING")).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("COMPARING")
   })
 
   test("renders ProductA title", () => {
-    expect(false).toBe(true)
+    const title = productA["name"]
+    expect(screen.getByText(title)).toBeInTheDocument()
   })
 
   test("renders ProductB title", () => {
-    expect(false).toBe(true)
+    const title = productB["name"]
+    expect(screen.getByText(title)).toBeInTheDocument()
   })
 
   test("renders titles in order: ProductA, then ProductB", () => {
-    expect(false).toBe(true)
+    const productTitles = screen.getByRoleAll("heading", { level: 4 })
+    expect(productTitles).toHaveLength(2)
+    expect(productTitles[0]).toHaveTextContent(productA["name"])
+    expect(productTitles[1]).toHaveTextContent(productB["name"])
   })
 
-  test("ProductA should match the 'currently displayed product' of for the entire page", () => {
-    expect(false).toBe(true)
-  })
-
-  test("ProductA should match the 'currently displayed product' of for the entire page", () => {
-    expect(false).toBe(true)
-  })
-
-  test("renders the Product short name", () => {
-    expect(false).toBe(true)
-  })
+  // test("renders the Product short name", () => {
+  //   expect(false).toBe(true)
+  // })
 
   test("renders a table", () => {
     expect(false).toBe(true)
   })
 
+  test("renders titles first row of the table", () => {
+    expect(false).toBe(true)
+    // const productTitles = screen.getByRoleAll("heading", { level: 4 })
+    // expect(productTitles).toHaveLength(2)
+  })
+
   test("table should have three columns", () => {
+    expect(false).toBe(true)
+  })
+
+  test("ProductA should match the 'currently displayed product' of for the entire page", () => {
+    expect(false).toBe(true)
+  })
+
+  test("ProductA should match the 'currently displayed product' of for the entire page", () => {
     expect(false).toBe(true)
   })
 
