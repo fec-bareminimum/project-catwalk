@@ -46,27 +46,14 @@
     "bootstrap": "^5.1.1",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
-<<<<<<< HEAD
-=======
     "morgan": "^1.10.0",
->>>>>>> 26eace1ee93713808e3279d809e6dcce06e9cf66
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "react-multi-carousel": "^2.6.5",
     "styled-components": "^5.3.1",
     "webfontloader": "^1.6.28"
-=======
-    "styled-components": "^5.3.1"
->>>>>>> main
-=======
-    "react-multi-carousel": "^2.6.5",
-    "styled-components": "^5.3.1",
-    "webfontloader": "^1.6.28"
->>>>>>> 26eace1ee93713808e3279d809e6dcce06e9cf66
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
