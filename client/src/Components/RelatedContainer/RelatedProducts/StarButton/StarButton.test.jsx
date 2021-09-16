@@ -1,6 +1,6 @@
 import React from "react"
 import { screen, render, fireEvent } from "../../../../test-utils.jsx"
-import RelatedProducts from "./RelatedProducts.jsx"
+import StarButton from "./StarButton.jsx"
 // import { ProductsContext } from '../../../../contexts/ProductsContext.jsx';
 // import sampleProduct from 'sampleProduct';
 

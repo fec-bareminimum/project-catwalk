@@ -7,7 +7,7 @@ describe("RelatedContainer", () => {
     render(<RelatedContainer />)
   })
 
-  test("displays two sets of related products", () => {
+  test("displays RELATED PRODUCTS and OUTFIT containers", () => {
     const { container } = render(<RelatedContainer />)
 
     expect(
