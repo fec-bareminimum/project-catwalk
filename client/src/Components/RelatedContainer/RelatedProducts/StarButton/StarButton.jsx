@@ -2,10 +2,11 @@ import React, { useState } from "react"
 import ProductComparison from "../ProductComparison/ProductComparison.jsx"
 import StarIcon from "./StarIcon.jsx"
 
-const StarButton = ({ thisProduct, displayedProduct }) => {
+const StarButton = ({ thisProduct }) => {
   const [displayComparison, setDisplayComparison] = useState(false)
 
   const togglePopup = () => {
+    console.log(displayComparison)
     setDisplayComparison((prevBool) => !prevBool)
   }
 
@@ -13,9 +14,8 @@ const StarButton = ({ thisProduct, displayedProduct }) => {
     <React.Fragment>
       {displayComparison ? (
         <ProductComparison
-          onClick={togglePopup}
-          productA={thisProduct}
-          productB={displayedProduct}
+          handleClick={togglePopup}
+          productToCompare={thisProduct}
         />
       ) : (
         <button className="actionBtn" onClick={togglePopup}>
