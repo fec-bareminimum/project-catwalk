@@ -1,5 +1,5 @@
 import React from "react"
-import { screen, render, within } from "../../../../test-utils.jsx"
+import { screen, render, within, fireEvent } from "../../../../test-utils.jsx"
 import ProductComparison from "./ProductComparison.jsx"
 import { ProductsContext } from "../../../../contexts/ProductsContext.jsx"
 import sampleProductList from "sampleProductList"
@@ -207,5 +207,16 @@ describe("ProductComparison Without Features Details", () => {
     )
 
     expect(fetchProductInfo).toHaveBeenCalledTimes(2)
+  })
+
+  test("accepts handleClick props and triggers when clicking the figure", () => {
+    const handleClick = jest.fn()
+    render(<ProductComparison handleClick={handleClick} />)
+
+    fireEvent.click(screen.getByRole("figure"))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+
+    fireEvent.click(screen.getByRole("figure"))
+    expect(handleClick).toHaveBeenCalledTimes(2)
   })
 })

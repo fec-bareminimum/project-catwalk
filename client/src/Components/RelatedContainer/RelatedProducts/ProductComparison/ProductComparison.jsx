@@ -28,54 +28,63 @@ const generateComparisonsObj = (productA, productB) => {
   return comparisons
 }
 
-const ProductComparison = ({ productToCompare }) => {
+const ProductComparison = ({ productToCompare, handleClick }) => {
   const { displayedProduct, fetchProductInfo } = useProducts()
   const [comparisonsObj, setComparisonsObj] = useState({})
 
   // Generate a comparison object
   useEffect(() => {
-    setComparisonsObj(generateComparisonsObj(displayedProduct, productToCompare))
+    if (displayedProduct && productToCompare) {
+      setComparisonsObj(generateComparisonsObj(displayedProduct, productToCompare))
+    }
   }, [displayedProduct, productToCompare])
 
   useEffect(() => {
-    if (displayedProduct["features"] === undefined) {
+    if (displayedProduct && displayedProduct["features"] === undefined) {
       fetchProductInfo(displayedProduct)
     }
-    if (productToCompare["features"] === undefined) {
+    if (productToCompare && productToCompare["features"] === undefined) {
       fetchProductInfo(productToCompare)
     }
   }, [])
 
+  const hasValidProducts = displayedProduct && productToCompare
   return (
-    <figure className="comparisonFigure">
+    <figure className="comparisonFigure" onClick={handleClick}>
       <h3>COMPARING</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <h4>{displayedProduct["name"]}</h4>
-            </th>
-            <th></th>
-            <th>
-              <h4>{productToCompare["name"]}</h4>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(comparisonsObj).length > 0 &&
-            Object.keys(comparisonsObj).map((featureName) => {
-              const featureObj = comparisonsObj[featureName]
+      {hasValidProducts && (
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <h4>{displayedProduct["name"]}</h4>
+              </th>
+              <th></th>
+              <th>
+                <h4>{productToCompare["name"]}</h4>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(comparisonsObj).length > 0 &&
+              Object.keys(comparisonsObj).map((featureName) => {
+                const featureObj = comparisonsObj[featureName]
 
-              return (
-                <tr key={featureName}>
-                  <td>{featureObj["productA"] !== undefined && <p>&#10003;</p>}</td>
-                  <td>{featureName}</td>
-                  <td>{featureObj["productB"] !== undefined && <p>&#10003;</p>}</td>
-                </tr>
-              )
-            })}
-        </tbody>
-      </table>
+                return (
+                  <tr key={featureName}>
+                    <td>
+                      {featureObj["productA"] !== undefined && <p>&#10003;</p>}
+                    </td>
+                    <td>{featureName}</td>
+                    <td>
+                      {featureObj["productB"] !== undefined && <p>&#10003;</p>}
+                    </td>
+                  </tr>
+                )
+              })}
+          </tbody>
+        </table>
+      )}
     </figure>
   )
 }
