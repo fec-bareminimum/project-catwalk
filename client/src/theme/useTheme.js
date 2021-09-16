@@ -10,10 +10,7 @@ export const useTheme = () => {
   const setMode = (mode) => {
     setToStorage("theme", mode)
     setTheme(mode)
-<<<<<<< HEAD
-=======
     setThemeLoaded(true)
->>>>>>> 26eace1ee93713808e3279d809e6dcce06e9cf66
   }
 
   const getFonts = () => {
@@ -21,16 +18,6 @@ export const useTheme = () => {
     return allFonts
   }
 
-<<<<<<< HEAD
-  useEffect(() => {
-    const localTheme = getFromStorage("theme")
-    // Defualt to theme.data.light
-    localTheme ? setTheme(localTheme) : setTheme(themes.data.light)
-    setThemeLoaded(true)
-  }, [])
-
-  return { theme, themeLoaded, setMode, getFonts }
-=======
   const toggleTheme = () => {
     const isLightMode = JSON.stringify(theme) === JSON.stringify(themes.data.light)
     let newTheme = theme
@@ -51,5 +38,4 @@ export const useTheme = () => {
   }, [])
 
   return { theme, themeLoaded, setMode, getFonts, toggleTheme }
->>>>>>> 26eace1ee93713808e3279d809e6dcce06e9cf66
 }
