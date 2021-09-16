@@ -1,26 +1,49 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import useProducts from "../../../../contexts/ProductsContext.jsx"
 
-const ProductComparison = ({ productToCompare }) => {
-  const { displayedProduct } = useProducts()
-
+const generateComparisonsObj = (productA, productB) => {
   const comparisons = {}
+  const featuresArray = [
+    {
+      featuresObj: productA["features"],
+      productKey: "productA",
+    },
+    {
+      featuresObj: productB["features"],
+      productKey: "productB",
+    },
+  ]
 
-  const productAFeatures = displayedProduct["features"]
-  for (const characteristic in productAFeatures) {
-    if (comparisons[characteristic] === undefined) {
-      comparisons[characteristic] = {}
+  featuresArray.forEach(({ featuresObj, productKey }) => {
+    if (featuresObj) {
+      featuresObj.forEach(({ feature, value }) => {
+        if (comparisons[feature] === undefined) {
+          comparisons[feature] = {}
+        }
+        comparisons[feature][productKey] = value
+      })
     }
-    comparisons[characteristic]["productA"] = productAFeatures[characteristic]
-  }
+  })
 
-  const productBFeatures = productToCompare["features"]
-  for (const characteristic in productBFeatures) {
-    if (comparisons[characteristic] === undefined) {
-      comparisons[characteristic] = {}
+  return comparisons
+}
+
+const ProductComparison = ({ productToCompare }) => {
+  const { displayedProduct, fetchProductInfo } = useProducts()
+  const [comparisonsObj, setComparisonsObj] = useState({})
+
+  // Generate a comparison object
+  useEffect(() => {
+    setComparisonsObj(generateComparisonsObj(displayedProduct, productToCompare))
+  }, [displayedProduct, productToCompare])
+
+  useEffect(() => {
+    if (displayedProduct["features"] === undefined) {
+      fetchProductInfo(displayedProduct)
+    } else if (productToCompare["features"] === undefined) {
+      fetchProductInfo(productToCompare)
     }
-    comparisons[characteristic]["productB"] = productBFeatures[characteristic]
-  }
+  }, [])
 
   return (
     <figure className="comparisonFigure">
@@ -38,11 +61,18 @@ const ProductComparison = ({ productToCompare }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-          </tr>
+          {Object.keys(comparisonsObj).length > 0 &&
+            Object.keys(comparisonsObj).map((featureName) => {
+              const featureObj = comparisonsObj[featureName]
+
+              return (
+                <tr key={featureName}>
+                  <td>{featureObj["productA"]}</td>
+                  <td>{featureName}</td>
+                  <td>{featureObj["productB"]}</td>
+                </tr>
+              )
+            })}
         </tbody>
       </table>
     </figure>

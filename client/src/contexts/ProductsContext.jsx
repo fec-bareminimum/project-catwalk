@@ -72,6 +72,7 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const value = {
+    productList,
     displayedProduct,
     fetchProducts,
     fetchProductInfo,

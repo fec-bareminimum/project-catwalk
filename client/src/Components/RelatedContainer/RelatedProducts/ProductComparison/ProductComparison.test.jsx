@@ -39,14 +39,6 @@ describe("ProductComparison", () => {
     expect(sampleProductList.length).toBeGreaterThan(1)
   })
 
-  test("should called fetchProductDetails if productA doesn't have 'features' key", () => {
-    expect(false).toBeNull()
-  })
-
-  test("should called fetchProductDetails if productB doesn't have 'features' key", () => {
-    expect(false).toBeNull()
-  })
-
   test("renders a figure", () => {
     expect(screen.getByRole("figure")).toBeInTheDocument()
   })
@@ -172,13 +164,13 @@ describe("ProductComparison Without Features Details", () => {
   const productB = Object.assign({}, sampleProductList[1])
   delete productB["features"]
 
-  let fetchProductDetails
+  let fetchProductInfo
 
   beforeEach(() => {
-    fetchProductDetails = jest.fn()
+    fetchProductInfo = jest.fn()
     const mockContext = {
       displayedProduct: productA,
-      fetchProductDetails: fetchProductDetails,
+      fetchProductInfo: fetchProductInfo,
     }
     render(
       <ProductsContext.Provider value={mockContext}>
@@ -191,11 +183,11 @@ describe("ProductComparison Without Features Details", () => {
     expect(sampleProductList.length).toBeGreaterThan(1)
   })
 
-  test("should called fetchProductDetails if productA doesn't have 'features' key", () => {
+  test("should called fetchProductInfo if productA doesn't have 'features' key", () => {
     expect(false).toBeNull()
   })
 
-  test("should called fetchProductDetails if productB doesn't have 'features' key", () => {
+  test("should called fetchProductInfo if productB doesn't have 'features' key", () => {
     expect(false).toBeNull()
   })
 })
