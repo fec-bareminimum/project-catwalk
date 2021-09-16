@@ -86,17 +86,21 @@ describe("ProductComparison", () => {
 
       // pull data from the row [featureValueA, featureName, featureValueB]
       const rowFeatureName = columns[1].textContent
+
+      // Extract the "features" key from the product
       const featureIndex = productA["features"]
         .map((e) => e.feature)
         .indexOf(rowFeatureName)
 
-      // Extract the "features" key from the product
+      expect(columns[1]).toHaveTextContent(rowFeatureName)
+
+      // Extract this characteristic object from the featuresObj
       const featureObj = productA["features"][featureIndex]
 
       if (featureObj) {
-        expect(columns[0]).toHaveTextContent(featureObj["value"])
+        expect(columns[0]).toHaveTextContent("✓")
       } else {
-        expect(columns[0]).not.toHaveTextContent()
+        expect(columns[0].innerHTML).toBe("")
       }
     })
   })
@@ -110,18 +114,19 @@ describe("ProductComparison", () => {
 
       // pull data from the row [featureValueA, featureName, featureValueB]
       const rowFeatureName = columns[1].textContent
+
+      // Extract the "features" key from the product
       const featureIndex = productB["features"]
         .map((e) => e.feature)
         .indexOf(rowFeatureName)
 
       expect(columns[1]).toHaveTextContent(rowFeatureName)
 
-      // Extract the "features" key from the product
+      // Extract this characteristic object from the featuresObj
       const featureObj = productB["features"][featureIndex]
 
       if (featureObj) {
-        // A feature object had a value: null, it still appeared as a valid key
-        expect(columns[2].innerHTML).toBe(featureObj["value"] || "")
+        expect(columns[2]).toHaveTextContent("✓")
       } else {
         expect(columns[2].innerHTML).toBe("")
       }

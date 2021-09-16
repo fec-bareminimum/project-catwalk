@@ -68,9 +68,9 @@ const ProductComparison = ({ productToCompare }) => {
 
               return (
                 <tr key={featureName}>
-                  <td>{featureObj["productA"]}</td>
+                  <td>{featureObj["productA"] !== undefined && <p>&#10003;</p>}</td>
                   <td>{featureName}</td>
-                  <td>{featureObj["productB"]}</td>
+                  <td>{featureObj["productB"] !== undefined && <p>&#10003;</p>}</td>
                 </tr>
               )
             })}
