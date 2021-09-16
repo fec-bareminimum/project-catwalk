@@ -1,8 +1,8 @@
 import React from "react"
 import ProductComparison from "../ProductComparison/ProductComparison.jsx"
-// import StarIcon from "./StarIcon.jsx"
+import StarIcon from "./StarIcon.jsx"
 
-const StartButton = ({ thisProduct, displayedProduct }) => {
+const StarButton = ({ thisProduct, displayedProduct }) => {
   const [displayComparison, setDisplayComparison] = useState(false)
 
   const togglePopup = () => {
@@ -19,11 +19,11 @@ const StartButton = ({ thisProduct, displayedProduct }) => {
         />
       ) : (
         <button className="actionBtn" onClick={togglePopup}>
-          {/* <StarIcon /> */}
+          <StarIcon />
         </button>
       )}
     </React.Fragment>
   )
 }
 
-export default StartButton
+export default StarButton
