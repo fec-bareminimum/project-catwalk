@@ -2,7 +2,6 @@ const express = require("express")
 const path = require("path")
 const axios = require("axios")
 const morgan = require("morgan")
-const { createProxyMiddleware } = require("http-proxy-middleware")
 
 const config = require("../config")
 
