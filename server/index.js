@@ -10,7 +10,7 @@ const port = 3000
 
 // Apply middleware
 app.use(morgan("tiny"))
-app.use(express.static(path.join(__dirname, "../client/dist")))
+app.use(express.static(path.join(__dirname, "../client/build")))
 app.use(express.json())
 
 // Configure Proxy
