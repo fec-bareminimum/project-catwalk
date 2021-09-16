@@ -2,11 +2,10 @@ import React, { useState } from "react"
 import ProductComparison from "../ProductComparison/ProductComparison.jsx"
 import StarIcon from "./StarIcon.jsx"
 
-const StarButton = ({ thisProduct }) => {
+const StarButton = ({ thisProduct, handleClick }) => {
   const [displayComparison, setDisplayComparison] = useState(false)
 
   const togglePopup = () => {
-    console.log(displayComparison)
     setDisplayComparison((prevBool) => !prevBool)
   }
 
