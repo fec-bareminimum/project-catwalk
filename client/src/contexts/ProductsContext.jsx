@@ -5,6 +5,7 @@ export const ProductsContext = React.createContext()
 
 export const ProductsProvider = ({ children }) => {
   const [productList, setProducts] = useState({})
+  const [displayedProduct, setDisplayedProduct] = useState({})
   const [productInfo, setProductsInfo] = useState({})
   const [styles, setStyles] = useState({})
   const [relatedProducts, setRelatedProducts] = useState({})
@@ -71,6 +72,7 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const value = {
+    displayedProduct,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
@@ -84,6 +86,8 @@ export const ProductsProvider = ({ children }) => {
 
 const useProducts = () => {
   const {
+    productList,
+    displayedProduct,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
@@ -91,6 +95,8 @@ const useProducts = () => {
   } = useContext(ProductsContext)
 
   return {
+    productList,
+    displayedProduct,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,

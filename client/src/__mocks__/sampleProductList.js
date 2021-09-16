@@ -405,6 +405,16 @@ const sampleProductList = [
         },
       ],
     },
+    features: [
+      {
+        feature: "Fabric",
+        value: "Canvas",
+      },
+      {
+        feature: "Buttons",
+        value: "Brass",
+      },
+    ],
   },
   {
     id: 42367,
@@ -812,6 +822,20 @@ const sampleProductList = [
         },
       ],
     },
+    features: [
+      {
+        feature: "Lenses",
+        value: "Ultrasheen",
+      },
+      {
+        feature: "UV Protection",
+        value: null,
+      },
+      {
+        feature: "Frames",
+        value: "LightCompose",
+      },
+    ],
   },
   {
     id: 42368,
@@ -1219,6 +1243,16 @@ const sampleProductList = [
         },
       ],
     },
+    features: [
+      {
+        feature: "Fabric",
+        value: "100% Cotton",
+      },
+      {
+        feature: "Cut",
+        value: "Skinny",
+      },
+    ],
   },
   {
     id: 42369,
@@ -1820,6 +1854,16 @@ const sampleProductList = [
         },
       ],
     },
+    features: [
+      {
+        feature: "Fabric",
+        value: "99% Cotton 1% Elastic",
+      },
+      {
+        feature: "Cut",
+        value: "Loose",
+      },
+    ],
   },
   {
     id: 42370,
@@ -2277,6 +2321,24 @@ const sampleProductList = [
         },
       ],
     },
+    features: [
+      {
+        feature: "Sole",
+        value: "Rubber",
+      },
+      {
+        feature: "Material",
+        value: "FullControlSkin",
+      },
+      {
+        feature: "Mid-Sole",
+        value: "ControlSupport Arch Bridge",
+      },
+      {
+        feature: "Stitching",
+        value: "Double Stitch",
+      },
+    ],
   },
 ]
 
