@@ -1,6 +1,6 @@
 import React from "react"
-import MoonIcon from "./moon.jsx"
-import SunIcon from "./sun.jsx"
+import MoonIcon from "./MoonIcon.jsx"
+import SunIcon from "./SunIcon.jsx"
 import { useTheme } from "../../../theme/useTheme"
 import styled from "styled-components"
 
