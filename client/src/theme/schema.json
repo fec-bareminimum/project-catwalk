@@ -17,9 +17,9 @@
       },
       "font": "Tinos"
     },
-    "seaWave": {
+    "dark": {
       "id": "T_007",
-      "name": "Sea Wave",
+      "name": "Dark",
       "colors": {
         "body": "#9be7ff",
         "text": "#0d47a1",

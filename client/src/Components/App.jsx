@@ -5,20 +5,14 @@ import { QAProvider } from "../contexts/QAContext.jsx"
 import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
 import { CartProvider } from "../contexts/CartContext.jsx"
 import RelatedContainer from "./RelatedContainer/RelatedContainer.jsx"
-import styled from "styled-components"
+import Navbar from "./Navbar/Navbar.jsx"
 import { ThemeProvider } from "styled-components"
 import WebFont from "webfontloader"
 import { GlobalStyles } from "../theme/GlobalStyles"
 import { useTheme } from "../theme/useTheme"
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`
-
 const App = () => {
-  const { theme, themeLoaded, getFonts } = useTheme()
+  const { theme, themeMode, themeLoaded, getFonts, toggleTheme } = useTheme()
   const [selectedTheme, setSelectedTheme] = useState(theme)
 
   useEffect(() => {
@@ -34,17 +28,22 @@ const App = () => {
     })
   })
 
+  const isLightMode = selectedTheme["name"].toLowerCase() === "light"
   return (
     <React.Fragment>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles />
-
           <ProductsProvider>
             <ReviewsProvider>
               <QAProvider>
                 <InteractionsProvider>
                   <CartProvider>
+                    <Navbar
+                      toggleTheme={() => setSelectedTheme(toggleTheme())}
+                      isLightMode={isLightMode}
+                    />
+
                     <RelatedContainer />
                     {/* <QAContainer /> */}
                     {/* <OverviewContainer /> */}
