@@ -1,9 +1,28 @@
 import React from "react"
 import { screen, render } from "../../../../test-utils.jsx"
 import ProductComparison from "./ProductComparison.jsx"
-// import sampleProductList from 'sampleProductList';
+import { ProductsContext } from "../../../../contexts/ProductsContext.jsx"
+import sampleProductList from "sampleProductList"
 
 describe("ProductComparison", () => {
+  const productA = sampleProductList[0]
+  const productB = sampleProductList[1]
+
+  beforeEach(() => {
+    const mockContext = {
+      displayedProduct: productA,
+    }
+    render(
+      <ProductsContext.Provider value={mockContext}>
+        <ProductComparison productToCompare={productB} />
+      </ProductsContext.Provider>
+    )
+  })
+
+  test("sampleProductList has at least 2 valid objects", () => {
+    expect(sampleProductList.length).toBeGreaterThan(1)
+  })
+
   test("renders a figure", () => {
     render(<ProductComparison />)
     expect(screen.getByRole("figure")).toBeInTheDocument()
