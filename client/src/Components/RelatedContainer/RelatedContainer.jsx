@@ -1,4 +1,5 @@
 import React from "react"
+import useClickLogger from "../../hooks/useClickLogger.jsx"
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 import OutfitProducts from "./OutfitProducts/OutfitProducts.jsx"
 
@@ -12,4 +13,4 @@ const RelatedContainer = () => {
   )
 }
 
-export default RelatedContainer
+export default useClickLogger(RelatedContainer, "Related Items & Comparison")

@@ -5,14 +5,14 @@ import { QAProvider } from "../contexts/QAContext.jsx"
 import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
 import { CartProvider } from "../contexts/CartContext.jsx"
 import RelatedContainer from "./RelatedContainer/RelatedContainer.jsx"
-<<<<<<< HEAD
+import Navbar from "./Navbar/Navbar.jsx"
 import { ThemeProvider } from "styled-components"
 import WebFont from "webfontloader"
 import { GlobalStyles } from "../theme/GlobalStyles"
 import { useTheme } from "../theme/useTheme"
 
 const App = () => {
-  const { theme, themeLoaded, getFonts } = useTheme()
+  const { theme, themeMode, themeLoaded, getFonts, toggleTheme } = useTheme()
   const [selectedTheme, setSelectedTheme] = useState(theme)
 
   useEffect(() => {
@@ -27,28 +27,23 @@ const App = () => {
       },
     })
   })
-=======
-import styled from "styled-components"
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`
->>>>>>> main
-
+  const isLightMode = selectedTheme["name"].toLowerCase() === "light"
   return (
     <React.Fragment>
-<<<<<<< HEAD
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles />
-
           <ProductsProvider>
             <ReviewsProvider>
               <QAProvider>
                 <InteractionsProvider>
                   <CartProvider>
+                    <Navbar
+                      toggleTheme={() => setSelectedTheme(toggleTheme())}
+                      isLightMode={isLightMode}
+                    />
+
                     <RelatedContainer />
                     {/* <QAContainer /> */}
                     {/* <OverviewContainer /> */}
@@ -60,23 +55,6 @@ const Title = styled.h1`
           </ProductsProvider>
         </ThemeProvider>
       )}
-=======
-      <ProductsProvider>
-        <ReviewsProvider>
-          <QAProvider>
-            <InteractionsProvider>
-              <CartProvider>
-                <RelatedContainer />
-                <Title>Hello World!</Title>
-                {/* <QAContainer /> */}
-                {/* <OverviewContainer /> */}
-                {/* <ReviewsContainer /> */}
-              </CartProvider>
-            </InteractionsProvider>
-          </QAProvider>
-        </ReviewsProvider>
-      </ProductsProvider>
->>>>>>> main
     </React.Fragment>
   )
 }

@@ -6,7 +6,7 @@ node_modules
 config.js
 
 # Builds
-bundle.js
+build
 
 # Testing
 coverage
