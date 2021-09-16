@@ -8,6 +8,12 @@ describe("StartButton", () => {
     expect(screen.getByRole("button")).toBeInTheDocument()
   })
 
+  test("renders an svg inside of the button", () => {
+    const { container } = render(<StarButton />)
+
+    expect(container.querySelector("button svg.starIcon")).toBeInTheDocument()
+  })
+
   test("renders a figure after clicking the button", () => {
     render(<StarButton />)
 
