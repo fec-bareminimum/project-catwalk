@@ -8,9 +8,13 @@ describe("RelatedContainer", () => {
   })
 
   test("displays two sets of related products", () => {
-    render(<RelatedContainer />)
+    const { container } = render(<RelatedContainer />)
 
-    expect(screen.getByTestId("outfitProductsContainer")).toBeInTheDocument()
-    expect(screen.getByTestId("relatedProductsContainer")).toBeInTheDocument()
+    expect(
+      container.querySelector("section.relatedProductsContainer")
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector("section.outfitProductsContainer")
+    ).toBeInTheDocument()
   })
 })
