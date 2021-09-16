@@ -1,6 +1,7 @@
 import React from "react"
-import SunIcon from "./SunIcon.jsx"
-import MoonIcon from "./MoonIcon.jsx"
+import MoonIcon from "./moon.jsx"
+import SunIcon from "./sun.jsx"
+import { useTheme } from "../../../theme/useTheme"
 import styled from "styled-components"
 
 const ToggleContainer = styled.button`
@@ -17,7 +18,6 @@ const ToggleContainer = styled.button`
   position: relative;
   width: 8rem;
   height: 4rem;
-
   svg {
     height: auto;
     width: 2.5rem;
@@ -28,7 +28,7 @@ const ToggleContainer = styled.button`
 const ThemeToggler = ({ toggleTheme, isLightMode }) => {
   return (
     <ToggleContainer onClick={toggleTheme}>
-      {isLightMode ? <SunIcon /> : <MoonIcon style={{ marginLeft: "auto" }} />}
+      {isLightMode ? <MoonIcon style={{ marginLeft: "auto" }} /> : <SunIcon />}
     </ToggleContainer>
   )
 }

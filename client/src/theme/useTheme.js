@@ -10,6 +10,7 @@ export const useTheme = () => {
   const setMode = (mode) => {
     setToStorage("theme", mode)
     setTheme(mode)
+    setThemeLoaded(true)
   }
 
   const getFonts = () => {
@@ -31,8 +32,8 @@ export const useTheme = () => {
 
   useEffect(() => {
     const localTheme = getFromStorage("theme")
-    // Defualt to theme.data.light
-    localTheme ? setTheme(localTheme) : setTheme(themes.data.light)
+    const newTheme = localTheme ? localTheme : themes.data.light
+    setTheme(newTheme)
     setThemeLoaded(true)
   }, [])
 
