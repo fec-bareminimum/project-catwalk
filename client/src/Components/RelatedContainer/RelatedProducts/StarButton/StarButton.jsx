@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ProductComparison from "../ProductComparison/ProductComparison.jsx"
 import StarIcon from "./StarIcon.jsx"
 
