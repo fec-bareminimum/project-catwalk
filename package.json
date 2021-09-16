@@ -50,13 +50,9 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
     "react-multi-carousel": "^2.6.5",
     "styled-components": "^5.3.1",
     "webfontloader": "^1.6.28"
-=======
-    "styled-components": "^5.3.1"
->>>>>>> main
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
