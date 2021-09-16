@@ -40,7 +40,8 @@ const ProductComparison = ({ productToCompare }) => {
   useEffect(() => {
     if (displayedProduct["features"] === undefined) {
       fetchProductInfo(displayedProduct)
-    } else if (productToCompare["features"] === undefined) {
+    }
+    if (productToCompare["features"] === undefined) {
       fetchProductInfo(productToCompare)
     }
   }, [])
