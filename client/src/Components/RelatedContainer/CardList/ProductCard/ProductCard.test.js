@@ -3,11 +3,11 @@ import { screen, render, fireEvent } from "../../../../test-utils.jsx"
 import ProductCard from "./ProductCard.jsx"
 import { ProductsContext } from "../../../../contexts/ProductsContext.jsx"
 import sampleProduct from "./sampleProduct"
+import sampleProductReviews from "sampleProductReviews"
 
 describe("ProductCard", () => {
   // TODO:
   //  - 1.4.1.1.1: conditional render for SALE price
-  //  - 1.4.1.1.4: test rendering for star reviews
   const MockActionBtn = () => <button>ACTION BUTTON</button>
 
   let props
@@ -33,6 +33,36 @@ describe("ProductCard", () => {
 
     expect(screen.getByText("ACTION BUTTON")).toBeInTheDocument()
     expect(screen.getByRole("button")).toHaveTextContent("ACTION BUTTON")
+  })
+
+  test("renders star rating", () => {
+    const { container } = render(<ProductCard {...props} />)
+    // Searching for component from https://www.npmjs.com/package/react-bootstrap-star-rating
+    const StarRating = container.querySelector(".star-rating")
+    expect(StarRating).toBeInTheDocument()
+  })
+
+  test("when the style is discounted, the sale price should appear in red, followed by the original price which is struckthrough", () => {
+    const placeholderStyles = {
+      results: [
+        {
+          original_price: "140.00",
+          sale_price: "100.00",
+        },
+      ],
+    }
+    const { container } = render(
+      <ProductCard {...props} styles={placeholderStyles} />
+    )
+    expect(screen.getByText("$140")).toBeInTheDocument()
+    expect(screen.getByText("$100")).toBeInTheDocument()
+
+    const strikeThroughElem = container.querySelector("span")
+    expect(strikeThroughElem).toBeInTheDocument()
+    expect(strikeThroughElem).toHaveAttribute("style")
+
+    const styleString = { "text-decoration": "line-through", color: "red" }
+    expect(strikeThroughElem.style["_values"]).toEqual(styleString)
   })
 
   test("clicking the body updates the currently display product in context", () => {
