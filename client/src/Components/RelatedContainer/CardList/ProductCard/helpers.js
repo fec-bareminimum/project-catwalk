@@ -17,7 +17,8 @@ export const extractPriceString = (product) => {
 
 export const extractThumbnailLink = (product) => {
   try {
-    const imageUrl = product["styles"][productStyleIndex].photos[0].thumbnail_url
+    const imageUrl =
+      product["styles"]["results"][productStyleIndex].photos[0].thumbnail_url
     return imageUrl
   } catch {
     // placeholder image
@@ -25,11 +26,17 @@ export const extractThumbnailLink = (product) => {
   }
 }
 
-export const extractSalesPrice = (styleObj) => {
-  if (styleObj && styleObj["sale_price"] && styleObj["sale_price"] !== null) {
-    return styleObj["sale_price"]
+export const extractSalesPrice = (product, styleIndex = 0) => {
+  try {
+    const stylesObj = product["styles"]["results"][styleIndex]
+    console.log(product)
+    if (styleObj && styleObj["sale_price"] && styleObj["sale_price"] !== null) {
+      return styleObj["sale_price"]
+    }
+    return
+  } catch {
+    return
   }
-  return
 }
 
 export const formatPriceStr = (priceStr) => {

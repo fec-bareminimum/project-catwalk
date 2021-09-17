@@ -14,18 +14,19 @@ import {
 const ProductCard = (props) => {
   const {
     updateDisplayedProduct,
-    selectedStyle,
+    displayedProduct,
     fetchProductInfo,
     fetchProductStyles,
+    selectedStyleIndex,
   } = useProducts()
   const { reviews } = useReviews()
 
   // Fetch more complete details for this product
   useEffect(() => {
-    if (!props["styles"]) {
+    if (!props["styles"] && fetchProductStyles) {
       fetchProductStyles(props["id"])
     }
-    if (!props["features"]) {
+    if (!props["features"] && fetchProductInfo) {
       fetchProductInfo(props["id"])
     }
   }, [props])
@@ -35,7 +36,7 @@ const ProductCard = (props) => {
   }
 
   const defaultPrice = formatPriceStr(extractPriceString(props))
-  const salePrice = extractSalesPrice(selectedStyle)
+  const salePrice = extractSalesPrice(displayedProduct, selectedStyleIndex)
   const strikeThroughStyles = { textDecoration: "line-through", color: "red" }
 
   return (

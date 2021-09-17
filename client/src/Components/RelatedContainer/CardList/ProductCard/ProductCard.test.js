@@ -1,12 +1,24 @@
 import React from "react"
-import { screen, render, fireEvent } from "../../../../test-utils.jsx"
+import { screen, render as rltRender, fireEvent } from "../../../../test-utils.jsx"
 import ProductCard from "./ProductCard.jsx"
 import { ProductsContext } from "../../../../contexts/ProductsContext.jsx"
 import sampleProduct from "./sampleProduct"
 import sampleProductReviews from "sampleProductReviews"
 
+const render = (ui, contextValue) => {
+  const defualtValues = {
+    fetchProductInfo: () => {},
+    fetchProductStyles: () => {},
+  }
+  return rltRender(
+    <ProductsContext.Provider value={{ ...defualtValues, ...contextValue }}>
+      {ui}
+    </ProductsContext.Provider>
+  )
+}
+
 describe("ProductCard", () => {
-  const MockActionBtn = () => <button>ACTION BUTTON</button>
+  const MockActionBtn = () => <button data-testid="actionBtn">ACTION BUTTON</button>
 
   let props
   beforeEach(() => {
@@ -31,6 +43,7 @@ describe("ProductCard", () => {
 
     expect(screen.getByText("ACTION BUTTON")).toBeInTheDocument()
     expect(screen.getByRole("button")).toHaveTextContent("ACTION BUTTON")
+    expect(screen.getByTestId("actionBtn")).toHaveTextContent("ACTION BUTTON")
   })
 
   test("renders star rating", () => {
@@ -41,15 +54,19 @@ describe("ProductCard", () => {
   })
 
   test("when the style is discounted, the sale price should appear in red, followed by the original price which is struckthrough", () => {
-    const mockStyle = {
-      original_price: "140.00",
-      sale_price: "100.00",
+    const styles = {
+      product_id: "42366",
+      results: [
+        {
+          original_price: "140.00",
+          sale_price: "100.00",
+        },
+      ],
     }
-    const { container } = render(
-      <ProductsContext value={{ selectedStyle: mockStyle }}>
-        <ProductCard {...props} styles={placeholderStyles} />
-      </ProductsContext>
-    )
+    render(<ProductCard {...props} styles={styles} />, {
+      displayedProduct: { ...sampleProduct, styles },
+    })
+
     expect(screen.getByText("$140")).toBeInTheDocument()
     expect(screen.getByText("$100")).toBeInTheDocument()
 
@@ -64,11 +81,9 @@ describe("ProductCard", () => {
   test("clicking the body updates the currently display product in context", () => {
     // Mock the Context function that should be triggered
     const updateDisplayedProduct = jest.fn()
-    const { container } = render(
-      <ProductsContext.Provider value={{ updateDisplayedProduct }}>
-        <ProductCard {...props} />
-      </ProductsContext.Provider>
-    )
+    const { container } = render(<ProductCard {...props} />, {
+      updateDisplayedProduct,
+    })
 
     // Click this product card
     const cardElem = container.querySelector(".card-body")
@@ -80,11 +95,9 @@ describe("ProductCard", () => {
 
   test("clicking the body updates the detail page to display THIS product", () => {
     const updateDisplayedProduct = jest.fn()
-    const { container } = render(
-      <ProductsContext.Provider value={{ updateDisplayedProduct }}>
-        <ProductCard {...props} />
-      </ProductsContext.Provider>
-    )
+    const { container } = render(<ProductCard {...props} />, {
+      updateDisplayedProduct,
+    })
 
     fireEvent.click(container.querySelector(".card-body"))
 
@@ -93,22 +106,6 @@ describe("ProductCard", () => {
     setTimeout(() => {
       const descText = sampleProduct.description
       expect(screen.getByText(descText)).toBeInTheDocument()
-    }, 0)
-  })
-
-  test("renders the comparison component on hover", () => {
-    render(<ProductCard {...props} />)
-    fireEvent.mouseOver(screen.getByText(props.name))
-
-    setTimeout(() => {
-      expect(screen.getByRole("figure")).toBeInTheDocument()
-      expect(screen.getByText(props.description)).toBeInTheDocument()
-    }, 0)
-
-    fireEvent.mouseLeave(screen.getByText(props.name))
-
-    setTimeout(() => {
-      expect(screen.getByRole("figure")).not.toBeInTheDocument()
     }, 0)
   })
 })
