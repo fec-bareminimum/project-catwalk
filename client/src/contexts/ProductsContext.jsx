@@ -71,6 +71,7 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const value = {
+    productList,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
@@ -84,6 +85,7 @@ export const ProductsProvider = ({ children }) => {
 
 const useProducts = () => {
   const {
+    productList,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
@@ -91,6 +93,7 @@ const useProducts = () => {
   } = useContext(ProductsContext)
 
   return {
+    productList,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
