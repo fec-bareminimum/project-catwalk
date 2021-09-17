@@ -12,17 +12,23 @@ import {
 } from "./helpers"
 
 const ProductCard = (props) => {
-  const { updateDisplayedProduct, selectedStyle } = useProducts()
+  const {
+    updateDisplayedProduct,
+    selectedStyle,
+    fetchProductInfo,
+    fetchProductStyles,
+  } = useProducts()
   const { reviews } = useReviews()
 
-  /* ******************************************************************
   // Fetch more complete details for this product
   useEffect(() => {
     if (!props["styles"]) {
-      // fetch product styles (/api/product/:productId/styles)
+      fetchProductStyles(props["id"])
     }
-  }, [])
-  ****************************************************************** */
+    if (!props["features"]) {
+      fetchProductInfo(props["id"])
+    }
+  }, [props])
 
   const handleClick = () => {
     updateDisplayedProduct(props)

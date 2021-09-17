@@ -6,8 +6,6 @@ import sampleProduct from "./sampleProduct"
 import sampleProductReviews from "sampleProductReviews"
 
 describe("ProductCard", () => {
-  // TODO:
-  //  - 1.4.1.1.1: conditional render for SALE price
   const MockActionBtn = () => <button>ACTION BUTTON</button>
 
   let props
