@@ -12,7 +12,7 @@ import {
 } from "./helpers"
 
 const ProductCard = (props) => {
-  const { updateDisplayedProduct } = useProducts()
+  const { updateDisplayedProduct, selectedStyle } = useProducts()
   const { reviews } = useReviews()
 
   /* ******************************************************************
@@ -28,9 +28,8 @@ const ProductCard = (props) => {
     updateDisplayedProduct(props)
   }
 
-  const currentStyleObj = ((props.styles || {}).results || [])[0]
   const defaultPrice = formatPriceStr(extractPriceString(props))
-  const salePrice = extractSalesPrice(currentStyleObj)
+  const salePrice = extractSalesPrice(selectedStyle)
   const strikeThroughStyles = { textDecoration: "line-through", color: "red" }
 
   return (

@@ -43,16 +43,14 @@ describe("ProductCard", () => {
   })
 
   test("when the style is discounted, the sale price should appear in red, followed by the original price which is struckthrough", () => {
-    const placeholderStyles = {
-      results: [
-        {
-          original_price: "140.00",
-          sale_price: "100.00",
-        },
-      ],
+    const mockStyle = {
+      original_price: "140.00",
+      sale_price: "100.00",
     }
     const { container } = render(
-      <ProductCard {...props} styles={placeholderStyles} />
+      <ProductsContext value={{ selectedStyle: mockStyle }}>
+        <ProductCard {...props} styles={placeholderStyles} />
+      </ProductsContext>
     )
     expect(screen.getByText("$140")).toBeInTheDocument()
     expect(screen.getByText("$100")).toBeInTheDocument()
