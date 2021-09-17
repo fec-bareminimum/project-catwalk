@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { setToStorage, getFromStorage } from "../utils/storage"
+import themeSchema from "./schema.json"
 import _ from "lodash"
 
 export const useTheme = () => {
   const themes = getFromStorage("all-themes")
-  const [theme, setTheme] = useState(themes.data.light)
+  const [theme, setTheme] = useState(themeSchema.data.light)
   const [themeLoaded, setThemeLoaded] = useState(false)
 
   const setMode = (mode) => {
@@ -14,7 +15,8 @@ export const useTheme = () => {
   }
 
   const getFonts = () => {
-    const allFonts = _.values(_.mapValues(themes.data, "font"))
+    const validThemeObj = themes || themeSchema
+    const allFonts = _.values(_.mapValues(validThemeObj.data, "font"))
     return allFonts
   }
 
@@ -32,8 +34,10 @@ export const useTheme = () => {
 
   useEffect(() => {
     const localTheme = getFromStorage("theme")
-    const newTheme = localTheme ? localTheme : themes.data.light
-    setTheme(newTheme)
+    if (localTheme && localTheme.data) {
+      const newTheme = themes.data.light
+      setTheme(newTheme)
+    }
     setThemeLoaded(true)
   }, [])
 
