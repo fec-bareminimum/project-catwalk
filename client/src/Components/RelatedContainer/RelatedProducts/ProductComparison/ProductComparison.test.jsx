@@ -1,8 +1,22 @@
 import React from "react"
-import { screen, render, within, fireEvent } from "../../../../test-utils.jsx"
 import ProductComparison from "./ProductComparison.jsx"
 import { ProductsContext } from "../../../../contexts/ProductsContext.jsx"
 import sampleProductList from "sampleProductList"
+import {
+  screen,
+  render as rltRender,
+  within,
+  fireEvent,
+} from "../../../../test-utils.jsx"
+
+const render = (ui, contextValue) => {
+  const defualtValues = {}
+  return rltRender(
+    <ProductsContext.Provider value={{ ...defualtValues, ...contextValue }}>
+      {ui}
+    </ProductsContext.Provider>
+  )
+}
 
 describe("ProductComparison", () => {
   // Have two mock product objects with characteristics to compare
@@ -11,14 +25,9 @@ describe("ProductComparison", () => {
   let container
 
   beforeEach(() => {
-    const mockContext = {
+    const renderResult = render(<ProductComparison productToCompare={productB} />, {
       displayedProduct: productA,
-    }
-    const renderResult = render(
-      <ProductsContext.Provider value={mockContext}>
-        <ProductComparison productToCompare={productB} />
-      </ProductsContext.Provider>
-    )
+    })
     container = renderResult.container
   })
 
@@ -164,11 +173,7 @@ describe("ProductComparison Without Features Details", () => {
       displayedProduct: productA,
       fetchProductInfo: fetchProductInfo,
     }
-    render(
-      <ProductsContext.Provider value={mockContext}>
-        <ProductComparison productToCompare={productB} />
-      </ProductsContext.Provider>
-    )
+    render(<ProductComparison productToCompare={productB} />, mockContext)
 
     expect(fetchProductInfo).toHaveBeenCalledTimes(1)
     expect(fetchProductInfo).toHaveBeenCalledWith(productA)
@@ -181,11 +186,7 @@ describe("ProductComparison Without Features Details", () => {
       displayedProduct: productA,
       fetchProductInfo: fetchProductInfo,
     }
-    render(
-      <ProductsContext.Provider value={mockContext}>
-        <ProductComparison productToCompare={productB} />
-      </ProductsContext.Provider>
-    )
+    render(<ProductComparison productToCompare={productB} />, mockContext)
 
     // Wait for component to trigger useEffect check
     expect(fetchProductInfo).toHaveBeenCalledTimes(1)
@@ -200,11 +201,7 @@ describe("ProductComparison Without Features Details", () => {
       displayedProduct: productA,
       fetchProductInfo: fetchProductInfo,
     }
-    render(
-      <ProductsContext.Provider value={mockContext}>
-        <ProductComparison productToCompare={productB} />
-      </ProductsContext.Provider>
-    )
+    render(<ProductComparison productToCompare={productB} />, mockContext)
 
     expect(fetchProductInfo).toHaveBeenCalledTimes(2)
   })
