@@ -4,8 +4,8 @@ import themeSchema from "./schema.json"
 import _ from "lodash"
 
 export const useTheme = () => {
-  const themes = getFromStorage("all-themes")
-  const [theme, setTheme] = useState(themeSchema.data.light)
+  const themes = getFromStorage("all-themes") || themeSchema
+  const [theme, setTheme] = useState(themes.data.light)
   const [themeLoaded, setThemeLoaded] = useState(false)
 
   const setMode = (mode) => {
@@ -15,8 +15,7 @@ export const useTheme = () => {
   }
 
   const getFonts = () => {
-    const validThemeObj = themes || themeSchema
-    const allFonts = _.values(_.mapValues(validThemeObj.data, "font"))
+    const allFonts = _.values(_.mapValues(themes.data, "font"))
     return allFonts
   }
 
