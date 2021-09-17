@@ -1,15 +1,19 @@
 import React from "react"
 import CardList from "../CardList/CardList.jsx"
+import useCart from "../../../contexts/CartContext.jsx"
+import RemoveButton from "./RemoveButton/RemoveButton.jsx"
 
 const OutfitProducts = () => {
-  // will access the state for products in CART
-  // will render the card list for that array
+  const { cartProducts } = useCart()
 
   return (
-    <div data-testid="outfitProductsContainer">
-      <p>under construction</p>
-      <CardList />
-    </div>
+    <section className="outfitProductsContainer">
+      <CardList
+        products={cartProducts}
+        listTitle={"YOUR OUTFIT"}
+        ActionBtn={RemoveButton}
+      />
+    </section>
   )
 }
 
