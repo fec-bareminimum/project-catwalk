@@ -25,7 +25,7 @@ describe("RelatedProducts", () => {
     expect(container.querySelector(".cardList")).toBeInTheDocument()
   })
 
-  test("renders NO cards when ProductsContext productList is empty", () => {
+  test("renders NO cards when ProductsContext relatedProducts is empty", () => {
     const { container } = render(
       <ProductsContext.Provider value={{ relatedProducts: [] }}>
         <RelatedProducts />
@@ -35,7 +35,7 @@ describe("RelatedProducts", () => {
     expect(container.querySelectorAll(".productCard")).toHaveLength(0)
   })
 
-  test("renders one card for each item in ProductsContext productList", () => {
+  test("renders one card for each item in ProductsContext relatedProducts", () => {
     // BROKEN - assume "react-multi-carousel" will handle a list properly
     expect(false).toBe(false)
 
