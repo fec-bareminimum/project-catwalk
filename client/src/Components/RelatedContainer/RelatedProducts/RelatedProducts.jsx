@@ -4,7 +4,7 @@ import useProducts from "../../../contexts/ProductsContext.jsx"
 import StarButton from "./StarButton/StarButton.jsx"
 
 const RelatedProducts = () => {
-  const { productList } = useProducts()
+  const { relatedProducts } = useProducts()
 
   return (
     <section className="relatedProductsContainer">
