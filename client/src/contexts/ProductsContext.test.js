@@ -33,16 +33,12 @@ const expectedExports = [
     targetInstance: Array,
   },
   {
-    key: "productInfo",
-    targetInstance: Object,
-  },
-  {
     key: "relatedProducts",
     targetInstance: Array,
   },
   {
-    key: "selectedStyle",
-    targetInstance: Object,
+    key: "selectedStyleIndex",
+    targetInstance: Number,
   },
   {
     key: "displayedProduct",
@@ -61,7 +57,7 @@ const expectedExports = [
     targetInstance: Function,
   },
   {
-    key: "fetchProductRelatedStyles",
+    key: "fetchProductRelatedIds",
     targetInstance: Function,
   },
 ]
