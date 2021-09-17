@@ -27,7 +27,7 @@ describe("RelatedProducts", () => {
 
   test("renders NO cards when ProductsContext productList is empty", () => {
     const { container } = render(
-      <ProductsContext.Provider value={{ productList: [] }}>
+      <ProductsContext.Provider value={{ relatedProducts: [] }}>
         <RelatedProducts />
       </ProductsContext.Provider>
     )
@@ -41,7 +41,7 @@ describe("RelatedProducts", () => {
 
     // const mockProductList = sampleProductList
     // const {container} = render(
-    //   <ProductsContext.Provider value={{ productList: mockProductList }}>
+    //   <ProductsContext.Provider value={{ relatedProducts: mockProductList }}>
     //     <RelatedProducts />
     //   </ProductsContext.Provider>
     // )
