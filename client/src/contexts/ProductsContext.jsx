@@ -80,9 +80,9 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get(`/products/${productId}/styles`, styleDetails)
       .then((response) => {
-        _extendExistingProductInList(response)
+        _extendExistingProductInList({ id: productId, styles: response })
         if (callback) {
-          callback(response)
+          callback({ id: productId, styles: response })
         }
       })
       .catch((err) => {
