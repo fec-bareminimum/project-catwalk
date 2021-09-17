@@ -26,7 +26,9 @@ export const ProductsProvider = ({ children }) => {
       .get("/products", productResults)
       .then((response) => {
         _setProductList(response)
-        callback(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
@@ -62,7 +64,9 @@ export const ProductsProvider = ({ children }) => {
       .get(`/products/${productId}`, infoBody)
       .then((response) => {
         _extendExistingProductInList(response)
-        callback(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
@@ -77,7 +81,9 @@ export const ProductsProvider = ({ children }) => {
       .get(`/products/${productId}/styles`, styleDetails)
       .then((response) => {
         _extendExistingProductInList(response)
-        callback(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
@@ -92,7 +98,9 @@ export const ProductsProvider = ({ children }) => {
       .get(`/products/${productId}/related`, relatedBody)
       .then((response) => {
         _setRelatedProducts(response)
-        callback(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
