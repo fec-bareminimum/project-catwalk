@@ -25,6 +25,45 @@ describe("OutfitProducts", () => {
     expect(container.querySelector(".cardList")).toBeInTheDocument()
   })
 
+  test("renders 'Add to Outfit' card", () => {
+    const { container } = render(<OutfitProducts />)
+
+    const addToCard = container.querySelector(".addToCard")
+    expect(screen.getByText("Add To Outfit")).toBeInTheDocument()
+    expect(addToCard).toBeInTheDocument()
+    expect(addToCard.tagName).toBe("BUTTON")
+  })
+
+  test("renders 'Add to Outfit' card with '+' icon", () => {
+    const { container } = render(<OutfitProducts />)
+
+    const plusIcon = container.querySelector(".addToCard svg.plusIcon")
+    expect(plusIcon).toBeInTheDocument()
+  })
+
+  test("clicking 'Add to Outfit' card will trigger addProductToCart in CartContext", () => {
+    const addProductToCart = jest.fn()
+    const { container } = render(<OutfitProducts />)
+
+    const addToCard = container.querySelector(".addToCard")
+
+    fireEvent.click(addToCard)
+
+    expect(addProductToCart).toHaveBeenCalledTimes(1)
+  })
+
+  test("clicking 'Add to Outfit' twice will trigger addProductToCart only once", () => {
+    const addProductToCart = jest.fn()
+    const { container } = render(<OutfitProducts />)
+
+    const addToCard = container.querySelector(".addToCard")
+
+    fireEvent.click(addToCard)
+    fireEvent.click(addToCard)
+
+    expect(addProductToCart).toHaveBeenCalledTimes(1)
+  })
+
   test("renders NO cards when CartContext cartProducts is empty", () => {
     const { container } = render(
       <CartContext.Provider value={{ cartProducts: [] }}>
