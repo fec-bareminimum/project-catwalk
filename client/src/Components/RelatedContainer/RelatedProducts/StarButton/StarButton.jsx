@@ -10,7 +10,7 @@ const StarButton = ({ thisProduct, handleClick }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {displayComparison ? (
         <ProductComparison
           handleClick={togglePopup}
@@ -21,7 +21,7 @@ const StarButton = ({ thisProduct, handleClick }) => {
           <StarIcon />
         </button>
       )}
-    </React.Fragment>
+    </>
   )
 }
 
