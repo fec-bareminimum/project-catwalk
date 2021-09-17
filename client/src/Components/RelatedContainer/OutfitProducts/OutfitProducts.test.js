@@ -43,7 +43,11 @@ describe("OutfitProducts", () => {
 
   test("clicking 'Add to Outfit' card will trigger addProductToCart in CartContext", () => {
     const addProductToCart = jest.fn()
-    const { container } = render(<OutfitProducts />)
+    const { container } = render(
+      <CartContext.Provider value={{ addProductToCart }}>
+        <OutfitProducts />
+      </CartContext.Provider>
+    )
 
     const addToCard = container.querySelector(".addToCard")
 
@@ -54,7 +58,11 @@ describe("OutfitProducts", () => {
 
   test("clicking 'Add to Outfit' twice will trigger addProductToCart only once", () => {
     const addProductToCart = jest.fn()
-    const { container } = render(<OutfitProducts />)
+    const { container } = render(
+      <CartContext.Provider value={{ addProductToCart }}>
+        <OutfitProducts />
+      </CartContext.Provider>
+    )
 
     const addToCard = container.querySelector(".addToCard")
 
