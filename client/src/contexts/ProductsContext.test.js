@@ -60,4 +60,8 @@ const expectedExports = [
     key: "fetchProductRelatedIds",
     targetInstance: Function,
   },
+  {
+    key: "changeSelectedStyleIndex",
+    targetInstance: Function,
+  },
 ]
