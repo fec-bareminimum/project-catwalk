@@ -1,11 +1,11 @@
 import React from "react"
 import useClickLogger from "../../hooks/useClickLogger.jsx"
-import ReviewList from "./ReviewList/ReviewList.jsx"
+import List from "./List/List.jsx"
 
 const ReviewsContainer = () => {
   return (
     <div className="reviewsContainer">
-      <ReviewList />
+      <List />
     </div>
   )
 }

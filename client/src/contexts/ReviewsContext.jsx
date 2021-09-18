@@ -7,16 +7,19 @@ export const ReviewsProvider = ({ children }) => {
   const [reviews, setReviews] = useState({})
   const [reviewMetadata, setReviewMetadata] = useState({})
 
-  const fetchReviews = (page, count, sort, productId, callback) => {
+  const fetchReviews = (page, count, sort, product_id, callback) => {
     const fetchDetails = {
       page,
       count,
       sort,
-      productId,
+      product_id,
     }
 
-    axios
-      .get("/reviews/", fetchDetails)
+    axios({
+      url: "/reviews/",
+      method: "get",
+      params: fetchDetails,
+    })
       .then((response) => {
         setReviews(response)
         callback(response)
@@ -26,13 +29,16 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
-  const fetchReviewMetadata = (productId, callback) => {
+  const fetchReviewMetadata = (product_id, callback) => {
     const fetchDetails = {
-      productId,
+      product_id,
     }
 
-    axios
-      .get("/reviews/meta", fetchDetails)
+    axios({
+      url: "/reviews/meta",
+      method: "get",
+      params: fetchDetails,
+    })
       .then((response) => {
         setReviewMetadata(response)
         callback(response)
