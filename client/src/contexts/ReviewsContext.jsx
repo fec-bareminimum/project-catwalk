@@ -21,6 +21,7 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
+        setReviews(response.data)
         callback(response.data)
       })
       .catch((err) => {

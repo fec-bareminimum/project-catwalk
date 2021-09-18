@@ -10,7 +10,7 @@ const ReviewList = (props) => {
   const [sort, setSort] = useState("relevant") // based on sort
   const [product_id, setProduct_id] = useState(42367)
 
-  const [tiles, setTiles] = useState([])
+  const [tiles, setTiles] = useState([]) // temp fix? reviews broken
 
   useEffect(() => {
     fetchReviews(page, count, sort, product_id, (data) => {
