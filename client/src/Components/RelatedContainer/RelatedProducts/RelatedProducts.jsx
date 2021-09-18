@@ -1,18 +1,26 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import CardList from "../CardList/CardList.jsx"
 import useProducts from "../../../contexts/ProductsContext.jsx"
 import StarButton from "./StarButton/StarButton.jsx"
 
 const RelatedProducts = () => {
-  const { relatedProducts, productList, fetchProductInfo, fetchProductStyles } = useProducts()
+  const { relatedProducts, productList, fetchProductInfo, fetchProductStyles } =
+    useProducts()
   const [relatedDetails, setRelatedDetails] = useState([])
 
   // Convert "relatedProducts" (list of IDS) to array of product objects
   useEffect(() => {
-    if (relatedProducts && relatedProducts.length && productList && productList.length) {
+    if (
+      relatedProducts &&
+      relatedProducts.length &&
+      productList &&
+      productList.length
+    ) {
       const newRelated = []
       relatedProducts.forEach((productID) => {
-        const existingIndex = productList.map((e) => e.id).indexOf(productID.toString())
+        const existingIndex = productList
+          .map((e) => e.id)
+          .indexOf(productID.toString())
 
         if (existingIndex) {
           newRelated.push(productList[existingIndex])
