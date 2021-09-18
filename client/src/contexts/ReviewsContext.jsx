@@ -108,6 +108,8 @@ export const ReviewsProvider = ({ children }) => {
   }
 
   const value = {
+    reviews,
+    reviewMetadata,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
@@ -120,6 +122,8 @@ export const ReviewsProvider = ({ children }) => {
 
 const useReviews = () => {
   const {
+    reviews,
+    reviewMetadata,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
@@ -128,6 +132,8 @@ const useReviews = () => {
   } = useContext(ReviewsContext)
 
   return {
+    reviews,
+    reviewMetadata,
     fetchReviews,
     fetchReviewMetadata,
     addReview,

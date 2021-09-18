@@ -72,6 +72,9 @@ export const ProductsProvider = ({ children }) => {
 
   const value = {
     productList,
+    productInfo,
+    styles,
+    relatedProducts,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
@@ -86,6 +89,9 @@ export const ProductsProvider = ({ children }) => {
 const useProducts = () => {
   const {
     productList,
+    productInfo,
+    styles,
+    relatedProducts,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
@@ -94,6 +100,9 @@ const useProducts = () => {
 
   return {
     productList,
+    productInfo,
+    styles,
+    relatedProducts,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
