@@ -21,8 +21,8 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        setReviews(response)
-        callback(response)
+        setReviews(response.data)
+        callback(response.data)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
@@ -40,8 +40,8 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        setReviewMetadata(response)
-        callback(response)
+        setReviewMetadata(response.data)
+        callback(response.data)
       })
       .catch((err) => {
         console.log("Server failed to fetch review metadata")
@@ -114,6 +114,8 @@ export const ReviewsProvider = ({ children }) => {
   }
 
   const value = {
+    reviews,
+    reviewMetadata,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
@@ -126,6 +128,8 @@ export const ReviewsProvider = ({ children }) => {
 
 const useReviews = () => {
   const {
+    reviews,
+    reviewMetadata,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
@@ -134,6 +138,8 @@ const useReviews = () => {
   } = useContext(ReviewsContext)
 
   return {
+    reviews,
+    reviewMetadata,
     fetchReviews,
     fetchReviewMetadata,
     addReview,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useLayoutEffect, useEffect } from "react"
 // import Sorter from "./Sorter.jsx"
 import ReviewList from "./ReviewList.jsx"
 // import Buttons from "./Buttons.jsx"
@@ -11,18 +11,20 @@ const List = () => {
   const [sort, setSort] = useState("relevant") // based on sort
   const [product_id, setProduct_id] = useState(42367)
 
-  // console.log("reviews before", reviews)
+  fetchReviews(page, count, sort, product_id, (response) => {
+    console.log("fetched reviews: ", response)
+  })
 
   useEffect(() => {
-    console.log("inside effect")
-    fetchReviews(page, count, sort, product_id, (data) => {
-      // console.log("reviews after", data)
+    fetchReviews(page, count, sort, product_id, (response) => {
+      console.log("fetched reviews: ", response)
     })
   }, [page, count, sort, product_id])
+
   return (
     <section className="list">
       {/* <Sorter /> */}
-      <ReviewList data={reviews} />
+      <ReviewList data={reviews.results} />
       {/* <Buttons /> */}
     </section>
   )
