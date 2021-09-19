@@ -17,21 +17,18 @@ const ReviewTile = (props) => {
     <Container>
       <Row>
         <Col className="stars">
-          <StarRatings
-            className="stars"
-            rating={props.rating}
-            starDimension="15px"
-            starSpacing="0"
-          />
+          <StarRatings rating={props.rating} starDimension="15px" starSpacing="0" />
         </Col>
         <Col className="name-date">
-          {props.reviewer_name}
-          {", "}
-          {new Date(props.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          <Card.Text>
+            {props.reviewer_name}
+            {", "}
+            {new Date(props.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </Card.Text>
         </Col>
       </Row>
     </Container>
@@ -50,7 +47,7 @@ const ReviewTile = (props) => {
   const response = () => {
     if (props.response) {
       return (
-        <Card>
+        <Card className="response">
           <Card.Title>Response</Card.Title>
           <Card.Text>{props.response}</Card.Text>
         </Card>
@@ -70,7 +67,6 @@ const ReviewTile = (props) => {
               return (
                 <Col key={photo.id} xs={6} md={4}>
                   <Image src={photo.url} onClick={handleShow} thumbnail />
-
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton></Modal.Header>
                     <Modal.Body>
