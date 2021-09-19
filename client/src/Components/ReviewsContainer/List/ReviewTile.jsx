@@ -14,7 +14,7 @@ const ReviewTile = (props) => {
   const [report, setReport] = useState(false)
 
   const header = () => (
-    <Container>
+    <Container className="header">
       <Row>
         <Col className="stars">
           <StarRatings rating={props.rating} starDimension="15px" starSpacing="0" />
@@ -58,7 +58,7 @@ const ReviewTile = (props) => {
   const photos = () => {
     if (props.photos.length > 0) {
       return (
-        <Container>
+        <Container className="photos">
           <Row>
             {props.photos.map((photo) => {
               const [show, setShow] = useState(false)

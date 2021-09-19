@@ -97,8 +97,8 @@ const ReviewList = (props) => {
           {all.length} reviews, sorted by {sorter()}
         </Card.Title>
       </Card>
-      <Container>{display}</Container>
-      <Container>
+      <Container className="tiles">{display}</Container>
+      <Container className="buttons">
         <Row>
           <Col>{more()}</Col>
           {/* <Col>
