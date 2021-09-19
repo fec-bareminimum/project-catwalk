@@ -61,10 +61,17 @@ const ReviewList = (props) => {
     tiles.push(next)
   }
 
+  const listStyle = {
+    height: "75vh",
+    overflow: "auto",
+  }
+
   return (
     <section className="list">
       {/* sorter goes here */}
-      <Container className="reviews">{tiles}</Container>
+      <Container className="reviews" style={listStyle}>
+        {tiles}
+      </Container>
       <Container className="buttons">
         <Row>
           <Col>{more()}</Col>
