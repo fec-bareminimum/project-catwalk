@@ -9,8 +9,7 @@ import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const listStyle = {
-  width: "66vh",
-  height: "75vh",
+  maxHeight: "85vh",
   overflow: "auto",
 }
 

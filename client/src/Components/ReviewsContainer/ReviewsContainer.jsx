@@ -11,11 +11,11 @@ const ReviewsContainer = () => {
   return (
     <Container className="reviews">
       <Row>
-        <Col>
+        <Col xs={2} md={4}>
           <h4>Ratings &#38; reviews</h4>
           <RatingBreakdown />
         </Col>
-        <Col>
+        <Col xs={4} md={8}>
           <ReviewList />
         </Col>
       </Row>

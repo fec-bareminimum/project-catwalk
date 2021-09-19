@@ -7,11 +7,6 @@ import StarRatings from "react-star-ratings"
 import ProductBreakdown from "./ProductBreakdown.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-const bkdStyle = {
-  width: "33vh",
-  height: "75vh",
-}
-
 const RatingBreakdown = () => {
   const { reviewMetadata, fetchReviewMetadata } = useReviews()
   const [product_id, setProduct_id] = useState(42367)
@@ -54,7 +49,7 @@ const RatingBreakdown = () => {
   }
 
   return (
-    <section className="breakdown" style={bkdStyle}>
+    <section className="breakdown">
       <Container className="rating">
         {bigs()}
         {/* {bars} */}
