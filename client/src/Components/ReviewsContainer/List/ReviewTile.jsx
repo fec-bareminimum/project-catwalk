@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
+import Badge from "react-bootstrap/Badge"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -17,13 +18,37 @@ const ReviewTile = (props) => {
     />
   )
 
-  const date = () => {
-    return new Intl.DateTimeFormat().format(props.date)
+  const date = new Date(props.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
+  const verified = () => {
+    // if email is associated with a sale...
+    if (props.email) {
+      return <Badge>Verified Purchaser</Badge>
+    }
   }
 
   const recommend = () => {
     if (props.recommend) {
-      return <Card.Text className="recommend">I recommend this product!</Card.Text>
+      return (
+        <Card.Text className="recommend">
+          &#10003; I recommend this product!
+        </Card.Text>
+      )
+    }
+  }
+
+  const response = () => {
+    if (props.response) {
+      return (
+        <Card>
+          <Card.Title>Response</Card.Title>
+          <Card.Text>{props.response}</Card.Text>
+        </Card>
+      )
     }
   }
 
@@ -45,19 +70,20 @@ const ReviewTile = (props) => {
     <Card className="reviewTile">
       <Card.Header>
         {stars}
-        {props.reviewer_name}, {date()}
+        {verified()} {props.reviewer_name}, {date}
       </Card.Header>
       <Card.Body>
         <Card.Title>{props.summary}</Card.Title>
         <Card.Text>{props.body}</Card.Text>
         {recommend()}
+        {response()}
       </Card.Body>
       <Card.Footer>
         Helpful?{" "}
         <Card.Link className="helpful" onClick={handleHelpful}>
           Yes ({props.helpfulness})
-        </Card.Link>{" "}
-        |
+        </Card.Link>
+        {" | "}
         <Card.Link className="report" onClick={handleReport}>
           Report
         </Card.Link>
