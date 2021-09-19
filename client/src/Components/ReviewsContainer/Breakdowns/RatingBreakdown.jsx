@@ -28,14 +28,24 @@ const RatingBreakdown = () => {
   }, [product_id])
 
   const bigs = () => {
-    const overall = 3.5
+    // let [total, setTotal] = useState(0)
+    // let [count, setCount] = useState(0)
+    // let [average, setAverage] = useState(0)
+    let average = 3.5
+
+    // for (let rating in ratings) {
+    //   setTotal(total + rating * ratings[rating])
+    //   setCount(count + ratings[rating])
+    // }
+    // setAverage(Math.round((total / count) * 10) / 10)
+
     return (
       <Row>
         <Col>
-          <h1>{overall}</h1>
+          <h1>{average}</h1>
         </Col>
         <Col>
-          <StarRatings rating={overall} starDimension="15px" starSpacing="0" />
+          <StarRatings rating={average} starDimension="15px" starSpacing="0" />
         </Col>
       </Row>
     )
