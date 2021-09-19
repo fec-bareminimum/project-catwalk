@@ -6,20 +6,29 @@ import Button from "react-bootstrap/Button"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
+const listStyle = {
+  width: "66vh",
+}
+const tilesStyle = {
+  height: "75vh",
+  overflow: "auto",
+}
+
 const ReviewList = (props) => {
   const { reviews, fetchReviews } = useReviews()
   const [page, setPage] = useState(1)
-  const [count, setCount] = useState(2)
-  const [sort, setSort] = useState("relevant") // based on sort
+  const [count, setCount] = useState(100)
+  const [sort, setSort] = useState("relevant")
   const [product_id, setProduct_id] = useState(42367)
-  const [tiles, setTiles] = useState([])
+  const [display, setDisplay] = useState([])
   const [next, setNext] = useState([])
+  const [all, setAll] = useState([])
 
-  // create first set of tiles
+  // fetch all sorted reviews & create first set of tiles
   useEffect(() => {
     fetchReviews(page, count, sort, product_id, (data) => {
-      setTiles(
-        data.results.map((review) => (
+      setDisplay(
+        data.results.slice(0, 2).map((review) => (
           <Row key={review.review_id}>
             <Col>
               <ReviewTile {...review} />
@@ -27,15 +36,17 @@ const ReviewList = (props) => {
           </Row>
         ))
       )
+      setAll(data.results)
+      setCount(2)
       setPage(page + 1)
     })
-  }, [count, sort, product_id])
+  }, [sort, product_id])
 
-  // create next sets of tiles
+  // create undisplayed sets of tiles
   useEffect(() => {
-    fetchReviews(page, count, sort, product_id, (data) => {
+    if (all.length > 0) {
       setNext(
-        data.results.map((review) => (
+        all.slice(page * count - 2, page * count).map((review) => (
           <Row key={review.review_id}>
             <Col>
               <ReviewTile {...review} />
@@ -43,34 +54,30 @@ const ReviewList = (props) => {
           </Row>
         ))
       )
-    })
+    }
   }, [page])
 
   const more = () => {
     if (next.length > 0) {
       return (
-        <Button className="more" onClick={handleMore}>
+        <Button
+          className="more"
+          onClick={() => {
+            setPage(page + 1)
+            display.push(next)
+          }}
+        >
           More Reviews
         </Button>
       )
     }
   }
 
-  const handleMore = () => {
-    setPage(page + 1)
-    tiles.push(next)
-  }
-
-  const listStyle = {
-    height: "75vh",
-    overflow: "auto",
-  }
-
   return (
-    <section className="list">
-      {/* sorter goes here */}
-      <Container className="reviews" style={listStyle}>
-        {tiles}
+    <section className="list" style={listStyle}>
+      {/* <Container className="sorter">{sorter()}</Container> */}
+      <Container className="tiles" style={tilesStyle}>
+        {display}
       </Container>
       <Container className="buttons">
         <Row>
