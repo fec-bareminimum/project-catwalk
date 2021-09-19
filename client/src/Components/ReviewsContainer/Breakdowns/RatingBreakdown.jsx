@@ -48,26 +48,21 @@ const RatingBreakdown = () => {
   }
 
   const bars = () => {
-    var summary = []
+    var summary = [1, 2, 3, 4, 5]
     var count = 0
 
-    for (let i = 1; i <= 5; i++) {
-      if (!ratings[i]) {
-        summary.push({ [i]: 0 })
-      } else {
-        summary.push({ [i]: 1 * ratings[i] })
-        count += 1 * ratings[i]
-      }
+    for (let rating in ratings) {
+      count += 1 * ratings[rating]
     }
 
     if (count > 0) {
-      return summary.map((ratings, i) => (
+      return summary.map((rating, i) => (
         <Row key={Math.abs(i - 5)}>
           <Col>{`${Math.abs(i - 5)} stars`}</Col>
           <Col>
-            <ProgressBar></ProgressBar>
+            <ProgressBar max={count} now={ratings[Math.abs(i - 5)]}></ProgressBar>
           </Col>
-          <Col>reviews</Col>
+          <Col>{ratings[Math.abs(i - 5)] || 0}</Col>
         </Row>
       ))
     }
