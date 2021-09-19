@@ -1,10 +1,26 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const ReviewTile = (props) => {
   const { markReviewHelpful, reportReview } = useReviews()
+  const [helpful, setHelpful] = useState(false)
+  const [report, setReport] = useState(false)
+
+  const handleHelpful = () => {
+    if (!helpful) {
+      markReviewHelpful(props.review_id)
+      setHelpful(!helpful)
+    }
+  }
+
+  const handleReport = () => {
+    if (!report) {
+      reportReview(props.review_id)
+      setReport(!report)
+    }
+  }
 
   return (
     <Card style={{ width: "18rem" }} className="reviewTile">
@@ -17,10 +33,8 @@ const ReviewTile = (props) => {
       </Card.Body>
       <Card.Footer>
         Helpful?
-        <Card.Link onClick={() => markReviewHelpful(props.review_id)}>
-          Yes ({props.helpfulness})
-        </Card.Link>
-        |<Card.Link onClick={() => reportReview(props.review_id)}>Report</Card.Link>
+        <Card.Link onClick={handleHelpful}>Yes ({props.helpfulness})</Card.Link>|
+        <Card.Link onClick={handleReport}>Report</Card.Link>
       </Card.Footer>
     </Card>
   )
