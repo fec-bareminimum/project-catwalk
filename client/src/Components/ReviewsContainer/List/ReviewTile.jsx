@@ -107,8 +107,8 @@ const ReviewTile = (props) => {
         <Card.Title>{props.summary}</Card.Title>
         <Card.Text>{props.body}</Card.Text>
         {recommend()}
-        {photos()}
         {response()}
+        {photos()}
       </Card.Body>
       <Card.Footer>
         {"Helpful? "}
