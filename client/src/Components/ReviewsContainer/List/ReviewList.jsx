@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
-import Card from "react-bootstrap/Card"
-import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import Card from "react-bootstrap/Card"
+import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
@@ -56,22 +56,20 @@ const ReviewList = (props) => {
     }
   }, [page])
 
-  const sorter = () => {
-    return (
-      <Form.Select
-        size="sm"
-        onChange={(e) => {
-          setPage(1)
-          setCount(100)
-          setSort(e.target.value)
-        }}
-      >
-        <option value="relevant">Most relevant</option>
-        <option value="helpful">Most helpful</option>
-        <option value="newest">Most recent</option>
-      </Form.Select>
-    )
-  }
+  const sorter = () => (
+    <Form.Select
+      size="sm"
+      onChange={(e) => {
+        setPage(1)
+        setCount(100)
+        setSort(e.target.value)
+      }}
+    >
+      <option value="relevant">Most relevant</option>
+      <option value="helpful">Most helpful</option>
+      <option value="newest">Most recent</option>
+    </Form.Select>
+  )
 
   const more = () => {
     if (next.length > 0) {

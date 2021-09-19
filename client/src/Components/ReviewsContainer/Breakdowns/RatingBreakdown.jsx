@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import Card from "react-bootstrap/Card"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import ProgressBar from "react-bootstrap/ProgressBar"
 import StarRatings from "react-star-ratings"
 import ProductBreakdown from "./ProductBreakdown.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
@@ -34,10 +34,9 @@ const RatingBreakdown = () => {
     if (total > 0) {
       average = Math.round((total / count) * 10) / 10
     }
-    console.log(total, count, average)
 
     return (
-      <Row>
+      <Row className="bigs">
         <Col>
           <h1>{`${average}`}</h1>
         </Col>
@@ -48,11 +47,37 @@ const RatingBreakdown = () => {
     )
   }
 
+  const bars = () => {
+    var summary = []
+    var count = 0
+
+    for (let i = 1; i <= 5; i++) {
+      if (!ratings[i]) {
+        summary.push({ [i]: 0 })
+      } else {
+        summary.push({ [i]: 1 * ratings[i] })
+        count += 1 * ratings[i]
+      }
+    }
+
+    if (count > 0) {
+      return summary.map((ratings, i) => (
+        <Row key={Math.abs(i - 5)}>
+          <Col>{`${Math.abs(i - 5)} stars`}</Col>
+          <Col>
+            <ProgressBar></ProgressBar>
+          </Col>
+          <Col>reviews</Col>
+        </Row>
+      ))
+    }
+  }
+
   return (
     <section className="breakdown">
       <Container className="rating">
         {bigs()}
-        {/* {bars} */}
+        {bars()}
         {/* {percents} */}
       </Container>
       {/* <ProductBreakdown /> */}
