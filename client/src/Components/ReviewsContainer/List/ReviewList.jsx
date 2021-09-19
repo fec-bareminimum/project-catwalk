@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import CardGroup from "react-bootstrap/CardGroup"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -16,13 +18,17 @@ const ReviewList = (props) => {
     fetchReviews(page, count, sort, product_id, (data) => {
       setTiles(
         data.results.map((review) => (
-          <ReviewTile key={review.review_id} {...review} />
+          <Row key={review.review_id}>
+            <Col>
+              <ReviewTile {...review} />
+            </Col>
+          </Row>
         ))
       )
     })
   }, [page, count, sort, product_id])
 
-  return <CardGroup className="reviewList">{tiles}</CardGroup>
+  return <Container className="reviewList">{tiles}</Container>
 }
 
 export default ReviewList

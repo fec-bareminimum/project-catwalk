@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
-import Badge from "react-bootstrap/Badge"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Image from "react-bootstrap/Image"
+import Modal from "react-bootstrap/Modal"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -9,27 +13,29 @@ const ReviewTile = (props) => {
   const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState(false)
 
-  const stars = (
-    <StarRatings
-      className="stars"
-      rating={props.rating}
-      starDimension="15px"
-      starSpacing="0"
-    />
+  const header = () => (
+    <Container>
+      <Row>
+        <Col className="stars">
+          <StarRatings
+            className="stars"
+            rating={props.rating}
+            starDimension="15px"
+            starSpacing="0"
+          />
+        </Col>
+        <Col className="name-date">
+          {props.reviewer_name}
+          {", "}
+          {new Date(props.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </Col>
+      </Row>
+    </Container>
   )
-
-  const date = new Date(props.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
-
-  const verified = () => {
-    // if email is associated with a sale...
-    if (props.email) {
-      return <Badge>Verified Purchaser</Badge>
-    }
-  }
 
   const recommend = () => {
     if (props.recommend) {
@@ -52,6 +58,34 @@ const ReviewTile = (props) => {
     }
   }
 
+  const photos = () => {
+    if (props.photos.length > 0) {
+      return (
+        <Container>
+          <Row>
+            {props.photos.map((photo) => {
+              const [show, setShow] = useState(false)
+              const handleClose = () => setShow(false)
+              const handleShow = () => setShow(true)
+              return (
+                <Col key={photo.id} xs={6} md={4}>
+                  <Image src={photo.url} onClick={handleShow} thumbnail />
+
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton></Modal.Header>
+                    <Modal.Body>
+                      <Image src={photo.url} onClick={handleShow} fluid />
+                    </Modal.Body>
+                  </Modal>
+                </Col>
+              )
+            })}
+          </Row>
+        </Container>
+      )
+    }
+  }
+
   const handleHelpful = () => {
     if (!helpful) {
       markReviewHelpful(props.review_id)
@@ -68,24 +102,22 @@ const ReviewTile = (props) => {
 
   return (
     <Card className="reviewTile">
-      <Card.Header>
-        {stars}
-        {verified()} {props.reviewer_name}, {date}
-      </Card.Header>
+      <Card.Header>{header()}</Card.Header>
       <Card.Body>
         <Card.Title>{props.summary}</Card.Title>
         <Card.Text>{props.body}</Card.Text>
         {recommend()}
+        {photos()}
         {response()}
       </Card.Body>
       <Card.Footer>
-        Helpful?{" "}
+        {"Helpful? "}
         <Card.Link className="helpful" onClick={handleHelpful}>
-          Yes ({props.helpfulness})
+          {`Yes (${props.helpfulness})`}
         </Card.Link>
-        {" | "}
+        {" |"}
         <Card.Link className="report" onClick={handleReport}>
-          Report
+          {"Report"}
         </Card.Link>
       </Card.Footer>
     </Card>
