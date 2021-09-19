@@ -49,7 +49,7 @@ export const ReviewsProvider = ({ children }) => {
   }
 
   const addReview = (
-    productId,
+    product_id,
     rating,
     summary,
     body,
@@ -61,7 +61,7 @@ export const ReviewsProvider = ({ children }) => {
     callback
   ) => {
     const addDetails = {
-      productId,
+      product_id,
       rating,
       summary,
       body,
@@ -83,30 +83,30 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
-  const markReviewHelpful = (reviewId, callback) => {
+  const markReviewHelpful = (review_id) => {
     const markDetails = {
-      reviewId,
+      review_id,
     }
 
     axios
-      .put(`/reviews/${reviewId}/helpful`, markDetails)
+      .put(`/reviews/${review_id}/helpful`, markDetails)
       .then((response) => {
-        callback(response)
+        console.log("Review marked as helpful")
       })
       .catch((err) => {
         console.log("Server failed to mark review as helpful")
       })
   }
 
-  const reportReview = (reviewId, callback) => {
+  const reportReview = (review_id) => {
     const reportDetails = {
-      reviewId,
+      review_id,
     }
 
     axios
-      .put(`/reviews/${reviewId}/report`, callback)
+      .put(`/reviews/${review_id}/report`)
       .then((response) => {
-        callback(response)
+        console.log("Review reported")
       })
       .catch((err) => {
         console.log("Server failed to report review")

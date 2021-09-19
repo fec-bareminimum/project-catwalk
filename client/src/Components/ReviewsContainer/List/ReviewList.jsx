@@ -14,7 +14,6 @@ const ReviewList = (props) => {
 
   useEffect(() => {
     fetchReviews(page, count, sort, product_id, (data) => {
-      console.log("fetched:", data)
       setTiles(
         data.results.map((review) => (
           <ReviewTile key={review.review_id} {...review} />
