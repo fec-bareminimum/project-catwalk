@@ -91,11 +91,20 @@ const ReviewList = (props) => {
   }
 
   return (
-    <section className="reviewList" style={listStyle}>
-      <h4 className="sorter" style={{ width: "66vh" }}>
-        {all.length} reviews, sorted by {sorter()}
-      </h4>
-      <Container className="tiles">{display}</Container>
+    <section className="reviewList">
+      <Container className="sorter">
+        <Row>
+          <Col>
+            <h4>{all.length} reviews, sorted by</h4>
+          </Col>
+          <Col>
+            <h4>{sorter()}</h4>
+          </Col>
+        </Row>
+      </Container>
+      <Container className="tiles" style={listStyle}>
+        {display}
+      </Container>
       <Container className="buttons">
         <Row>
           <Col>{more()}</Col>
