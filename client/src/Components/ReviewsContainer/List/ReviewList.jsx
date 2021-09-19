@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import Button from "react-bootstrap/Button"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -28,7 +29,22 @@ const ReviewList = (props) => {
     })
   }, [page, count, sort, product_id])
 
-  return <Container className="reviewList">{tiles}</Container>
+  return (
+    <section className="list">
+      {/* sorter goes here */}
+      <Container className="reviews">{tiles}</Container>
+      <Container className="buttons">
+        <Row>
+          <Col>
+            <Button className="more">More Reviews</Button>
+          </Col>
+          {/* <Col>
+            <Button className="add">Add a Review</Button>
+          </Col> */}
+        </Row>
+      </Container>
+    </section>
+  )
 }
 
 export default ReviewList
