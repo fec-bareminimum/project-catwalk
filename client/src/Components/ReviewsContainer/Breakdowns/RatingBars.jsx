@@ -1,4 +1,5 @@
 import React from "react"
+import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import ProgressBar from "react-bootstrap/ProgressBar"
@@ -12,8 +13,8 @@ const RatingBars = () => {
     count += 1 * reviewMetadata.ratings[rating]
   }
 
-  if (count > 0) {
-    return [5, 4, 3, 2, 1].map((rating, i) => (
+  const Bars = () =>
+    [5, 4, 3, 2, 1].map((rating, i) => (
       <Row key={Math.abs(i - 5)}>
         <Col>
           <a>{`${Math.abs(i - 5)} stars`}</a>
@@ -28,9 +29,8 @@ const RatingBars = () => {
         <Col>{reviewMetadata.ratings[Math.abs(i - 5)] || 0}</Col>
       </Row>
     ))
-  } else {
-    return null
-  }
+
+  return <Container className="bars">{count > 0 ? <Bars /> : null}</Container>
 }
 
 export default RatingBars
