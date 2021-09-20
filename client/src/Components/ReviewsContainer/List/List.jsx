@@ -7,9 +7,7 @@ const List = () => {
   const { fetchReviews } = useReviews()
   const [sort, setSort] = useState("relevant")
   const [product_id, setProduct_id] = useState(42367)
-  // const [display, setDisplay] = useState([])
-  // const [next, setNext] = useState([])
-  // const [all, setAll] = useState([])
+  const [listLength, setListLength] = useState(2)
 
   // fetch all sorted reviews & create first set of tiles
   // create undisplayed sets of tiles
@@ -18,31 +16,17 @@ const List = () => {
     fetchReviews(1, 100, sort, product_id)
   }, [sort, product_id])
 
-  // useEffect(() => {
-  //   if (all.length > 0) {
-  //     setNext(
-  //       all.slice(page * count - 2, page * count).map((review) => (
-  //         <Row key={review.review_id}>
-  //           <Col>
-  //             <ReviewTile {...review} />
-  //           </Col>
-  //         </Row>
-  //       ))
-  //     )
-  //   }
-  // }, [page])
-
   const sortReviews = (sort) => {
     setSort(sort)
   }
 
   const showMore = () => {
-    setCount(count + 2)
+    setListLength(listLength + 2)
   }
 
   return (
     <section className="list">
-      <ReviewList sortReviews={sortReviews} />
+      <ReviewList sortReviews={sortReviews} listLength={listLength} />
       <MoreAddBtns showMore={showMore} />
     </section>
   )
