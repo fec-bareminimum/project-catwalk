@@ -41,11 +41,7 @@ jobs:
       - name: ✅  Run tests
         run: npm run test
 
-  # https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
-  coverage:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+      # https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
       - name: 💯 Generate test coverage report
         run: |
           # var SUMMARY = [
@@ -87,7 +83,6 @@ jobs:
           message: ${{ env.COVERAGE }}
           color: green
           namedLogo: jest
-          parallel-finished: true
 
 
 #    # Main doesn't have a PR for comments so skip that branch
