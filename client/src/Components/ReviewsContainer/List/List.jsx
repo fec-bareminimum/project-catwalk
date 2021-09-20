@@ -27,7 +27,7 @@ const List = () => {
   return (
     <section className="list">
       <ReviewList sortReviews={sortReviews} listLength={listLength} />
-      <MoreAddBtns showMore={showMore} />
+      <MoreAddBtns showMore={showMore} listLength={listLength} />
     </section>
   )
 }

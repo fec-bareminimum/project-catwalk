@@ -8,18 +8,24 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 const MoreAddBtns = (props) => {
   const { reviews } = useReviews()
 
+  const MoreBtn = () => (
+    <Button
+      className="more"
+      onClick={() => {
+        props.showMore()
+      }}
+    >
+      More Reviews
+    </Button>
+  )
+
   return (
     <Container className="buttons">
       <Row>
         <Col>
-          <Button
-            className="more"
-            onClick={() => {
-              props.showMore()
-            }}
-          >
-            More Reviews
-          </Button>
+          {reviews.results && props.listLength < reviews.results.length ? (
+            <MoreBtn />
+          ) : null}
         </Col>
         {/* <Col>
             <Button className="add">Add a Review</Button>
