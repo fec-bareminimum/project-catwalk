@@ -31,16 +31,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-          
+
       - name: ⬇️  Install npm dependencies
         run: npm ci
 
       - name: 🏗️  Build
         run: npm run build --if-present
-        
+
       - name: ✅  Run tests
-        run: npm run test:coverage
-      
+        run: npm run test
+
   # https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
   coverage:
     needs: build
@@ -88,8 +88,8 @@ jobs:
           color: green
           namedLogo: jest
           parallel-finished: true
-          
-          
+
+
 #    # Main doesn't have a PR for comments so skip that branch
 #     # We don't want multiple comments about code coverage, just just run it once on 14.x on Linux
 #     - if: ${{ github.ref != 'refs/heads/main' && matrix.node-version == '14.x' && matrix.os == 'ubuntu-latest' }}
