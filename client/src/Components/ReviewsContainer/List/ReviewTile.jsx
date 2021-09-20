@@ -14,23 +14,29 @@ const ReviewTile = (props) => {
   const [report, setReport] = useState(false)
 
   const Header = () => (
-    <Container className="header">
-      <Row>
-        <Col className="stars">
-          <StarRatings rating={props.rating} starDimension="15px" starSpacing="0" />
-        </Col>
-        <Col className="name-date">
-          <Card.Text>
-            {`${props.reviewer_name},
-            ${new Date(props.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}`}
-          </Card.Text>
-        </Col>
-      </Row>
-    </Container>
+    <Card.Header>
+      <Container className="header">
+        <Row>
+          <Col className="stars">
+            <StarRatings
+              rating={props.rating}
+              starDimension="15px"
+              starSpacing="0"
+            />
+          </Col>
+          <Col className="name-date">
+            <Card.Text>
+              {`${props.reviewer_name},
+              ${new Date(props.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}`}
+            </Card.Text>
+          </Col>
+        </Row>
+      </Container>
+    </Card.Header>
   )
 
   const Recommend = () => (
@@ -67,6 +73,19 @@ const ReviewTile = (props) => {
     </Container>
   )
 
+  const Footer = () => (
+    <Card.Footer>
+      {"Helpful? "}
+      <Card.Link className="helpful" onClick={handleHelpful}>
+        {`Yes (${props.helpfulness})`}
+      </Card.Link>
+      {" |"}
+      <Card.Link className="report" onClick={handleReport}>
+        {"Report"}
+      </Card.Link>
+    </Card.Footer>
+  )
+
   const handleHelpful = () => {
     if (!helpful) {
       markReviewHelpful(props.review_id)
@@ -83,9 +102,7 @@ const ReviewTile = (props) => {
 
   return (
     <Card className="reviewTile">
-      <Card.Header>
-        <Header />
-      </Card.Header>
+      <Header />
       <Card.Body>
         <Card.Title>{props.summary}</Card.Title>
         <Card.Text>{props.body}</Card.Text>
@@ -93,16 +110,7 @@ const ReviewTile = (props) => {
         {props.response ? <Response /> : null}
         {props.photos.length > 0 ? <Photos /> : null}
       </Card.Body>
-      <Card.Footer>
-        {"Helpful? "}
-        <Card.Link className="helpful" onClick={handleHelpful}>
-          {`Yes (${props.helpfulness})`}
-        </Card.Link>
-        {" |"}
-        <Card.Link className="report" onClick={handleReport}>
-          {"Report"}
-        </Card.Link>
-      </Card.Footer>
+      <Footer />
     </Card>
   )
 }
