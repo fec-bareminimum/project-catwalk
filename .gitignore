@@ -1,4 +1,12 @@
+# Misc
 node_modules
+.husky
+
+# Config
 config.js
+
+# Builds
 bundle.js
+
+# Testing
 coverage

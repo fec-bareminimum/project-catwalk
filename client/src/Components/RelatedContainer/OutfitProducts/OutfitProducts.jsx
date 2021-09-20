@@ -1,5 +1,5 @@
-import React from 'react';
-import CardList from '../CardList/CardList.jsx';
+import React from "react"
+import CardList from "../CardList/CardList.jsx"
 
 const OutfitProducts = () => {
   // will access the state for products in CART
@@ -10,7 +10,7 @@ const OutfitProducts = () => {
       <p>under construction</p>
       <CardList />
     </div>
-  );
-};
+  )
+}
 
-export default OutfitProducts;
+export default OutfitProducts

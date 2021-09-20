@@ -1,5 +1,5 @@
-import React from 'react';
-import ProductCard from './ProductCard/ProductCard.jsx';
+import React from "react"
+import ProductCard from "./ProductCard/ProductCard.jsx"
 
 const CardList = () => {
   // accepts a list of products
@@ -11,7 +11,7 @@ const CardList = () => {
     <div className="productCard">
       <p>under construction</p>
     </div>
-  );
-};
+  )
+}
 
-export default CardList;
+export default CardList

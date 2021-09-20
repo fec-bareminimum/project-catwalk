@@ -1,80 +1,86 @@
-import React, { useState, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from "react"
+import axios from "axios"
 
-export const ProductsContext = React.createContext();
+export const ProductsContext = React.createContext()
 
 export const ProductsProvider = ({ children }) => {
-  const [productList, setProducts] = useState({});
-  const [productInfo, setProductsInfo] = useState({});
-  const [styles, setStyles] = useState({});
-  const [relatedProducts, setRelatedProducts] = useState({});
+  const [productList, setProducts] = useState({})
+  const [productInfo, setProductsInfo] = useState({})
+  const [styles, setStyles] = useState({})
+  const [relatedProducts, setRelatedProducts] = useState({})
 
   const fetchProducts = (page, count, callback) => {
     const productResults = {
       page,
       count,
-    };
-    axios.get('/products', productResults)
+    }
+    axios
+      .get("/products", productResults)
       .then((response) => {
-        setProducts(response);
-        callback(response);
+        setProducts(response)
+        callback(response)
       })
       .catch((err) => {
-        console.log('Failed to load products', err);
-      });
-  };
+        console.log("Failed to load products", err)
+      })
+  }
 
   const fetchProductInfo = (productId, callback) => {
     const infoBody = {
       productId,
-    };
-    axios.get(`/products/${productId}`, infoBody)
+    }
+    axios
+      .get(`/products/${productId}`, infoBody)
       .then((response) => {
-        setProductsInfo(response);
-        callback(response);
+        setProductsInfo(response)
+        callback(response)
       })
       .catch((err) => {
-        console.log('Failed to load products', err);
-      });
-  };
+        console.log("Failed to load products", err)
+      })
+  }
 
   const fetchProductStyles = (productId, callback) => {
     const styleDetails = {
       productId,
-    };
-    axios.get(`/products/${productId}/styles`, styleDetails)
+    }
+    axios
+      .get(`/products/${productId}/styles`, styleDetails)
       .then((response) => {
-        setStyles(response);
-        callback(response);
+        setStyles(response)
+        callback(response)
       })
       .catch((err) => {
-        console.log('Failed to load products', err);
-      });
-  };
+        console.log("Failed to load products", err)
+      })
+  }
 
   const fetchProductRelatedStyles = (productId, callback) => {
     const relatedBody = {
       productId,
-    };
-    axios.get(`/products/${productId}/related`, relatedBody)
+    }
+    axios
+      .get(`/products/${productId}/related`, relatedBody)
       .then((response) => {
-        setRelatedProducts(response);
-        callback(response);
+        setRelatedProducts(response)
+        callback(response)
       })
       .catch((err) => {
-        console.log('Failed to load products', err);
-      });
-  };
+        console.log("Failed to load products", err)
+      })
+  }
 
   const value = {
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
     fetchProductRelatedStyles,
-  };
+  }
 
-  return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>;
-};
+  return (
+    <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
+  )
+}
 
 const useProducts = () => {
   const {
@@ -82,14 +88,14 @@ const useProducts = () => {
     fetchProductInfo,
     fetchProductStyles,
     fetchProductRelatedStyles,
-  } = useContext(ProductsContext);
+  } = useContext(ProductsContext)
 
   return {
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
     fetchProductRelatedStyles,
-  };
-};
+  }
+}
 
-export default useProducts;
+export default useProducts
