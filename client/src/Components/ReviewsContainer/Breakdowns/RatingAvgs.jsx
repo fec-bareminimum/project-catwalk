@@ -1,26 +1,17 @@
-import React from "react"
+import React, { useEffect } from "react"
+import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-const RatingAvgs = () => {
-  const { reviewMetadata } = useReviews()
+const RatingAvgs = (props) => {
+  const { reviewMetadata, average, setHelpers } = useReviews()
 
-  let total = 0
-  let count = 0
-  let average = 0
+  useEffect(() => setHelpers())
 
-  for (let rating in reviewMetadata.ratings) {
-    total += rating * reviewMetadata.ratings[rating]
-    count += 1 * reviewMetadata.ratings[rating]
-  }
-  if (total > 0) {
-    average = Math.round((total / count) * 10) / 10
-  }
-
-  return (
-    <Row className="averages">
+  const Average = () => (
+    <Row>
       <Col>
         <h1>{`${average}`}</h1>
       </Col>
@@ -28,6 +19,10 @@ const RatingAvgs = () => {
         <StarRatings rating={average} starDimension="15px" starSpacing="0" />
       </Col>
     </Row>
+  )
+
+  return (
+    <Container className="average">{average > 0 ? <Average /> : null}</Container>
   )
 }
 

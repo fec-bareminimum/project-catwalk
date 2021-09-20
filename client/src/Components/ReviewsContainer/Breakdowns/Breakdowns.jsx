@@ -5,7 +5,7 @@ import RatingBars from "./RatingBars.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const Breakdowns = () => {
-  const { fetchReviewMetadata } = useReviews()
+  const { reviewMetadata, fetchReviewMetadata, setHelpers } = useReviews()
   const [product_id, setProduct_id] = useState(42366)
 
   useEffect(() => {
