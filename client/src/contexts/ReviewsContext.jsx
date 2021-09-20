@@ -32,7 +32,7 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
-  const fetchReviewMetadata = (product_id, callback) => {
+  const fetchReviewMetadata = (product_id) => {
     const fetchDetails = {
       product_id,
     }
@@ -44,10 +44,6 @@ export const ReviewsProvider = ({ children }) => {
     })
       .then((response) => {
         setReviewMetadata(response.data)
-        return response.data
-      })
-      .then((data) => {
-        callback(data)
       })
       .catch((err) => {
         console.log("Server failed to fetch review metadata")

@@ -6,16 +6,13 @@ import ProgressBar from "react-bootstrap/ProgressBar"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const RatingBars = () => {
-  const { reviewMetadata, fetchReviewMetadata } = useReviews()
-  var summary = [5, 4, 3, 2, 1]
-  var count = 0
-
+  const { reviews, reviewMetadata } = useReviews()
+  let count = 0
   for (let rating in reviewMetadata.ratings) {
     count += 1 * reviewMetadata.ratings[rating]
   }
-
   if (count > 0) {
-    return summary.map((rating, i) => (
+    return reviews.results.map((rating, i) => (
       <Row key={Math.abs(i - 5)}>
         <Col>
           <a>{`${Math.abs(i - 5)} stars`}</a>
