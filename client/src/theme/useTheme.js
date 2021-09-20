@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { setToStorage, getFromStorage } from "../utils/storage"
+import themeSchema from "./schema.json"
 import _ from "lodash"
 
 export const useTheme = () => {
-  const themes = getFromStorage("all-themes")
+  const themes = getFromStorage("all-themes") || themeSchema
   const [theme, setTheme] = useState(themes.data.light)
   const [themeLoaded, setThemeLoaded] = useState(false)
 

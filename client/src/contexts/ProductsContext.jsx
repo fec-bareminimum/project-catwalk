@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import axios from "axios"
 
 export const ProductsContext = React.createContext()
@@ -127,6 +127,8 @@ export const ProductsProvider = ({ children }) => {
     changeSelectedStyleIndex,
     displayedProduct,
     updateDisplayedProduct,
+    relatedProducts,
+    fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
     fetchProductRelatedIds,
@@ -137,28 +139,6 @@ export const ProductsProvider = ({ children }) => {
   )
 }
 
-const useProducts = () => {
-  const {
-    productList,
-    relatedProducts,
-    selectedStyleIndex,
-    displayedProduct,
-    updateDisplayedProduct,
-    fetchProductInfo,
-    fetchProductStyles,
-    fetchProductRelatedIds,
-  } = useContext(ProductsContext)
-
-  return {
-    productList,
-    relatedProducts,
-    selectedStyleIndex,
-    displayedProduct,
-    updateDisplayedProduct,
-    fetchProductInfo,
-    fetchProductStyles,
-    fetchProductRelatedIds,
-  }
-}
+const useProducts = () => useContext(ProductsContext)
 
 export default useProducts

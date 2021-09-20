@@ -5,6 +5,7 @@ import { QAProvider } from "../contexts/QAContext.jsx"
 import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
 import { CartProvider } from "../contexts/CartContext.jsx"
 import RelatedContainer from "./RelatedContainer/RelatedContainer.jsx"
+import ReviewsContainer from "./ReviewsContainer/ReviewsContainer.jsx"
 import Navbar from "./Navbar/Navbar.jsx"
 import { ThemeProvider } from "styled-components"
 import WebFont from "webfontloader"
@@ -47,7 +48,7 @@ const App = () => {
                     <RelatedContainer />
                     {/* <QAContainer /> */}
                     {/* <OverviewContainer /> */}
-                    {/* <ReviewsContainer /> */}
+                    <ReviewsContainer />
                   </CartProvider>
                 </InteractionsProvider>
               </QAProvider>
