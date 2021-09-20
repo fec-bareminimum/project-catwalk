@@ -13,7 +13,7 @@ const ReviewTile = (props) => {
   const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState(false)
 
-  const header = () => (
+  const Header = () => (
     <Container className="header">
       <Row>
         <Col className="stars">
@@ -33,18 +33,18 @@ const ReviewTile = (props) => {
     </Container>
   )
 
-  const recommend = () => (
+  const Recommend = () => (
     <Card.Text className="recommend">&#10003; I recommend this product!</Card.Text>
   )
 
-  const response = () => (
+  const Response = () => (
     <Card className="response">
       <Card.Title>Response from seller</Card.Title>
       <Card.Text>{props.response}</Card.Text>
     </Card>
   )
 
-  const photos = () => (
+  const Photos = () => (
     <Container className="photos">
       <Row>
         {props.photos.map((photo) => {
@@ -83,13 +83,15 @@ const ReviewTile = (props) => {
 
   return (
     <Card className="reviewTile">
-      <Card.Header>{header()}</Card.Header>
+      <Card.Header>
+        <Header />
+      </Card.Header>
       <Card.Body>
         <Card.Title>{props.summary}</Card.Title>
         <Card.Text>{props.body}</Card.Text>
-        {recommend && props.recommend}
-        {response && props.response}
-        {photos && props.photos.length > 0}
+        {props.recommend ? <Recommend /> : null}
+        {props.response ? <Response /> : null}
+        {props.photos.length > 0 ? <Photos /> : null}
       </Card.Body>
       <Card.Footer>
         {"Helpful? "}

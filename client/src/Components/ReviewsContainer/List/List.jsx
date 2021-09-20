@@ -6,11 +6,8 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 const List = () => {
   const { fetchReviews } = useReviews()
   const [sort, setSort] = useState("relevant")
-  const [product_id, setProduct_id] = useState(42367)
+  const [product_id, setProduct_id] = useState(42366)
   const [listLength, setListLength] = useState(2)
-
-  // fetch all sorted reviews & create first set of tiles
-  // create undisplayed sets of tiles
 
   useEffect(() => {
     fetchReviews(1, 100, sort, product_id)

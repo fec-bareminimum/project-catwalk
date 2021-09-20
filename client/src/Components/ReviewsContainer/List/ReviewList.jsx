@@ -35,7 +35,7 @@ const ReviewList = (props) => {
   )
 
   const Tiles = () => (
-    <Container className="tiles" style={listStyle}>
+    <Container className="tiles">
       {reviews.results.slice(0, props.listLength).map((review) => (
         <Row key={review.review_id}>
           <Col>
@@ -47,7 +47,7 @@ const ReviewList = (props) => {
   )
 
   return (
-    <Container className="reviewList">
+    <Container className="reviewList" style={listStyle}>
       {reviews.results ? <Sorter /> : null}
       {reviews.results ? <Tiles /> : null}
     </Container>

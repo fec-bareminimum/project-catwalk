@@ -6,7 +6,7 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const Breakdowns = () => {
   const { fetchReviewMetadata } = useReviews()
-  const [product_id, setProduct_id] = useState(42367)
+  const [product_id, setProduct_id] = useState(42366)
 
   useEffect(() => {
     fetchReviewMetadata(product_id)
