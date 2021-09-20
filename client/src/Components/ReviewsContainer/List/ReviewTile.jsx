@@ -21,66 +21,51 @@ const ReviewTile = (props) => {
         </Col>
         <Col className="name-date">
           <Card.Text>
-            {props.reviewer_name}
-            {", "}
-            {new Date(props.date).toLocaleDateString("en-US", {
+            {`${props.reviewer_name},
+            ${new Date(props.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
-            })}
+            })}`}
           </Card.Text>
         </Col>
       </Row>
     </Container>
   )
 
-  const recommend = () => {
-    if (props.recommend) {
-      return (
-        <Card.Text className="recommend">
-          &#10003; I recommend this product!
-        </Card.Text>
-      )
-    }
-  }
+  const recommend = () => (
+    <Card.Text className="recommend">&#10003; I recommend this product!</Card.Text>
+  )
 
-  const response = () => {
-    if (props.response) {
-      return (
-        <Card className="response">
-          <Card.Title>Response</Card.Title>
-          <Card.Text>{props.response}</Card.Text>
-        </Card>
-      )
-    }
-  }
+  const response = () => (
+    <Card className="response">
+      <Card.Title>Response from seller</Card.Title>
+      <Card.Text>{props.response}</Card.Text>
+    </Card>
+  )
 
-  const photos = () => {
-    if (props.photos.length > 0) {
-      return (
-        <Container className="photos">
-          <Row>
-            {props.photos.map((photo) => {
-              const [show, setShow] = useState(false)
-              const handleClose = () => setShow(false)
-              const handleShow = () => setShow(true)
-              return (
-                <Col key={photo.id} xs={6} md={4}>
-                  <Image src={photo.url} onClick={handleShow} thumbnail />
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton></Modal.Header>
-                    <Modal.Body>
-                      <Image src={photo.url} onClick={handleShow} fluid />
-                    </Modal.Body>
-                  </Modal>
-                </Col>
-              )
-            })}
-          </Row>
-        </Container>
-      )
-    }
-  }
+  const photos = () => (
+    <Container className="photos">
+      <Row>
+        {props.photos.map((photo) => {
+          const [show, setShow] = useState(false)
+          const handleClose = () => setShow(false)
+          const handleShow = () => setShow(true)
+          return (
+            <Col key={photo.id} xs={6} md={4}>
+              <Image src={photo.url} onClick={handleShow} thumbnail />
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton></Modal.Header>
+                <Modal.Body>
+                  <Image src={photo.url} onClick={handleShow} fluid />
+                </Modal.Body>
+              </Modal>
+            </Col>
+          )
+        })}
+      </Row>
+    </Container>
+  )
 
   const handleHelpful = () => {
     if (!helpful) {
@@ -102,9 +87,9 @@ const ReviewTile = (props) => {
       <Card.Body>
         <Card.Title>{props.summary}</Card.Title>
         <Card.Text>{props.body}</Card.Text>
-        {recommend()}
-        {response()}
-        {photos()}
+        {recommend && props.recommend}
+        {response && props.response}
+        {photos && props.photos.length > 0}
       </Card.Body>
       <Card.Footer>
         {"Helpful? "}
