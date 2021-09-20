@@ -9,12 +9,13 @@ export const ReviewsProvider = ({ children }) => {
   const [average, setAverage] = useState(0)
   const [count, setCount] = useState(0)
 
-  const fetchReviews = (page, count, sort, product_id) => {
+  const fetchReviews = (page, count, sort, product_id, filter) => {
     const fetchDetails = {
       page,
       count,
       sort,
       product_id,
+      filter,
     }
 
     axios({
@@ -24,6 +25,7 @@ export const ReviewsProvider = ({ children }) => {
     })
       .then((response) => {
         setReviews(response.data)
+        console.log("inside fetchReviews", filter)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")

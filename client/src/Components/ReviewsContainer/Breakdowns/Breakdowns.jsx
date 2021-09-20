@@ -4,8 +4,8 @@ import RatingAvgs from "./RatingAvgs.jsx"
 import RatingBars from "./RatingBars.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-const Breakdowns = () => {
-  const { reviewMetadata, fetchReviewMetadata, setHelpers } = useReviews()
+const Breakdowns = (props) => {
+  const { fetchReviewMetadata } = useReviews()
   const [product_id, setProduct_id] = useState(42366)
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Breakdowns = () => {
     <section className="breakdowns">
       <Container className="rating">
         <RatingAvgs />
-        <RatingBars />
+        <RatingBars filterReviews={props.filterReviews} />
         {/* {percent} */}
       </Container>
       {/* <ProductBreakdown parts /> */}

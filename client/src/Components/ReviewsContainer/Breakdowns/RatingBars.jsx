@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col"
 import ProgressBar from "react-bootstrap/ProgressBar"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-const RatingBars = () => {
+const RatingBars = (props) => {
   const { reviewMetadata, count, setHelpers } = useReviews()
 
   useEffect(() => setHelpers())
@@ -14,7 +14,13 @@ const RatingBars = () => {
     [5, 4, 3, 2, 1].map((rating, i) => (
       <Row key={Math.abs(i - 5)}>
         <Col>
-          <a>{`${Math.abs(i - 5)} stars`}</a>
+          <a
+            onClick={(e) => {
+              props.filterReviews(Math.abs(i - 5))
+            }}
+          >
+            {`${Math.abs(i - 5)} stars`}
+          </a>
         </Col>
         <Col>
           <ProgressBar
