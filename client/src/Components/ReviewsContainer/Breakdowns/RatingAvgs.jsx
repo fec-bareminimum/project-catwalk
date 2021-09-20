@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react"
-import Container from "react-bootstrap/Container"
+import React from "react"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const RatingAvgs = () => {
-  const { reviewMetadata, fetchReviewMetadata } = useReviews()
-  var total = 0
-  var count = 0
-  var average = 0
+  const { reviewMetadata } = useReviews()
+
+  let total = 0
+  let count = 0
+  let average = 0
 
   for (let rating in reviewMetadata.ratings) {
     total += rating * reviewMetadata.ratings[rating]
@@ -20,7 +20,7 @@ const RatingAvgs = () => {
   }
 
   return (
-    <Row className="bigs">
+    <Row className="averages">
       <Col>
         <h1>{`${average}`}</h1>
       </Col>

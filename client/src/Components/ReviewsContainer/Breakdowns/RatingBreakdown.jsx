@@ -18,7 +18,7 @@ const RatingBreakdown = () => {
       <Container className="rating">
         <RatingAvgs />
         <RatingBars />
-        {/* {percents} */}
+        {/* {percent} */}
       </Container>
       {/* <ProductBreakdown /> */}
     </section>
