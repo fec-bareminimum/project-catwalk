@@ -1,112 +1,56 @@
-import React, { useState, useEffect } from "react"
-import Card from "react-bootstrap/Card"
-import Form from "react-bootstrap/Form"
+import React, { useState } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const listStyle = {
-  width: "66vh",
-  height: "75vh",
+  maxHeight: "85vh",
   overflow: "auto",
 }
 
 const ReviewList = (props) => {
-  const { reviews, fetchReviews } = useReviews()
-  const [page, setPage] = useState(1)
-  const [count, setCount] = useState(100)
-  const [sort, setSort] = useState("relevant")
-  const [product_id, setProduct_id] = useState(42367)
-  const [display, setDisplay] = useState([])
-  const [next, setNext] = useState([])
-  const [all, setAll] = useState([])
+  const { reviews } = useReviews()
 
-  // fetch all sorted reviews & create first set of tiles
-  useEffect(() => {
-    fetchReviews(page, count, sort, product_id, (data) => {
-      setDisplay(
-        data.results.slice(0, 2).map((review) => (
-          <Row key={review.review_id}>
-            <Col>
-              <ReviewTile {...review} />
-            </Col>
-          </Row>
-        ))
-      )
-      setAll(data.results)
-      setCount(2)
-      setPage(page + 1)
-    })
-  }, [sort, product_id])
-
-  // create undisplayed sets of tiles
-  useEffect(() => {
-    if (all.length > 0) {
-      setNext(
-        all.slice(page * count - 2, page * count).map((review) => (
-          <Row key={review.review_id}>
-            <Col>
-              <ReviewTile {...review} />
-            </Col>
-          </Row>
-        ))
-      )
-    }
-  }, [page])
-
-  const sorter = () => {
-    return (
-      <Form.Select
-        size="sm"
-        onChange={(e) => {
-          setPage(1)
-          setCount(100)
-          setSort(e.target.value)
-        }}
-      >
-        <option value="relevant">Most relevant</option>
-        <option value="helpful">Most helpful</option>
-        <option value="newest">Most recent</option>
-      </Form.Select>
-    )
-  }
-
-  const more = () => {
-    if (next.length > 0) {
-      return (
-        <Button
-          className="more"
-          onClick={() => {
-            setPage(page + 1)
-            display.push(next)
+  const Sorter = () => (
+    <Row className="sorter">
+      <Col>
+        <h4>{`${reviews.results.length} reviews, sorted by`}</h4>
+      </Col>
+      <Col>
+        <Form.Select
+          size="sm"
+          onChange={(e) => {
+            props.sortReviews(e.target.value)
           }}
         >
-          More Reviews
-        </Button>
-      )
-    }
-  }
+          <option value="relevant">Most relevant</option>
+          <option value="helpful">Most helpful</option>
+          <option value="newest">Most recent</option>
+        </Form.Select>
+      </Col>
+    </Row>
+  )
+
+  const Tiles = () => (
+    <Container className="tiles">
+      {reviews.results.slice(0, props.listLength).map((review) => (
+        <Row key={review.review_id}>
+          <Col>
+            <ReviewTile {...review} />
+          </Col>
+        </Row>
+      ))}
+    </Container>
+  )
 
   return (
-    <section className="list" style={listStyle}>
-      <Card className="sorter">
-        <Card.Title>
-          {all.length} reviews, sorted by {sorter()}
-        </Card.Title>
-      </Card>
-      <Container>{display}</Container>
-      <Container>
-        <Row>
-          <Col>{more()}</Col>
-          {/* <Col>
-            <Button className="add">Add a Review</Button>
-          </Col> */}
-        </Row>
-      </Container>
-    </section>
+    <Container className="reviewList" style={listStyle}>
+      {reviews.results ? <Sorter /> : null}
+      {reviews.results ? <Tiles /> : null}
+    </Container>
   )
 }
 
