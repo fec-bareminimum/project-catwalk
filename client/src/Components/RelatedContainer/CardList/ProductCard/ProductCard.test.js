@@ -1,10 +1,10 @@
-import React from 'react';
-import { screen, render } from '../../../../test-utils.jsx';
-import ProductCard from './ProductCard.jsx';
-import sampleProduct from './sampleProduct';
+import React from "react"
+import { screen, render } from "../../../../test-utils.jsx"
+import ProductCard from "./ProductCard.jsx"
+import sampleProduct from "./sampleProduct"
 
-describe('ProductCard', () => {
-  let props;
+describe("ProductCard", () => {
+  let props
 
   // accepts an action button to display
 
@@ -14,19 +14,19 @@ describe('ProductCard', () => {
 
   beforeEach(() => {
     // Refresh the props object before each test
-    props = { ...sampleProduct };
-  });
+    props = { ...sampleProduct }
+  })
 
-  test('renders ProductCard component', () => {
-    render(<ProductCard {...props} />);
-  });
+  test("renders ProductCard component", () => {
+    render(<ProductCard {...props} />)
+  })
 
-  test('renders product details from props', () => {
-    render(<ProductCard {...props} />);
+  test("renders product details from props", () => {
+    render(<ProductCard {...props} />)
 
-    expect(screen.getByText('Camo Onesie')).toBeInDocument();
-    expect(screen.getByText('Jackets')).toBeInDocument();
-    expect(screen.getByText('$140')).toBeInDocument();
-    expect(screen.getByRole('img')).toBeInDocument();
-  });
-});
+    expect(screen.getByText("Camo Onesie")).toBeInTheDocument()
+    expect(screen.getByText("Jackets")).toBeInTheDocument()
+    expect(screen.getByText("$140")).toBeInTheDocument()
+    expect(screen.getByRole("img")).toBeInTheDocument()
+  })
+})

@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from "react"
+import axios from "axios"
 
-export const ReviewsContext = React.createContext();
+export const ReviewsContext = React.createContext()
 
 export const ReviewsProvider = ({ children }) => {
-  const [reviews, setReviews] = useState({});
-  const [reviewMetadata, setReviewMetadata] = useState({});
+  const [reviews, setReviews] = useState({})
+  const [reviewMetadata, setReviewMetadata] = useState({})
 
   const fetchReviews = (page, count, sort, productId, callback) => {
     const fetchDetails = {
@@ -13,32 +13,34 @@ export const ReviewsProvider = ({ children }) => {
       count,
       sort,
       productId,
-    };
+    }
 
-    axios.get('/reviews/', fetchDetails)
+    axios
+      .get("/reviews/", fetchDetails)
       .then((response) => {
-        setReviews(response);
-        callback(response);
+        setReviews(response)
+        callback(response)
       })
       .catch((err) => {
-        console.log('Server failed to fetch all reviews');
-      });
-  };
+        console.log("Server failed to fetch all reviews")
+      })
+  }
 
   const fetchReviewMetadata = (productId, callback) => {
     const fetchDetails = {
       productId,
-    };
+    }
 
-    axios.get('/reviews/meta', fetchDetails)
+    axios
+      .get("/reviews/meta", fetchDetails)
       .then((response) => {
-        setReviewMetadata(response);
-        callback(response);
+        setReviewMetadata(response)
+        callback(response)
       })
       .catch((err) => {
-        console.log('Server failed to fetch review metadata');
-      });
-  };
+        console.log("Server failed to fetch review metadata")
+      })
+  }
 
   const addReview = (
     productId,
@@ -50,7 +52,7 @@ export const ReviewsProvider = ({ children }) => {
     email,
     photos,
     characteristics,
-    callback,
+    callback
   ) => {
     const addDetails = {
       productId,
@@ -63,44 +65,47 @@ export const ReviewsProvider = ({ children }) => {
       photos,
       characteristics,
       callback,
-    };
+    }
 
-    axios.post('/reviews', addDetails)
+    axios
+      .post("/reviews", addDetails)
       .then((response) => {
-        callback(response);
+        callback(response)
       })
       .catch((err) => {
-        console.log('Server failed to post review');
-      });
-  };
+        console.log("Server failed to post review")
+      })
+  }
 
   const markReviewHelpful = (reviewId, callback) => {
     const markDetails = {
       reviewId,
-    };
+    }
 
-    axios.put(`/reviews/${reviewId}/helpful`, markDetails)
+    axios
+      .put(`/reviews/${reviewId}/helpful`, markDetails)
       .then((response) => {
-        callback(response);
+        callback(response)
       })
       .catch((err) => {
-        console.log('Server failed to mark review as helpful');
-      });
-  };
+        console.log("Server failed to mark review as helpful")
+      })
+  }
 
   const reportReview = (reviewId, callback) => {
     const reportDetails = {
       reviewId,
-    };
+    }
 
-    axios.put(`/reviews/${reviewId}/report`, callback)
+    axios
+      .put(`/reviews/${reviewId}/report`, callback)
       .then((response) => {
-        callback(response);
+        callback(response)
       })
       .catch((err) => {
-        console.log('Server failed to report review');
-      });
-  };
+        console.log("Server failed to report review")
+      })
+  }
 
   const value = {
     fetchReviews,
@@ -108,10 +113,10 @@ export const ReviewsProvider = ({ children }) => {
     addReview,
     markReviewHelpful,
     reportReview,
-  };
+  }
 
-  return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>;
-};
+  return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
+}
 
 const useReviews = () => {
   const {
@@ -120,7 +125,7 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview,
-  } = useContext(ReviewsContext);
+  } = useContext(ReviewsContext)
 
   return {
     fetchReviews,
@@ -128,7 +133,7 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview,
-  };
-};
+  }
+}
 
-export default useReviews;
+export default useReviews
