@@ -1,7 +1,7 @@
 # Project Catwalk
 
 ![CircleCI](https://circleci.com/gh/fec-bareminimum/project-catwalk/tree/main.svg?style=shield)
-[![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/spencerlepine/3aef2bca7e937f5cc040581361bb4feb/raw/project-catwalk__heads_main.json)]
+![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/spencerlepine/3aef2bca7e937f5cc040581361bb4feb/raw/project-catwalk__heads_main.json)
 
 ## Table of Contents
 
