@@ -7,7 +7,7 @@ export const ReviewsProvider = ({ children }) => {
   const [reviews, setReviews] = useState({})
   const [reviewMetadata, setReviewMetadata] = useState({})
 
-  const fetchReviews = (page, count, sort, product_id, callback) => {
+  const fetchReviews = (page, count, sort, product_id) => {
     const fetchDetails = {
       page,
       count,
@@ -22,10 +22,6 @@ export const ReviewsProvider = ({ children }) => {
     })
       .then((response) => {
         setReviews(response.data)
-        return response.data
-      })
-      .then((data) => {
-        callback(data)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
