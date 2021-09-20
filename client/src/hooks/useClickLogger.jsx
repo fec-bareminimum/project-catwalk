@@ -8,7 +8,7 @@ const useClickLogger = (Component, widgetName) => {
     const handleClick = (e) => {
       const element = JSON.stringify(e.target.outerHTML)
       logInteraction(element, widgetName, () =>
-        console.log("Successfuly logged interation")
+        console.log("Successfuly logged interaction")
       )
     }
 

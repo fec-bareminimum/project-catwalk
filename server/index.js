@@ -52,6 +52,25 @@ app.post("/*", (req, res) => {
     })
 })
 
+app.put("/*", (req, res) => {
+  axios({
+    url: req.url,
+    method: req.method,
+    baseURL: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax",
+    headers: {
+      Authorization: config.API_TOKEN,
+    },
+    data: req.body,
+  })
+    .then((results) => {
+      res.status(201).send(results.data)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)
 })
