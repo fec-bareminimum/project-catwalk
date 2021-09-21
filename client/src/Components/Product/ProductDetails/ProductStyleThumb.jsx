@@ -1,5 +1,6 @@
 import React from "react"
 import { Image } from "react-bootstrap"
+import Stylesheet from "../styles.css"
 
 function ProductStyleThumb(props) {
   const clickHandler = (event) => {

@@ -4,6 +4,7 @@ import ProductMainView from "./ProductMainView.jsx"
 import { Button, Carousel } from "react-bootstrap"
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 import ProductModal from "./ProductModal.jsx"
+import Stylesheet from "./styles.css"
 
 function ProductCarouselList(props) {
   const [showExpanded, setShowExpanded] = useState(false)
@@ -27,7 +28,7 @@ function ProductCarouselList(props) {
   }
 
   const removeZoomHandler = () => {
-    setShowZoomed(false);
+    setShowZoomed(false)
   }
 
   return (

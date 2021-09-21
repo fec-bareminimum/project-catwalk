@@ -2,6 +2,7 @@
 import React from "react"
 import { Image, Row, Col } from "react-bootstrap"
 import Star from "./ProductStar.jsx"
+import Stylesheet from "../styles.css"
 
 function ProductDetails(props) {
   return (

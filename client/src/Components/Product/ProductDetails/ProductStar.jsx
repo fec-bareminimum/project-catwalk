@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import StarRatings from "react-star-ratings"
 import axios from "axios"
+import Stylesheet from "../styles.css"
 
 function Star({ average }) {
   return (

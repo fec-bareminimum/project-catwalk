@@ -5,6 +5,7 @@ import {
   PinterestShareButton,
 } from "react-share"
 import { FacebookIcon, TwitterIcon, PinterestIcon } from "react-share"
+import Stylesheet from "../styles.css"
 
 function Share() {
   return (

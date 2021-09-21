@@ -4,6 +4,7 @@ import { ProductsContext } from "../../contexts/ProductsContext.jsx"
 import { Navbar, Container, Row, Col } from "react-bootstrap"
 import ProductCarouselList from "./ProductCarouselList.jsx"
 import ProductThumbRight from "./ProductDetails/ProductThumbRight.jsx"
+import Stylesheet from "./styles.css"
 
 // Main Product Page
 

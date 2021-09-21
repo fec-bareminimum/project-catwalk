@@ -14,6 +14,7 @@ import ProductDetails from "./ProductDetails.jsx"
 import Star from "./ProductStar.jsx"
 import Share from "./Share.jsx"
 import uniqid from "uniqid"
+import Stylesheet from "../styles.css"
 
 function ProductThumbRight(props) {
   return (

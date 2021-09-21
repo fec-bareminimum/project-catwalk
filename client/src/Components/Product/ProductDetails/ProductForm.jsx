@@ -2,7 +2,8 @@
 import React, { useState, useContext } from "react"
 import { Row, Col, Dropdown, Button, DropdownButton, Form } from "react-bootstrap"
 import { CartContext } from "../../../contexts/CartContext.jsx"
-import uniqid from 'uniqid';
+import uniqid from "uniqid"
+import Stylesheet from "../styles.css"
 
 function ProductForm(props) {
   const cartCtx = useContext(CartContext)
@@ -45,52 +46,11 @@ function ProductForm(props) {
   const submitHandler = (e) => {
     e.preventDefault()
     for (var i = 0; i < selectedQuantity; i++) {
-      cartCtx.addProductToCart(selectedSKU.sku, () => console.log('product added'))
+      cartCtx.addProductToCart(selectedSKU.sku, () =>
+        alert("ADDED SOMETHING TO CART")
+      )
     }
   }
-
-  // const quantityCombinations = (selectedSize) => {
-  //   var quantityStock = []
-  //   var sizes = []
-  //   var result = []
-  //   var filtered
-  //   Object.keys(props.selectedStyle.skus).map((item, i) => {
-  //     sizes.push(props.selectedStyle.skus[item].size)
-  //   })
-
-  //   filtered = sizes.filter((match) => selectedSize === match.size)
-  //   console.log("filtered", filtered)
-  //   if (selectedSize === filtered) {
-  //     quantityStock.push(props.selectedStyle.skus[item].quantity)
-  //   }
-
-  //   for (var i = 0; i < sizes.length; i++) {
-  //     if (sizes[i] === selectedSize) {
-  //       console.log("PLZ", sizes[i])
-  //       console.log("PL@@", selectedSize)
-  //       quantityStock.push(props.selectedStyle.skus[i].quantity)
-  //     }
-  //   }
-
-  //   console.log("quantityStock", quantityStock)
-  //   for (var i = 0; i < quantityStock; i++) {
-  //     var max = 15
-  //     if (quantityStock > 15) {
-  //       while (k <= 15) {
-  //         var k = 1
-  //         result.push(k)
-  //         k++
-  //       }
-  //     } else {
-  //       while (k <= quantityStock[i]) {
-  //         var k = 1
-  //         result.push(k)
-  //         k++
-  //       }
-  //     }
-  //     setDisplayQuantity(result)
-  //   }
-  // }
 
   return (
     <div>
@@ -133,7 +93,11 @@ function ProductForm(props) {
                 onChange={quantityChangeHandler}
               >
                 {selectedSKU &&
-                  quantityArray.map((item) => <option key={uniqid()} value={item}>{item}</option>)}
+                  quantityArray.map((item) => (
+                    <option key={uniqid()} value={item}>
+                      {item}
+                    </option>
+                  ))}
               </Form.Select>
             )}
           </Col>

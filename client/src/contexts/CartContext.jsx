@@ -8,12 +8,11 @@ export const CartProvider = ({ children }) => {
 
   const addProductToCart = (skuId, callback) => {
     axios
-      .post("/cart", {sku_id: skuId })
+      .post("/cart", { sku_id: skuId })
       .then((response) => {
         callback()
       })
       .catch((err) => {
-        console.log(err)
         console.log("Server failed to save item to cart")
       })
   }
