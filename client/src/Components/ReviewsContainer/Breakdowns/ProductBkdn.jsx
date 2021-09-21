@@ -11,7 +11,7 @@ const scaleStyle = {
 }
 
 const ProductBkdn = () => {
-  const { reviewMetadata } = useReviews()
+  const { reviewMetadata, details } = useReviews()
 
   const Scale = (props) => (
     <Row>
@@ -19,19 +19,19 @@ const ProductBkdn = () => {
         <h5>{props.char}</h5>
         <Form.Range
           max="5"
-          value={props.char.value}
+          value={props.value}
           disabled
           style={{ width: "100%" }}
         ></Form.Range>
-        <div style={{ float: "left" }}>{"fill"}</div>
-        <div style={{ float: "right" }}>{"fill"}</div>
+        <div style={{ float: "left" }}>{details[props.char][0]}</div>
+        <div style={{ float: "right" }}>{details[props.char][4]}</div>
       </Col>
     </Row>
   )
 
   return (
     <Container className="productBkdn">
-      {reviewMetadata.characteristics
+      {reviewMetadata.characteristics && details
         ? Object.keys(reviewMetadata.characteristics).map((char, i) => (
             <Scale
               key={i}
