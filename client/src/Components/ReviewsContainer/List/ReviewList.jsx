@@ -15,7 +15,7 @@ const ReviewList = (props) => {
   const { reviews } = useReviews()
 
   const Sorter = () => (
-    <Row className="sorter">
+    <Row>
       <Col>
         <h4>{`${reviews.length} reviews, sorted by`}</h4>
       </Col>
@@ -34,13 +34,10 @@ const ReviewList = (props) => {
     </Row>
   )
 
-  const Tiles = () => (
-    <Container className="tiles">
-      {reviews.slice(0, props.listLength).map((review) => (
-        <ReviewTile key={review.review_id} {...review} />
-      ))}
-    </Container>
-  )
+  const Tiles = () =>
+    reviews
+      .slice(0, props.listLength)
+      .map((review) => <ReviewTile key={review.review_id} {...review} />)
 
   return (
     <Container className="reviewList" style={listStyle}>
