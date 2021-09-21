@@ -4,12 +4,22 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import ReviewList from "./ReviewList.jsx"
-import AddBtn from "./AddBtn.jsx"
+import AddButton from "./AddButton/AddButton.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const List = (props) => {
   const { reviews } = useReviews()
   const [listLength, setListLength] = useState(2)
+
+  // const [product_id, setProduct_id] = useState(productInfo.)
+  // const [rating, setRating] = useState(0)
+  // const [summary, setSummary] = useState("")
+  // const [body, setBody] = useState("")
+  // const [recommend, setRecommend] = useState("false")
+  // const [name, setName] = useState("")
+  // const [email, setEmail] = useState("")
+  // const [photos, setPhotos] = useState([])
+  // const [characteristics, setCharacteristics] = useState({})
 
   const MoreBtn = () => (
     <Col>
@@ -29,7 +39,7 @@ const List = (props) => {
       <Container>
         <Row>
           {reviews && listLength < reviews.length ? <MoreBtn /> : null}
-          <AddBtn />
+          <AddButton />
         </Row>
       </Container>
     </section>
