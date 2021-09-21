@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
-import RatingAvgs from "./RatingAvgs.jsx"
-import RatingBars from "./RatingBars.jsx"
+import RatingBkdn from "./RatingBkdn.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const Breakdowns = (props) => {
@@ -15,8 +14,7 @@ const Breakdowns = (props) => {
   return (
     <section className="breakdowns">
       <Container className="rating">
-        <RatingAvgs />
-        <RatingBars filterReviews={props.filterReviews} />
+        <RatingBkdn filterReviews={props.filterReviews} />
         {/* {percent} */}
       </Container>
       {/* <ProductBreakdown parts /> */}
