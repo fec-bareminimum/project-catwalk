@@ -123,6 +123,7 @@ export const ProductsProvider = ({ children }) => {
 
   const value = {
     productList,
+    displayedProduct,
     relatedProducts,
     selectedStyleIndex,
     changeSelectedStyleIndex,
