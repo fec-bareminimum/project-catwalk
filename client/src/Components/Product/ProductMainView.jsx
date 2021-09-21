@@ -3,7 +3,7 @@ import ProductDescription from "./ProductDescription.jsx"
 import { ProductsContext } from "../../contexts/ProductsContext.jsx"
 import { Navbar, Container, Row, Col } from "react-bootstrap"
 import ProductCarouselList from "./ProductCarouselList.jsx"
-import ProductThumbRight from "./ProductDetails/ProductThumbRight.jsx"
+import ProductDetails from "./ProductDetails/ProductDetails.jsx"
 import useProducts from "../../contexts/ProductsContext.jsx"
 
 // Main Product Page
@@ -28,7 +28,6 @@ function ProductMainView(props) {
     })
     context.fetchProductInfo(42370, (response) => {
       setInfo(response.data)
-      console.log("productInfo", response.data)
     })
   }, [])
 
@@ -74,11 +73,6 @@ function ProductMainView(props) {
   return (
     <div>
       <Container>
-        <Navbar className="navbar-fixed-top" bg="dark" variant="light">
-          <Navbar.Brand className="logo" style={{ color: "white" }} href="#home">
-            Logo
-          </Navbar.Brand>
-        </Navbar>
         <Container>
           <p className="siteHeader">
             SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE/DISCOUNT <b>OFFER</b> --{" "}
@@ -96,7 +90,7 @@ function ProductMainView(props) {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="27"
-                          height="27"
+                          height="35"
                           fill="currentColor"
                           className="center-block ml-2 bi bi-arrow-up-circle-fill align-items-center"
                           viewBox="0 0 16 16"
@@ -110,7 +104,7 @@ function ProductMainView(props) {
                       <div key={i} onClick={() => setIndex(i)}>
                         <img
                           className="lol mb-1 mr-1"
-                          style={{ border: index === i ? "4px solid" : "" }}
+                          style={{ border: index === i ? "5px solid" : "" }}
                           width="77px"
                           height="77px"
                           src={item.thumbnail_url}
@@ -126,7 +120,7 @@ function ProductMainView(props) {
                           xmlns="http://www.w3.org/2000/svg"
                           align="center"
                           width="27"
-                          height="27"
+                          height="35"
                           fill="currentColor"
                           className="center-block ml-2 bi bi-arrow-down-circle-fill align-items-center"
                           viewBox="0 0 16 16"
@@ -149,7 +143,7 @@ function ProductMainView(props) {
               )}
             </Col>
             <Col md={4}>
-              <ProductThumbRight
+              <ProductDetails
                 updateStyle={updateStyleFromID}
                 selectedStyle={selectedStyle}
                 stylePhotos={stylePhotos}
@@ -160,7 +154,9 @@ function ProductMainView(props) {
             </Col>
           </Row>
         </div>
-        <ProductDescription productInfo={info} />
+        <div className="desc">
+          <ProductDescription productInfo={info} />
+        </div>
       </Container>
     </div>
   )

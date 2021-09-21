@@ -6,11 +6,9 @@ node_modules
 config.js
 
 # Builds
-<<<<<<< HEAD
 bundle.js
-=======
->>>>>>> main
 build
+dist
 
 # Testing
 coverage

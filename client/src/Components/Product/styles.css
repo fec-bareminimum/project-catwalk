@@ -72,7 +72,8 @@
 
 .descriptionList {
   border-left: 3px solid grey;
-  margin-left: 12px;
+  margin-left: 20px;
+  margin-bottom: 12px;
 }
 
 .rowPad {
@@ -80,6 +81,9 @@
   align-items: center;
 }
 
+.descFeatures {
+  font-style: italic;
+}
 .carouselImage {
   width: 100%;
   object-fit: cover;
@@ -108,7 +112,8 @@
   height: 55px;
   border-radius: 2222px;
   object-fit: cover;
-  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 15px;
 }
 
 .styleThumb:hover {
@@ -118,6 +123,7 @@
 
 .features {
   list-style: none;
+  margin-bottom: 2px;
 }
 
 .redStrike {
@@ -140,7 +146,7 @@
 }
 
 .social {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .color-nav {
@@ -211,7 +217,6 @@
   top: 0px;
   z-index: 10;
   color: white;
-  background-color: #ffffff00;
 }
 
 .carousel-holder {
@@ -227,4 +232,17 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.socialImages {
+  margin-right: 15px;
+  padding: 10px;
+}
+
+.styleBold {
+  font-weight: bold;
+}
+
+.desc {
+  margin-left: 70px;
 }
