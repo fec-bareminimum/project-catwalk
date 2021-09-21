@@ -17,6 +17,7 @@ const Overall = () => {
         <Form.Label>Overall rating*</Form.Label>
         <div style={{ float: "right" }}>
           <StarRatings
+            required
             rating={rating}
             changeRating={(stars) => setRating(stars)}
             starDimension="15px"
@@ -29,6 +30,7 @@ const Overall = () => {
         <Form.Label>Do you recommend this product?*</Form.Label>
         {["No", "Yes"].map((option, i) => (
           <Form.Check
+            required
             inline
             key={option}
             type="radio"

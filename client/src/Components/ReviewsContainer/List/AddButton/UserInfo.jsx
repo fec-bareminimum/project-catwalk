@@ -9,6 +9,7 @@ const UserInfo = () => {
       <Form.Group>
         <Form.Label>What is your nickname?*</Form.Label>
         <Form.Control
+          required
           type="text"
           placeholder="Example: jackson11!"
           maxLength="60"
@@ -22,6 +23,7 @@ const UserInfo = () => {
       <Form.Group>
         <Form.Label>Your email*</Form.Label>
         <Form.Control
+          required
           type="email"
           placeholder="Example: jackson11@email.com"
           maxLength="60"

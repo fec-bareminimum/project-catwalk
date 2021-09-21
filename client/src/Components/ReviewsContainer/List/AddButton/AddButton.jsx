@@ -13,21 +13,40 @@ import UserInfo from "./UserInfo.jsx"
 import useReviews from "../../../../contexts/ReviewsContext.jsx"
 
 const AddButton = (props) => {
-  const { reviews, reviewMetadata, details, productInfo, addReview } = useReviews()
+  const { reviews, reviewMetadata, details, productInfo } = useReviews()
+  // const [product_id, setProduct_id] = useState(productInfo.id)
+  const [validated, setValidated] = useState(false)
   const [show, setShow] = useState(false)
-
-  // const [product_id, setProduct_id] = useState(productInfo.)
-  const [rating, setRating] = useState(0)
-  const [summary, setSummary] = useState("")
-  const [body, setBody] = useState("")
-  const [recommend, setRecommend] = useState("false")
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [photos, setPhotos] = useState([])
-  const [characteristics, setCharacteristics] = useState({})
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+  const handleSubmit = () => console.log("submit")
+
+  const AddModal = () => (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Container>
+          <Row>
+            <h3>Write Your Review</h3>
+          </Row>
+          <Row>
+            {/* <h5>{`About the ${productInfo.name}`}</h5> */}
+            <h5>About the Camo Onesie</h5>
+          </Row>
+        </Container>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Overall />
+          <Characteristics />
+          <Review />
+          <Upload />
+          <UserInfo />
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  )
 
   return (
     <Col>
@@ -37,22 +56,7 @@ const AddButton = (props) => {
           <Button className="add" onClick={handleShow} style={{ float: "right" }}>
             Add a review
           </Button>
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-              <h3>Write Your Review</h3>
-              {/* <h5>{`About the ${productInfo.name}`}</h5> */}
-              <h5>About the Camo Onesie</h5>
-              <Form>
-                <Overall />
-                <Characteristics />
-                <Review />
-                <Upload />
-                <UserInfo />
-                {/* <Submit /> */}
-              </Form>
-            </Modal.Body>
-          </Modal>
+          <AddModal />
         </Col>
       ) : null}
     </Col>

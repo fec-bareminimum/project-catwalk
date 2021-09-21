@@ -16,6 +16,7 @@ const Review = () => {
       />
       <Form.Label>Review body*</Form.Label>
       <Form.Control
+        required
         as="textarea"
         placeholder="Why did you like the product or not?"
         maxLength="1000"

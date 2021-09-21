@@ -8,6 +8,7 @@ import useReviews from "../../../../contexts/ReviewsContext.jsx"
 const Characteristics = () => {
   const { reviewMetadata, details } = useReviews()
   const [chars, setChars] = useState({})
+  const [characteristics, setCharacteristics] = useState({})
 
   return Object.keys(reviewMetadata.characteristics).map((char, i) => (
     <Form.Group key={i}>
@@ -28,11 +29,12 @@ const Characteristics = () => {
           <Col>
             {[1, 2, 3, 4, 5].map((rating, i) => (
               <Form.Check
+                required
                 inline
                 key={`${char}-${rating}`}
+                label={rating}
                 type="radio"
                 name={char}
-                label={rating}
                 onChange={() => {
                   setChars({
                     ...chars,
