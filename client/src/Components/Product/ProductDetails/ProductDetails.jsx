@@ -14,6 +14,7 @@ function ProductDetails(props) {
               key={index}
               className="thumbnail"
               src={photo.thumbnail_url}
+              alt="thumb"
               roundedCircle
             />
           </Col>

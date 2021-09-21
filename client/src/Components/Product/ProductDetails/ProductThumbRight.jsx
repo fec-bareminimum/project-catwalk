@@ -43,7 +43,7 @@ function ProductThumbRight(props) {
       </Row>
       <div className="productDetail">
         {" "}
-        <b> STYLES </b>
+        <b> STYLES {">"} </b>
         {props.selectedStyle && props.selectedStyle.name !== null ? (
           props.selectedStyle.name
         ) : (
