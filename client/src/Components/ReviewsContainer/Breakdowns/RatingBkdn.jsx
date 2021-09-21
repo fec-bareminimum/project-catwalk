@@ -28,19 +28,21 @@ const RatingBkdn = (props) => {
 
   const Bar = (props) => (
     <Row>
-      <Col>
+      <Col xs={6} md={3}>
         <a
           onClick={() => props.filterReviews(props.rating)}
         >{`${props.rating} stars`}</a>
       </Col>
-      <Col>
+      <Col xs={12} md={6}>
         <ProgressBar
           variant="success"
           max={reviews.length}
           now={reviewMetadata.ratings[props.rating]}
         ></ProgressBar>
       </Col>
-      <Col>{reviewMetadata.ratings[props.rating] || 0}</Col>
+      <Col xs={4} md={2}>
+        {reviewMetadata.ratings[props.rating] || 0}
+      </Col>
     </Row>
   )
 
