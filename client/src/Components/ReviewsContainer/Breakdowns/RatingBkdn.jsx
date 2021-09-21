@@ -55,6 +55,16 @@ const RatingBkdn = (props) => {
     </Row>
   )
 
+  const Recs = () => (
+    <Row>
+      <Col>
+        {`${Math.round(
+          (reviewMetadata.recommended.true / count) * 100
+        )}% of reviews recommend this product `}
+      </Col>
+    </Row>
+  )
+
   return (
     <Container className="rating">
       {filters.length > 0 ? <Filters /> : null}
@@ -70,6 +80,7 @@ const RatingBkdn = (props) => {
             ))
           : null}
       </Container>
+      {count > 0 ? <Recs /> : null}
     </Container>
   )
 }
