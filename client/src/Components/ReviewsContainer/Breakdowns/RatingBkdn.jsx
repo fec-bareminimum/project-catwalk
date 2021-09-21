@@ -2,19 +2,29 @@ import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import Alert from "react-bootstrap/Alert"
 import ProgressBar from "react-bootstrap/ProgressBar"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const RatingBkdn = (props) => {
-  const { reviewMetadata, count, average, setHelpers } = useReviews()
-  const [filtered, setFiltered] = useState(false)
+  const { reviewMetadata, filters, count, average, setHelpers } = useReviews()
 
   useEffect(() => setHelpers())
 
   const Filters = () => (
     <Row>
-      <Col></Col>
+      <Col>
+        <Alert variant="secondary">
+          {"Filtered by: "}
+          {filters.map((rating) => ` ${rating} `)}
+          {"stars"}
+          <hr />
+          <Alert.Link onClick={() => props.filterReviews(0)}>
+            Remove all filters
+          </Alert.Link>
+        </Alert>
+      </Col>
     </Row>
   )
 
@@ -49,7 +59,7 @@ const RatingBkdn = (props) => {
 
   return (
     <Container className="rating">
-      {filtered ? <Filters /> : null}
+      {filters.length > 0 ? <Filters /> : null}
       {average > 0 ? <Average /> : null}
       <Container className="bars">
         {count > 0

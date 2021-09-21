@@ -31,6 +31,8 @@ const ReviewsContainer = () => {
           return toggled
         }, [])
       )
+    } else if (option === 0) {
+      setFilters([])
     } else {
       setFilters([...filters, option])
     }
