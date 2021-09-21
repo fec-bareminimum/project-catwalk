@@ -9,7 +9,7 @@ import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const AddBtn = (props) => {
-  const { reviews, reviewMetadata, productInfo } = useReviews()
+  const { reviews, reviewMetadata, details, productInfo } = useReviews()
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -45,37 +45,64 @@ const AddBtn = (props) => {
     return (
       <Form.Group>
         <Form.Label>Do you recommend this product?</Form.Label>
-        <Form.Check
-          inline
-          label="no"
-          type="radio"
-          id="RecNo"
-          style={{ float: "right" }}
-        />
-        <Form.Check
-          inline
-          label="yes"
-          type="radio"
-          id="RecYes"
-          style={{ float: "right" }}
-        />
+        {["No", "Yes"].map((option, i) => (
+          <Form.Check
+            inline
+            key={option}
+            type="radio"
+            name="rec"
+            label={option}
+            style={{ float: "right" }}
+          />
+        ))}
       </Form.Group>
     )
   }
 
   const Characteristics = () => {
-    return (
-      <Form.Group>
-        {/* {reviewMetadata.characteristics}
-      <Form.Label></Form.Label> */}
+    const [picked, setPicked] = useState({})
+    return Object.keys(reviewMetadata.characteristics).map((char, i) => (
+      <Form.Group key={i}>
+        <Form.Label>{char}</Form.Label>
+        <Container>
+          <Row>
+            <Col>
+              {Object.keys(picked).length > 0 && picked[char] ? (
+                <Form.Text>{details[char][picked[char] - 1]}</Form.Text>
+              ) : null}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              {[1, 2, 3, 4, 5].map((rating, i) => (
+                <Form.Check
+                  inline
+                  key={`${char}-${rating}`}
+                  type="radio"
+                  name={char}
+                  label={rating}
+                  onChange={() => setPicked({ ...picked, [char]: rating })}
+                />
+              ))}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div>{details[char][0]}</div>
+            </Col>
+            <Col>
+              <div>{details[char][4]}</div>
+            </Col>
+          </Row>
+        </Container>
       </Form.Group>
-    )
+    ))
   }
 
   return (
     <Col>
-      {/* {productInfo && reviewMetadata ? (*/}
-      {reviews && reviewMetadata ? (
+      {/* {productInfo && reviewMetadata && details ? (*/}
+      {reviews && reviewMetadata && details ? (
         <Col>
           <Button className="add" onClick={handleShow} style={{ float: "right" }}>
             Add a review
@@ -89,6 +116,7 @@ const AddBtn = (props) => {
               <Form>
                 <Overall />
                 <Recommend />
+                <Characteristics />
               </Form>
             </Modal.Body>
           </Modal>
