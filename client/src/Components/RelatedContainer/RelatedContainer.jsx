@@ -7,8 +7,7 @@ const RelatedContainer = () => {
   return (
     <div className="relatedContainer">
       <RelatedProducts />
-
-      <OutfitProducts />
+      <OutfitProducts />{" "}
     </div>
   )
 }
