@@ -26,11 +26,9 @@ const AddBtn = (props) => {
     })
 
     return (
-      <Container>
-        <Col>
-          <Form.Label>Overall rating*</Form.Label>
-        </Col>
-        <Col>
+      <Form.Group>
+        <Form.Label>Overall rating*</Form.Label>
+        <div style={{ float: "right" }}>
           <StarRatings
             rating={stars}
             changeRating={(rating) => setStars(rating)}
@@ -38,8 +36,30 @@ const AddBtn = (props) => {
             starSpacing="0"
           />
           {stars > 0 ? <Form.Text>{details[stars]}</Form.Text> : null}
-        </Col>
-      </Container>
+        </div>
+      </Form.Group>
+    )
+  }
+
+  const Recommend = () => {
+    return (
+      <Form.Group>
+        <Form.Label>Do you recommend this product?</Form.Label>
+        <Form.Check
+          inline
+          label="yes"
+          type="radio"
+          id="RecYes"
+          style={{ float: "right" }}
+        />
+        <Form.Check
+          inline
+          label="no"
+          type="radio"
+          id="RecNo"
+          style={{ float: "right" }}
+        />
+      </Form.Group>
     )
   }
 
@@ -59,6 +79,7 @@ const AddBtn = (props) => {
               <h5>About the Camo Onesie</h5>
               <Form>
                 <Overall />
+                <Recommend />
               </Form>
             </Modal.Body>
           </Modal>
