@@ -1,5 +1,12 @@
 import React from "react"
 import ThemeToggler from "./ThemeToggler/ThemeToggler.jsx"
+import styled from "styled-components"
+
+const NavStyle = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+`
 
 const Navbar = ({ toggleTheme, isLightMode }) => {
   return (
@@ -8,7 +15,9 @@ const Navbar = ({ toggleTheme, isLightMode }) => {
 
       <p>Search Bar</p>
 
-      <ThemeToggler toggleTheme={toggleTheme} isLightMode={isLightMode} />
+      <NavStyle>
+        <ThemeToggler toggleTheme={toggleTheme} isLightMode={isLightMode} />
+      </NavStyle>
     </nav>
   )
 }
