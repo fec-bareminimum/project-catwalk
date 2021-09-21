@@ -6,12 +6,16 @@ import sampleProduct from "./sampleProduct"
 import sampleProductReviews from "sampleProductReviews"
 
 const render = (ui, contextValue) => {
-  const defualtValues = {
-    fetchProductInfo: () => {},
-    fetchProductStyles: () => {},
+  const defaultValues = {
+    fetchProductInfo: () => {
+      console.log("mock fetchProductInfo")
+    },
+    fetchProductStyles: () => {
+      console.log("mock fetchProductStyles")
+    },
   }
   return rltRender(
-    <ProductsContext.Provider value={{ ...defualtValues, ...contextValue }}>
+    <ProductsContext.Provider value={{ ...defaultValues, ...contextValue }}>
       {ui}
     </ProductsContext.Provider>
   )
