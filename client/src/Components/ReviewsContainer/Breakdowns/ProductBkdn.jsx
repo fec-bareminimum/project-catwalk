@@ -8,9 +8,13 @@ const ProductBkdn = () => {
   const { reviewMetadata } = useReviews()
   const [chars, setChars] = useState([])
 
-  // useEffect(() => {
-
-  // })
+  useEffect(() => {
+    let flattened = []
+    for (const char in reviewMetadata.characteristics) {
+      flattened.push({ [char]: reviewMetadata.characteristics[char] })
+    }
+    setChars(flattened)
+  }, [reviewMetadata])
 
   const Scale = (props) => (
     <Row>
