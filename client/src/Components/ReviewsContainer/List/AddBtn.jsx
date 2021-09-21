@@ -9,7 +9,7 @@ import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const AddBtn = (props) => {
-  const { reviews, productInfo } = useReviews()
+  const { reviews, reviewMetadata, productInfo } = useReviews()
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -47,26 +47,35 @@ const AddBtn = (props) => {
         <Form.Label>Do you recommend this product?</Form.Label>
         <Form.Check
           inline
-          label="yes"
+          label="no"
           type="radio"
-          id="RecYes"
+          id="RecNo"
           style={{ float: "right" }}
         />
         <Form.Check
           inline
-          label="no"
+          label="yes"
           type="radio"
-          id="RecNo"
+          id="RecYes"
           style={{ float: "right" }}
         />
       </Form.Group>
     )
   }
 
+  const Characteristics = () => {
+    return (
+      <Form.Group>
+        {/* {reviewMetadata.characteristics}
+      <Form.Label></Form.Label> */}
+      </Form.Group>
+    )
+  }
+
   return (
     <Col>
-      {/* {productInfo ? (*/}
-      {reviews ? (
+      {/* {productInfo && reviewMetadata ? (*/}
+      {reviews && reviewMetadata ? (
         <Col>
           <Button className="add" onClick={handleShow} style={{ float: "right" }}>
             Add a review
