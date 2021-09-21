@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
+import Image from "react-bootstrap/Image"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -21,6 +22,7 @@ const AddBtn = (props) => {
   })
   const [picked, setPicked] = useState({})
   const [body, setBody] = useState("")
+  const [imgs, setImgs] = useState([])
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -56,7 +58,7 @@ const AddBtn = (props) => {
     </Form.Group>
   )
 
-  const Characteristics = () =>
+  const Rate = () =>
     Object.keys(reviewMetadata.characteristics).map((char, i) => (
       <Form.Group key={i}>
         <Form.Label>{`${char}*`}</Form.Label>
@@ -103,7 +105,7 @@ const AddBtn = (props) => {
         type="text"
         placeholder="Example: Best purchase ever!"
         maxLength="60"
-      ></Form.Control>
+      />
       <Form.Label>Review body*</Form.Label>
       <Form.Control
         as="textarea"
@@ -111,12 +113,33 @@ const AddBtn = (props) => {
         maxLength="1000"
         value={body}
         onChange={(e) => setBody(e.target.value)}
-      ></Form.Control>
+      />
       <Form.Text>
         {body.length < 50
           ? `Minimum required characters left: ${50 - body.length}`
           : "Minimum reached"}
       </Form.Text>
+    </Form.Group>
+  )
+
+  const Upload = () => (
+    <Form.Group>
+      <Form.Label>Upload your photos</Form.Label>
+      {imgs.length < 5 ? (
+        <Form.Control
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          onChange={(e) => {
+            setImgs([...imgs, e.target.files])
+          }}
+        />
+      ) : null}
+      {imgs.length > 0
+        ? imgs.map((img, i) => (
+            <Image key={i} src={URL.createObjectURL(new Blob(img))} thumbnail />
+          ))
+        : null}
+      {imgs.length === 0 ? imgs.map((img, i) => URL.revokeObjectURL(img)) : null}
     </Form.Group>
   )
 
@@ -137,8 +160,9 @@ const AddBtn = (props) => {
               <Form>
                 <Overall />
                 <Recommend />
-                <Characteristics />
+                <Rate />
                 {Review()}
+                <Upload />
               </Form>
             </Modal.Body>
           </Modal>
