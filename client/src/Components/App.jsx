@@ -12,6 +12,8 @@ import { ThemeProvider } from "styled-components"
 import WebFont from "webfontloader"
 import { GlobalStyles } from "../theme/GlobalStyles"
 import { useTheme } from "../theme/useTheme"
+import ProductMainView from "./Product/ProductMainView.jsx"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
   const { theme, themeMode, themeLoaded, getFonts, toggleTheme } = useTheme()
@@ -45,10 +47,9 @@ const App = () => {
                       toggleTheme={() => setSelectedTheme(toggleTheme())}
                       isLightMode={isLightMode}
                     />
-
+                    <ProductMainView />
                     <RelatedContainer />
                     <QuestionsContainer />
-                    {/* <OverviewContainer /> */}
                     <ReviewsContainer />
                   </CartProvider>
                 </InteractionsProvider>

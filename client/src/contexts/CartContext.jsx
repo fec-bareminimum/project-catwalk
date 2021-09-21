@@ -8,7 +8,7 @@ export const CartProvider = ({ children }) => {
 
   const addProductToCart = (skuId, callback) => {
     axios
-      .post("/cart", { skuId })
+      .post("/cart", { sku_id: skuId })
       .then((response) => {
         callback()
       })

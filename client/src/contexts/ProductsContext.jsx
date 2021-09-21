@@ -35,26 +35,26 @@ export const ProductsProvider = ({ children }) => {
       })
   }
 
-  const _extendExistingProductInList = (productObj) => {
-    // If we have NEW data, EXTENED the exisiting object in productList
+  // const _extendExistingProductInList = (productObj) => {
+  //   // If we have NEW data, EXTENED the exisiting object in productList
 
-    // Search the productList
-    const existingIndex = productList.map((e) => e.id).indexOf(productObj["id"])
-    if (existingIndex) {
-      _setProductList((prevList) =>
-        prevList.map((product) =>
-          product["id"] === productObj["id"]
-            ? { ...product, ...productObj }
-            : product
-        )
-      )
-      // this could be the display product reference
-      updateDisplayedProduct(productList[existingIndex])
-    } else {
-      // Can't find the item? Push it to the end of the array
-      _setProductList((prevList) => [...prevList, productObj])
-    }
-  }
+  //   // Search the productList
+  //   const existingIndex = productList.map((e) => e.id).indexOf(productObj["id"])
+  //   if (existingIndex) {
+  //     _setProductList((prevList) =>
+  //       prevList.map((product) =>
+  //         product["id"] === productObj["id"]
+  //           ? { ...product, ...productObj }
+  //           : product
+  //       )
+  //     )
+  //     // this could be the display product reference
+  //     updateDisplayedProduct(productList[existingIndex])
+  //   } else {
+  //     // Can't find the item? Push it to the end of the array
+  //     _setProductList((prevList) => [...prevList, productObj])
+  //   }
+  // }
 
   const fetchProductInfo = (productId, callback) => {
     const infoBody = {
@@ -63,7 +63,7 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get(`/products/${productId}`, infoBody)
       .then((response) => {
-        _extendExistingProductInList(response)
+        // _extendExistingProductInList(response)
         if (callback) {
           callback(response)
         }
@@ -80,7 +80,8 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get(`/products/${productId}/styles`, styleDetails)
       .then((response) => {
-        _extendExistingProductInList({ id: productId, styles: response })
+        callback(response)
+        // _extendExistingProductInList({ id: productId, styles: response })
         if (callback) {
           callback({ id: productId, styles: response })
         }
@@ -113,7 +114,7 @@ export const ProductsProvider = ({ children }) => {
 
   const updateDisplayedProduct = (newProduct) => {
     // Find the index in productList
-    const existingIndex = productList.map((e) => e.id).indexOf(productObj["id"])
+    const existingIndex = productList.map((e) => e.id).indexOf(newProduct["id"])
 
     // Reference an object in the productList array
     setDisplayProduct(productList[existingIndex] || newProduct)
@@ -127,7 +128,6 @@ export const ProductsProvider = ({ children }) => {
     changeSelectedStyleIndex,
     displayedProduct,
     updateDisplayedProduct,
-    relatedProducts,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
