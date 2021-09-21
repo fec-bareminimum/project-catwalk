@@ -27,6 +27,7 @@ const AnswersListEntry = (props) => {
   const context = useQA()
 
   function handleHelpfulChange(e) {
+    // sends a request to change the value of the helpful key to add 1 to the current helpfulness and only allow the click to happen once per visit
     context.markAnswerHelpful(props.answer.answer_id, (response) => {
       console.log("Sucessfully Update Answer's Helpfulness")
       setAnswerHelpfulness(answerHelpfulness + 1)
@@ -35,6 +36,7 @@ const AnswersListEntry = (props) => {
   }
 
   function handleReport() {
+    // sends a request to change the value of the report key to true and only allow the click to happen once per visit
     context.reportAnswer(props.answer.answer_id, (response) => {
       console.log("Sucessfully Reported Answer")
       setReportedAnswerClicked(true)
@@ -42,6 +44,7 @@ const AnswersListEntry = (props) => {
   }
 
   function Report() {
+    // function is used to report answer and change report to reported
     if (!reportedAnswerClicked) {
       return <u onClick={handleReport}>Report</u>
     } else {
@@ -50,6 +53,7 @@ const AnswersListEntry = (props) => {
   }
 
   function BoldedText({ text, shouldBeBold }) {
+    // function is used to bold 'Seller' if user is the seller
     const textArray = text.split(shouldBeBold)
     return (
       <span>
