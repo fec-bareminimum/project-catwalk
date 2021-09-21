@@ -143,6 +143,28 @@ const AddBtn = (props) => {
     </Form.Group>
   )
 
+  const Nickname = () => (
+    <Form.Group>
+      <Form.Label>What is your nickname?*</Form.Label>
+      <Form.Control type="text" placeholder="Example: jackson11!" maxLength="60" />
+      <Form.Text>
+        For privacy reasons, do not use your full name or email address
+      </Form.Text>
+    </Form.Group>
+  )
+
+  const Email = () => (
+    <Form.Group>
+      <Form.Label>Your email*</Form.Label>
+      <Form.Control
+        type="email"
+        placeholder="Example: jackson11@email.com"
+        maxLength="60"
+      />
+      <Form.Text>For authentication reasons, you will not be emailed</Form.Text>
+    </Form.Group>
+  )
+
   return (
     <Col>
       {/* {productInfo && reviewMetadata && details ? (*/}
@@ -163,6 +185,8 @@ const AddBtn = (props) => {
                 <Rate />
                 {Review()}
                 <Upload />
+                <Nickname />
+                <Email />
               </Form>
             </Modal.Body>
           </Modal>
