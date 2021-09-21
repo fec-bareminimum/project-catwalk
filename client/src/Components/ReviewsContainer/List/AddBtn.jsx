@@ -69,7 +69,9 @@ const AddBtn = (props) => {
             <Col>
               {Object.keys(picked).length > 0 && picked[char] ? (
                 <Form.Text>{details[char][picked[char] - 1]}</Form.Text>
-              ) : null}
+              ) : (
+                <Form.Text>None selected</Form.Text>
+              )}
             </Col>
           </Row>
           <Row>
