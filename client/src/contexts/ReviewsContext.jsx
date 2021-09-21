@@ -6,6 +6,7 @@ export const ReviewsContext = React.createContext()
 export const ReviewsProvider = ({ children }) => {
   const [reviews, setReviews] = useState([])
   const [reviewMetadata, setReviewMetadata] = useState({})
+  const [filters, setFilters] = useState([])
   const [average, setAverage] = useState(0)
   const [count, setCount] = useState(0)
 
@@ -36,6 +37,7 @@ export const ReviewsProvider = ({ children }) => {
                 return filtered
               }, [])
             )
+        setFilters(filters)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
@@ -145,6 +147,7 @@ export const ReviewsProvider = ({ children }) => {
   const value = {
     reviews,
     reviewMetadata,
+    filters,
     average,
     count,
     fetchReviews,
@@ -153,6 +156,7 @@ export const ReviewsProvider = ({ children }) => {
     markReviewHelpful,
     reportReview,
     setHelpers,
+    setFilters,
   }
 
   return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
@@ -162,6 +166,7 @@ const useReviews = () => {
   const {
     reviews,
     reviewMetadata,
+    filters,
     average,
     count,
     fetchReviews,
@@ -170,11 +175,13 @@ const useReviews = () => {
     markReviewHelpful,
     reportReview,
     setHelpers,
+    setFilters,
   } = useContext(ReviewsContext)
 
   return {
     reviews,
     reviewMetadata,
+    filters,
     average,
     count,
     fetchReviews,
@@ -183,6 +190,7 @@ const useReviews = () => {
     markReviewHelpful,
     reportReview,
     setHelpers,
+    setFilters,
   }
 }
 

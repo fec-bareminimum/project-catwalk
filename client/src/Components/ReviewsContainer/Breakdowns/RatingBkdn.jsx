@@ -8,13 +8,15 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const RatingBkdn = (props) => {
   const { reviewMetadata, count, average, setHelpers } = useReviews()
-  // const [filtered, setFiltered] = useState(false)
+  const [filtered, setFiltered] = useState(false)
 
   useEffect(() => setHelpers())
 
-  // const Filters = () => (
-
-  // )
+  const Filters = () => (
+    <Row>
+      <Col></Col>
+    </Row>
+  )
 
   const Average = () => (
     <Row>
@@ -47,7 +49,7 @@ const RatingBkdn = (props) => {
 
   return (
     <Container className="rating">
-      {/* {filtered ? <Filters /> : null} */}
+      {filtered ? <Filters /> : null}
       {average > 0 ? <Average /> : null}
       <Container className="bars">
         {count > 0

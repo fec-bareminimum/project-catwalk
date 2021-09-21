@@ -9,10 +9,9 @@ import useClickLogger from "../../hooks/useClickLogger.jsx"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const ReviewsContainer = () => {
-  const { fetchReviews } = useReviews()
+  const { fetchReviews, filters, setFilters } = useReviews()
   const [sort, setSort] = useState("relevant")
   const [product_id, setProduct_id] = useState(42366)
-  const [filters, setFilters] = useState([])
 
   useEffect(() => {
     fetchReviews(1, 100, sort, product_id, filters)
