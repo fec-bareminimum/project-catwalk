@@ -1,53 +1,69 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
-
-const placeholderImg =
-  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081"
+import StarRating from "react-bootstrap-star-rating"
+import useProducts from "../../../../contexts/ProductsContext.jsx"
+import useReviews from "../../../../contexts/ReviewsContext.jsx"
+import {
+  getAverageRating,
+  extractPriceString,
+  extractThumbnailLink,
+  extractSalesPrice,
+  formatPriceStr,
+} from "./helpers"
 
 const ProductCard = (props) => {
-  /* ******************************************************************
-  // Keep track of which thumbnail image to display
-  const [productStyleIndex, setProductStyleIndex] = useState(0);
+  const {
+    updateDisplayedProduct,
+    displayedProduct,
+    fetchProductInfo,
+    fetchProductStyles,
+    selectedStyleIndex,
+  } = useProducts()
+  const { reviews } = useReviews()
 
   // Fetch more complete details for this product
   useEffect(() => {
-    if (!props['styles']) {
-      // fetch product styles (/api/product/:productId/styles)
+    if (!props["styles"] && fetchProductStyles) {
+      fetchProductStyles(props["id"])
     }
-  }, []);
+    if (!props["features"] && fetchProductInfo) {
+      fetchProductInfo(props["id"])
+    }
+  }, [props])
 
-  const extractThumbnailLink = (props) => {
-    try {
-      const imageUrl = props['styles'][productStyleIndex].photos[0].thumbnail_url;
-      return imageUrl;
-    } catch {
-      return '';
-    }
+  const handleClick = () => {
+    updateDisplayedProduct(props)
   }
 
-  const extractSalesPrice = (props) => {
-    try {
-      const imageUrl = props['styles'][productStyleIndex].sale_price;
-      return imageUrl;
-    } catch {
-      return '';
-    }
-  }
-  <Card.Img variant="top" src={extractThumbnailLink(props)placeholderImg} />
-  ****************************************************************** */
-
-  // 140.00 (integer) => "$140" (string)
-  const formattedPriceStr =
-    "$" + Number(props["default_price"]).toFixed(0).toLocaleString()
+  const defaultPrice = formatPriceStr(extractPriceString(props))
+  const salePrice = extractSalesPrice(displayedProduct, selectedStyleIndex)
+  const strikeThroughStyles = { textDecoration: "line-through", color: "red" }
 
   return (
     <Card style={{ width: "18rem" }} className="productCard">
-      <Card.Img variant="top" src={placeholderImg} />
-      <Card.Body>
+      <Card.Img variant="top" src={extractThumbnailLink(props)} />
+      <Card.Body onClick={handleClick}>
         <Card.Subtitle>{props.category}</Card.Subtitle>
         <Card.Title>{props.name}</Card.Title>
-        <Card.Subtitle>{formattedPriceStr}</Card.Subtitle>
-        {/* <ProductRating /> */}
+
+        {salePrice ? (
+          <Card.Subtitle>
+            {formatPriceStr(salePrice)}
+            <span style={strikeThroughStyles}>{defaultPrice}</span>
+          </Card.Subtitle>
+        ) : (
+          <Card.Subtitle>{defaultPrice}</Card.Subtitle>
+        )}
+
+        <Card.Subtitle>
+          <StarRating
+            defaultValue={getAverageRating(reviews)}
+            min={0}
+            max={5}
+            step={0.25}
+          />
+        </Card.Subtitle>
+        {React.createElement(props.ActionBtn, { thisProduct: props })}
       </Card.Body>
     </Card>
   )

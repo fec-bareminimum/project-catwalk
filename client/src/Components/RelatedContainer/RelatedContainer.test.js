@@ -7,10 +7,29 @@ describe("RelatedContainer", () => {
     render(<RelatedContainer />)
   })
 
-  test("displays two sets of related products", () => {
-    render(<RelatedContainer />)
+  test("displays RELATED PRODUCTS and OUTFIT containers", () => {
+    const { container } = render(<RelatedContainer />)
 
-    expect(screen.getByTestId("outfitProductsContainer")).toBeInTheDocument()
-    expect(screen.getByTestId("relatedProductsContainer")).toBeInTheDocument()
+    expect(container.querySelectorAll("section")).toHaveLength(2)
+    expect(
+      container.querySelector("section.relatedProductsContainer")
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector("section.outfitProductsContainer")
+    ).toBeInTheDocument()
+  })
+
+  test("displays RELATED PRODUCTS section first", () => {
+    const { container } = render(<RelatedContainer />)
+
+    const sections = container.querySelectorAll("section")
+    expect(sections[0]).toHaveTextContent("RELATED PRODUCTS")
+  })
+
+  test("displays OUTFITS section second", () => {
+    const { container } = render(<RelatedContainer />)
+
+    const sections = container.querySelectorAll("section")
+    expect(sections[1]).toHaveTextContent("RELATED PRODUCTS")
   })
 })

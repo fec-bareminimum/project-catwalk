@@ -1,14 +1,21 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import axios from "axios"
 
 export const ProductsContext = React.createContext()
 
 export const ProductsProvider = ({ children }) => {
-  const [productList, setProducts] = useState({})
-  const [displayedProduct, setDisplayedProduct] = useState({})
-  const [productInfo, setProductsInfo] = useState({})
-  const [styles, setStyles] = useState({})
-  const [relatedProducts, setRelatedProducts] = useState({})
+  const [productList, _setProductList] = useState([])
+  const [displayedProduct, _setDisplayedProduct] = useState({}) // Reference an object in the productList array
+  const [relatedProducts, _setRelatedProducts] = useState([])
+  const [selectedStyleIndex, _setSelectedStyleIndex] = useState(0)
+
+  // Display a defualt product for the Overview
+  useEffect(() => {
+    if (Object.keys(displayedProduct).length === 0 && productList.length > 0) {
+      // Reference the object in productList
+      _setDisplayedProduct(productList[0])
+    }
+  }, [productList])
 
   const fetchProducts = (page, count, callback) => {
     const productResults = {
@@ -18,13 +25,36 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get("/products", productResults)
       .then((response) => {
-        setProducts(response)
-        callback(response)
+        _setProductList(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
       })
   }
+
+  // const _extendExistingProductInList = (productObj) => {
+  //   // If we have NEW data, EXTENED the exisiting object in productList
+
+  //   // Search the productList
+  //   const existingIndex = productList.map((e) => e.id).indexOf(productObj["id"])
+  //   if (existingIndex) {
+  //     _setProductList((prevList) =>
+  //       prevList.map((product) =>
+  //         product["id"] === productObj["id"]
+  //           ? { ...product, ...productObj }
+  //           : product
+  //       )
+  //     )
+  //     // this could be the display product reference
+  //     updateDisplayedProduct(productList[existingIndex])
+  //   } else {
+  //     // Can't find the item? Push it to the end of the array
+  //     _setProductList((prevList) => [...prevList, productObj])
+  //   }
+  // }
 
   const fetchProductInfo = (productId, callback) => {
     const infoBody = {
@@ -33,8 +63,10 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get(`/products/${productId}`, infoBody)
       .then((response) => {
-        setProductsInfo(response)
-        callback(response)
+        // _extendExistingProductInList(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
@@ -48,36 +80,59 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get(`/products/${productId}/styles`, styleDetails)
       .then((response) => {
-        setStyles(response)
         callback(response)
+        // _extendExistingProductInList({ id: productId, styles: response })
+        if (callback) {
+          callback({ id: productId, styles: response })
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
       })
   }
 
-  const fetchProductRelatedStyles = (productId, callback) => {
+  const fetchProductRelatedIds = (productId, callback) => {
     const relatedBody = {
       productId,
     }
     axios
       .get(`/products/${productId}/related`, relatedBody)
       .then((response) => {
-        setRelatedProducts(response)
-        callback(response)
+        _setRelatedProducts(response)
+        if (callback) {
+          callback(response)
+        }
       })
       .catch((err) => {
         console.log("Failed to load products", err)
       })
   }
 
+  const changeSelectedStyleIndex = (newIndex) => {
+    _setSelectedStyleIndex(newIndex)
+  }
+
+  const updateDisplayedProduct = (newProduct) => {
+    // Find the index in productList
+    const existingIndex = productList.map((e) => e.id).indexOf(newProduct["id"])
+
+    // Reference an object in the productList array
+    setDisplayProduct(productList[existingIndex] || newProduct)
+    changeSelectedStyleIndex(0)
+  }
+
   const value = {
     productList,
     displayedProduct,
+    relatedProducts,
+    selectedStyleIndex,
+    changeSelectedStyleIndex,
+    displayedProduct,
+    updateDisplayedProduct,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
-    fetchProductRelatedStyles,
+    fetchProductRelatedIds,
   }
 
   return (
@@ -85,24 +140,6 @@ export const ProductsProvider = ({ children }) => {
   )
 }
 
-const useProducts = () => {
-  const {
-    productList,
-    displayedProduct,
-    fetchProducts,
-    fetchProductInfo,
-    fetchProductStyles,
-    fetchProductRelatedStyles,
-  } = useContext(ProductsContext)
-
-  return {
-    productList,
-    displayedProduct,
-    fetchProducts,
-    fetchProductInfo,
-    fetchProductStyles,
-    fetchProductRelatedStyles,
-  }
-}
+const useProducts = () => useContext(ProductsContext)
 
 export default useProducts

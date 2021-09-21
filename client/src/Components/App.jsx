@@ -5,11 +5,15 @@ import { QAProvider } from "../contexts/QAContext.jsx"
 import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
 import { CartProvider } from "../contexts/CartContext.jsx"
 import RelatedContainer from "./RelatedContainer/RelatedContainer.jsx"
+import QuestionsContainer from "./QuestionsContainer/QuestionsContainer.jsx"
+import ReviewsContainer from "./ReviewsContainer/ReviewsContainer.jsx"
 import Navbar from "./Navbar/Navbar.jsx"
 import { ThemeProvider } from "styled-components"
 import WebFont from "webfontloader"
 import { GlobalStyles } from "../theme/GlobalStyles"
 import { useTheme } from "../theme/useTheme"
+import ProductMainView from "./Product/ProductMainView.jsx"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const App = () => {
   const { theme, themeMode, themeLoaded, getFonts, toggleTheme } = useTheme()
@@ -43,11 +47,10 @@ const App = () => {
                       toggleTheme={() => setSelectedTheme(toggleTheme())}
                       isLightMode={isLightMode}
                     />
-
+                    <ProductMainView />
                     <RelatedContainer />
-                    {/* <QAContainer /> */}
-                    {/* <OverviewContainer /> */}
-                    {/* <ReviewsContainer /> */}
+                    <QuestionsContainer />
+                    <ReviewsContainer />
                   </CartProvider>
                 </InteractionsProvider>
               </QAProvider>
