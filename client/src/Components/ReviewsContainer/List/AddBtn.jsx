@@ -11,59 +11,55 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 const AddBtn = (props) => {
   const { reviews, reviewMetadata, details, productInfo } = useReviews()
   const [show, setShow] = useState(false)
+  const [stars, setStars] = useState(0)
+  const [starDetails, setStarDetails] = useState({
+    5: "Great",
+    4: "Good",
+    3: "Average",
+    2: "Fair",
+    1: "Poor",
+  })
+  const [picked, setPicked] = useState({})
+  const [body, setBody] = useState("")
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  const Overall = () => {
-    const [stars, setStars] = useState(0)
-    const [details, setDetails] = useState({
-      5: "Great",
-      4: "Good",
-      3: "Average",
-      2: "Fair",
-      1: "Poor",
-    })
+  const Overall = () => (
+    <Form.Group>
+      <Form.Label>Overall rating*</Form.Label>
+      <div style={{ float: "right" }}>
+        <StarRatings
+          rating={stars}
+          changeRating={(rating) => setStars(rating)}
+          starDimension="15px"
+          starSpacing="0"
+        />
+        {stars > 0 ? <Form.Text>{starDetails[stars]}</Form.Text> : null}
+      </div>
+    </Form.Group>
+  )
 
-    return (
-      <Form.Group>
-        <Form.Label>Overall rating*</Form.Label>
-        <div style={{ float: "right" }}>
-          <StarRatings
-            rating={stars}
-            changeRating={(rating) => setStars(rating)}
-            starDimension="15px"
-            starSpacing="0"
-          />
-          {stars > 0 ? <Form.Text>{details[stars]}</Form.Text> : null}
-        </div>
-      </Form.Group>
-    )
-  }
+  const Recommend = () => (
+    <Form.Group>
+      <Form.Label>Do you recommend this product?*</Form.Label>
+      {["No", "Yes"].map((option, i) => (
+        <Form.Check
+          inline
+          key={option}
+          type="radio"
+          name="rec"
+          label={option}
+          style={{ float: "right" }}
+        />
+      ))}
+    </Form.Group>
+  )
 
-  const Recommend = () => {
-    return (
-      <Form.Group>
-        <Form.Label>Do you recommend this product?</Form.Label>
-        {["No", "Yes"].map((option, i) => (
-          <Form.Check
-            inline
-            key={option}
-            type="radio"
-            name="rec"
-            label={option}
-            style={{ float: "right" }}
-          />
-        ))}
-      </Form.Group>
-    )
-  }
-
-  const Characteristics = () => {
-    const [picked, setPicked] = useState({})
-    return Object.keys(reviewMetadata.characteristics).map((char, i) => (
+  const Characteristics = () =>
+    Object.keys(reviewMetadata.characteristics).map((char, i) => (
       <Form.Group key={i}>
-        <Form.Label>{char}</Form.Label>
+        <Form.Label>{`${char}*`}</Form.Label>
         <Container>
           <Row>
             <Col>
@@ -90,16 +86,39 @@ const AddBtn = (props) => {
           </Row>
           <Row>
             <Col>
-              <div>{details[char][0]}</div>
+              <Form.Text>{details[char][0]}</Form.Text>
             </Col>
             <Col>
-              <div>{details[char][4]}</div>
+              <Form.Text>{details[char][4]}</Form.Text>
             </Col>
           </Row>
         </Container>
       </Form.Group>
     ))
-  }
+
+  const Review = () => (
+    <Form.Group>
+      <Form.Label>Review summary</Form.Label>
+      <Form.Control
+        type="text"
+        placeholder="Example: Best purchase ever!"
+        maxLength="60"
+      ></Form.Control>
+      <Form.Label>Review body*</Form.Label>
+      <Form.Control
+        as="textarea"
+        placeholder="Why did you like the product or not?"
+        maxLength="1000"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+      ></Form.Control>
+      <Form.Text>
+        {body.length < 50
+          ? `Minimum required characters left: ${50 - body.length}`
+          : "Minimum reached"}
+      </Form.Text>
+    </Form.Group>
+  )
 
   return (
     <Col>
@@ -119,6 +138,7 @@ const AddBtn = (props) => {
                 <Overall />
                 <Recommend />
                 <Characteristics />
+                {Review()}
               </Form>
             </Modal.Body>
           </Modal>
