@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Alert from "react-bootstrap/Alert"
+import Button from "react-bootstrap/Button"
 import ProgressBar from "react-bootstrap/ProgressBar"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
@@ -19,10 +20,7 @@ const RatingBkdn = (props) => {
           {"Filtered by: "}
           {filters.map((rating) => ` ${rating} `)}
           {"stars"}
-          <hr />
-          <Alert.Link onClick={() => props.filterReviews(0)}>
-            Remove all filters
-          </Alert.Link>
+          <Button onClick={() => props.filterReviews(0)}>Remove all filters</Button>
         </Alert>
       </Col>
     </Row>
