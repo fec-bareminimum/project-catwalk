@@ -1,6 +1,6 @@
 # Project Catwalk
 
-![CircleCI](https://circleci.com/gh/fec-bareminimum/project-catwalk/tree/main.svg?style=shield)
+[![Build Status](https://github.com/fec-bareminimum/project-catwalk/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/fec-bareminimum/project-catwalk/actions/workflows/main.yml)
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ Project Catwalk is a MVP client-facing retail web-portal. Browse catalog product
 ## Setup tasks
 
 - run `npm install` in this directory to install the dependencies.
-- run `npm run build` and `npm start` in separate terminals to start webpack and express.
+- run `npm run dev` and `npm start` in separate terminals to start webpack and express.
 - use the `config.example.js` file to create your own `config.js` and add your github API token to attach as an "Authorization" header in requests.
 
 ## Tests
