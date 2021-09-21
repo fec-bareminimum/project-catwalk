@@ -7,7 +7,6 @@ import Stylesheet from "../styles.css"
 
 function ProductForm(props) {
   const cartCtx = useContext(CartContext)
-
   const [selectedSize, setSelectedSize] = useState("")
   const [selectedSKU, setSelectedSKU] = useState(null)
   const [selectedQuantity, setSelectedQuantity] = useState(1)
