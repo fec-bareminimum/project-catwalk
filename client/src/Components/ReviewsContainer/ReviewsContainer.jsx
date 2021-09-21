@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 const ReviewsContainer = () => {
   const { fetchReviews, fetchReviewMetadata, filters, setFilters } = useReviews()
   const [sort, setSort] = useState("relevant")
-  const [product_id, setProduct_id] = useState(42366)
+  const [product_id, setProduct_id] = useState(42370)
 
   useEffect(() => {
     fetchReviews(1, 100, sort, product_id, filters)

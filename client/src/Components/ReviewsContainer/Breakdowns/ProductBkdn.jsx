@@ -19,16 +19,17 @@ const ProductBkdn = () => {
   const Scale = (props) => (
     <Row>
       <Col>
-        <h5>{props.size}</h5>
+        <h5>{Object.keys(props.char)[0]}</h5>
+        <input type="range" max="5" value={props.char.value} disabled></input>
       </Col>
     </Row>
   )
 
   return (
     <Container className="productBkdn">
-      {/* {count > 0
-        ?
-      } */}
+      {chars.length > 0
+        ? chars.map((char, i) => <Scale key={i} char={char} />)
+        : null}
     </Container>
   )
 }

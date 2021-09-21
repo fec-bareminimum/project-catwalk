@@ -42,7 +42,11 @@ const ReviewList = (props) => {
   return (
     <Container className="reviewList" style={listStyle}>
       {reviews ? <Sorter /> : null}
-      {reviews ? <Tiles /> : null}
+      {reviews && reviews.length > 0 ? (
+        <Tiles />
+      ) : (
+        "No reviews have been posted yet!"
+      )}
     </Container>
   )
 }

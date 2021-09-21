@@ -14,10 +14,14 @@ const RatingBkdn = (props) => {
   const Average = () => (
     <Row>
       <Col>
-        <h1>{`${props.average}`}</h1>
+        <h1>{`${reviews.length > 0 ? props.average : 0}`}</h1>
       </Col>
       <Col>
-        <StarRatings rating={props.average} starDimension="15px" starSpacing="0" />
+        <StarRatings
+          rating={reviews.length > 0 ? props.average : 0}
+          starDimension="15px"
+          starSpacing="0"
+        />
       </Col>
     </Row>
   )
@@ -62,9 +66,11 @@ const RatingBkdn = (props) => {
   const Recs = () => (
     <Row>
       <Col>
-        {`${Math.round(
-          (reviewMetadata.recommended.true / reviews.length) * 100
-        )}% of reviews recommend this product `}
+        {`${
+          reviews.length > 0
+            ? Math.round((reviewMetadata.recommended.true / reviews.length) * 100)
+            : 0
+        }% of reviews recommend this product `}
       </Col>
     </Row>
   )
