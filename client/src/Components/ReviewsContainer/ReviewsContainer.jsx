@@ -23,7 +23,18 @@ const ReviewsContainer = () => {
   }
 
   const filterReviews = (option) => {
-    setFilters([...filters, option])
+    if (filters.includes(option)) {
+      setFilters(
+        filters.reduce((toggled, current) => {
+          if (current !== option) {
+            toggled.push(current)
+          }
+          return toggled
+        }, [])
+      )
+    } else {
+      setFilters([...filters, option])
+    }
   }
 
   return (

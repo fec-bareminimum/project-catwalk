@@ -27,7 +27,6 @@ export const ReviewsProvider = ({ children }) => {
         filters.length === 0
           ? setReviews(response.data.results)
           : setReviews(
-              // response.data.results.filter((review) => review.rating === filter)
               response.data.results.reduce((filtered, current) => {
                 filters.forEach((option) => {
                   if (current.rating === option) {

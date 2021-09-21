@@ -37,11 +37,7 @@ const ReviewList = (props) => {
   const Tiles = () => (
     <Container className="tiles">
       {reviews.slice(0, props.listLength).map((review) => (
-        <Row key={review.review_id}>
-          <Col>
-            <ReviewTile {...review} />
-          </Col>
-        </Row>
+        <ReviewTile key={review.review_id} {...review} />
       ))}
     </Container>
   )
