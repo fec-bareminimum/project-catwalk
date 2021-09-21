@@ -9,9 +9,26 @@ import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const RatingBkdn = (props) => {
-  const { reviewMetadata, filters, count, average, setHelpers } = useReviews()
+  const { reviewMetadata, filters } = useReviews()
+  const [average, setAverage] = useState(0)
+  const [count, setCount] = useState(0)
 
-  useEffect(() => setHelpers())
+  useEffect(() => {
+    let total = 0
+    let ct = 0
+    let avg = 0
+
+    for (let rating in reviewMetadata.ratings) {
+      total += rating * reviewMetadata.ratings[rating]
+      ct += 1 * reviewMetadata.ratings[rating]
+    }
+    if (total > 0) {
+      avg = Math.round((total / ct) * 10) / 10
+    }
+
+    setCount(ct)
+    setAverage(avg)
+  })
 
   const Filters = () => (
     <Row>

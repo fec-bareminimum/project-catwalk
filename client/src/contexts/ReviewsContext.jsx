@@ -7,8 +7,6 @@ export const ReviewsProvider = ({ children }) => {
   const [reviews, setReviews] = useState([])
   const [reviewMetadata, setReviewMetadata] = useState({})
   const [filters, setFilters] = useState([])
-  const [average, setAverage] = useState(0)
-  const [count, setCount] = useState(0)
 
   const fetchReviews = (page, count, sort, product_id, filters) => {
     const fetchDetails = {
@@ -127,35 +125,15 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
-  const setHelpers = () => {
-    let total = 0
-    let ct = 0
-    let avg = 0
-
-    for (let rating in reviewMetadata.ratings) {
-      total += rating * reviewMetadata.ratings[rating]
-      ct += 1 * reviewMetadata.ratings[rating]
-    }
-    if (total > 0) {
-      avg = Math.round((total / ct) * 10) / 10
-    }
-
-    setCount(ct)
-    setAverage(avg)
-  }
-
   const value = {
     reviews,
     reviewMetadata,
     filters,
-    average,
-    count,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
     reportReview,
-    setHelpers,
     setFilters,
   }
 
@@ -167,14 +145,11 @@ const useReviews = () => {
     reviews,
     reviewMetadata,
     filters,
-    average,
-    count,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
     reportReview,
-    setHelpers,
     setFilters,
   } = useContext(ReviewsContext)
 
@@ -182,14 +157,11 @@ const useReviews = () => {
     reviews,
     reviewMetadata,
     filters,
-    average,
-    count,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
     markReviewHelpful,
     reportReview,
-    setHelpers,
     setFilters,
   }
 }
