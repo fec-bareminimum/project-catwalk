@@ -9,13 +9,13 @@ export const ReviewsProvider = ({ children }) => {
   const [average, setAverage] = useState(0)
   const [count, setCount] = useState(0)
 
-  const fetchReviews = (page, count, sort, product_id, filter) => {
+  const fetchReviews = (page, count, sort, product_id, filters) => {
     const fetchDetails = {
       page,
       count,
       sort,
       product_id,
-      filter,
+      filters,
     }
 
     axios({
@@ -24,10 +24,18 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        filter === 0
+        filters.length === 0
           ? setReviews(response.data.results)
           : setReviews(
-              response.data.results.filter((review) => review.rating === filter)
+              // response.data.results.filter((review) => review.rating === filter)
+              response.data.results.reduce((filtered, current) => {
+                filters.forEach((option) => {
+                  if (current.rating === option) {
+                    filtered.push(current)
+                  }
+                })
+                return filtered
+              }, [])
             )
       })
       .catch((err) => {

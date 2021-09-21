@@ -15,7 +15,6 @@ const Breakdowns = (props) => {
     <section className="breakdowns">
       <Container className="rating">
         <RatingBkdn filterReviews={props.filterReviews} />
-        {/* {percent} */}
       </Container>
       {/* <ProductBreakdown parts /> */}
     </section>

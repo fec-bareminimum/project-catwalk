@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -8,8 +8,13 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const RatingBkdn = (props) => {
   const { reviewMetadata, count, average, setHelpers } = useReviews()
+  const [filtered, setFiltered] = useState(false)
 
   useEffect(() => setHelpers())
+
+  // const Filters = () => (
+
+  // )
 
   const Average = () => (
     <Row>
@@ -47,6 +52,7 @@ const RatingBkdn = (props) => {
 
   return (
     <Container className="rating">
+      {/* {filtered ? <Filters /> : null} */}
       {average > 0 ? <Average /> : null}
       <Container className="bars">{count > 0 ? <Bars /> : null}</Container>
     </Container>

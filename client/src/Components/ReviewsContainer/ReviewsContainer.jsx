@@ -12,18 +12,18 @@ const ReviewsContainer = () => {
   const { fetchReviews } = useReviews()
   const [sort, setSort] = useState("relevant")
   const [product_id, setProduct_id] = useState(42366)
-  const [filter, setFilter] = useState(0)
+  const [filters, setFilters] = useState([])
 
   useEffect(() => {
-    fetchReviews(1, 100, sort, product_id, filter)
-  }, [sort, product_id, filter])
+    fetchReviews(1, 100, sort, product_id, filters)
+  }, [sort, product_id, filters])
 
   const sortReviews = (option) => {
     setSort(option)
   }
 
   const filterReviews = (option) => {
-    setFilter(option)
+    setFilters([...filters, option])
   }
 
   return (
