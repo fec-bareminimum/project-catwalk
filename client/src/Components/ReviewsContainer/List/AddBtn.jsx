@@ -10,9 +10,8 @@ import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const AddBtn = (props) => {
-  const { reviews, reviewMetadata, details, productInfo } = useReviews()
+  const { reviews, reviewMetadata, details, productInfo, addReview } = useReviews()
   const [show, setShow] = useState(false)
-  const [stars, setStars] = useState(0)
   const [starDetails, setStarDetails] = useState({
     5: "Great",
     4: "Good",
@@ -20,9 +19,15 @@ const AddBtn = (props) => {
     2: "Fair",
     1: "Poor",
   })
-  const [picked, setPicked] = useState({})
+  // const [product_id, setProduct_id] = useState(productInfo.)
+  const [rating, setRating] = useState(0)
+  const [summary, setSummary] = useState("")
   const [body, setBody] = useState("")
-  const [imgs, setImgs] = useState([])
+  const [recommend, setRecommend] = useState("false")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [photos, setPhotos] = useState([])
+  const [characteristics, setCharacteristics] = useState({})
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -32,12 +37,12 @@ const AddBtn = (props) => {
       <Form.Label>Overall rating*</Form.Label>
       <div style={{ float: "right" }}>
         <StarRatings
-          rating={stars}
-          changeRating={(rating) => setStars(rating)}
+          rating={rating}
+          changeRating={(stars) => setStars(stars)}
           starDimension="15px"
           starSpacing="0"
         />
-        {stars > 0 ? <Form.Text>{starDetails[stars]}</Form.Text> : null}
+        {rating > 0 ? <Form.Text>{starDetails[rating]}</Form.Text> : null}
       </div>
     </Form.Group>
   )
@@ -58,15 +63,18 @@ const AddBtn = (props) => {
     </Form.Group>
   )
 
-  const Rate = () =>
-    Object.keys(reviewMetadata.characteristics).map((char, i) => (
+  const Rate = () => {
+    const [chars, setChars] = useState({})
+    return Object.keys(reviewMetadata.characteristics).map((char, i) => (
       <Form.Group key={i}>
         <Form.Label>{`${char}*`}</Form.Label>
         <Container>
           <Row>
             <Col>
-              {Object.keys(picked).length > 0 && picked[char] ? (
-                <Form.Text>{details[char][picked[char] - 1]}</Form.Text>
+              {chars[reviewMetadata.characteristics[char].id] ? (
+                <Form.Text>
+                  {details[char][chars[reviewMetadata.characteristics[char].id] - 1]}
+                </Form.Text>
               ) : (
                 <Form.Text>None selected</Form.Text>
               )}
@@ -81,7 +89,12 @@ const AddBtn = (props) => {
                   type="radio"
                   name={char}
                   label={rating}
-                  onChange={() => setPicked({ ...picked, [char]: rating })}
+                  onChange={() =>
+                    setChars({
+                      ...chars,
+                      [reviewMetadata.characteristics[char].id]: rating,
+                    })
+                  }
                 />
               ))}
             </Col>
@@ -97,6 +110,7 @@ const AddBtn = (props) => {
         </Container>
       </Form.Group>
     ))
+  }
 
   const Review = () => (
     <Form.Group>
@@ -105,6 +119,8 @@ const AddBtn = (props) => {
         type="text"
         placeholder="Example: Best purchase ever!"
         maxLength="60"
+        value={summary}
+        onChange={(e) => setSummary(e.target.value)}
       />
       <Form.Label>Review body*</Form.Label>
       <Form.Control
@@ -125,28 +141,36 @@ const AddBtn = (props) => {
   const Upload = () => (
     <Form.Group>
       <Form.Label>Upload your photos</Form.Label>
-      {imgs.length < 5 ? (
+      {photos.length < 5 ? (
         <Form.Control
           type="file"
           accept=".jpg, .jpeg, .png"
           onChange={(e) => {
-            setImgs([...imgs, e.target.files])
+            setPhotos([...photos, e.target.files])
           }}
         />
       ) : null}
-      {imgs.length > 0
-        ? imgs.map((img, i) => (
-            <Image key={i} src={URL.createObjectURL(new Blob(img))} thumbnail />
+      {photos.length > 0
+        ? photos.map((photo, i) => (
+            <Image key={i} src={URL.createObjectURL(new Blob(photo))} thumbnail />
           ))
         : null}
-      {imgs.length === 0 ? imgs.map((img, i) => URL.revokeObjectURL(img)) : null}
+      {photos.length === 0
+        ? photos.map((photo, i) => URL.revokeObjectURL(photo))
+        : null}
     </Form.Group>
   )
 
   const Nickname = () => (
     <Form.Group>
       <Form.Label>What is your nickname?*</Form.Label>
-      <Form.Control type="text" placeholder="Example: jackson11!" maxLength="60" />
+      <Form.Control
+        type="text"
+        placeholder="Example: jackson11!"
+        maxLength="60"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
       <Form.Text>
         For privacy reasons, do not use your full name or email address
       </Form.Text>
@@ -160,9 +184,31 @@ const AddBtn = (props) => {
         type="email"
         placeholder="Example: jackson11@email.com"
         maxLength="60"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <Form.Text>For authentication reasons, you will not be emailed</Form.Text>
     </Form.Group>
+  )
+
+  const Submit = () => (
+    <Button
+      type="submit"
+      onSubmit={() =>
+        addReview(
+          product_id,
+          rating,
+          summary,
+          body,
+          recommend,
+          name,
+          email,
+          photos,
+          characteristics,
+          callback
+        )
+      }
+    ></Button>
   )
 
   return (
@@ -187,6 +233,7 @@ const AddBtn = (props) => {
                 <Upload />
                 <Nickname />
                 <Email />
+                <Submit />
               </Form>
             </Modal.Body>
           </Modal>
