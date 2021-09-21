@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -23,9 +23,7 @@ const MoreAddBtns = (props) => {
     <Container className="buttons">
       <Row>
         <Col>
-          {reviews.results && props.listLength < reviews.results.length ? (
-            <MoreBtn />
-          ) : null}
+          {reviews && props.listLength < reviews.length ? <MoreBtn /> : null}
         </Col>
         {/* <Col>
             <Button className="add">Add a Review</Button>
