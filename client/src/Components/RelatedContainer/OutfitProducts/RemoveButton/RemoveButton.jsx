@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import useCart from "../../../../contexts/CartContext.jsx"
+import useOutfit from "../../../../contexts/OutiftContext.jsx"
 import RemoveIcon from "./RemoveIcon.jsx"
 
 const RemoveButton = ({ product }) => {
-  const { removeProductFromCart } = useCart()
+  const { removeProductFromOutfit } = useOufit()
 
   const handleClick = () => {
-    removeProductFromCart(product)
+    removeProductFromOutfit(product)
   }
 
   return (

@@ -1,7 +1,7 @@
 import React from "react"
 import CardList from "../CardList/CardList.jsx"
-import useCart from "../../../contexts/CartContext.jsx"
 import useProducts from "../../../contexts/ProductsContext.jsx"
+import useOutfit from "../../../contexts/OutfitContext.jsx"
 import PlusIcon from "./PlusIcon.jsx"
 import RemoveButton from "./RemoveButton/RemoveButton.jsx"
 import styled from "styled-components"
@@ -29,18 +29,18 @@ const AddToOutfitBtn = ({ handleClick }) => {
 }
 
 const OutfitProducts = () => {
-  const { displayedProduct } = useProducts()
-  const { cartProducts, addProductToCart } = useCart()
+  const { displayedProduct } = useProduct()
+  const { outfitList, removeProductFromOutfit, addProductToOutfit } = useOutift()
 
   const handleAddClick = () => {
-    addProductToCart(displayedProduct)
+    addProductToOutfit(displayedProduct)
   }
 
   return (
     <Section className="outfitProductsContainer">
       <CardList
         FirstCard={<AddToOutfitBtn handleClick={handleAddClick} />}
-        products={cartProducts}
+        products={outfitList}
         listTitle={"YOUR OUTFIT"}
         ActionBtn={RemoveButton}
       />
