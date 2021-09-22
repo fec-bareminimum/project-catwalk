@@ -22,11 +22,11 @@ function ProductMainView(props) {
   }
 
   useEffect(() => {
-    context.fetchProductStyles(42370, (response) => {
+    context.fetchProductStyles(42366, (response) => {
       setStyleList(response.styles.results)
       setStyle(response.styles.results[0])
     })
-    context.fetchProductInfo(42370, (response) => {
+    context.fetchProductInfo(42366, (response) => {
       setInfo(response)
     })
   }, [])

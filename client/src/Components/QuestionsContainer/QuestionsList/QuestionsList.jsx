@@ -44,7 +44,7 @@ const QuestionsList = (props) => {
   }, [props.filterBySearch])
 
   const getData = () => {
-    context.fetchQuestions(42370, 1, 50, (response) => {
+    context.fetchQuestions(42366, 1, 50, (response) => {
       setQuestionListData(response.data.results)
     })
   }

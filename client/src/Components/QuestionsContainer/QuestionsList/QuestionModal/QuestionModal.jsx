@@ -68,7 +68,7 @@ const QuestionModal = () => {
   const handleSubmit = () => {
     // if valid post the question, else send an alert regarding which sections are invalid
     if (isValidEmail && isValidNickname && isValidQuestionBody) {
-      context.postQuestion(questionBody, nickname, email, 42370, (response) => {
+      context.postQuestion(questionBody, nickname, email, 42366, (response) => {
         setShow(false)
       })
     } else {
