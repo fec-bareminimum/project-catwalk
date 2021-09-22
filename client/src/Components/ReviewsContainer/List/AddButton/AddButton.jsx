@@ -5,10 +5,10 @@ import Characteristics from "./Characteristics.jsx"
 import Review from "./Review.jsx"
 import Upload from "./Upload.jsx"
 import UserInfo from "./UserInfo.jsx"
-import useReviews from "../../../../contexts/ReviewsContext.jsx"
+// import useReviews from "../../../../contexts/ReviewsContext.jsx"
 
 const AddButton = (props) => {
-  const { reviews, reviewMetadata, details, productInfo } = useReviews()
+  // const { productInfo } = useReviews()
   // const [product_id, setProduct_id] = useState(productInfo.id)
   const [validated, setValidated] = useState(false)
   const [show, setShow] = useState(false)
@@ -53,15 +53,12 @@ const AddButton = (props) => {
 
   return (
     <Col>
-      {/* {productInfo && reviewMetadata && details ? (*/}
-      {reviews && reviewMetadata && details ? (
-        <Col>
-          <Button className="add" onClick={handleShow} style={{ float: "right" }}>
-            Add a review
-          </Button>
-          <AddModal />
-        </Col>
-      ) : null}
+      <Col>
+        <Button className="add" onClick={handleShow} style={{ float: "right" }}>
+          Add a review
+        </Button>
+        <AddModal />
+      </Col>
     </Col>
   )
 }

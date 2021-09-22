@@ -35,7 +35,7 @@ const List = (props) => {
       <ReviewList sortReviews={props.sortReviews} listLength={listLength} />
       <Container>
         <Row>
-          {reviews && listLength < reviews.length ? <MoreBtn /> : null}
+          {listLength < reviews.length ? <MoreBtn /> : null}
           <AddButton />
         </Row>
       </Container>
