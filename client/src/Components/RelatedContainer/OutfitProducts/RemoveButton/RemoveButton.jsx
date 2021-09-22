@@ -1,18 +1,29 @@
 import React, { useState } from "react"
-import useCart from "../../../../contexts/CartContext.jsx"
+import useOutfit from "../../../../contexts/OutfitContext.jsx"
 import RemoveIcon from "./RemoveIcon.jsx"
+import styled from "styled-components"
 
-const RemoveButton = ({ product }) => {
-  const { removeProductFromCart } = useCart()
+const ButtonWrapper = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0.5em;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.button.text};
+`
+
+const RemoveButton = ({ thisProduct }) => {
+  const { removeProductFromOutfit } = useOutfit()
 
   const handleClick = () => {
-    removeProductFromCart(product)
+    removeProductFromOutfit(thisProduct)
   }
 
   return (
-    <button className="actionBtn" onClick={handleClick}>
+    <ButtonWrapper className="actionBtn" onClick={handleClick}>
       <RemoveIcon />
-    </button>
+    </ButtonWrapper>
   )
 }
 

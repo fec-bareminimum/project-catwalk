@@ -1,54 +1,94 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
-
-const placeholderImg =
-  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081"
+import Placeholder from "react-bootstrap/Placeholder"
+import StarRating from "react-star-ratings"
+import useProducts from "../../../../contexts/ProductsContext.jsx"
+import useReviews from "../../../../contexts/ReviewsContext.jsx"
+import {
+  getAverageRating,
+  extractPriceString,
+  extractThumbnailLink,
+  extractSalesPrice,
+  formatPriceStr,
+} from "./helpers"
 
 const ProductCard = (props) => {
-  /* ******************************************************************
-  // Keep track of which thumbnail image to display
-  const [productStyleIndex, setProductStyleIndex] = useState(0);
+  const {
+    updateDisplayedProduct,
+    displayedProduct,
+    fetchProductInfo,
+    fetchProductStyles,
+    selectedStyleIndex,
+  } = useProducts()
+  const { reviews } = useReviews()
+  const [styleShownIndex, setStyleShownIndex] = useState(0)
 
-  // Fetch more complete details for this product
   useEffect(() => {
-    if (!props['styles']) {
-      // fetch product styles (/api/product/:productId/styles)
+    if (!props["id"] && fetchProductInfo) {
+      return fetchProductInfo(props["id"])
     }
-  }, []);
+  }, [props["name"]])
 
-  const extractThumbnailLink = (props) => {
-    try {
-      const imageUrl = props['styles'][productStyleIndex].photos[0].thumbnail_url;
-      return imageUrl;
-    } catch {
-      return '';
+  useEffect(() => {
+    if (!props["styles"] && fetchProductStyles) {
+      console.log("I need to fetch styles")
+      return fetchProductStyles(props["id"])
     }
+  }, [props["styles"]])
+
+  const handleClick = () => {
+    updateDisplayedProduct(props)
   }
 
-  const extractSalesPrice = (props) => {
-    try {
-      const imageUrl = props['styles'][productStyleIndex].sale_price;
-      return imageUrl;
-    } catch {
-      return '';
-    }
-  }
-  <Card.Img variant="top" src={extractThumbnailLink(props)placeholderImg} />
-  ****************************************************************** */
+  const defaultPrice = formatPriceStr(extractPriceString(props))
+  const salePrice = extractSalesPrice(displayedProduct, selectedStyleIndex)
+  const strikeThroughStyles = { textDecoration: "line-through", color: "red" }
 
-  // 140.00 (integer) => "$140" (string)
-  const formattedPriceStr =
-    "$" + Number(props["default_price"]).toFixed(0).toLocaleString()
-
+  const ActionBtn = props.ActionBtn
   return (
-    <Card style={{ width: "18rem" }} className="productCard">
-      <Card.Img variant="top" src={placeholderImg} />
-      <Card.Body>
-        <Card.Subtitle>{props.category}</Card.Subtitle>
-        <Card.Title>{props.name}</Card.Title>
-        <Card.Subtitle>{formattedPriceStr}</Card.Subtitle>
-        {/* <ProductRating /> */}
-      </Card.Body>
+    <Card
+      style={{ width: "15rem", border: "1px solid black" }}
+      className="productCard"
+    >
+      <Card.Img
+        variant="top"
+        style={{ height: "15rem" }}
+        src={extractThumbnailLink(props, styleShownIndex)}
+      />
+
+      {props.name ? (
+        <Card.Body onClick={handleClick}>
+          <Card.Subtitle>{props.category}</Card.Subtitle>
+          <Card.Subtitle>{props.name}</Card.Subtitle>
+
+          {salePrice ? (
+            <Card.Subtitle>
+              {formatPriceStr(salePrice)}
+              <span style={strikeThroughStyles}>{defaultPrice}</span>
+            </Card.Subtitle>
+          ) : (
+            <Card.Subtitle>{defaultPrice}</Card.Subtitle>
+          )}
+
+          <Card.Subtitle>
+            <StarRating
+              rating={getAverageRating(reviews)}
+              starDimension="15px"
+              starSpacing="0"
+            />
+          </Card.Subtitle>
+          <ActionBtn thisProduct={props} />
+        </Card.Body>
+      ) : (
+        <Card.Body>
+          <Placeholder as={Card.Title} animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+          <Placeholder as={Card.Text} animation="glow">
+            <Placeholder xs={7} />
+          </Placeholder>
+        </Card.Body>
+      )}
     </Card>
   )
 }

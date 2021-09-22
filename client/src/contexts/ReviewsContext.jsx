@@ -4,7 +4,7 @@ import axios from "axios"
 export const ReviewsContext = React.createContext()
 
 export const ReviewsProvider = ({ children }) => {
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState({})
   const [reviewMetadata, setReviewMetadata] = useState({})
   const [filters, setFilters] = useState([])
   const [details, setDetails] = useState({
@@ -40,13 +40,12 @@ export const ReviewsProvider = ({ children }) => {
     ],
   })
 
-  const fetchReviews = (page, count, sort, product_id, filters) => {
+  const fetchReviews = (page, count, sort, product_id) => {
     const fetchDetails = {
       page,
       count,
       sort,
       product_id,
-      filters,
     }
 
     axios({
@@ -55,19 +54,7 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        filters.length === 0
-          ? setReviews(response.data.results)
-          : setReviews(
-              response.data.results.reduce((filtered, current) => {
-                filters.forEach((option) => {
-                  if (current.rating === option) {
-                    filtered.push(current)
-                  }
-                })
-                return filtered
-              }, [])
-            )
-        setFilters(filters)
+        setReviews(response.data)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
@@ -143,7 +130,6 @@ export const ReviewsProvider = ({ children }) => {
     addReview,
     markReviewHelpful,
     reportReview,
-    setFilters,
   }
 
   return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
@@ -160,7 +146,6 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview,
-    setFilters,
   } = useContext(ReviewsContext)
 
   return {
@@ -173,7 +158,6 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview,
-    setFilters,
   }
 }
 
