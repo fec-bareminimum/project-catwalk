@@ -61,10 +61,6 @@ function ProductForm(props) {
     setOpenStyle(false)
   }
 
-  // {openStyle && selectedSize === "" ? (
-  //   <div className="warning">Please select size</div>
-  // ) : (
-
   return (
     <div>
       <div className={`${openStyle === true ? "warning" : "invisible"}`}>
