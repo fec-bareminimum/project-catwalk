@@ -29,7 +29,6 @@ const AnswersListEntry = (props) => {
   function handleHelpfulChange(e) {
     // sends a request to change the value of the helpful key to add 1 to the current helpfulness and only allow the click to happen once per visit
     context.markAnswerHelpful(props.answer.answer_id, (response) => {
-      console.log("Sucessfully Update Answer's Helpfulness")
       setAnswerHelpfulness(answerHelpfulness + 1)
       setHelpfulnessClicked(true)
     })
@@ -38,7 +37,6 @@ const AnswersListEntry = (props) => {
   function handleReport() {
     // sends a request to change the value of the report key to true and only allow the click to happen once per visit
     context.reportAnswer(props.answer.answer_id, (response) => {
-      console.log("Sucessfully Reported Answer")
       setReportedAnswerClicked(true)
     })
   }

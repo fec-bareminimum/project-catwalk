@@ -45,7 +45,6 @@ const QuestionsList = (props) => {
 
   const getData = () => {
     context.fetchQuestions(42370, 1, 50, (response) => {
-      console.log(response)
       setQuestionListData(response.data.results)
     })
   }

@@ -58,9 +58,6 @@ const AnswerModal = (props) => {
     // used for image upload
     let fileData = new FileReader()
     fileData.onloadend = handleFile
-    // fileData.onloadend = () => {
-    //   console.log(fileData.result)
-    // };
     fileData.readAsDataURL(file)
   }
 
@@ -95,7 +92,6 @@ const AnswerModal = (props) => {
         email,
         [photos],
         (response) => {
-          console.log("Your Answer has been successfully posted")
           setShow(false)
         }
       )
@@ -179,12 +175,6 @@ const AnswerModal = (props) => {
             />
           </Form.Group>
 
-          {/* <Form>
-                <Form.Group className="mb-3" controlId="AnswerForm.Images">
-                  <Form.Label>Images:</Form.Label>
-                  <Form.Control onChange={(e) => console.log(e.target)} type="file" value={photos}/>
-                </Form.Group>
-              </Form> */}
           <img src={photos} width="100" height="100" />
         </Modal.Body>
 

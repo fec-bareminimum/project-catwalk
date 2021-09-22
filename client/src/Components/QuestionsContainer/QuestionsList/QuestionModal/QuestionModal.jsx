@@ -69,7 +69,6 @@ const QuestionModal = () => {
     // if valid post the question, else send an alert regarding which sections are invalid
     if (isValidEmail && isValidNickname && isValidQuestionBody) {
       context.postQuestion(questionBody, nickname, email, 42370, (response) => {
-        console.log("Your Question has been successfully posted")
         setShow(false)
       })
     } else {

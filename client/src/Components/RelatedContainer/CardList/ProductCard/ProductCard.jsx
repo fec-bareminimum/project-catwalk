@@ -31,7 +31,6 @@ const ProductCard = (props) => {
 
   useEffect(() => {
     if (!props["styles"] && fetchProductStyles) {
-      console.log("I need to fetch styles")
       return fetchProductStyles(props["id"])
     }
   }, [props["styles"]])
