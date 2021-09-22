@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -17,7 +17,7 @@ const ReviewList = (props) => {
   const Sorter = () => (
     <Row className="sorter">
       <Col>
-        <h4>{`${reviews.results.length} reviews, sorted by`}</h4>
+        <h4>{`${reviews.length} reviews, sorted by`}</h4>
       </Col>
       <Col>
         <Form.Select
@@ -36,20 +36,16 @@ const ReviewList = (props) => {
 
   const Tiles = () => (
     <Container className="tiles">
-      {reviews.results.slice(0, props.listLength).map((review) => (
-        <Row key={review.review_id}>
-          <Col>
-            <ReviewTile {...review} />
-          </Col>
-        </Row>
+      {reviews.slice(0, props.listLength).map((review) => (
+        <ReviewTile key={review.review_id} {...review} />
       ))}
     </Container>
   )
 
   return (
     <Container className="reviewList" style={listStyle}>
-      {reviews.results ? <Sorter /> : null}
-      {reviews.results ? <Tiles /> : null}
+      {reviews ? <Sorter /> : null}
+      {reviews ? <Tiles /> : null}
     </Container>
   )
 }

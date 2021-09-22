@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
-import RatingAvgs from "./RatingAvgs.jsx"
-import RatingBars from "./RatingBars.jsx"
+import RatingBkdn from "./RatingBkdn.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-const Breakdowns = () => {
+const Breakdowns = (props) => {
   const { fetchReviewMetadata } = useReviews()
   const [product_id, setProduct_id] = useState(42366)
 
@@ -15,9 +14,7 @@ const Breakdowns = () => {
   return (
     <section className="breakdowns">
       <Container className="rating">
-        <RatingAvgs />
-        <RatingBars />
-        {/* {percent} */}
+        <RatingBkdn filterReviews={props.filterReviews} />
       </Container>
       {/* <ProductBreakdown parts /> */}
     </section>

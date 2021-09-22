@@ -101,17 +101,21 @@ const ReviewTile = (props) => {
   }
 
   return (
-    <Card className="reviewTile">
-      <Header />
-      <Card.Body>
-        <Card.Title>{props.summary}</Card.Title>
-        <Card.Text>{props.body}</Card.Text>
-        {props.recommend ? <Recommend /> : null}
-        {props.response ? <Response /> : null}
-        {props.photos.length > 0 ? <Photos /> : null}
-      </Card.Body>
-      <Footer />
-    </Card>
+    <Row>
+      <Col>
+        <Card className="reviewTile">
+          <Header />
+          <Card.Body>
+            <Card.Title>{props.summary}</Card.Title>
+            <Card.Text>{props.body}</Card.Text>
+            {props.recommend ? <Recommend /> : null}
+            {props.response ? <Response /> : null}
+            {props.photos.length > 0 ? <Photos /> : null}
+          </Card.Body>
+          <Footer />
+        </Card>
+      </Col>
+    </Row>
   )
 }
 

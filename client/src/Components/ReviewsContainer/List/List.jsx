@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import ReviewList from "./ReviewList.jsx"
 import MoreAddBtns from "./MoreAddBtns.jsx"
-import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-const List = () => {
-  const { fetchReviews } = useReviews()
-  const [sort, setSort] = useState("relevant")
-  const [product_id, setProduct_id] = useState(42366)
+const List = (props) => {
   const [listLength, setListLength] = useState(2)
-
-  useEffect(() => {
-    fetchReviews(1, 100, sort, product_id)
-  }, [sort, product_id])
-
-  const sortReviews = (sort) => {
-    setSort(sort)
-  }
 
   const showMore = () => {
     setListLength(listLength + 2)
@@ -23,7 +11,7 @@ const List = () => {
 
   return (
     <section className="list">
-      <ReviewList sortReviews={sortReviews} listLength={listLength} />
+      <ReviewList sortReviews={props.sortReviews} listLength={listLength} />
       <MoreAddBtns showMore={showMore} listLength={listLength} />
     </section>
   )
