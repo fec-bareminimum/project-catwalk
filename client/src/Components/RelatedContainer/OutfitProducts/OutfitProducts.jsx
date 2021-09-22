@@ -29,8 +29,8 @@ const AddToOutfitBtn = ({ handleClick }) => {
 }
 
 const OutfitProducts = () => {
-  const { displayedProduct } = useProduct()
-  const { outfitList, removeProductFromOutfit, addProductToOutfit } = useOutift()
+  const { displayedProduct } = useProducts()
+  const { outfitList, removeProductFromOutfit, addProductToOutfit } = useOutfit()
 
   const handleAddClick = () => {
     addProductToOutfit(displayedProduct)
