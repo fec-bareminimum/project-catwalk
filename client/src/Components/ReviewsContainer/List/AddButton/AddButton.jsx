@@ -10,18 +10,18 @@ import UserInfo from "./UserInfo.jsx"
 const AddButton = (props) => {
   // const { productInfo } = useReviews()
   // const [product_id, setProduct_id] = useState(productInfo.id)
-  const [validated, setValidated] = useState(false)
   const [show, setShow] = useState(false)
+  const [validated, setValidated] = useState(false)
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
   const handleSubmit = (e) => {
     const form = e.currentTarget
     if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
     }
-
     setValidated(true)
   }
 
@@ -39,7 +39,7 @@ const AddButton = (props) => {
         </Container>
       </Modal.Header>
       <Modal.Body>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form validated={validated} onSubmit={handleSubmit}>
           <Overall />
           <Characteristics />
           <Review />

@@ -5,7 +5,6 @@ import useReviews from "../../../../contexts/ReviewsContext.jsx"
 const Characteristics = () => {
   const { reviewMetadata, details } = useReviews()
   const [chars, setChars] = useState({})
-  const [characteristics, setCharacteristics] = useState({})
 
   return Object.keys(reviewMetadata.characteristics).map((char, i) => (
     <Form.Group key={i}>

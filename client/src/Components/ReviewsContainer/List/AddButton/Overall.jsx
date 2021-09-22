@@ -17,6 +17,7 @@ const Overall = () => {
         <Form.Label>Overall rating*</Form.Label>
         <div style={{ float: "right" }}>
           <StarRatings
+            // required
             rating={rating}
             changeRating={(stars) => setRating(stars)}
             starDimension="15px"

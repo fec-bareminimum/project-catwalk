@@ -23,11 +23,9 @@ const ProductBkdn = () => {
 
   return (
     <Container className="productBkdn">
-      {reviewMetadata.characteristics
-        ? Object.keys(reviewMetadata.characteristics).map((char, i) => (
-            <Scale key={i} char={char} {...reviewMetadata.characteristics[char]} />
-          ))
-        : null}
+      {Object.keys(reviewMetadata.characteristics).map((char, i) => (
+        <Scale key={i} char={char} {...reviewMetadata.characteristics[char]} />
+      ))}
     </Container>
   )
 }
