@@ -25,7 +25,7 @@ export const QAProvider = ({ children }) => {
       })
   }
 
-  const fetchAnswers = (questionId, callback) => {
+  const fetchAnswers = (questionId, page, count, callback) => {
     const fetchParams = {
       page,
       count,

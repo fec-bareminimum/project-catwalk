@@ -51,26 +51,24 @@ const ReviewTile = (props) => {
   )
 
   const Photos = () => (
-    <Container className="photos">
-      <Row>
-        {props.photos.map((photo) => {
-          const [show, setShow] = useState(false)
-          const handleClose = () => setShow(false)
-          const handleShow = () => setShow(true)
-          return (
-            <Col key={photo.id} xs={6} md={4}>
-              <Image src={photo.url} onClick={handleShow} thumbnail />
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton></Modal.Header>
-                <Modal.Body>
-                  <Image src={photo.url} onClick={handleShow} fluid />
-                </Modal.Body>
-              </Modal>
-            </Col>
-          )
-        })}
-      </Row>
-    </Container>
+    <Row>
+      {props.photos.map((photo) => {
+        const [show, setShow] = useState(false)
+        const handleClose = () => setShow(false)
+        const handleShow = () => setShow(true)
+        return (
+          <Col key={photo.id} xs={6} md={4}>
+            <Image src={photo.url} onClick={handleShow} thumbnail />
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Body>
+                <Image src={photo.url} onClick={handleShow} fluid />
+              </Modal.Body>
+            </Modal>
+          </Col>
+        )
+      })}
+    </Row>
   )
 
   const Footer = () => (

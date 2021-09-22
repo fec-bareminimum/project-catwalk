@@ -2,7 +2,7 @@ import React from "react"
 import { Image } from "react-bootstrap"
 import Stylesheet from "../styles.css"
 
-function ProductStyleThumb(props) {
+function RightThumbOverlay(props) {
   const clickHandler = (event) => {
     props.updateStyle(props.id)
   }
@@ -16,7 +16,7 @@ function ProductStyleThumb(props) {
           height="55"
           fill="currentColor"
           fillOpacity="1"
-          className="position-absolute ms-2 bi ml-2 bi-check-circle"
+          className="position-absolute mt-3 bi bi-check-circle"
           viewBox="0 0 16 16"
         >
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -28,4 +28,4 @@ function ProductStyleThumb(props) {
   )
 }
 
-export default ProductStyleThumb
+export default RightThumbOverlay

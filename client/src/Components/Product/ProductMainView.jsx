@@ -3,8 +3,8 @@ import ProductDescription from "./ProductDescription.jsx"
 import { ProductsContext } from "../../contexts/ProductsContext.jsx"
 import { Navbar, Container, Row, Col } from "react-bootstrap"
 import ProductCarouselList from "./ProductCarouselList.jsx"
-import ProductThumbRight from "./ProductDetails/ProductThumbRight.jsx"
-import Stylesheet from "./styles.css"
+import ProductDetails from "./ProductDetails/ProductDetails.jsx"
+import useProducts from "../../contexts/ProductsContext.jsx"
 
 // Main Product Page
 
@@ -28,7 +28,6 @@ function ProductMainView(props) {
     })
     context.fetchProductInfo(42370, (response) => {
       setInfo(response.data)
-      console.log("productInfo", response.data)
     })
   }, [])
 
@@ -74,11 +73,6 @@ function ProductMainView(props) {
   return (
     <div>
       <Container>
-        <Navbar className="navbar-fixed-top" bg="dark" variant="light">
-          <Navbar.Brand className="logo" style={{ color: "white" }} href="#home">
-            Logo
-          </Navbar.Brand>
-        </Navbar>
         <Container>
           <p className="siteHeader">
             SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE/DISCOUNT <b>OFFER</b> --{" "}
@@ -96,10 +90,11 @@ function ProductMainView(props) {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="27"
-                          height="27"
+                          height="35"
                           fill="currentColor"
                           className="center-block ml-2 bi bi-arrow-up-circle-fill align-items-center"
                           viewBox="0 0 16 16"
+                          alt="thumb"
                         >
                           <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
                         </svg>
@@ -109,10 +104,11 @@ function ProductMainView(props) {
                       <div key={i} onClick={() => setIndex(i)}>
                         <img
                           className="lol mb-1 mr-1"
-                          style={{ border: index === i ? "4px solid" : "" }}
+                          style={{ border: index === i ? "5px solid" : "" }}
                           width="77px"
                           height="77px"
                           src={item.thumbnail_url}
+                          alt="thumb"
                         />
                       </div>
                     ))}
@@ -124,10 +120,11 @@ function ProductMainView(props) {
                           xmlns="http://www.w3.org/2000/svg"
                           align="center"
                           width="27"
-                          height="27"
+                          height="35"
                           fill="currentColor"
                           className="center-block ml-2 bi bi-arrow-down-circle-fill align-items-center"
                           viewBox="0 0 16 16"
+                          alt="thumb"
                         >
                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
                         </svg>
@@ -146,7 +143,7 @@ function ProductMainView(props) {
               )}
             </Col>
             <Col md={4}>
-              <ProductThumbRight
+              <ProductDetails
                 updateStyle={updateStyleFromID}
                 selectedStyle={selectedStyle}
                 stylePhotos={stylePhotos}
@@ -157,7 +154,9 @@ function ProductMainView(props) {
             </Col>
           </Row>
         </div>
-        <ProductDescription productInfo={info} />
+        <div className="desc">
+          <ProductDescription productInfo={info} />
+        </div>
       </Container>
     </div>
   )

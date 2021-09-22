@@ -145,12 +145,12 @@ export const ProductsProvider = ({ children }) => {
     relatedProductIds,
     selectedStyleIndex,
     changeSelectedStyleIndex,
-    displayedProduct,
     updateDisplayedProduct,
     fetchProducts,
     fetchProductInfo,
     fetchProductStyles,
     fetchProductRelatedIds,
+    displayedProduct,
   }
 
   return (

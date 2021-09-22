@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import ProductMainView from "./ProductMainView.jsx"
-// import ProductCarouselItem from './ProductCarouselItem.jsx'
 import { Button, Carousel } from "react-bootstrap"
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 import ProductModal from "./ProductModal.jsx"
@@ -22,7 +21,6 @@ function ProductCarouselList(props) {
   }
 
   const toggleZoomHandler = (e) => {
-    console.log(e.target.currentSrc)
     setSelectedImage(e.target.currentSrc)
     setShowZoomed(true)
   }
@@ -37,7 +35,7 @@ function ProductCarouselList(props) {
     >
       <Button
         variant="outline-dark"
-        className="fullscreenButton mt-4 mx-4"
+        className="fullscreenButton mt-2 mx-4"
         onClick={toggleExpandedHandler}
       >
         <svg

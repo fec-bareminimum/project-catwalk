@@ -9,13 +9,17 @@ import useClickLogger from "../../hooks/useClickLogger.jsx"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 const ReviewsContainer = () => {
-  const { fetchReviews, filters, setFilters } = useReviews()
+  const { fetchReviews, fetchReviewMetadata, filters, setFilters } = useReviews()
   const [sort, setSort] = useState("relevant")
   const [product_id, setProduct_id] = useState(42366)
 
   useEffect(() => {
     fetchReviews(1, 100, sort, product_id, filters)
   }, [sort, product_id, filters])
+
+  useEffect(() => {
+    fetchReviewMetadata(product_id)
+  }, [product_id])
 
   const sortReviews = (option) => {
     setSort(option)

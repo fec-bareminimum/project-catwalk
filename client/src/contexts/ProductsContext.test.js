@@ -12,7 +12,6 @@ describe("ProductsContext", () => {
         } catch {
           console.error(`expected ${key} to NOT be undefined`)
         }
-
         try {
           const matchesConstructor =
             productExports[key] instanceof targetInstance ||

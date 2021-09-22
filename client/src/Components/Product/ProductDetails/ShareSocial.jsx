@@ -7,7 +7,7 @@ import {
 import { FacebookIcon, TwitterIcon, PinterestIcon } from "react-share"
 import Stylesheet from "../styles.css"
 
-function Share() {
+function ShareSocial() {
   return (
     <>
       <FacebookShareButton
@@ -15,29 +15,28 @@ function Share() {
         quote={"フェイスブックはタイトルが付けれるようです"}
         hashtag={"#hashtag"}
         description={"aiueo"}
-        className="Demo__some-network__share-button"
+        className="socialImages"
       >
         <FacebookIcon size={32} round />
-        Facebook
       </FacebookShareButton>
       <TwitterShareButton
         title={"test"}
         url={"https://peing.net/ja/"}
         hashtags={["hashtag1", "hashtag2"]}
+        className="socialImages"
       >
         <TwitterIcon size={32} round />
-        Twitter
       </TwitterShareButton>
       <PinterestShareButton
         title={"test"}
         url={"https://peing.net/ja/"}
         hashtags={["hashtag1", "hashtag2"]}
+        className="socialImages"
       >
         <PinterestIcon size={32} round />
-        Pinterest
       </PinterestShareButton>
     </>
   )
 }
 
-export default Share
+export default ShareSocial
