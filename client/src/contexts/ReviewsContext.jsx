@@ -4,7 +4,7 @@ import axios from "axios"
 export const ReviewsContext = React.createContext()
 
 export const ReviewsProvider = ({ children }) => {
-  const [reviews, setReviews] = useState({})
+  const [reviews, setReviews] = useState([])
   const [reviewMetadata, setReviewMetadata] = useState({})
   const [filters, setFilters] = useState([])
   const [details, setDetails] = useState({
@@ -54,7 +54,7 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        setReviews(response.data)
+        setReviews(response.data.results)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")

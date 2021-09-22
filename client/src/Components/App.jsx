@@ -52,7 +52,7 @@ const App = () => {
                       <ProductMainView />
                       <RelatedContainer />
                       <QuestionsContainer />
-                    <ReviewsContainer />
+                      <ReviewsContainer />
                     </CartProvider>
                   </InteractionsProvider>
                 </QAProvider>
