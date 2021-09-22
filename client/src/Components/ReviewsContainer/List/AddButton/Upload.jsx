@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import Form from "react-bootstrap/Form"
-import Image from "react-bootstrap/Image"
+import { Form, Image } from "react-bootstrap"
 
 const Upload = () => {
   const [photos, setPhotos] = useState([])

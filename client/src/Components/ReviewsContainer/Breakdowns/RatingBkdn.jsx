@@ -1,10 +1,5 @@
 import React from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Alert from "react-bootstrap/Alert"
-import Button from "react-bootstrap/Button"
-import ProgressBar from "react-bootstrap/ProgressBar"
+import { Container, Row, Col, Alert, Button, ProgressBar } from "react-bootstrap"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 

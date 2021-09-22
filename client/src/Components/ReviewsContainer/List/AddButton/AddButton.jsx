@@ -1,10 +1,5 @@
 import React, { useState } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
-import Modal from "react-bootstrap/Modal"
-import Form from "react-bootstrap/Form"
+import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap"
 import Overall from "./Overall.jsx"
 import Characteristics from "./Characteristics.jsx"
 import Review from "./Review.jsx"
@@ -20,7 +15,15 @@ const AddButton = (props) => {
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-  const handleSubmit = () => console.log("submit")
+  const handleSubmit = (e) => {
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    setValidated(true)
+  }
 
   const AddModal = () => (
     <Modal show={show} onHide={handleClose}>
@@ -36,7 +39,7 @@ const AddButton = (props) => {
         </Container>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Overall />
           <Characteristics />
           <Review />
