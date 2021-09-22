@@ -22,17 +22,12 @@ export const CartProvider = ({ children }) => {
       .get("/cart", { user_token: 12345 })
       .then((result) => {
         setCartProducts(result.data)
-        console.log(result)
         callback(result.data)
       })
       .catch((err) => {
         console.log("Server failed to fetch cart products")
       })
   }
-
-  useEffect(() => {
-    fetchCartProducts()
-  }, [])
 
   const value = {
     cartProducts,
