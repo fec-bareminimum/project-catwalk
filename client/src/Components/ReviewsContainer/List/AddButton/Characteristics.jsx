@@ -1,10 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Container, Row, Col, Form } from "react-bootstrap"
 import useReviews from "../../../../contexts/ReviewsContext.jsx"
 
-const Characteristics = () => {
+const Characteristics = (props) => {
   const { reviewMetadata, details } = useReviews()
   const [chars, setChars] = useState({})
+
+  useEffect(() => {
+    props.submitData({ characteristics: chars })
+  }, [chars])
 
   return Object.keys(reviewMetadata.characteristics).map((char, i) => (
     <Form.Group key={i}>
@@ -36,7 +40,6 @@ const Characteristics = () => {
                     ...chars,
                     [reviewMetadata.characteristics[char].id]: rating,
                   })
-                  // something to set
                 }}
                 style={{ float: "right" }}
               />

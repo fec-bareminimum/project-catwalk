@@ -92,35 +92,11 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
-  const addReview = (
-    product_id,
-    rating,
-    summary,
-    body,
-    recommend,
-    name,
-    email,
-    photos,
-    characteristics,
-    callback
-  ) => {
-    const addDetails = {
-      product_id,
-      rating,
-      summary,
-      body,
-      recommend,
-      name,
-      email,
-      photos,
-      characteristics,
-      callback,
-    }
-
+  const addReview = (addDetails) => {
     axios
       .post("/reviews", addDetails)
       .then((response) => {
-        callback(response)
+        console.log("Review submitted")
       })
       .catch((err) => {
         console.log("Server failed to post review")

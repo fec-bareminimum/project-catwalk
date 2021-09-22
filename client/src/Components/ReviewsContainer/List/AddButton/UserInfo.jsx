@@ -1,9 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Form from "react-bootstrap/Form"
 
-const UserInfo = () => {
+const UserInfo = (props) => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+
+  useEffect(() => {
+    props.submitData({ name: name })
+    props.submitData({ email: email })
+  }, [name, email])
+
   return (
     <div>
       <Form.Group>

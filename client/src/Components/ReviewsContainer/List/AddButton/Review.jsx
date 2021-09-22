@@ -1,9 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Form from "react-bootstrap/Form"
 
-const Review = () => {
+const Review = (props) => {
   const [summary, setSummary] = useState("")
   const [body, setBody] = useState("")
+
+  useEffect(() => {
+    props.submitData({ summary: summary })
+    props.submitData({ body: body })
+  }, [summary, body])
+
   return (
     <Form.Group>
       <Form.Label>Review summary</Form.Label>

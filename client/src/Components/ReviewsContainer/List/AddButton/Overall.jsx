@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Form from "react-bootstrap/Form"
 import StarRatings from "react-star-ratings"
 
-const Overall = () => {
+const Overall = (props) => {
   const [rating, setRating] = useState(0)
+  const [recommend, setRecommend] = useState(false)
   const [starDetails, setStarDetails] = useState({
     5: "Great",
     4: "Good",
@@ -11,6 +12,12 @@ const Overall = () => {
     2: "Fair",
     1: "Poor",
   })
+
+  useEffect(() => {
+    props.submitData({ rating: rating })
+    props.submitData({ recommend: recommend })
+  }, [rating, recommend])
+
   return (
     <div>
       <Form.Group>
@@ -36,6 +43,7 @@ const Overall = () => {
             type="radio"
             name="rec"
             label={option}
+            onChange={() => setRecommend(true)}
             style={{ float: "right" }}
           />
         ))}

@@ -1,8 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Form, Image } from "react-bootstrap"
 
-const Upload = () => {
+const Upload = (props) => {
   const [photos, setPhotos] = useState([])
+
+  useEffect(() => {
+    props.submitData({ photos: photos })
+  }, [photos])
+
   return (
     <Form.Group>
       <Form.Label>Upload your photos</Form.Label>

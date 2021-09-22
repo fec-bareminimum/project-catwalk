@@ -5,24 +5,43 @@ import Characteristics from "./Characteristics.jsx"
 import Review from "./Review.jsx"
 import Upload from "./Upload.jsx"
 import UserInfo from "./UserInfo.jsx"
-// import useReviews from "../../../../contexts/ReviewsContext.jsx"
+import useReviews from "../../../../contexts/ReviewsContext.jsx"
 
 const AddButton = (props) => {
-  // const { productInfo } = useReviews()
+  const { productInfo, addReview } = useReviews()
   // const [product_id, setProduct_id] = useState(productInfo.id)
   const [show, setShow] = useState(false)
-  const [validated, setValidated] = useState(false)
+  const [reviewData, setReviewData] = useState({ product_id: 42366 })
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+  const submitData = (data) => {
+    setReviewData(Object.assign(reviewData, data))
+  }
 
-  const handleSubmit = (e) => {
-    const form = e.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
+  const AddForm = () => {
+    const [validated, setValidated] = useState(false)
+
+    const handleSubmit = (e) => {
+      const form = e.currentTarget
+      if (form.checkValidity() === false) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      setValidated(true)
+      addReview(reviewData)
     }
-    setValidated(true)
+
+    return (
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Overall submitData={submitData} />
+        <Characteristics submitData={submitData} />
+        <Review submitData={submitData} />
+        <Upload submitData={submitData} />
+        <UserInfo submitData={submitData} />
+        <Button type="submit">Submit</Button>
+      </Form>
+    )
   }
 
   const AddModal = () => (
@@ -39,14 +58,7 @@ const AddButton = (props) => {
         </Container>
       </Modal.Header>
       <Modal.Body>
-        <Form validated={validated} onSubmit={handleSubmit}>
-          <Overall />
-          <Characteristics />
-          <Review />
-          <Upload />
-          <UserInfo />
-          <Button type="submit">Submit</Button>
-        </Form>
+        <AddForm />
       </Modal.Body>
     </Modal>
   )
