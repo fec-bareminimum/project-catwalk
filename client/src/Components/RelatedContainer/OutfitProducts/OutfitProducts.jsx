@@ -4,13 +4,27 @@ import useCart from "../../../contexts/CartContext.jsx"
 import useProducts from "../../../contexts/ProductsContext.jsx"
 import PlusIcon from "./PlusIcon.jsx"
 import RemoveButton from "./RemoveButton/RemoveButton.jsx"
+import styled from "styled-components"
+
+const Section = styled.section`
+  margin-bottom: 2em;
+`
+
+const Button = styled.button`
+  width: 10em;
+  height: 10em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
 
 const AddToOutfitBtn = ({ handleClick }) => {
   return (
-    <button className="addToCard" onClick={handleClick}>
+    <Button className="addToCard" onClick={handleClick}>
       <PlusIcon />
       Add To Outfit
-    </button>
+    </Button>
   )
 }
 
@@ -19,23 +33,18 @@ const OutfitProducts = () => {
   const { cartProducts, addProductToCart } = useCart()
 
   const handleAddClick = () => {
-    const alreadyInCart = cartProducts.some(
-      (productObj) => productObj["id"] === displayedProduct["id"]
-    )
-    if (alreadyInCart === false) {
-      addProductToCart(displayedProduct)
-    }
+    addProductToCart(displayedProduct)
   }
 
   return (
-    <section className="outfitProductsContainer">
-      <AddToOutfitBtn handleClick={handleAddClick} />
+    <Section className="outfitProductsContainer">
       <CardList
+        FirstCard={<AddToOutfitBtn handleClick={handleAddClick} />}
         products={cartProducts}
         listTitle={"YOUR OUTFIT"}
         ActionBtn={RemoveButton}
       />
-    </section>
+    </Section>
   )
 }
 

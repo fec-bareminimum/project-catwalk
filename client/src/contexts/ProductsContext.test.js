@@ -3,7 +3,7 @@ import { render, screen } from "../test-utils.jsx"
 import useProducts, { ProductsContext } from "./ProductsContext.jsx"
 
 describe("ProductsContext", () => {
-  test("passes correct values to children", () => {
+  test("passes correct values to children", (done) => {
     const MockChild = () => {
       const productExports = useProducts()
       expectedExports.forEach(({ key, targetInstance }) => {
@@ -14,7 +14,10 @@ describe("ProductsContext", () => {
         }
 
         try {
-          expect(productExports[key] instanceof targetInstance).toBeTruthy()
+          const matchesConstructor =
+            productExports[key] instanceof targetInstance ||
+            productExports[key].constructor === targetInstance
+          expect(matchesConstructor).toBeTruthy()
         } catch {
           console.error(`expected ${key} to be instance of ${targetInstance}`)
         }
@@ -23,7 +26,7 @@ describe("ProductsContext", () => {
       return <p>test</p>
     }
 
-    render(<MockChild />)
+    return render(<MockChild />)
   })
 })
 
@@ -33,7 +36,7 @@ const expectedExports = [
     targetInstance: Array,
   },
   {
-    key: "relatedProducts",
+    key: "relatedProductIds",
     targetInstance: Array,
   },
   {

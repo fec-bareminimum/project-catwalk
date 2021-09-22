@@ -1,14 +1,15 @@
 import React from "react"
 import useClickLogger from "../../hooks/useClickLogger.jsx"
+import { Container } from "react-bootstrap"
 import RelatedProducts from "./RelatedProducts/RelatedProducts.jsx"
 import OutfitProducts from "./OutfitProducts/OutfitProducts.jsx"
 
 const RelatedContainer = () => {
   return (
-    <div className="relatedContainer">
+    <Container className="relatedContainer">
       <RelatedProducts />
       <OutfitProducts />{" "}
-    </div>
+    </Container>
   )
 }
 

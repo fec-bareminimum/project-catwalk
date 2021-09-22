@@ -1,20 +1,31 @@
 import React from "react"
 import ProductCard from "./ProductCard/ProductCard.jsx"
 import Carousel from "react-multi-carousel"
+import { Card, Container } from "react-bootstrap"
+import styled from "styled-components"
 import "react-multi-carousel/lib/styles.css"
+
+const Header = styled.h5`
+  color: gray;
+`
+const ListContainer = styled.div``
 
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
+    breakpoint: { max: 4000, min: 2000 },
     items: 5,
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 2000, min: 1150 },
+    items: 4,
+  },
+  medium: {
+    breakpoint: { max: 1150, min: 980 },
     items: 3,
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
+    breakpoint: { max: 980, min: 464 },
     items: 2,
   },
   mobile: {
@@ -23,25 +34,44 @@ const responsive = {
   },
 }
 
-const CardList = ({ products, listTitle, ActionBtn }) => {
+const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
   const validProductList = products && products.length > 0
 
-  return (
-    <div className="cardList">
-      <h3>{listTitle}</h3>
+  const productsToRender =
+    products.length > 0 ? products : [{ id: 123 }, { id: 123 }, { id: 123 }]
 
-      {validProductList && (
-        <Carousel responsive={responsive}>
-          {products.map((productObj) => (
-            <ProductCard
-              {...productObj}
-              key={productObj["id"]}
-              ActionBtn={ActionBtn}
-            />
-          ))}
-        </Carousel>
-      )}
-    </div>
+  return (
+    <Container className="cardList p-4">
+      <Header>{listTitle}</Header>
+
+      <Carousel
+        responsive={responsive}
+        itemClass="carousel-item-padding-40-px"
+        showDots={false}
+      >
+        {FirstCard && (
+          <Card
+            style={{
+              height: "20rem",
+              width: "15rem",
+              margin: "0.5em",
+              background: "transparent",
+              border: "none",
+            }}
+          >
+            <Card.Body>{FirstCard}</Card.Body>
+          </Card>
+        )}
+
+        {productsToRender.map((productObj) => (
+          <ProductCard
+            {...productObj}
+            key={productObj["id"]}
+            ActionBtn={ActionBtn}
+          />
+        ))}
+      </Carousel>
+    </Container>
   )
 }
 
