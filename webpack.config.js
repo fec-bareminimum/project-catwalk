@@ -13,6 +13,27 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, "client", "public", "index.html"),
       filename: "./index.html",
+      title: "Project Catwalk",
+      meta: {
+        viewport:
+          "width=device-width, initial-scale=1,viewport-fit=cover, shrink-to-fit=no",
+        "theme-color": "#42b029",
+        "apple-mobile-web-app-status-bar-style": "#42b029",
+        "og:title": "Project-catwalk",
+        "og:description": "MPV online-retail frontend client",
+        "content-type": {
+          "http-equiv": "content-type",
+          content: "text/html; charset=UTF-8",
+        },
+      },
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
   ],
   module: {

@@ -2,6 +2,8 @@ const express = require("express")
 const path = require("path")
 const axios = require("axios")
 const morgan = require("morgan")
+const compression = require("compression")
+const critical = require("critical")
 
 const config = require("../config")
 
@@ -9,9 +11,10 @@ const app = express()
 const port = 3000
 
 // Apply middleware
-app.use(morgan("tiny"))
+app.use(compression())
 app.use(express.static(path.join(__dirname, "../client/build")))
 app.use(express.json())
+app.use(morgan("tiny"))
 
 // Configure Proxy
 app.get("/*", (req, res) => {
