@@ -43,7 +43,9 @@
   "dependencies": {
     "@testing-library/react": "^12.1.0",
     "axios": "^0.21.4",
+    "boolbase": "^1.0.0",
     "bootstrap": "^5.1.0",
+    "domelementtype": "^2.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",

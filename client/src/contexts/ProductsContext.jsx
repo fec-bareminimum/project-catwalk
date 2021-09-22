@@ -123,11 +123,10 @@ export const ProductsProvider = ({ children }) => {
 
   const value = {
     productList,
-    displayedProduct,
+    // displayedProduct,
     relatedProducts,
     selectedStyleIndex,
     changeSelectedStyleIndex,
-    displayedProduct,
     updateDisplayedProduct,
     fetchProducts,
     fetchProductInfo,
