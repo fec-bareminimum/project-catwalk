@@ -5,26 +5,32 @@ import useReviews from "../../../contexts/ReviewsContext.jsx"
 
 const Breakdowns = (props) => {
   const { reviews, reviewMetadata } = useReviews()
-  const [average, setAverage] = useState(0)
+  const [avgRating, setAvgRating] = useState(0)
+  const [reviewCt, setreviewCt] = useState(0)
 
   useEffect(() => {
     if (reviews.length > 0) {
-      let total = 0
-      let avg = 0
+      let [total, ct, avg] = [0, 0, 0]
       for (let rating in reviewMetadata.ratings) {
         total += rating * reviewMetadata.ratings[rating]
+        ct += 1 * reviewMetadata.ratings[rating]
       }
       if (total > 0) {
-        avg = Math.round((total / reviews.length) * 10) / 10
+        avg = Math.round((total / ct) * 10) / 10
       }
-      setAverage(avg)
+      setAvgRating(avg)
+      setreviewCt(ct)
     }
-  }, [reviews, reviewMetadata])
+  }, [reviewMetadata])
 
   return (
     <section className="breakdowns">
-      {average > 0 ? (
-        <RatingBkdn filterReviews={props.filterReviews} average={average} />
+      {reviewCt > 0 ? (
+        <RatingBkdn
+          filterReviews={props.filterReviews}
+          average={avgRating}
+          count={reviewCt}
+        />
       ) : null}
       {reviewMetadata.characteristics ? <ProductBkdn /> : null}
     </section>
