@@ -33,8 +33,10 @@ export const useTheme = () => {
 
   useEffect(() => {
     const localTheme = getFromStorage("theme")
-    const newTheme = localTheme ? localTheme : themes.data.light
-    setTheme(newTheme)
+    if (localTheme && localTheme.data) {
+      const newTheme = themes.data.light
+      setTheme(newTheme)
+    }
     setThemeLoaded(true)
   }, [])
 

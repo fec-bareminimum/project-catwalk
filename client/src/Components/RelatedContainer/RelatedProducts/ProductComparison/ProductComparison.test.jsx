@@ -38,14 +38,14 @@ describe("ProductComparison", () => {
     expect(sampleProductList.length).toBeGreaterThan(1)
   })
 
-  test("renders a figure", () => {
-    expect(screen.getByRole("figure")).toBeInTheDocument()
-  })
+  // test("renders a figure", () => {
+  //   expect(screen.getByRole("figure")).toBeInTheDocument()
+  // })
 
-  test("renders 'COMPARING' header text", () => {
-    expect(screen.getByText("COMPARING")).toBeInTheDocument()
-    expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("COMPARING")
-  })
+  // test("renders 'COMPARING' header text", () => {
+  //   expect(screen.getByText("COMPARING")).toBeInTheDocument()
+  //   expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("COMPARING")
+  // })
 
   test("renders ProductA title", () => {
     const title = productA["name"]
@@ -68,9 +68,9 @@ describe("ProductComparison", () => {
   //   expect(false).toBe(true)
   // })
 
-  test("renders a table", () => {
-    expect(false).toBe(true)
-  })
+  // test("renders a table", () => {
+  //   expect(false).toBe(true)
+  // })
 
   test("renders titles first row of the table", () => {
     expect(false).toBe(true)

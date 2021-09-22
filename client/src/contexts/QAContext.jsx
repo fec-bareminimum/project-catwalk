@@ -7,15 +7,15 @@ export const QAProvider = ({ children }) => {
   const [questionsList, setQuestionsList] = useState([])
   const [answersList, setAnswersList] = useState([])
 
-  const fetchQuestions = (productId, page, count, callback) => {
+  const fetchQuestions = (product_id, page, count, callback) => {
     const fetchParams = {
-      productId,
+      product_id,
       page,
       count,
     }
 
     axios
-      .get("/qa/questions", fetchParams)
+      .get("/qa/questions", { params: fetchParams })
       .then((response) => {
         setQuestionsList(response)
         callback(response)
@@ -25,14 +25,14 @@ export const QAProvider = ({ children }) => {
       })
   }
 
-  const fetchAnswers = (questionId, callback) => {
+  const fetchAnswers = (questionId, page, count, callback) => {
     const fetchParams = {
       page,
       count,
     }
 
     axios
-      .get(`/qa/questions/${questionID}/answers`, fetchParams)
+      .get(`/qa/questions/${questionId}/answers`, { params: fetchParams })
       .then((response) => {
         setAnswersList(response)
         callback(response)
@@ -42,12 +42,12 @@ export const QAProvider = ({ children }) => {
       })
   }
 
-  const postQuestion = (body, name, email, productId, callback) => {
+  const postQuestion = (body, name, email, product_id, callback) => {
     const addParams = {
       body,
       name,
       email,
-      productId,
+      product_id,
     }
 
     axios
@@ -78,13 +78,13 @@ export const QAProvider = ({ children }) => {
       })
   }
 
-  const markQuestionHelpful = (questionId, callback) => {
+  const markQuestionHelpful = (question_id, callback) => {
     const markHelpfulParams = {
-      questionId,
+      question_id: question_id,
     }
 
     axios
-      .put(`/qa/questions/${questionId}/helpful`, markHelpfulParams)
+      .put(`/qa/questions/${question_id}/helpful`, { params: markHelpfulParams })
       .then((response) => {
         callback()
       })
@@ -108,13 +108,13 @@ export const QAProvider = ({ children }) => {
       })
   }
 
-  const markAnswerHelpful = (answerId, callback) => {
+  const markAnswerHelpful = (answer_id, callback) => {
     const markAnswerParams = {
-      answerId,
+      answer_id,
     }
 
     axios
-      .put(`/qa/answers/${answerId}/helpful`, markAnswerParams)
+      .put(`/qa/answers/${answer_id}/helpful`, markAnswerParams)
       .then((response) => {
         callback()
       })
@@ -123,13 +123,13 @@ export const QAProvider = ({ children }) => {
       })
   }
 
-  const reportAnswer = (answerId, callback) => {
+  const reportAnswer = (answer_id, callback) => {
     const reportAnswerParams = {
-      answerId,
+      answer_id,
     }
 
     axios
-      .put(`/qa/answers/${answerId}/report`, reportAnswerParams)
+      .put(`/qa/answers/${answer_id}/report`, reportAnswerParams)
       .then((response) => {
         callback()
       })
@@ -139,6 +139,8 @@ export const QAProvider = ({ children }) => {
   }
 
   const value = {
+    questionsList,
+    answersList,
     fetchQuestions,
     fetchAnswers,
     postQuestion,
@@ -154,6 +156,8 @@ export const QAProvider = ({ children }) => {
 
 const useQA = () => {
   const {
+    questionsList,
+    answersList,
     fetchQuestions,
     fetchAnswers,
     postQuestion,
@@ -165,6 +169,8 @@ const useQA = () => {
   } = useContext(QAContext)
 
   return {
+    questionsList,
+    answersList,
     fetchQuestions,
     fetchAnswers,
     postQuestion,
