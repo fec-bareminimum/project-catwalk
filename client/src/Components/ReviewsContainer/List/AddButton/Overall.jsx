@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import Form from "react-bootstrap/Form"
+import React, { useState, useEffect, useRef } from "react"
+import { Form, Overlay, Tooltip } from "react-bootstrap"
 import StarRatings from "react-star-ratings"
 
 const Overall = (props) => {
@@ -18,13 +18,44 @@ const Overall = (props) => {
     props.submitData({ recommend: recommend })
   }, [rating, recommend])
 
+  const Recommend = () => (
+    <Form.Group>
+      <Form.Label>Do you recommend this product?*</Form.Label>
+      {["No", "Yes"].map((option, i) => {
+        const [show, setShow] = useState(false)
+        const target = useRef(null)
+        return (
+          <div key={i}>
+            <Form.Check
+              required
+              inline
+              type="radio"
+              name="rec"
+              label={option}
+              ref={target}
+              onChange={() => {
+                i === 0 ? setRecommend(false) : setRecommend(true)
+                if (rating === 0) {
+                  setShow(!show)
+                }
+              }}
+              style={{ float: "right" }}
+            />
+            <Overlay target={target.current} show={show} placement="top">
+              {(props) => <Tooltip {...props}>Please select a rating first</Tooltip>}
+            </Overlay>
+          </div>
+        )
+      })}
+    </Form.Group>
+  )
+
   return (
-    <div>
+    <>
       <Form.Group>
         <Form.Label>Overall rating*</Form.Label>
         <div style={{ float: "right" }}>
           <StarRatings
-            // required
             rating={rating}
             changeRating={(stars) => setRating(stars)}
             starDimension="15px"
@@ -33,22 +64,8 @@ const Overall = (props) => {
           {rating > 0 ? <Form.Text>{starDetails[rating]}</Form.Text> : null}
         </div>
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Do you recommend this product?*</Form.Label>
-        {["No", "Yes"].map((option, i) => (
-          <Form.Check
-            required
-            inline
-            key={option}
-            type="radio"
-            name="rec"
-            label={option}
-            onChange={() => setRecommend(true)}
-            style={{ float: "right" }}
-          />
-        ))}
-      </Form.Group>
-    </div>
+      <Recommend />
+    </>
   )
 }
 

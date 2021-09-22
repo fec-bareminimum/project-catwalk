@@ -10,11 +10,10 @@ import useReviews from "../../../../contexts/ReviewsContext.jsx"
 const AddButton = (props) => {
   const { productInfo, addReview } = useReviews()
   // const [product_id, setProduct_id] = useState(productInfo.id)
-  const [show, setShow] = useState(false)
   const [reviewData, setReviewData] = useState({ product_id: 42366 })
-
-  const handleClose = () => setShow(false)
+  const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
+
   const submitData = (data) => {
     setReviewData(Object.assign(reviewData, data))
   }
@@ -44,24 +43,28 @@ const AddButton = (props) => {
     )
   }
 
-  const AddModal = () => (
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Container>
-          <Row>
-            <h3>Write Your Review</h3>
-          </Row>
-          <Row>
-            {/* <h5>{`About the ${productInfo.name}`}</h5> */}
-            <h5>About the Camo Onesie</h5>
-          </Row>
-        </Container>
-      </Modal.Header>
-      <Modal.Body>
-        <AddForm />
-      </Modal.Body>
-    </Modal>
-  )
+  const AddModal = () => {
+    const handleClose = () => setShow(false)
+
+    return (
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Container>
+            <Row>
+              <h3>Write Your Review</h3>
+            </Row>
+            <Row>
+              {/* <h5>{`About the ${productInfo.name}`}</h5> */}
+              <h5>About the Camo Onesie</h5>
+            </Row>
+          </Container>
+        </Modal.Header>
+        <Modal.Body>
+          <AddForm />
+        </Modal.Body>
+      </Modal>
+    )
+  }
 
   return (
     <Col>
