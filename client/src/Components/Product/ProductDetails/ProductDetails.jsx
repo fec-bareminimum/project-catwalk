@@ -14,6 +14,7 @@ import Star from "./ProductStar.jsx"
 import ShareSocial from "./ShareSocial.jsx"
 import uniqid from "uniqid"
 import Stylesheet from "../styles.css"
+// import RatingsAvgs from "../../ReviewsContainer/Breakdowns/RatingsAvgs"
 
 function ProductDetails(props) {
   return (
@@ -22,6 +23,7 @@ function ProductDetails(props) {
         <Col>
           <div className="sameline">
             <Star />
+            {/* <RatingAvgs  */}
             <span className="reviews" href="#reviews">
               Read All Reviews
             </span>

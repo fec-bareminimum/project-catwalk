@@ -10,6 +10,8 @@ function ProductForm(props) {
   const [selectedSize, setSelectedSize] = useState("")
   const [selectedSKU, setSelectedSKU] = useState(null)
   const [selectedQuantity, setSelectedQuantity] = useState(1)
+  const [openStyle, setOpenStyle] = useState(false)
+  const [counter, setCounter] = useState(0)
   const [out, setOut] = useState("OUT OF STOCK")
 
   const sizeChangeHandler = (e) => {
@@ -22,6 +24,7 @@ function ProductForm(props) {
       })
       .filter((item) => item.data.size === e.target.value)
     setSelectedSKU(selectedSkuArray[0])
+    setOpenStyle(false)
   }
 
   const quantityChangeHandler = (e) => {
@@ -40,20 +43,33 @@ function ProductForm(props) {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    alert(`Successfully added ${selectedQuantity} products to cart`)
-    for (var i = 0; i < selectedQuantity; i++) {
-      cartCtx.addProductToCart(selectedSKU.sku)
+    if (selectedSize === "" && openStyle === false) {
+      setOpenStyle(true)
     }
-    clearInput()
+    if (openStyle === false && selectedSize !== "") {
+      alert(`Successfully added ${selectedQuantity} products to cart`)
+      for (var i = 0; i < selectedQuantity; i++) {
+        cartCtx.addProductToCart(selectedSKU.sku)
+      }
+      clearInput()
+    }
   }
 
   const clearInput = () => {
-    setSelectedQuantity(1)
+    setSelectedQuantity("")
     setSelectedSize("")
+    setOpenStyle(false)
   }
+
+  // {openStyle && selectedSize === "" ? (
+  //   <div className="warning">Please select size</div>
+  // ) : (
 
   return (
     <div>
+      <div className={`${openStyle === true ? "warning" : "invisible"}`}>
+        Please select size
+      </div>
       <form onSubmit={submitHandler}>
         <Row>
           <Col>
@@ -62,7 +78,7 @@ function ProductForm(props) {
               variant="outline-dark"
               id="dropdown-item-button"
               title="Select Size"
-              className="w-30 p-0.5 mt-5"
+              className="w-30 p-0.5 mt-1"
               value={selectedSize}
               onChange={sizeChangeHandler}
             >
@@ -79,7 +95,7 @@ function ProductForm(props) {
             {selectedSize === "" ? (
               <Form.Select
                 variant="outline-dark"
-                className="w-30 p-0.5 mt-5 d-none"
+                className="w-30 p-0.5 mt-1 d-none"
                 title={selectedQuantity}
               />
             ) : (
@@ -88,7 +104,7 @@ function ProductForm(props) {
                 variant="outline-dark"
                 id="dropdown-item-button"
                 title="Select Quantity"
-                className="w-30 p-0.5 mt-5"
+                className="w-30 p-0.5 mt-1"
                 value={selectedQuantity}
                 onChange={quantityChangeHandler}
               >

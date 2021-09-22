@@ -40,8 +40,8 @@
 }
 
 .thumbnail {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   width: 55px;
   height: 55px;
   display: block;
@@ -71,8 +71,7 @@
 }
 
 .descriptionList {
-  border-left: 3px solid grey;
-  margin-left: 20px;
+  border-left: 1px solid grey;
   margin-bottom: 12px;
 }
 
@@ -245,4 +244,17 @@
 
 .desc {
   margin-left: 70px;
+}
+
+.warning {
+  margin-top: 45px;
+  font-weight: bold;
+  font-size: larger;
+  font-style: italic;
+  color: red;
+}
+
+.invisible {
+  margin-top: 45px;
+  opacity: 0;
 }
