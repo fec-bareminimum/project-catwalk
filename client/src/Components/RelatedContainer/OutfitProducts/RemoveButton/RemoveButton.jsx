@@ -10,6 +10,7 @@ const ButtonWrapper = styled.button`
   padding: 0;
   border-radius: 50%;
   background: transparent;
+  color: ${({ theme }) => theme.colors.button.text};
 `
 
 const RemoveButton = ({ thisProduct }) => {

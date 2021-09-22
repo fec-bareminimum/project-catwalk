@@ -9,13 +9,18 @@ import styled from "styled-components"
 const Section = styled.section`
   margin-bottom: 2em;
 `
-
 const Button = styled.button`
-  width: 10em;
-  height: 10em;
+  width: 100%;
+  height: 90%;
+  color: black;
+  font-size: 1.5em;
+  margin: auto;
+  background: #d7d7d7;
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 `
 
