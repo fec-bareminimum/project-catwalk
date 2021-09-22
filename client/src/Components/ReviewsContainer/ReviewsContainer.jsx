@@ -4,7 +4,6 @@ import Breakdowns from "./Breakdowns/Breakdowns.jsx"
 import List from "./List/List.jsx"
 import useReviews from "../../contexts/ReviewsContext.jsx"
 import useClickLogger from "../../hooks/useClickLogger.jsx"
-import "bootstrap/dist/css/bootstrap.min.css"
 
 const ReviewsContainer = () => {
   const { fetchReviews, fetchReviewMetadata, filters, setFilters } = useReviews()

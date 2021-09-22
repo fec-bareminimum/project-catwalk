@@ -40,7 +40,6 @@ const QuestionsListEntry = (props) => {
     // handles changing the helpfulness each time the page is visited and 'helpful' button is clicked
     if (!helpfulnessClicked) {
       context.markQuestionHelpful(props.question.question_id, (response) => {
-        console.log("Successfully Updated Helpfulness")
         setQuestionHelpfulness(questionHelpfulness + 1)
         setHelpfulnessClicked(true)
       })

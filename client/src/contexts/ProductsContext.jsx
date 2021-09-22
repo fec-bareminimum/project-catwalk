@@ -113,18 +113,14 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const updateDisplayedProduct = (newProduct) => {
-    console.log(newProduct ? newProduct["id"] : newProduct)
+    // console.log(newProduct ? newProduct["id"] : newProduct)
     // if (newProduct && newProduct["id"] !== displayedProduct["id"]) {
     //   // Find the index in productList
     //   const existingIndex = productList.map((e) => e.id).indexOf(newProduct["id"])
-
     //   // Reference an object in the productList array
     //   _setDisplayedProduct(productList[existingIndex] || newProduct)
-
     //   fetchProductRelatedIds(newProduct["id"])
-
     //   console.log('this is repeating a lot')
-
     //   changeSelectedStyleIndex(0)
     // }
   }

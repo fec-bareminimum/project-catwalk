@@ -1866,7 +1866,7 @@ const sampleProductList = [
     ],
   },
   {
-    id: 42370,
+    id: 42366,
     campus: "hr-lax",
     name: "Heir Force Ones",
     slogan: "A sneaker dynasty",
@@ -1877,7 +1877,7 @@ const sampleProductList = [
     created_at: "2021-08-13T14:39:39.968Z",
     updated_at: "2021-08-13T14:39:39.968Z",
     styles: {
-      product_id: "42370",
+      product_id: "42366",
       results: [
         {
           style_id: 253645,
