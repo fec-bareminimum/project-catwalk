@@ -11,7 +11,7 @@ const UserInfo = (props) => {
   }, [name, email])
 
   return (
-    <div>
+    <>
       <Form.Group>
         <Form.Label>What is your nickname?*</Form.Label>
         <Form.Control
@@ -38,7 +38,7 @@ const UserInfo = (props) => {
         />
         <Form.Text>For authentication reasons, you will not be emailed</Form.Text>
       </Form.Group>
-    </div>
+    </>
   )
 }
 
