@@ -180,6 +180,10 @@
   animation: slide-down 300ms ease-out forwards;
 }
 
+.productmodal img:hover {
+  cursor: crosshair;
+}
+
 .productZoom {
   position: fixed;
   top: 1vh;
@@ -220,17 +224,6 @@
 
 .carousel-holder {
   position: relative;
-}
-
-@keyframes slide-down {
-  from {
-    opacity: 0;
-    transform: translateY(-3rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .socialImages {

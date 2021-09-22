@@ -1,12 +1,9 @@
 import React, { useState, useContext, useEffect } from "react"
 import ProductDescription from "./ProductDescription.jsx"
 import { ProductsContext } from "../../contexts/ProductsContext.jsx"
-import { Navbar, Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import ProductCarouselList from "./ProductCarouselList.jsx"
 import ProductDetails from "./ProductDetails/ProductDetails.jsx"
-import useProducts from "../../contexts/ProductsContext.jsx"
-
-// Main Product Page
 
 function ProductMainView(props) {
   const context = useContext(ProductsContext)
@@ -48,14 +45,12 @@ function ProductMainView(props) {
   }
 
   const updateThumbnailHandlerBackward = () => {
-    setIndex(0) //change me - anything but 0 breaks
+    setIndex(0)
     setVisibleCarThumb((prev) => {
       let endpos = selectedStyle.photos.indexOf(prev[0])
       return selectedStyle.photos.slice(endpos < 0 ? 0 : endpos - 4, endpos)
     })
   }
-
-  //breaking on 9th image backwards if setindex is 0
 
   const updateThumbnailHandlerForward = () => {
     setIndex(0)
@@ -108,7 +103,6 @@ function ProductMainView(props) {
                           width="77px"
                           height="77px"
                           src={item.thumbnail_url}
-                          alt="thumb"
                         />
                       </div>
                     ))}
@@ -124,7 +118,6 @@ function ProductMainView(props) {
                           fill="currentColor"
                           className="center-block ml-2 bi bi-arrow-down-circle-fill align-items-center"
                           viewBox="0 0 16 16"
-                          alt="thumb"
                         >
                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
                         </svg>

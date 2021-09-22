@@ -29,7 +29,6 @@ export const extractThumbnailLink = (product) => {
 export const extractSalesPrice = (product, styleIndex = 0) => {
   try {
     const stylesObj = product["styles"]["results"][styleIndex]
-    console.log(product)
     if (styleObj && styleObj["sale_price"] && styleObj["sale_price"] !== null) {
       return styleObj["sale_price"]
     }

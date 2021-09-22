@@ -2,13 +2,13 @@ const express = require("express")
 const path = require("path")
 const axios = require("axios")
 const morgan = require("morgan")
-
+const compression = require("compression")
 const config = require("../config")
-
 const app = express()
 const port = 3000
 
 // Apply middleware
+app.use(compression())
 app.use(morgan("tiny"))
 app.use(express.static(path.join(__dirname, "../client/build")))
 app.use(express.json())
