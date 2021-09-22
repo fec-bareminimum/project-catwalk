@@ -35,8 +35,8 @@ export const ReviewsProvider = ({ children }) => {
       "Runs tight",
       "Runs slightly tight",
       "Perfect",
-      "Runs slightly long",
-      "Runs long",
+      "Runs slightly loose",
+      "Runs loose",
     ],
   })
 

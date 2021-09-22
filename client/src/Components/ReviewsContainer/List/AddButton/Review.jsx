@@ -25,6 +25,7 @@ const Review = (props) => {
         required
         as="textarea"
         placeholder="Why did you like the product or not?"
+        minLength="50"
         maxLength="1000"
         value={body}
         onChange={(e) => setBody(e.target.value)}
