@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Card from "react-bootstrap/Card"
-import Image from "react-bootstrap/Image"
-import Modal from "react-bootstrap/Modal"
+import { Container, Row, Col, Card, Image, Modal } from "react-bootstrap"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 

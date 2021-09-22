@@ -1,8 +1,5 @@
 import React from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Form from "react-bootstrap/Form"
+import { Container, Row, Col, Form } from "react-bootstrap"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -41,12 +38,8 @@ const ReviewList = (props) => {
 
   return (
     <Container className="reviewList" style={listStyle}>
-      {reviews ? <Sorter /> : null}
-      {reviews && reviews.length > 0 ? (
-        <Tiles />
-      ) : (
-        "No reviews have been posted yet!"
-      )}
+      <Sorter />
+      {reviews.length > 0 ? <Tiles /> : "No reviews have been posted yet!"}
     </Container>
   )
 }

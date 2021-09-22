@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
+import { Container, Row, Col } from "react-bootstrap"
 import Breakdowns from "./Breakdowns/Breakdowns.jsx"
 import List from "./List/List.jsx"
 import useReviews from "../../contexts/ReviewsContext.jsx"

@@ -8,21 +8,25 @@ const Breakdowns = (props) => {
   const [average, setAverage] = useState(0)
 
   useEffect(() => {
-    let total = 0
-    let avg = 0
-    for (let rating in reviewMetadata.ratings) {
-      total += rating * reviewMetadata.ratings[rating]
+    if (reviews.length > 0) {
+      let total = 0
+      let avg = 0
+      for (let rating in reviewMetadata.ratings) {
+        total += rating * reviewMetadata.ratings[rating]
+      }
+      if (total > 0) {
+        avg = Math.round((total / reviews.length) * 10) / 10
+      }
+      setAverage(avg)
     }
-    if (total > 0) {
-      avg = Math.round((total / reviews.length) * 10) / 10
-    }
-    setAverage(avg)
-  }, [reviewMetadata])
+  }, [reviews, reviewMetadata])
 
   return (
     <section className="breakdowns">
-      <RatingBkdn filterReviews={props.filterReviews} average={average} />
-      <ProductBkdn />
+      {average > 0 ? (
+        <RatingBkdn filterReviews={props.filterReviews} average={average} />
+      ) : null}
+      {reviewMetadata.characteristics ? <ProductBkdn /> : null}
     </section>
   )
 }
