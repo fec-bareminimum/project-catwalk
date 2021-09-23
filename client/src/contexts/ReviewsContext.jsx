@@ -47,7 +47,6 @@ export const ReviewsProvider = ({ children }) => {
       sort,
       product_id,
       filters,
-      callback,
     }
 
     axios({
