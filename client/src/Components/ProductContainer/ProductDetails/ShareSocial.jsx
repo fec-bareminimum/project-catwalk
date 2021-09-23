@@ -1,10 +1,12 @@
 import React from "react"
 import {
+  FacebookIcon,
+  TwitterIcon,
+  PinterestIcon,
   FacebookShareButton,
   TwitterShareButton,
   PinterestShareButton,
 } from "react-share"
-import { FacebookIcon, TwitterIcon, PinterestIcon } from "react-share"
 import Stylesheet from "../styles.css"
 
 function ShareSocial() {

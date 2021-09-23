@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-key */
-//renders and css styles with
 import React from "react"
 import { Container, Row, Col } from "react-bootstrap"
 import uniqid from "uniqid"
