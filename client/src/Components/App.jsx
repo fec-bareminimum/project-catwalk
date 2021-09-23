@@ -38,18 +38,18 @@ const App = () => {
           <GlobalStyles />
           <ProductsProvider>
             <ReviewsProvider>
-              <InteractionsProvider>
-                <Navbar
-                  toggleTheme={() => setSelectedTheme(toggleTheme())}
-                  isLightMode={isLightMode}
-                />
-                <ProductMainView />
-                <RelatedContainer />
-                <QAProvider>
+              <QAProvider>
+                <InteractionsProvider>
+                  <Navbar
+                    toggleTheme={() => setSelectedTheme(toggleTheme())}
+                    isLightMode={isLightMode}
+                  />
+                  <ProductMainView />
+                  <RelatedContainer />
                   <QuestionsContainer />
-                </QAProvider>
-                <ReviewsContainer />
-              </InteractionsProvider>
+                  <ReviewsContainer />
+                </InteractionsProvider>
+              </QAProvider>
             </ReviewsProvider>
           </ProductsProvider>
         </ThemeProvider>

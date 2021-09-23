@@ -61,10 +61,10 @@ const AnswersListEntry = (props) => {
     return (
       <span>
         {textArray.map((item, index) => (
-          <>
+          <React.Fragment key={index}>
             {item}
-            {index !== textArray.length - 1 && <b key={index}>{shouldBeBold}</b>}
-          </>
+            {index !== textArray.length - 1 && <b>{shouldBeBold}</b>}
+          </React.Fragment>
         ))}
       </span>
     )

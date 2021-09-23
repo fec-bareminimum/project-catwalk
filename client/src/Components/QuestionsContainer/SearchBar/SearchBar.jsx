@@ -10,6 +10,15 @@ const Search = styled.div`
 `
 
 const SearchBar = (props) => {
+  function handleSearchChange(e) {
+    props.setSearchValue(e.target.value)
+    if (e.target.value.length > 2) {
+      props.setFilterBySearch(e.target.value)
+    } else {
+      props.setFilterBySearch("")
+    }
+  }
+
   return (
     <Search>
       <Col>
@@ -17,7 +26,7 @@ const SearchBar = (props) => {
           <FormControl
             type="text"
             placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-            onChange={props.handleSearchChange}
+            onChange={handleSearchChange}
             value={props.searchValue}
           />
         </InputGroup>
