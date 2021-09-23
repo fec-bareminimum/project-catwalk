@@ -3,7 +3,6 @@ import Card from "react-bootstrap/Card"
 import Placeholder from "react-bootstrap/Placeholder"
 import StarRating from "react-star-ratings"
 import useProducts from "../../../../contexts/ProductsContext.jsx"
-import useReviews from "../../../../contexts/ReviewsContext.jsx"
 import {
   getAverageRating,
   extractPriceString,
@@ -21,20 +20,25 @@ const ProductCard = (props) => {
     fetchProductStyles,
     selectedStyleIndex,
   } = useProducts()
-  const { reviews } = useReviews()
   const [styleShownIndex, setStyleShownIndex] = useState(0)
+
+  // useEffect(() => {
+  //   if (!props["name"] && fetchProductInfo) {
+  //     // fetchProductInfo(props["id"])
+  //     console.log("I need to fetch details")
+  //   }
+  //   if (!props["styles"] && fetchProductStyles) {
+  //     // fetchProductStyles(props["id"])
+  //     console.log("I need to fetch styles")
+  //   }
+  // }, [props])
 
   useEffect(() => {
     if (!props["name"] && fetchProductInfo) {
-      return fetchProductInfo(props["id"])
+      fetchProductInfo(props["id"])
+      console.log("I need to fetch details")
     }
   }, [props["name"]])
-
-  useEffect(() => {
-    if (!props["styles"] && fetchProductStyles) {
-      return fetchProductStyles(props["id"])
-    }
-  }, [props["styles"]])
 
   const handleClick = () => {
     updateDisplayedProduct(props)
@@ -57,7 +61,7 @@ const ProductCard = (props) => {
         src={extractThumbnailLink(props, styleShownIndex)}
       />
 
-      {props.loading ? (
+      {props.name ? (
         <Card.Body onClick={handleClick}>
           <Card.Subtitle>{props.category}</Card.Subtitle>
           <Card.Subtitle>{props.name}</Card.Subtitle>
@@ -73,12 +77,11 @@ const ProductCard = (props) => {
 
           <Card.Subtitle>
             <StarRating
-              rating={getAverageRating(reviews)}
+              rating={getAverageRating(props.ratings)}
               starDimension="15px"
               starSpacing="0"
             />
           </Card.Subtitle>
-          <ActionBtn thisProduct={props} />
         </Card.Body>
       ) : (
         <Card.Body>
@@ -88,9 +91,9 @@ const ProductCard = (props) => {
           <Placeholder as={Card.Text} animation="glow">
             <Placeholder xs={7} />
           </Placeholder>
-          <ActionBtn thisProduct={props} />
         </Card.Body>
       )}
+      <ActionBtn thisProduct={props} />
     </Card>
   )
 }

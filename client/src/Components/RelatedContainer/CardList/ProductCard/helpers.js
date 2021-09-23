@@ -1,13 +1,21 @@
-export const getAverageRating = (reviewsObj) => {
+export const getAverageRating = (ratingsObj) => {
   let reviewAverage = 0
 
-  if (reviewsObj && reviewsObj["results"]) {
-    const ratingsSum = reviewsObj["results"].reduce(
-      (sum, { rating }) => (sum += rating),
+  const ratings = ratingsObj
+  if (ratings) {
+    const reviewCount = Object.values(ratings).reduce(
+      (sum, num) => (sum += parseInt(num)),
       0
     )
-    reviewAverage = ratingsSum / reviewsObj["count"]
+
+    let ratingsSum = 0
+    for (const rating in ratings) {
+      ratingsSum += parseInt(rating) * parseInt(ratings[rating])
+    }
+
+    reviewAverage = ratingsSum / reviewCount
   }
+
   return reviewAverage
 }
 
