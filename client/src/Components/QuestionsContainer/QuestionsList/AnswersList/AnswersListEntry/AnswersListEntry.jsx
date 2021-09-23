@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import useQA from "../../../../../contexts/QAContext.jsx"
 import styled from "styled-components"
+import Img from "react-cool-img"
 
 const Dash = styled.span`
   margin-right: 10px;
@@ -72,7 +73,7 @@ const AnswersListEntry = (props) => {
         {props.answer.body}
         <div>
           {props.answer.photos.map((photo) => (
-            <img key={photo.id} src={photo.url} alt="" width="200" height="200" />
+            <Img key={photo.id} src={photo.url} alt="" width="200" height="200" />
           ))}
         </div>
         <SmallDiv>

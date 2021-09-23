@@ -4,6 +4,7 @@ import { Button, Carousel } from "react-bootstrap"
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 import ProductModal from "./ProductModal.jsx"
 import Stylesheet from "./styles.css"
+import Img from "react-cool-img"
 
 function ProductCarouselList(props) {
   const [showExpanded, setShowExpanded] = useState(false)
@@ -59,7 +60,7 @@ function ProductCarouselList(props) {
             >
               {props.photos.map((item, index) => (
                 <Carousel.Item key={index}>
-                  <img
+                  <Img
                     onClick={toggleZoomHandler}
                     className="carouselExpandedImage"
                     width="auto"
@@ -74,7 +75,7 @@ function ProductCarouselList(props) {
           </ProductModal>
           {showZoomed && (
             <div className="productZoom" onClick={removeZoomHandler}>
-              <img
+              <Img
                 className="carouselExpandedImage"
                 width="auto"
                 height="auto"
@@ -93,7 +94,7 @@ function ProductCarouselList(props) {
         >
           {props.photos.map((item, index) => (
             <Carousel.Item onClick={toggleExpandedHandler} key={index}>
-              <img
+              <Img
                 className="carouselImage"
                 width="auto"
                 height="auto"

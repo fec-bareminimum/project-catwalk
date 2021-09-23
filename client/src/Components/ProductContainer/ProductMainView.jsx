@@ -6,6 +6,7 @@ import ProductCarouselList from "./ProductCarouselList.jsx"
 import ProductDetails from "./ProductDetails/ProductDetails.jsx"
 import useProducts from "../../contexts/ProductsContext.jsx"
 import useCart, { CartProvider } from "../../contexts/CartContext.jsx"
+import Img from "react-cool-img"
 
 // Main Product Page
 
@@ -107,7 +108,7 @@ function ProductMainView(props) {
                       )}
                       {visibleCarThumb.map((item, i) => (
                         <div key={i} onClick={() => setIndex(i)}>
-                          <img
+                          <Img
                             className="lol mb-1 mr-1"
                             style={{ border: index === i ? "5px solid" : "" }}
                             width="77px"

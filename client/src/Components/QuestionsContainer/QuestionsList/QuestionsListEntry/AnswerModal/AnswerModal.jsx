@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Modal, Form } from "react-bootstrap"
 import useQA from "../../../../../contexts/QAContext.jsx"
 import styled from "styled-components"
+import Img from "react-cool-img"
 
 const Button1 = styled.button`
   margin-right: 15px;
@@ -175,7 +176,7 @@ const AnswerModal = (props) => {
             />
           </Form.Group>
 
-          <img src={photos} width="100" height="100" />
+          <Img src={photos} width="100" height="100" />
         </Modal.Body>
 
         <Modal.Footer>
