@@ -11,6 +11,7 @@ import {
   extractSalesPrice,
   formatPriceStr,
 } from "./helpers"
+import Img from "react-cool-img"
 
 const ProductCard = (props) => {
   const {
@@ -49,7 +50,7 @@ const ProductCard = (props) => {
       style={{ width: "15rem", border: "1px solid black" }}
       className="productCard"
     >
-      <Card.Img
+      <Img
         variant="top"
         style={{ height: "15rem" }}
         src={extractThumbnailLink(props, styleShownIndex)}
