@@ -36,7 +36,8 @@ const ProductCard = (props) => {
     }
   }, [props["styles"]])
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     updateDisplayedProduct(props)
   }
 

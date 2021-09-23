@@ -11,7 +11,7 @@ import Img from "react-cool-img"
 // Main Product Page
 
 function ProductMainView(props) {
-  const context = useContext(ProductsContext)
+  const context = useProducts()
   const [styleList, setStyleList] = useState([])
   const [selectedStyle, setStyle] = useState(null)
   const [info, setInfo] = useState([])
@@ -24,15 +24,28 @@ function ProductMainView(props) {
   }
 
   useEffect(() => {
-    console.log(context.displayedProduct.id)
-    context.fetchProductStyles(context.displayedProduct.id, (response) => {
-      setStyleList(response.styles.results)
-      setStyle(response.styles.results[0])
-    })
-    context.fetchProductInfo(context.displayedProduct.id, (response) => {
-      setInfo(response)
-    })
-  }, [])
+    console.log("1", context.displayedProduct.styles)
+    console.log("2", context.displayedProduct)
+
+    setInfo(context.displayedProduct)
+    if (context.displayedProduct.styles) {
+      setStyleList((context.displayedProduct.styles || {}).results)
+      setStyle((context.displayedProduct.styles || {}).results[0])
+    }
+
+    // setStyleList(context.displayedProduct.styles.results)
+    // setStyle(context.displayedProduct.styles.results[0])
+    // setStyleList(context.fetchProductStyles)
+    // setStyle(context.fetchProductStyles[context.selectedStyleIndex])
+    // setInfo(context.displayedProduct)
+    // context.fetchProductStyles(context.displayedProduct.id, (response) => {
+    //   setStyleList(response.styles.results)
+    //   setStyle(response.styles.results[0])
+    // })
+    // context.fetchProductInfo(context.displayedProduct.id, (response) => {
+    //   setInfo(response)
+    // })
+  }, [context.displayedProduct])
 
   useEffect(() => {
     if (selectedStyle) {
