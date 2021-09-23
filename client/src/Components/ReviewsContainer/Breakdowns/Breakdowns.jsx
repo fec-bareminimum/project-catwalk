@@ -16,6 +16,7 @@ const Breakdowns = (props) => {
         ct += 1 * reviewMetadata.ratings[rating]
       }
       if (total > 0) {
+        console.log(ct)
         avg = Math.round((total / ct) * 10) / 10
       }
       setAvgRating(avg)
@@ -25,7 +26,7 @@ const Breakdowns = (props) => {
 
   return (
     <section className="breakdowns">
-      {reviewCt > 0 ? (
+      {reviewMetadata.ratings ? (
         <RatingBkdn
           filterReviews={props.filterReviews}
           average={avgRating}

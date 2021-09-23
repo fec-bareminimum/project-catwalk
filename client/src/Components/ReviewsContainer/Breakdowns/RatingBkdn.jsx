@@ -74,7 +74,12 @@ const RatingBkdn = (props) => {
       {filters.length > 0 ? <Filters /> : null}
       <Average />
       {[5, 4, 3, 2, 1].map((rating, i) => (
-        <Bar key={i} rating={Math.abs(i - 5)} filterReviews={props.filterReviews} />
+        <Bar
+          key={i}
+          rating={rating}
+          count={props.count}
+          filterReviews={props.filterReviews}
+        />
       ))}
       <Recs />
     </Container>

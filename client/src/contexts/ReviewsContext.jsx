@@ -46,6 +46,7 @@ export const ReviewsProvider = ({ children }) => {
       count,
       sort,
       product_id,
+      filters,
     }
 
     axios({
@@ -55,6 +56,19 @@ export const ReviewsProvider = ({ children }) => {
     })
       .then((response) => {
         setReviews(response.data.results)
+        filters.length === 0
+          ? setReviews(response.data.results)
+          : setReviews(
+              response.data.results.reduce((filtered, current) => {
+                filters.forEach((option) => {
+                  if (current.rating === option) {
+                    filtered.push(current)
+                  }
+                })
+                return filtered
+              }, [])
+            )
+        setFilters(filters)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
@@ -130,6 +144,7 @@ export const ReviewsProvider = ({ children }) => {
     addReview,
     markReviewHelpful,
     reportReview,
+    setFilters,
   }
 
   return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
@@ -146,6 +161,7 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview,
+    setFilters,
   } = useContext(ReviewsContext)
 
   return {
@@ -158,6 +174,7 @@ const useReviews = () => {
     addReview,
     markReviewHelpful,
     reportReview,
+    setFilters,
   }
 }
 
