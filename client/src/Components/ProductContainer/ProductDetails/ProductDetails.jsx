@@ -14,9 +14,9 @@ function ProductDetails(props) {
         <Col>
           <div className="sameline">
             <Star />
-            <span className="reviews" href="#reviews">
+            <a className="reviews" href="#reviews">
               Read All Reviews
-            </span>
+            </a>
           </div>
         </Col>
       </Row>
@@ -31,12 +31,19 @@ function ProductDetails(props) {
               props.selectedStyle.sale_price && (
                 <>
                   <span>
-                    <s className="redStrike styleText">{props.selectedStyle.original_price}</s>
+                    <s className="redStrike styleText">
+                      {props.selectedStyle.original_price}
+                    </s>
                   </span>
-                  <span className="styleText">  {props.selectedStyle.sale_price}</span>{" "}
+                  <span className="styleText">
+                    {" "}
+                    {props.selectedStyle.sale_price}
+                  </span>{" "}
                 </>
               )
-            : props.selectedStyle && <div className="styleText">{props.selectedStyle.original_price}</div>}
+            : props.selectedStyle && (
+                <div className="styleText">{props.selectedStyle.original_price}</div>
+              )}
         </div>
       </Row>
       <div className="productDetail">

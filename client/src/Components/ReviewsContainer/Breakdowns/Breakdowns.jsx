@@ -24,7 +24,7 @@ const Breakdowns = (props) => {
   }, [reviewMetadata])
 
   return (
-    <section className="breakdowns">
+    <section id="reviews" className="breakdowns">
       {reviewCt > 0 ? (
         <RatingBkdn
           filterReviews={props.filterReviews}

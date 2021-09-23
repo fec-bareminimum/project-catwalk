@@ -24,11 +24,12 @@ function ProductMainView(props) {
   }
 
   useEffect(() => {
-    context.fetchProductStyles(42366, (response) => {
+    console.log(context.displayedProduct.id)
+    context.fetchProductStyles(context.displayedProduct.id, (response) => {
       setStyleList(response.styles.results)
       setStyle(response.styles.results[0])
     })
-    context.fetchProductInfo(42366, (response) => {
+    context.fetchProductInfo(context.displayedProduct.id, (response) => {
       setInfo(response)
     })
   }, [])
