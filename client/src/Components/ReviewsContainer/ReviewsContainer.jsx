@@ -41,7 +41,7 @@ const ReviewsContainer = () => {
 
   return (
     <Container className="reviews">
-      <h4>Ratings &#38; reviews</h4>
+      <h4 style={{ marginTop: "20px" }}>Ratings &#38; reviews</h4>
       <Row>
         <Col xs={2} md={4}>
           <Breakdowns filterReviews={filterReviews} />
