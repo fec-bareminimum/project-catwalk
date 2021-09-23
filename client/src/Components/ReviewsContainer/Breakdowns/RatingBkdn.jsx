@@ -28,7 +28,7 @@ const RatingBkdn = (props) => {
       <Col xs={12} md={6}>
         <ProgressBar
           variant="success"
-          max={props.count}
+          max={reviews.length}
           now={reviewMetadata.ratings[props.rating]}
         ></ProgressBar>
       </Col>

@@ -26,7 +26,7 @@ const Breakdowns = (props) => {
 
   return (
     <section className="breakdowns">
-      {reviewMetadata.ratings ? (
+      {avgRating > 0 ? (
         <RatingBkdn
           filterReviews={props.filterReviews}
           average={avgRating}
