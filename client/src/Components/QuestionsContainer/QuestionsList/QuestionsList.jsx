@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { ListGroup, Button } from "react-bootstrap"
-// import QuestionListEntry from "./QuestionsListEntry/QuestionsListEntry.jsx"
-// import QuestionModal from "./QuestionModal/QuestionModal.jsx"
+import QuestionListEntry from "./QuestionsListEntry/QuestionsListEntry.jsx"
+import QuestionModal from "./QuestionModal/QuestionModal.jsx"
 import useQA from "../../../contexts/QAContext.jsx"
 import styled from "styled-components"
-// import InfiniteScroll from "react-infinite-scroll-component"
+import InfiniteScroll from "react-infinite-scroll-component"
 
 const Button1 = styled.button`
   margin-right: 15px;
@@ -44,7 +44,7 @@ const QuestionsList = (props) => {
   }, [props.filterBySearch])
 
   const getData = () => {
-    context.fetchQuestions(42370, 1, 50, (response) => {
+    context.fetchQuestions(42366, 1, 50, (response) => {
       setQuestionListData(response.data.results)
     })
   }
@@ -94,7 +94,7 @@ const QuestionsList = (props) => {
 
   return (
     <div>
-      {/* <InfiniteScroll
+      <InfiniteScroll
         dataLength={questionsCount}
         next={fetchMoreQuestions}
         hasMore={hasMore}
@@ -106,9 +106,12 @@ const QuestionsList = (props) => {
           </p>
         }
       >
-      </InfiniteScroll> */}
+        {renderQuestionsListData.map((question) => (
+          <QuestionListEntry question={question} key={question.question_id} />
+        ))}
+      </InfiniteScroll>
       <Button1 onClick={handleShowMoreQuestions}>MORE ANSWERED QUESTIONS</Button1>
-      {/* <QuestionModal getData={getData} /> */}
+      <QuestionModal getData={getData} />
     </div>
   )
 }

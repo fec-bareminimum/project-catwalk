@@ -4,8 +4,41 @@ import axios from "axios"
 export const ReviewsContext = React.createContext()
 
 export const ReviewsProvider = ({ children }) => {
-  const [reviews, setReviews] = useState({})
+  const [reviews, setReviews] = useState([])
   const [reviewMetadata, setReviewMetadata] = useState({})
+  const [filters, setFilters] = useState([])
+  const [details, setDetails] = useState({
+    Size: [
+      "A size too small",
+      "½ a size too small",
+      "Perfect",
+      "½ a size too big",
+      "A size too wide",
+    ],
+    Width: ["Too narrow", "Slightly narrow", "Perfect", "Slightly wide", "Too wide"],
+    Comfort: [
+      "Uncomfortable",
+      "Slightly uncomfortable",
+      "Ok",
+      "Comfortable",
+      "Perfect",
+    ],
+    Quality: ["Poor", "Below average", "What I expected", "Pretty great", "Perfect"],
+    Length: [
+      "Runs short",
+      "Runs slightly short",
+      "Perfect",
+      "Runs slightly long",
+      "Runs long",
+    ],
+    Fit: [
+      "Runs tight",
+      "Runs slightly tight",
+      "Perfect",
+      "Runs slightly loose",
+      "Runs loose",
+    ],
+  })
 
   const fetchReviews = (page, count, sort, product_id) => {
     const fetchDetails = {
@@ -21,7 +54,7 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        setReviews(response.data)
+        setReviews(response.data.results)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
@@ -46,35 +79,11 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
-  const addReview = (
-    product_id,
-    rating,
-    summary,
-    body,
-    recommend,
-    name,
-    email,
-    photos,
-    characteristics,
-    callback
-  ) => {
-    const addDetails = {
-      product_id,
-      rating,
-      summary,
-      body,
-      recommend,
-      name,
-      email,
-      photos,
-      characteristics,
-      callback,
-    }
-
+  const addReview = (addDetails) => {
     axios
       .post("/reviews", addDetails)
       .then((response) => {
-        callback(response)
+        console.log("Review submitted")
       })
       .catch((err) => {
         console.log("Server failed to post review")
@@ -114,6 +123,8 @@ export const ReviewsProvider = ({ children }) => {
   const value = {
     reviews,
     reviewMetadata,
+    filters,
+    details,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
@@ -128,6 +139,8 @@ const useReviews = () => {
   const {
     reviews,
     reviewMetadata,
+    filters,
+    details,
     fetchReviews,
     fetchReviewMetadata,
     addReview,
@@ -138,6 +151,8 @@ const useReviews = () => {
   return {
     reviews,
     reviewMetadata,
+    filters,
+    details,
     fetchReviews,
     fetchReviewMetadata,
     addReview,

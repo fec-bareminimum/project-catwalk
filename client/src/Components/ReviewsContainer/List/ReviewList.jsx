@@ -1,8 +1,5 @@
-import React, { useState } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Form from "react-bootstrap/Form"
+import React from "react"
+import { Container, Row, Col, Form } from "react-bootstrap"
 import ReviewTile from "./ReviewTile.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -15,9 +12,9 @@ const ReviewList = (props) => {
   const { reviews } = useReviews()
 
   const Sorter = () => (
-    <Row className="sorter">
+    <Row>
       <Col>
-        <h4>{`${reviews.results.length} reviews, sorted by`}</h4>
+        <h4>{`${reviews.length} reviews, sorted by`}</h4>
       </Col>
       <Col>
         <Form.Select
@@ -34,22 +31,15 @@ const ReviewList = (props) => {
     </Row>
   )
 
-  const Tiles = () => (
-    <Container className="tiles">
-      {reviews.results.slice(0, props.listLength).map((review) => (
-        <Row key={review.review_id}>
-          <Col>
-            <ReviewTile {...review} />
-          </Col>
-        </Row>
-      ))}
-    </Container>
-  )
+  const Tiles = () =>
+    reviews
+      .slice(0, props.listLength)
+      .map((review) => <ReviewTile key={review.review_id} {...review} />)
 
   return (
     <Container className="reviewList" style={listStyle}>
-      {reviews.results ? <Sorter /> : null}
-      {reviews.results ? <Tiles /> : null}
+      <Sorter />
+      {reviews.length > 0 ? <Tiles /> : "No reviews have been posted yet!"}
     </Container>
   )
 }

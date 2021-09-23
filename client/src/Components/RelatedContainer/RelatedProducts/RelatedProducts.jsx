@@ -2,46 +2,33 @@ import React, { useState, useEffect } from "react"
 import CardList from "../CardList/CardList.jsx"
 import useProducts from "../../../contexts/ProductsContext.jsx"
 import StarButton from "./StarButton/StarButton.jsx"
+import styled from "styled-components"
+
+const Section = styled.section`
+  margin-top: 2em;
+  margin-bottom: 2em;
+`
 
 const RelatedProducts = () => {
-  const { relatedProducts, productList, fetchProductInfo, fetchProductStyles } =
+  const { relatedProductIds, productList, fetchProductInfo, fetchProductStyles } =
     useProducts()
-  const [relatedDetails, setRelatedDetails] = useState([])
 
-  // Convert "relatedProducts" (list of IDS) to array of product objects
-  useEffect(() => {
-    if (
-      relatedProducts &&
-      relatedProducts.length &&
-      productList &&
-      productList.length
-    ) {
-      const newRelated = []
-      relatedProducts.forEach((productID) => {
-        const existingIndex = productList
-          .map((e) => e.id)
-          .indexOf(productID.toString())
-
-        if (existingIndex) {
-          newRelated.push(productList[existingIndex])
-        } else {
-          // This object is not even in the app state
-          fetchProductInfo(productID)
-          fetchProductStyles(productID)
-        }
-      })
-      setRelatedDetails(newRelated)
-    }
-  }, [relatedProducts, productList])
+  // Map the list of IDs to complete product objects
+  const relatedDetails = relatedProductIds.map(
+    (ID) =>
+      productList[productList.map((e) => parseInt(e.id)).indexOf(parseInt(ID))] || {
+        id: ID,
+      }
+  )
 
   return (
-    <section className="relatedProductsContainer">
+    <Section className="relatedProductsContainer">
       <CardList
         products={relatedDetails}
         listTitle={"RELATED PRODUCTS"}
         ActionBtn={StarButton}
       />
-    </section>
+    </Section>
   )
 }
 

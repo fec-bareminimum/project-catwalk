@@ -25,13 +25,18 @@ function ProductDetails(props) {
         <h1 className="productTitle">{props.infoData.name}</h1>
       </Col>
       <Row>
-        <div className="productDetail">
+        <div className="productDetail styleText ">
           {props.selectedStyle && props.selectedStyle.sale_price !== null
             ? props.selectedStyle &&
               props.selectedStyle.sale_price && (
-                <s className="redStrike">{props.selectedStyle.original_price}</s>
+                <>
+                  <span>
+                    <s className="redStrike styleText">{props.selectedStyle.original_price}</s>
+                  </span>
+                  <span className="styleText">  {props.selectedStyle.sale_price}</span>{" "}
+                </>
               )
-            : props.selectedStyle && <h4>{props.selectedStyle.original_price}</h4>}
+            : props.selectedStyle && <div className="styleText">{props.selectedStyle.original_price}</div>}
         </div>
       </Row>
       <div className="productDetail">

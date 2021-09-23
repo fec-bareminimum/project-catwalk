@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
-import StarRating from "react-bootstrap-star-rating"
+import Placeholder from "react-bootstrap/Placeholder"
+import StarRating from "react-star-ratings"
 import useProducts from "../../../../contexts/ProductsContext.jsx"
 import useReviews from "../../../../contexts/ReviewsContext.jsx"
 import {
@@ -10,6 +11,7 @@ import {
   extractSalesPrice,
   formatPriceStr,
 } from "./helpers"
+import Img from "react-cool-img"
 
 const ProductCard = (props) => {
   const {
@@ -20,16 +22,19 @@ const ProductCard = (props) => {
     selectedStyleIndex,
   } = useProducts()
   const { reviews } = useReviews()
+  const [styleShownIndex, setStyleShownIndex] = useState(0)
 
-  // Fetch more complete details for this product
+  useEffect(() => {
+    if (!props["id"] && fetchProductInfo) {
+      return fetchProductInfo(props["id"])
+    }
+  }, [props["name"]])
+
   useEffect(() => {
     if (!props["styles"] && fetchProductStyles) {
-      fetchProductStyles(props["id"])
+      return fetchProductStyles(props["id"])
     }
-    if (!props["features"] && fetchProductInfo) {
-      fetchProductInfo(props["id"])
-    }
-  }, [props])
+  }, [props["styles"]])
 
   const handleClick = () => {
     updateDisplayedProduct(props)
@@ -39,32 +44,51 @@ const ProductCard = (props) => {
   const salePrice = extractSalesPrice(displayedProduct, selectedStyleIndex)
   const strikeThroughStyles = { textDecoration: "line-through", color: "red" }
 
+  const ActionBtn = props.ActionBtn
   return (
-    <Card style={{ width: "18rem" }} className="productCard">
-      <Card.Img variant="top" src={extractThumbnailLink(props)} />
-      <Card.Body onClick={handleClick}>
-        <Card.Subtitle>{props.category}</Card.Subtitle>
-        <Card.Title>{props.name}</Card.Title>
+    <Card
+      style={{ width: "15rem", border: "1px solid black" }}
+      className="productCard"
+    >
+      <Img
+        variant="top"
+        style={{ height: "15rem" }}
+        src={extractThumbnailLink(props, styleShownIndex)}
+      />
 
-        {salePrice ? (
+      {props.name ? (
+        <Card.Body onClick={handleClick}>
+          <Card.Subtitle>{props.category}</Card.Subtitle>
+          <Card.Subtitle>{props.name}</Card.Subtitle>
+
+          {salePrice ? (
+            <Card.Subtitle>
+              {formatPriceStr(salePrice)}
+              <span style={strikeThroughStyles}>{defaultPrice}</span>
+            </Card.Subtitle>
+          ) : (
+            <Card.Subtitle>{defaultPrice}</Card.Subtitle>
+          )}
+
           <Card.Subtitle>
-            {formatPriceStr(salePrice)}
-            <span style={strikeThroughStyles}>{defaultPrice}</span>
+            <StarRating
+              rating={getAverageRating(reviews)}
+              starDimension="15px"
+              starSpacing="0"
+            />
           </Card.Subtitle>
-        ) : (
-          <Card.Subtitle>{defaultPrice}</Card.Subtitle>
-        )}
-
-        <Card.Subtitle>
-          <StarRating
-            defaultValue={getAverageRating(reviews)}
-            min={0}
-            max={5}
-            step={0.25}
-          />
-        </Card.Subtitle>
-        {React.createElement(props.ActionBtn, { thisProduct: props })}
-      </Card.Body>
+          <ActionBtn thisProduct={props} />
+        </Card.Body>
+      ) : (
+        <Card.Body>
+          <Placeholder as={Card.Title} animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+          <Placeholder as={Card.Text} animation="glow">
+            <Placeholder xs={7} />
+          </Placeholder>
+        </Card.Body>
+      )}
     </Card>
   )
 }

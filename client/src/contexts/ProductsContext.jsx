@@ -1,21 +1,16 @@
 import React, { useState, useContext, useEffect } from "react"
 import axios from "axios"
 
+import sampleProductList from "../__mocks__/sampleProductList"
+
 export const ProductsContext = React.createContext()
 
 export const ProductsProvider = ({ children }) => {
-  const [productList, _setProductList] = useState([])
-  const [displayedProduct, _setDisplayedProduct] = useState({}) // Reference an object in the productList array
-  const [relatedProducts, _setRelatedProducts] = useState([])
+  const [productList, _setProductList] = useState(sampleProductList) // [])
+  const [displayedProduct, _setDisplayedProduct] = useState(sampleProductList[0]) // {})
+  // Reference an object in the productList array
+  const [relatedProductIds, _setRelatedIds] = useState([])
   const [selectedStyleIndex, _setSelectedStyleIndex] = useState(0)
-
-  // Display a defualt product for the Overview
-  useEffect(() => {
-    if (Object.keys(displayedProduct).length === 0 && productList.length > 0) {
-      // Reference the object in productList
-      _setDisplayedProduct(productList[0])
-    }
-  }, [productList])
 
   const fetchProducts = (page, count, callback) => {
     const productResults = {
@@ -25,9 +20,9 @@ export const ProductsProvider = ({ children }) => {
     axios
       .get("/products", productResults)
       .then((response) => {
-        _setProductList(response)
+        _setProductList(response.data)
         if (callback) {
-          callback(response)
+          callback(response.data)
         }
       })
       .catch((err) => {
@@ -35,37 +30,37 @@ export const ProductsProvider = ({ children }) => {
       })
   }
 
-  // const _extendExistingProductInList = (productObj) => {
-  //   // If we have NEW data, EXTENED the exisiting object in productList
+  const _extendExistingProductInList = (productObj) => {
+    // If we have NEW data, EXTENED the exisiting object in productList
 
-  //   // Search the productList
-  //   const existingIndex = productList.map((e) => e.id).indexOf(productObj["id"])
-  //   if (existingIndex) {
-  //     _setProductList((prevList) =>
-  //       prevList.map((product) =>
-  //         product["id"] === productObj["id"]
-  //           ? { ...product, ...productObj }
-  //           : product
-  //       )
-  //     )
-  //     // this could be the display product reference
-  //     updateDisplayedProduct(productList[existingIndex])
-  //   } else {
-  //     // Can't find the item? Push it to the end of the array
-  //     _setProductList((prevList) => [...prevList, productObj])
-  //   }
-  // }
+    // Search the productList
+    const existingIndex = productList.map((e) => e.id).indexOf(productObj["id"])
+    if (existingIndex > -1) {
+      _setProductList((prevList) =>
+        prevList.map((product) =>
+          product["id"] === productObj["id"]
+            ? { ...product, ...productObj }
+            : product
+        )
+      )
+      // this could be the display product reference
+      updateDisplayedProduct(productList[existingIndex])
+    } else {
+      // Can't find the item? Push it to the end of the array
+      _setProductList((prevList) => [...prevList, productObj])
+    }
+  }
 
-  const fetchProductInfo = (productId, callback) => {
+  const fetchProductInfo = (product_id, callback) => {
     const infoBody = {
-      productId,
+      product_id,
     }
     axios
-      .get(`/products/${productId}`, infoBody)
+      .get(`/products/${product_id}`, infoBody)
       .then((response) => {
-        // _extendExistingProductInList(response)
+        _extendExistingProductInList(response.data)
         if (callback) {
-          callback(response)
+          callback(response.data)
         }
       })
       .catch((err) => {
@@ -73,17 +68,16 @@ export const ProductsProvider = ({ children }) => {
       })
   }
 
-  const fetchProductStyles = (productId, callback) => {
+  const fetchProductStyles = (product_id, callback) => {
     const styleDetails = {
-      productId,
+      product_id,
     }
     axios
-      .get(`/products/${productId}/styles`, styleDetails)
+      .get(`/products/${product_id}/styles`, styleDetails)
       .then((response) => {
-        callback(response)
-        // _extendExistingProductInList({ id: productId, styles: response })
+        _extendExistingProductInList({ id: product_id, styles: response.data })
         if (callback) {
-          callback({ id: productId, styles: response })
+          callback({ id: product_id, styles: response.data })
         }
       })
       .catch((err) => {
@@ -91,20 +85,26 @@ export const ProductsProvider = ({ children }) => {
       })
   }
 
-  const fetchProductRelatedIds = (productId, callback) => {
+  const fetchProductRelatedIds = (product_id, callback) => {
     const relatedBody = {
-      productId,
+      product_id,
     }
     axios
-      .get(`/products/${productId}/related`, relatedBody)
+      .get(`/products/${product_id}/related`, relatedBody)
       .then((response) => {
-        _setRelatedProducts(response)
+        _setRelatedIds(response.data)
+
+        response.data.forEach((id) => {
+          fetchProductInfo(id)
+          fetchProductStyles(id)
+        })
+
         if (callback) {
           callback(response)
         }
       })
       .catch((err) => {
-        console.log("Failed to load products", err)
+        console.log("Failed to load related", err)
       })
   }
 
@@ -113,18 +113,32 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const updateDisplayedProduct = (newProduct) => {
-    // Find the index in productList
-    const existingIndex = productList.map((e) => e.id).indexOf(newProduct["id"])
-
-    // Reference an object in the productList array
-    setDisplayProduct(productList[existingIndex] || newProduct)
-    changeSelectedStyleIndex(0)
+    // console.log(newProduct ? newProduct["id"] : newProduct)
+    // if (newProduct && newProduct["id"] !== displayedProduct["id"]) {
+    //   // Find the index in productList
+    //   const existingIndex = productList.map((e) => e.id).indexOf(newProduct["id"])
+    //   // Reference an object in the productList array
+    //   _setDisplayedProduct(productList[existingIndex] || newProduct)
+    //   fetchProductRelatedIds(newProduct["id"])
+    //   console.log('this is repeating a lot')
+    //   changeSelectedStyleIndex(0)
+    // }
   }
+
+  // Display a defualt product for the Overview
+  // useEffect(() => {
+  //   fetchProducts()
+  // }, [])
+
+  useEffect(() => {
+    if (displayedProduct["id"]) {
+      fetchProductRelatedIds(displayedProduct["id"])
+    }
+  }, [displayedProduct])
 
   const value = {
     productList,
-    // displayedProduct,
-    relatedProducts,
+    relatedProductIds,
     selectedStyleIndex,
     changeSelectedStyleIndex,
     updateDisplayedProduct,
@@ -132,6 +146,7 @@ export const ProductsProvider = ({ children }) => {
     fetchProductInfo,
     fetchProductStyles,
     fetchProductRelatedIds,
+    displayedProduct,
   }
 
   return (

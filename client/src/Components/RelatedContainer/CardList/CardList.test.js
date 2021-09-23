@@ -2,9 +2,22 @@ import React from "react"
 import { screen, render, fireEvent } from "../../../test-utils.jsx"
 import CardList from "./CardList.jsx"
 import { ProductsContext } from "../../../contexts/ProductsContext.jsx"
-import sampleProductList from "sampleProductList"
+
+// Short placeholder list for of product objects
+const sampleProductList = [
+  {
+    id: 42366,
+    name: "Camo Onesie",
+  },
+  {
+    id: 423466,
+    name: "Heir Force Ones",
+  },
+]
 
 describe("CardList", () => {
+  // TODO: accepts an action button React Node for the card (e.g. <button>Like</button>)
+
   test("renders the react-multi-carousel (npm) component ul", () => {
     const { container } = render(<CardList products={sampleProductList} />)
     expect(container.querySelector("ul")).toBeInTheDocument()
@@ -17,13 +30,6 @@ describe("CardList", () => {
   })
 
   /* IRRELEVANT TESTS with react-multi-carousel
-
-  // The <Carousel /> does not render the inner list right away
-  test("accepts and ActionBtn component in prop", () => {
-    const mockBtn = <button data-testid="actionBtn">TEST</button>
-    render(<CardList ActionBtn={mockBtn} />)
-    expect
-  })
 
   test("renders one card for each item in the products prop", () => {
     render(<CardList products={sampleProductList} />)

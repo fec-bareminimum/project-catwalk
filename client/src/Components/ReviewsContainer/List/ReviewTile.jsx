@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react"
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Card from "react-bootstrap/Card"
-import Image from "react-bootstrap/Image"
-import Modal from "react-bootstrap/Modal"
+import { Container, Row, Col, Card, Image, Modal } from "react-bootstrap"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
 
@@ -51,26 +46,24 @@ const ReviewTile = (props) => {
   )
 
   const Photos = () => (
-    <Container className="photos">
-      <Row>
-        {props.photos.map((photo) => {
-          const [show, setShow] = useState(false)
-          const handleClose = () => setShow(false)
-          const handleShow = () => setShow(true)
-          return (
-            <Col key={photo.id} xs={6} md={4}>
-              <Image src={photo.url} onClick={handleShow} thumbnail />
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton></Modal.Header>
-                <Modal.Body>
-                  <Image src={photo.url} onClick={handleShow} fluid />
-                </Modal.Body>
-              </Modal>
-            </Col>
-          )
-        })}
-      </Row>
-    </Container>
+    <Row>
+      {props.photos.map((photo) => {
+        const [show, setShow] = useState(false)
+        const handleClose = () => setShow(false)
+        const handleShow = () => setShow(true)
+        return (
+          <Col key={photo.id} xs={6} md={4}>
+            <Image src={photo.url} onClick={handleShow} thumbnail />
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton></Modal.Header>
+              <Modal.Body>
+                <Image src={photo.url} onClick={handleShow} fluid />
+              </Modal.Body>
+            </Modal>
+          </Col>
+        )
+      })}
+    </Row>
   )
 
   const Footer = () => (
@@ -101,17 +94,21 @@ const ReviewTile = (props) => {
   }
 
   return (
-    <Card className="reviewTile">
-      <Header />
-      <Card.Body>
-        <Card.Title>{props.summary}</Card.Title>
-        <Card.Text>{props.body}</Card.Text>
-        {props.recommend ? <Recommend /> : null}
-        {props.response ? <Response /> : null}
-        {props.photos.length > 0 ? <Photos /> : null}
-      </Card.Body>
-      <Footer />
-    </Card>
+    <Row>
+      <Col>
+        <Card className="reviewTile">
+          <Header />
+          <Card.Body>
+            <Card.Title>{props.summary}</Card.Title>
+            <Card.Text>{props.body}</Card.Text>
+            {props.recommend ? <Recommend /> : null}
+            {props.response ? <Response /> : null}
+            {props.photos.length > 0 ? <Photos /> : null}
+          </Card.Body>
+          <Footer />
+        </Card>
+      </Col>
+    </Row>
   )
 }
 

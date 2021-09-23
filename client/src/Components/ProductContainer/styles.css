@@ -127,6 +127,7 @@
 
 .redStrike {
   color: red;
+  font-size: 23px;
 }
 
 .my-component {
@@ -250,4 +251,8 @@
 .invisible {
   margin-top: 45px;
   opacity: 0;
+}
+
+.styleText {
+  font-size: 23px;
 }
