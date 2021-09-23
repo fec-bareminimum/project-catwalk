@@ -11,7 +11,7 @@ const ReviewsContainer = () => {
   const [product_id, setProduct_id] = useState(42366)
 
   useEffect(() => {
-    fetchReviews(1, 100, sort, product_id, filters)
+    fetchReviews(1, 100, sort, product_id, filters, (data) => {})
   }, [sort, product_id, filters])
 
   useEffect(() => {

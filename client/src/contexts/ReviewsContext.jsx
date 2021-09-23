@@ -40,13 +40,14 @@ export const ReviewsProvider = ({ children }) => {
     ],
   })
 
-  const fetchReviews = (page, count, sort, product_id) => {
+  const fetchReviews = (page, count, sort, product_id, filters, callback) => {
     const fetchDetails = {
       page,
       count,
       sort,
       product_id,
       filters,
+      callback,
     }
 
     axios({
@@ -55,7 +56,6 @@ export const ReviewsProvider = ({ children }) => {
       params: fetchDetails,
     })
       .then((response) => {
-        setReviews(response.data.results)
         filters.length === 0
           ? setReviews(response.data.results)
           : setReviews(
@@ -69,6 +69,7 @@ export const ReviewsProvider = ({ children }) => {
               }, [])
             )
         setFilters(filters)
+        callback(response.data.results)
       })
       .catch((err) => {
         console.log("Server failed to fetch all reviews")
@@ -134,6 +135,24 @@ export const ReviewsProvider = ({ children }) => {
       })
   }
 
+  const getAverageRating = (product_id) => {
+    let avg = 0
+
+    const setAvg = (reviews) => {
+      let sum = reviews.reduce((sum, { rating }) => (sum += rating), 0)
+      avg = Math.round((sum / reviews.length) * 10) / 10
+    }
+
+    if (!reviews) {
+      fetchReviews(1, 100, "relevant", product_id, (reviews) => setAvg(reviews))
+    } else if (reviews.length > 0) {
+      setAvg(reviews)
+    } else {
+      return 0
+    }
+    return avg
+  }
+
   const value = {
     reviews,
     reviewMetadata,
@@ -145,6 +164,7 @@ export const ReviewsProvider = ({ children }) => {
     markReviewHelpful,
     reportReview,
     setFilters,
+    getAverageRating,
   }
 
   return <ReviewsContext.Provider value={value}>{children}</ReviewsContext.Provider>
@@ -162,6 +182,7 @@ const useReviews = () => {
     markReviewHelpful,
     reportReview,
     setFilters,
+    getAverageRating,
   } = useContext(ReviewsContext)
 
   return {
@@ -175,6 +196,7 @@ const useReviews = () => {
     markReviewHelpful,
     reportReview,
     setFilters,
+    getAverageRating,
   }
 }
 
