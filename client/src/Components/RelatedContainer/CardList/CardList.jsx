@@ -34,7 +34,7 @@ const responsive = {
   },
 }
 
-const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
+const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
   const validProductList = products && products.length > 0
 
   const productsToRender =
@@ -68,6 +68,7 @@ const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
             {...productObj}
             key={productObj["id"]}
             ActionBtn={ActionBtn}
+            loading={loading}
           />
         ))}
       </Carousel>

@@ -22,10 +22,9 @@ export const extractThumbnailLink = (product, productStyleIndex = 0) => {
     const imageUrl =
       product["styles"]["results"][productStyleIndex].photos[0].thumbnail_url
 
-    return imageUrl || placeholderImg
+    return imageUrl || "" // || placeholderImg
   } catch {
-    // placeholder image
-    return placeholderImg
+    return "" // placeholderImg
   }
 }
 

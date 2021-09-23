@@ -10,8 +10,13 @@ const Section = styled.section`
 `
 
 const RelatedProducts = () => {
-  const { relatedProductIds, productList, fetchProductInfo, fetchProductStyles } =
-    useProducts()
+  const {
+    relatedProductIds,
+    productList,
+    fetchProductInfo,
+    fetchProductStyles,
+    loading,
+  } = useProducts()
 
   // Map the list of IDs to complete product objects
   const relatedDetails = relatedProductIds.map(
@@ -27,6 +32,7 @@ const RelatedProducts = () => {
         products={relatedDetails}
         listTitle={"RELATED PRODUCTS"}
         ActionBtn={StarButton}
+        loading={loading}
       />
     </Section>
   )

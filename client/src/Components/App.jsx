@@ -40,14 +40,14 @@ const App = () => {
             <ReviewsProvider>
               <QAProvider>
                 <InteractionsProvider>
-                  <Navbar
+                  {/* <Navbar
                     toggleTheme={() => setSelectedTheme(toggleTheme())}
                     isLightMode={isLightMode}
-                  />
-                  <ProductMainView />
+                  /> */}
+                  {/* <ProductMainView /> */}
                   <RelatedContainer />
-                  <QuestionsContainer />
-                  <ReviewsContainer />
+                  {/* <QuestionsContainer /> */}
+                  {/* <ReviewsContainer /> */}
                 </InteractionsProvider>
               </QAProvider>
             </ReviewsProvider>

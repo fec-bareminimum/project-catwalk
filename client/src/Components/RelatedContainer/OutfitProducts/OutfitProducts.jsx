@@ -35,7 +35,8 @@ const AddToOutfitBtn = ({ handleClick }) => {
 
 const OutfitProducts = () => {
   const { displayedProduct } = useProducts()
-  const { outfitList, removeProductFromOutfit, addProductToOutfit } = useOutfit()
+  const { outfitList, removeProductFromOutfit, addProductToOutfit, loading } =
+    useOutfit()
 
   const handleAddClick = () => {
     addProductToOutfit(displayedProduct)
@@ -48,6 +49,7 @@ const OutfitProducts = () => {
         products={outfitList}
         listTitle={"YOUR OUTFIT"}
         ActionBtn={RemoveButton}
+        loading={loading}
       />
     </Section>
   )

@@ -25,7 +25,7 @@ const ProductCard = (props) => {
   const [styleShownIndex, setStyleShownIndex] = useState(0)
 
   useEffect(() => {
-    if (!props["id"] && fetchProductInfo) {
+    if (!props["name"] && fetchProductInfo) {
       return fetchProductInfo(props["id"])
     }
   }, [props["name"]])
@@ -52,11 +52,12 @@ const ProductCard = (props) => {
     >
       <Img
         variant="top"
-        style={{ height: "15rem" }}
+        alt={props.name || "Product Thumbnail"}
+        style={{ height: "15rem", width: "14.9rem", background: "#eaeaea" }}
         src={extractThumbnailLink(props, styleShownIndex)}
       />
 
-      {props.name ? (
+      {props.loading ? (
         <Card.Body onClick={handleClick}>
           <Card.Subtitle>{props.category}</Card.Subtitle>
           <Card.Subtitle>{props.name}</Card.Subtitle>
@@ -87,6 +88,7 @@ const ProductCard = (props) => {
           <Placeholder as={Card.Text} animation="glow">
             <Placeholder xs={7} />
           </Placeholder>
+          <ActionBtn thisProduct={props} />
         </Card.Body>
       )}
     </Card>
