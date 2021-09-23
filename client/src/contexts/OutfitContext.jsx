@@ -5,6 +5,7 @@ export const OutfitContext = React.createContext()
 
 export const OutfitProvider = ({ children }) => {
   const storageKey = "outfitList"
+  const [loading, setLoading] = useState(false)
   const [outfitList, setOutfitList] = useState([])
 
   const _retreiveOutfitList = () => {
@@ -42,6 +43,7 @@ export const OutfitProvider = ({ children }) => {
 
   const value = {
     outfitList,
+    loading,
     removeProductFromOutfit,
     addProductToOutfit,
   }
