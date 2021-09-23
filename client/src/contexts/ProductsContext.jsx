@@ -50,7 +50,7 @@ export const ProductsProvider = ({ children }) => {
 
   const fetchProducts = (page, count, callback) => {
     fetch("/products", { page, count }, (products) => {
-      console.log("LOL", products)
+      console.log("products", products)
       _setProductList(products)
       updateDisplayedProduct(products[0])
 
@@ -80,9 +80,7 @@ export const ProductsProvider = ({ children }) => {
       // extra ---------
       if (callback) {
         callback(stylesObj)
-      } // } else {
-      //   console.log("error fetching stylesObj")
-      // }
+      }
       // ---------------
     })
   }

@@ -6,7 +6,7 @@ import styled from "styled-components"
 import "react-multi-carousel/lib/styles.css"
 
 const Header = styled.h5`
-  color: gray;
+  color: #3d3d3d;
 `
 const ListContainer = styled.div``
 
@@ -34,11 +34,13 @@ const responsive = {
   },
 }
 
-const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
+const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
   const validProductList = products && products.length > 0
 
   const productsToRender =
-    products.length > 0 ? products : [{ id: 123 }, { id: 123 }, { id: 123 }]
+    products.length > 0 || loading === false
+      ? products
+      : [{ id: 123 }, { id: 123 }, { id: 123 }]
 
   return (
     <Container className="cardList p-4">

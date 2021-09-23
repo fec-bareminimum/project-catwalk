@@ -1,12 +1,9 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import axios from "axios"
 
 export const QAContext = React.createContext()
 
 export const QAProvider = ({ children }) => {
-  const [questionsList, setQuestionsList] = useState([])
-  const [answersList, setAnswersList] = useState([])
-
   const fetchQuestions = (product_id, page, count, callback) => {
     const fetchParams = {
       product_id,
@@ -17,7 +14,6 @@ export const QAProvider = ({ children }) => {
     axios
       .get("/qa/questions", { params: fetchParams })
       .then((response) => {
-        setQuestionsList(response)
         callback(response)
       })
       .catch((err) => {
@@ -34,7 +30,6 @@ export const QAProvider = ({ children }) => {
     axios
       .get(`/qa/questions/${questionId}/answers`, { params: fetchParams })
       .then((response) => {
-        setAnswersList(response)
         callback(response)
       })
       .catch((err) => {
@@ -139,8 +134,6 @@ export const QAProvider = ({ children }) => {
   }
 
   const value = {
-    questionsList,
-    answersList,
     fetchQuestions,
     fetchAnswers,
     postQuestion,
@@ -156,8 +149,6 @@ export const QAProvider = ({ children }) => {
 
 const useQA = () => {
   const {
-    questionsList,
-    answersList,
     fetchQuestions,
     fetchAnswers,
     postQuestion,
@@ -169,8 +160,6 @@ const useQA = () => {
   } = useContext(QAContext)
 
   return {
-    questionsList,
-    answersList,
     fetchQuestions,
     fetchAnswers,
     postQuestion,
