@@ -9,6 +9,9 @@ module.exports = {
     path: path.resolve(__dirname, "client", "build"),
     filename: "[name].[chunkhash].bundle.js",
   },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
   plugins: [
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, "client", "public", "index.html"),
