@@ -29,17 +29,21 @@ const AnswersListEntry = (props) => {
 
   function handleHelpfulChange(e) {
     // sends a request to change the value of the helpful key to add 1 to the current helpfulness and only allow the click to happen once per visit
-    context.markAnswerHelpful(props.answer.answer_id, (response) => {
-      setAnswerHelpfulness(answerHelpfulness + 1)
-      setHelpfulnessClicked(true)
-    })
+    if (!helpfulnessClicked) {
+      context.markAnswerHelpful(props.answer.answer_id, (response) => {
+        setAnswerHelpfulness(answerHelpfulness + 1)
+        setHelpfulnessClicked(true)
+      })
+    }
   }
 
   function handleReport() {
     // sends a request to change the value of the report key to true and only allow the click to happen once per visit
-    context.reportAnswer(props.answer.answer_id, (response) => {
-      setReportedAnswerClicked(true)
-    })
+    if (!reportedAnswerClicked) {
+      context.reportAnswer(props.answer.answer_id, (response) => {
+        setReportedAnswerClicked(true)
+      })
+    }
   }
 
   function Report() {
@@ -73,12 +77,12 @@ const AnswersListEntry = (props) => {
         {props.answer.body}
         <div>
           {props.answer.photos.map((photo) => (
-            <Img key={photo.id} src={photo.url} alt="" width="200" height="200" />
+            <Img key={photo.id} src={photo.url} alt="" width="100" height="100" />
           ))}
         </div>
         <SmallDiv>
           by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />
-          , {props.answer.date.substr(1, 10)}
+          , {props.answer.date.substr(0, 10)}
           <Dash>|</Dash>
           <Helpful>Helpful?</Helpful>
           <u onClick={handleHelpfulChange}>Yes({answerHelpfulness})</u>
@@ -92,8 +96,8 @@ const AnswersListEntry = (props) => {
     <div>
       {props.answer.body}
       <SmallDiv>
-        by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />,
-        {props.answer.date}
+        by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />,{" "}
+        {props.answer.date.substr(0, 10)}
         <Dash>|</Dash>
         <Helpful>Helpful?</Helpful>
         <u onClick={handleHelpfulChange}>Yes({answerHelpfulness})</u>

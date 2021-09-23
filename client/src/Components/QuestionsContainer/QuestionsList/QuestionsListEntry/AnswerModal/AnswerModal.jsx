@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { Modal, Form } from "react-bootstrap"
+import React, { useState, useEffect, useRef } from "react"
+import { Modal, Form, Button } from "react-bootstrap"
 import useQA from "../../../../../contexts/QAContext.jsx"
 import styled from "styled-components"
 import Img from "react-cool-img"
+import axios from "axios"
 
 const Button1 = styled.button`
   margin-right: 15px;
@@ -31,89 +32,103 @@ const AnswerModal = (props) => {
   const [email, setEmail] = useState("")
   const [nickname, setNickname] = useState("")
   const [answerBody, setAnswerBody] = useState("")
-  const [photos, setPhotos] = useState("")
-  const [isValidEmail, setIsValidEmail] = useState(false)
-  const [isValidNickname, setIsValidNickname] = useState(false)
-  const [isValidAnswerBody, setIsValidAnswerBody] = useState(false)
+  const [photoPreviews, setPhotoPreviews] = useState([])
+  const [files, setFiles] = useState([])
+  const [photos, setPhotos] = useState([])
+  const [validated, setValidated] = useState(false)
 
   const context = useQA()
 
-  useEffect(() => {
-    validateEmail(email)
-    validateBlank()
-  }, [email, nickname, answerBody])
-
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleShow = () => {
+    setShow(true)
+    resetAnswerModal()
+  }
   const handleEmail = (e) => setEmail(e.target.value)
   const handleNickname = (e) => setNickname(e.target.value)
   const handleAnswerBody = (e) => setAnswerBody(e.target.value)
 
-  const handleFile = (e) => {
-    // sets photos to image link
-    const content = e.target.result
-    setPhotos(content)
-    // You can set content in state and show it in render.
-  }
-  const handleChangeFile = (file) => {
-    // used for image upload
-    let fileData = new FileReader()
-    fileData.onloadend = handleFile
-    fileData.readAsDataURL(file)
+  const resetAnswerModal = () => {
+    setEmail("")
+    setNickname("")
+    setAnswerBody("")
+    setPhotoPreviews([])
+    setFiles([])
+    setPhotos([])
+    setValidated(false)
   }
 
-  const validateEmail = (mail) => {
-    // eslint-disable-next-line no-console
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-      // eslint-disable-line no-eval
-      return true
-    }
-    return false
-  }
-
-  const validateBlank = () => {
-    if (validateEmail(email)) {
-      setIsValidEmail(true)
-    }
-    if (nickname !== "") {
-      setIsValidNickname(true)
-    }
-    if (answerBody !== "") {
-      setIsValidAnswerBody(true)
-    }
-  }
-
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    setValidated(true)
+    event.preventDefault()
     // post if all sections are valid
-    if (isValidEmail && isValidNickname && isValidAnswerBody) {
+    const form = event.currentTarget
+    if (form.checkValidity() === true) {
+      // console.log(form.checkValidity())
       context.postAnswer(
         props.questionId,
         answerBody,
         nickname,
         email,
-        [photos],
+        photos,
         (response) => {
           setShow(false)
+          props.getAnswersData()
         }
       )
-    } else {
-      const invalidFields = []
-
-      if (!isValidEmail) {
-        invalidFields.push("Email")
-      }
-      if (!isValidNickname) {
-        invalidFields.push(" Nickname")
-      }
-      if (!isValidAnswerBody) {
-        invalidFields.push(" Answer Body")
-      }
-
-      alert(
-        "You must enter the following:\n" +
-          invalidFields.map((invalidField) => invalidField)
-      )
     }
+  }
+
+  const ImagePreviews = (props) => {
+    if (props.url) {
+      return <img src={props.url} width="100" height="100" />
+    } else {
+      return null
+    }
+  }
+
+  const InputImages = () => {
+    if (photoPreviews.length < 5) {
+      return (
+        <Form.Control
+          type="file"
+          onChange={(e) => {
+            // console.log(e.target.files)
+            setPhotoPreviews([
+              ...photoPreviews,
+              URL.createObjectURL(e.target.files[0]),
+            ])
+            setFiles([...files, e.target.files[0]])
+          }}
+        />
+      )
+    } else {
+      return null
+    }
+  }
+
+  const handleFileUpload = (e) => {
+    e.preventDefault()
+    const urls = []
+    const uploaders = files.map((file) => {
+      const formData = new FormData()
+      formData.append("file", file)
+      // formData.append("tags", `codeinfuse, medium, gist`)
+      formData.append("upload_preset", "wcjmqzvr")
+      // formData.append("api_key", "353977359896185")
+      // formData.append("timestamp", (Date.now() / 1000) | 0)
+
+      axios
+        .post("https://api.cloudinary.com/v1_1/dqab317k6/image/upload", formData)
+        .then((response) => {
+          const data = response.data
+          const fileURL = data.secure_url // You should store this URL for future references in your app
+          // setPhotos([...photos, fileURL])
+          urls.push(fileURL)
+          console.log(data)
+        })
+    })
+    setPhotos(urls)
   }
 
   return (
@@ -126,22 +141,25 @@ const AnswerModal = (props) => {
         </Modal.Header>
 
         <Modal.Body>
-          <Subtitle>[Product Name]: {props.questionBody}</Subtitle>
-          <Form.Group className="mb-3" controlId="AnswerForm.AnswerTextArea">
-            <Form.Label>Your Answer:</Form.Label>
-            <Form.Control
-              onChange={handleAnswerBody}
-              as="textarea"
-              type="text"
-              max="1000"
-              rows={3}
-              value={answerBody}
-            />
-          </Form.Group>
-          <Form>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Subtitle>[Product Name]: {props.questionBody}</Subtitle>
+            <Form.Group className="mb-3" controlId="AnswerForm.AnswerTextArea">
+              <Form.Label>Your Answer:</Form.Label>
+              <Form.Control
+                required
+                onChange={handleAnswerBody}
+                as="textarea"
+                type="text"
+                max="1000"
+                rows={3}
+                value={answerBody}
+              />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="AnswerForm.Nickname">
               <Form.Label>Nickname:</Form.Label>
               <Form.Control
+                required
                 onChange={handleNickname}
                 type="text"
                 max="60"
@@ -152,13 +170,13 @@ const AnswerModal = (props) => {
                 For privacy reasons, do not use your full name or email address
               </UnderText>
             </Form.Group>
-          </Form>
-          <Form>
+
             <Form.Group className="mb-3" controlId="AnswerForm.Email">
               <Form.Label>Email address:</Form.Label>
               <Form.Control
+                required
                 onChange={handleEmail}
-                type="email"
+                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                 placeholder="Example: jack@email.com"
                 value={email}
               />
@@ -166,23 +184,20 @@ const AnswerModal = (props) => {
                 For authentication reasons, you will not be emailed
               </UnderText>
             </Form.Group>
+
+            <Form.Group controlId="formFile" className="mb-3">
+              <InputImages />
+              <button onClick={handleFileUpload}>Upload</button>
+            </Form.Group>
+            {photoPreviews.map((photoPreview, i) => (
+              <ImagePreviews url={photoPreview} key={i} />
+            ))}
+            <div>
+              <Button1 onClick={handleClose}>Close</Button1>
+              <Button1 type="submit">Submit</Button1>
+            </div>
           </Form>
-
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Images:</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={(e) => handleChangeFile(e.target.files[0])}
-            />
-          </Form.Group>
-
-          <Img src={photos} width="100" height="100" />
         </Modal.Body>
-
-        <Modal.Footer>
-          <Button1 onClick={handleClose}>Close</Button1>
-          <Button1 onClick={handleSubmit}>Submit</Button1>
-        </Modal.Footer>
       </Modal>
     </>
   )

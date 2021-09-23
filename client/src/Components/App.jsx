@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { ProductsProvider } from "../contexts/ProductsContext.jsx"
 import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
 import { ReviewsProvider } from "../contexts/ReviewsContext.jsx"
+import { QAProvider } from "../contexts/QAContext.jsx"
 import ProductMainView from "./ProductContainer/ProductMainView.jsx"
 import RelatedContainer from "./RelatedContainer/RelatedContainer.jsx"
 import QuestionsContainer from "./QuestionsContainer/QuestionsContainer.jsx"
@@ -44,7 +45,9 @@ const App = () => {
                 />
                 <ProductMainView />
                 <RelatedContainer />
-                <QuestionsContainer />
+                <QAProvider>
+                  <QuestionsContainer />
+                </QAProvider>
                 <ReviewsContainer />
               </InteractionsProvider>
             </ReviewsProvider>

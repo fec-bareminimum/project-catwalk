@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import AnswersList from "../AnswersList/AnswersList.jsx"
 import { Row, Col } from "react-bootstrap"
 import styled from "styled-components"
@@ -25,6 +25,9 @@ const SmallUnderline = styled.u`
   margin-right: 10px;
   margin-left: 10px;
 `
+const SmallBold = styled.b`
+  font-size: small;
+`
 
 const QuestionsListEntry = (props) => {
   // uses component AnswersList to list answers for each question
@@ -34,7 +37,18 @@ const QuestionsListEntry = (props) => {
     props.question.question_helpfulness
   )
   const [helpfulnessClicked, setHelpfulnessClicked] = useState(false)
+  const [answersListData, setAnswersListData] = useState([])
+  const [renderedAnswersListData, setRenderedAnswersListData] = useState([])
+  const [answersCount, setAnswersCount] = useState(2)
   const context = useQA()
+
+  useEffect(() => {
+    getAnswersData()
+  }, [])
+
+  useEffect(() => {
+    getAnswersRenderData()
+  }, [answersCount, answersListData])
 
   function handleHelpfulChange(e) {
     // handles changing the helpfulness each time the page is visited and 'helpful' button is clicked
@@ -43,6 +57,28 @@ const QuestionsListEntry = (props) => {
         setQuestionHelpfulness(questionHelpfulness + 1)
         setHelpfulnessClicked(true)
       })
+    }
+  }
+
+  const getAnswersData = () => {
+    context.fetchAnswers(props.question.question_id, 1, 12, (response) => {
+      setAnswersListData(response.data.results)
+    })
+  }
+
+  const getAnswersRenderData = () => {
+    setRenderedAnswersListData(answersListData.slice(0, answersCount))
+  }
+
+  const ShowMoreOrCollapse = () => {
+    if (answersCount === 2) {
+      return (
+        <SmallBold onClick={() => setAnswersCount(12)}>SEE MORE ANSWERS</SmallBold>
+      )
+    } else if (answersCount !== 2) {
+      return (
+        <SmallBold onClick={() => setAnswersCount(2)}>COLLAPSE ANSWERS</SmallBold>
+      )
     }
   }
 
@@ -67,12 +103,17 @@ const QuestionsListEntry = (props) => {
             <AnswerModal
               questionId={props.question.question_id}
               questionBody={props.question.question_body}
+              getAnswersData={getAnswersData}
             />
           </Col>
         </QuestionLine>
       </Row>
 
-      <AnswersList questionId={props.question.question_id} />
+      <AnswersList
+        answersListData={answersListData}
+        renderedAnswersListData={renderedAnswersListData}
+        ShowMoreOrCollapse={ShowMoreOrCollapse}
+      />
     </div>
   )
 }
