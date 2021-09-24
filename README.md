@@ -29,7 +29,7 @@ Project Catwalk is a MVP client-facing retail web-portal. Browse catalog product
 - [Andy Chen](https://github.com/andy-ch3n)
 - [Gabrielle Guo](https://github.com/ggbbi)
 - [Lawrence Sun](https://github.com/lawsun03)
-- [Spencer Lepine](https://github.com/spencerlepine)
+- [Spencer Lepine](https://github.com/spencerlepine) ([Journal](https://gist.github.com/spencerlepine/964affee95497d2009f96c0f778a3a41))
 
 ## Tech Stack
 
