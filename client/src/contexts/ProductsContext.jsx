@@ -21,36 +21,39 @@ export const ProductsProvider = ({ children }) => {
   const [relatedProductIds, _setRelatedIds] = useState([])
   const [selectedStyleIndex, _setSelectedStyleIndex] = useState(0)
 
-  const exisitingListProduct = (productList, productObj) => {
+  const existingListProduct = (productList, productObj) => {
     return productList[productList.map((e) => e.id).indexOf(productObj["id"])]
   }
   //  productList.map((e) => parseInt(e.id) ).indexOf((productObj["id"]))
 
   const _extendExistingProductInList = (productObj) => {
-    _setProductList((prevList) => {
-      // Also update the displayed product value
-      if (
-        productObj["id"] === displayedProduct["id"] ||
-        Object.keys(displayedProduct).length < 10
-      ) {
-        _setDisplayedProduct((prevObj) => ({ ...prevObj, ...productObj }))
-      }
+    setTimeout(() => {
+      _setProductList((prevList) => {
+        // Also update the displayed product value
 
-      if (exisitingListProduct(prevList, productObj)) {
-        return prevList.map((product) =>
-          product["id"] !== productObj["id"]
-            ? product
-            : { ...product, ...productObj }
-        )
-      } else {
-        return [...prevList, productObj]
-      }
-    })
+        _setDisplayedProduct((prevObj) => {
+          if (productObj["id"] === prevObj["id"]) {
+            return { ...prevObj, ...productObj }
+          } else {
+            return prevObj
+          }
+        })
+
+        if (existingListProduct(prevList, productObj)) {
+          return prevList.map((product) =>
+            product["id"] !== productObj["id"]
+              ? product
+              : { ...product, ...productObj }
+          )
+        } else {
+          return [...prevList, productObj]
+        }
+      })
+    }, 0)
   }
 
   const fetchProducts = (page, count, callback) => {
     fetch("/products", { page, count }, (products) => {
-      console.log("products", products)
       _setProductList(products)
       updateDisplayedProduct(products[0])
 
@@ -110,8 +113,10 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const updateDisplayedProduct = (newProduct) => {
-    if (newProduct && newProduct["id"] !== displayedProduct["id"]) {
-      console.log("Changed displayedProduct", displayedProduct)
+    if (
+      (newProduct && newProduct["id"] !== displayedProduct["id"]) ||
+      Object.keys(displayedProduct).length === 0
+    ) {
       _setDisplayedProduct(newProduct)
       fetchProductRelatedIds(newProduct["id"])
       fetchProductStyles(newProduct["id"])

@@ -13,7 +13,7 @@ function ProductDetails(props) {
       <Row>
         <Col>
           <div className="sameline">
-            <Star />
+            <Star id={props.infoData.id} />
             <a className="reviews" href="#reviews">
               Read All Reviews
             </a>
@@ -61,8 +61,8 @@ function ProductDetails(props) {
             props.stylesData.map((item) => {
               return (
                 <RightThumbOverlay
-                  selectedStyle={props.selectedStyle}
-                  updateStyle={props.updateStyle}
+                   selectedStyle={props.selectedStyle}
+                   updateStyle={props.updateStyle}
                   name={item.name}
                   item={item.photos[0].thumbnail_url}
                   id={item.style_id}
@@ -77,7 +77,7 @@ function ProductDetails(props) {
         stylePhotos={props.stylePhotos}
         stylesData={props.styleList}
         infoData={props.info}
-        setStyle={props.updateStyleHandler}
+        setStyle={props.setStyle}
       />
       <h4 className="social">Share on social media</h4>
       <div className="App">
