@@ -14,7 +14,7 @@ function ProductDetails(props) {
         <Col>
           <div className="sameline">
             <Star id={props.infoData.id} />
-            <a className="reviews" href="#reviews">
+            <a className="reviews" href="#ratings-reviews">
               Read All Reviews
             </a>
           </div>
