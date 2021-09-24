@@ -9,8 +9,6 @@ import QuestionsContainer from "./QuestionsContainer/QuestionsContainer.jsx"
 import ReviewsContainer from "./ReviewsContainer/ReviewsContainer.jsx"
 import Navbar from "./Navbar/Navbar.jsx"
 import { ThemeProvider } from "styled-components"
-import WebFont from "webfontloader"
-import { GlobalStyles } from "../theme/GlobalStyles"
 import { useTheme } from "../theme/useTheme"
 import InfiniteScroll from "react-infinite-scroll-component"
 
@@ -22,21 +20,11 @@ const App = () => {
     setSelectedTheme(theme)
   }, [themeLoaded])
 
-  // Load all the fonts
-  useEffect(() => {
-    WebFont.load({
-      google: {
-        families: getFonts(),
-      },
-    })
-  })
-
   const isLightMode = selectedTheme["name"].toLowerCase() === "light"
   return (
     <React.Fragment>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
-          <GlobalStyles />
           <ProductsProvider>
             <ReviewsProvider>
               <QAProvider>

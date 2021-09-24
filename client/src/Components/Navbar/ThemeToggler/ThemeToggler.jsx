@@ -30,7 +30,7 @@ const ToggleContainer = styled.button`
 const ThemeToggler = ({ toggleTheme, isLightMode }) => {
   return (
     <ToggleContainer onClick={toggleTheme}>
-      {isLightMode ? <MoonIcon style={{ marginLeft: "auto" }} /> : <SunIcon />}
+      {isLightMode ? <SunIcon style={{ marginLeft: "auto" }} /> : <MoonIcon />}
     </ToggleContainer>
   )
 }
