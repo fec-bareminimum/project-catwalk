@@ -21,7 +21,7 @@ const Subtitle = styled.b`
 const UnderText = styled.div`
   font-size: small;
 `
-const SmallUnderline = styled.u`
+const SmallUnderline = styled.a`
   font-size: small;
   margin-right: 10px;
   margin-left: 10px;

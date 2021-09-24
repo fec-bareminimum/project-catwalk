@@ -6,6 +6,18 @@ import Review from "./Review.jsx"
 import Upload from "./Upload.jsx"
 import UserInfo from "./UserInfo.jsx"
 import useReviews from "../../../../contexts/ReviewsContext.jsx"
+import styled from "styled-components"
+
+const Btn = styled.button`
+  margin-right: 15px;
+  border-radius: 0px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+`
 
 const AddButton = (props) => {
   const { productInfo, addReview } = useReviews()
@@ -69,9 +81,9 @@ const AddButton = (props) => {
   return (
     <Col>
       <Col>
-        <Button className="add" onClick={handleShow} style={{ float: "right" }}>
+        <Btn className="add" onClick={handleShow} style={{ float: "right" }}>
           Add a review
-        </Button>
+        </Btn>
         <AddModal />
       </Col>
     </Col>

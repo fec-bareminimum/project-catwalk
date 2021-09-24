@@ -20,7 +20,7 @@ const SmallSpan = styled.span`
   margin-right: 10px;
   margin-left: 10px;
 `
-const SmallUnderline = styled.u`
+const SmallUnderline = styled.a`
   font-size: small;
   margin-right: 10px;
   margin-left: 10px;

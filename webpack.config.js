@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   watch: true,
-  mode: "production",
+  mode: "none",
   entry: path.resolve(__dirname, "client", "src", "index.jsx"),
   output: {
     path: path.resolve(__dirname, "client", "build"),
@@ -16,6 +16,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, "client", "public", "index.html"),
       filename: "./index.html",
+      favicon: path.resolve(__dirname, "client", "public", "favicon.ico"),
       title: "Project Catwalk",
       meta: {
         viewport:

@@ -97,6 +97,18 @@ export const ProductsProvider = ({ children }) => {
     })
   }
 
+  function memoizer(fn) {
+    const cachedResults = {}
+    return function (...args) {
+      const key = JSON.stringify(args)
+      if (!cachedResults[key]) {
+        cachedResults[n] = fn(args)
+      }
+      return cachedResults[key]
+    }
+  }
+
+
   const fetchProductRelatedIds = (product_id) => {
     fetch(`/products/${product_id}/related`, { product_id }, (relatedProducts) => {
       _setRelatedIds(relatedProducts)

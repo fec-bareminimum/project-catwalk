@@ -5,18 +5,8 @@ import { Container } from "react-bootstrap"
 import styled from "styled-components"
 import QAProvider from "../../contexts/QAContext.jsx"
 
-const Title = styled.div`
+const Title = styled.h3`
   margin-top: 20px;
-`
-const Button1 = styled.button`
-  margin-right: 15px;
-  border-radius: 0px;
-  border: 2px solid black;
-  background-color: white;
-  color: black;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
 `
 
 const QuestionsContainer = () => {

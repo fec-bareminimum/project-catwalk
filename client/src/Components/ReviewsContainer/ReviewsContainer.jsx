@@ -4,6 +4,11 @@ import Breakdowns from "./Breakdowns/Breakdowns.jsx"
 import List from "./List/List.jsx"
 import useReviews from "../../contexts/ReviewsContext.jsx"
 import useClickLogger from "../../hooks/useClickLogger.jsx"
+import styled from "styled-components"
+
+const Title = styled.h3`
+  margin-top: 20px;
+`
 
 const ReviewsContainer = () => {
   const { fetchReviews, fetchReviewMetadata, filters, setFilters } = useReviews()
@@ -40,8 +45,8 @@ const ReviewsContainer = () => {
   }
 
   return (
-    <Container className="reviews">
-      <h4 style={{ marginTop: "20px" }}>Ratings &#38; reviews</h4>
+    <Container className="reviews" id="reviews">
+      <Title>RATINGS &#38; REVIEWS</Title>
       <Row>
         <Col xs={2} md={4}>
           <Breakdowns filterReviews={filterReviews} />

@@ -61,8 +61,8 @@ function ProductDetails(props) {
             props.stylesData.map((item) => {
               return (
                 <RightThumbOverlay
-                   selectedStyle={props.selectedStyle}
-                   updateStyle={props.updateStyle}
+                  selectedStyle={props.selectedStyle}
+                  updateStyle={props.updateStyle}
                   name={item.name}
                   item={item.photos[0].thumbnail_url}
                   id={item.style_id}
