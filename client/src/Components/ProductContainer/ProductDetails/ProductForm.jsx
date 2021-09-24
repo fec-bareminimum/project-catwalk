@@ -6,16 +6,16 @@ import uniqid from "uniqid"
 import Stylesheet from "../styles.css"
 import styled from "styled-components"
 
-// const Button1 = styled.button`
-//   margin-right: 15px;
-//   border-radius: 0px;
-//   border: 2px solid black;
-//   background-color: white;
-//   color: black;
-//   padding: 14px 28px;
-//   font-size: 16px;
-//   cursor: pointer;
-// `
+const Button1 = styled.button`
+  margin-right: 15px;
+  border-radius: 0px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+`
 
 function ProductForm(props) {
   const cartCtx = useContext(CartContext)
@@ -129,7 +129,7 @@ function ProductForm(props) {
         <Row>
           <Col>
             <div className="d-grid gap-2" bg="white" style={{ color: "grey" }}>
-              <Button
+              <Button1
                 bg="white"
                 size="lg"
                 variant="secondary"
@@ -137,7 +137,7 @@ function ProductForm(props) {
                 onClick={submitHandler}
               >
                 ADD TO BAG
-              </Button>
+              </Button1>
             </div>
           </Col>
         </Row>

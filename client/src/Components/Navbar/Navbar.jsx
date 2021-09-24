@@ -20,12 +20,7 @@ const Search = styled.div`
 
 const Nav = ({ toggleTheme, isLightMode }) => {
   return (
-    <Navbar
-      className="navbar-fixed-top"
-      bg="dark"
-      variant="light"
-      style={{ color: "white" }}
-    >
+    <Navbar className="navbar-fixed-top" bg="dark" variant="dark">
       {/* <img src="./project_logo" alt="Project Logo"></img> */}
       <Navbar.Brand style={{ marginLeft: "20px", color: "white" }} href="#home">
         The Bare Minimum

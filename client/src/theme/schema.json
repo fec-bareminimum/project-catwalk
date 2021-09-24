@@ -4,35 +4,39 @@
       "id": "T_001",
       "name": "Light",
       "colors": {
-        "body": "#FFFFFF",
-        "text": "#000000",
+        "body": "#F4F2F7",
+        "text": "#28242B",
         "button": {
-          "text": "#FFFFFF",
-          "background": "#000000"
+          "text": "#D3CCA5",
+          "background": "#795A2D",
+          "right": "15px",
+          "radius": "0px",
+          "border": "2px #D3CCA5",
+          "padding": "14px 28px"
         },
         "link": {
-          "text": "teal",
-          "opacity": 1
+          "text": "#417726"
         }
-      },
-      "font": "Ubuntu"
+      }
     },
     "dark": {
-        "id": "X1Sr26A8eA",
-        "name": "Dark",
-        "colors": {
-            "body": "#2e2a29",
-            "text": "#cfcfcf",
-            "button": {
-                "text": "#0081c2",
-                "background": "#fcfcfc"
-            },
-            "link": {
-                "text": "#dbaa24",
-                "opacity": 1
-            }
+      "id": "X1Sr26A8eA",
+      "name": "Dark",
+      "colors": {
+        "body": "#181719",
+        "text": "#FFFFFF",
+        "button": {
+          "text": "#795A2D",
+          "background": "#D5DE2E",
+          "right": "15px",
+          "radius": "0px",
+          "border": "2px #795A2D",
+          "padding": "14px 28px"
         },
-        "font": "Ubuntu"
+        "link": {
+          "text": "#63D317"
+        }
+      }
     }
   }
 }

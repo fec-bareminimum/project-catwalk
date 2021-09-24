@@ -10,7 +10,6 @@ function Star(props) {
     <StarRatings
       starSpacing={"2px"}
       rating={getAverageRating(props.id)}
-      starRatedColor="rgb(0,0,0)"
       numberOfStars={5}
       starDimension="15px"
       className="star-rating"

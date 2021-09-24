@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { ProductsProvider } from "../contexts/ProductsContext.jsx"
-import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
 import { ReviewsProvider } from "../contexts/ReviewsContext.jsx"
-import { QAProvider } from "../contexts/QAContext.jsx"
+import { InteractionsProvider } from "../contexts/InteractionsContext.jsx"
+import Navbar from "./Navbar/Navbar.jsx"
 import ProductMainView from "./ProductContainer/ProductMainView.jsx"
 import RelatedContainer from "./RelatedContainer/RelatedContainer.jsx"
 import QuestionsContainer from "./QuestionsContainer/QuestionsContainer.jsx"
 import ReviewsContainer from "./ReviewsContainer/ReviewsContainer.jsx"
-import Navbar from "./Navbar/Navbar.jsx"
+import { GlobalStyles } from "../theme/GlobalStyles"
 import { ThemeProvider } from "styled-components"
 import { useTheme } from "../theme/useTheme"
 import InfiniteScroll from "react-infinite-scroll-component"
@@ -25,20 +25,19 @@ const App = () => {
     <React.Fragment>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
+          <GlobalStyles />
           <ProductsProvider>
             <ReviewsProvider>
-              <QAProvider>
-                <InteractionsProvider>
-                  <Navbar
-                    toggleTheme={() => setSelectedTheme(toggleTheme())}
-                    isLightMode={isLightMode}
-                  />
-                  <ProductMainView />
-                  <RelatedContainer />
-                  <QuestionsContainer />
-                  <ReviewsContainer />
-                </InteractionsProvider>
-              </QAProvider>
+              <InteractionsProvider>
+                <Navbar
+                  toggleTheme={() => setSelectedTheme(toggleTheme())}
+                  isLightMode={isLightMode}
+                />
+                <ProductMainView />
+                <RelatedContainer />
+                <QuestionsContainer />
+                <ReviewsContainer />
+              </InteractionsProvider>
             </ReviewsProvider>
           </ProductsProvider>
         </ThemeProvider>
