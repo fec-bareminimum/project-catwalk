@@ -3,6 +3,18 @@ import { Container, Row, Col, Button } from "react-bootstrap"
 import ReviewList from "./ReviewList.jsx"
 import AddButton from "./AddButton/AddButton.jsx"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
+import styled from "styled-components"
+
+const Btn = styled.button`
+  margin-right: 15px;
+  border-radius: 0px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+`
 
 const List = (props) => {
   const { reviews } = useReviews()
@@ -10,9 +22,9 @@ const List = (props) => {
 
   const MoreBtn = () => (
     <Col>
-      <Button className="more" onClick={showMore} style={{ float: "left" }}>
-        More reviews
-      </Button>
+      <Btn className="more" onClick={showMore} style={{ float: "left" }}>
+        MORE REVIEWS
+      </Btn>
     </Col>
   )
 

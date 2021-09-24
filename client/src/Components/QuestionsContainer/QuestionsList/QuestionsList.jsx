@@ -99,7 +99,7 @@ const QuestionsList = (props) => {
         next={fetchMoreQuestions}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        height={300}
+        height={200}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>There are no more questions!</b>

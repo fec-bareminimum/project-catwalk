@@ -12,10 +12,14 @@ const Helpful = styled.span`
   margin-right: 10px;
 `
 
-const SmallDiv = styled.div`
-  font-size: small;
-  margin-bottom: 10px;
-`
+// const SmallDiv = styled.div`
+//   font-size: small;
+//   margin-bottom: 10px;
+// `
+
+// const smallA = styled.a`
+//   font-size: small;
+// `
 
 const AnswersListEntry = (props) => {
   const [answerHelpfulness, setAnswerHelpfulness] = useState(
@@ -49,9 +53,9 @@ const AnswersListEntry = (props) => {
   function Report() {
     // function is used to report answer and change report to reported
     if (!reportedAnswerClicked) {
-      return <u onClick={handleReport}>Report</u>
+      return <a onClick={handleReport}>Report</a>
     } else {
-      return <u>Reported</u>
+      return <a>Reported</a>
     }
   }
 
@@ -80,30 +84,30 @@ const AnswersListEntry = (props) => {
             <Img key={photo.id} src={photo.url} alt="" width="100" height="100" />
           ))}
         </div>
-        <SmallDiv>
+        <div>
           by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />
           , {props.answer.date.substr(0, 10)}
           <Dash>|</Dash>
           <Helpful>Helpful?</Helpful>
-          <u onClick={handleHelpfulChange}>Yes({answerHelpfulness})</u>
+          <a onClick={handleHelpfulChange}>Yes({answerHelpfulness})</a>
           <Dash>|</Dash>
           <Report />
-        </SmallDiv>
+        </div>
       </div>
     )
   }
   return (
     <div>
       {props.answer.body}
-      <SmallDiv>
+      <div>
         by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />,{" "}
         {props.answer.date.substr(0, 10)}
         <Dash>|</Dash>
         <Helpful>Helpful?</Helpful>
-        <u onClick={handleHelpfulChange}>Yes({answerHelpfulness})</u>
+        <a onClick={handleHelpfulChange}>Yes({answerHelpfulness})</a>
         <Dash>|</Dash>
         <Report />
-      </SmallDiv>
+      </div>
     </div>
   )
 }
