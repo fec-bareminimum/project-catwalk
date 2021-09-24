@@ -3,6 +3,7 @@ import { ListGroup, Button } from "react-bootstrap"
 import QuestionListEntry from "./QuestionsListEntry/QuestionsListEntry.jsx"
 import QuestionModal from "./QuestionModal/QuestionModal.jsx"
 import useQA from "../../../contexts/QAContext.jsx"
+import useProducts from "../../../contexts/ProductsContext.jsx"
 import styled from "styled-components"
 import InfiniteScroll from "react-infinite-scroll-component"
 
@@ -25,13 +26,23 @@ const QuestionsList = (props) => {
   const [renderQuestionsListData, setRenderQuestionsListData] = useState([])
   const [questionsCount, setQuestionsCount] = useState(4)
   const [hasMore, setHasMore] = useState(true)
+  const [product_id, setProduct_id] = useState(null)
 
-  const context = useQA()
+  const { fetchQuestions } = useQA()
+  const { displayedProduct } = useProducts()
+
+  useEffect(() => {
+    if (Object.keys(displayedProduct).length > 0) {
+      setProduct_id(displayedProduct.id)
+    }
+  }, [displayedProduct])
 
   useEffect(() => {
     // collecting entire Question List for a certain product ID
-    getData()
-  }, [])
+    if (product_id) {
+      getData()
+    }
+  }, [product_id])
 
   useEffect(() => {
     // sets the questions to be rendered; as questionsCount increases the more questions that are rendered
@@ -44,7 +55,7 @@ const QuestionsList = (props) => {
   }, [props.filterBySearch])
 
   const getData = () => {
-    context.fetchQuestions(42366, 1, 50, (response) => {
+    fetchQuestions(product_id, 1, 50, (response) => {
       setQuestionListData(response.data.results)
     })
   }

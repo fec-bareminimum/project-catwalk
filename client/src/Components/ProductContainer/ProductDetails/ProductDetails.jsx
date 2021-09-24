@@ -48,7 +48,7 @@ function ProductDetails(props) {
       </Row>
       <div className="productDetail">
         {" "}
-        <b className="styleBold"> STYLE {">"} </b>
+        <b className="styleBold">STYLE</b>
         {props.selectedStyle && props.selectedStyle.name !== null ? (
           props.selectedStyle.name
         ) : (

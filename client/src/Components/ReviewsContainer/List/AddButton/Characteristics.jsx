@@ -27,7 +27,7 @@ const Characteristics = (props) => {
         </Row>
         <Row>
           <Col>
-            {[1, 2, 3, 4, 5].map((rating, i) => (
+            {[5, 4, 3, 2, 1].map((rating, i) => (
               <Form.Check
                 required
                 inline

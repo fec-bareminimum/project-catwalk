@@ -46,11 +46,7 @@ const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
     <Container className="cardList p-4">
       <Header>{listTitle}</Header>
 
-      <Carousel
-        responsive={responsive}
-        showDots={false}
-        arrows={true}
-      >
+      <Carousel responsive={responsive} showDots={false} arrows={true}>
         {FirstCard && (
           <Card
             style={{
