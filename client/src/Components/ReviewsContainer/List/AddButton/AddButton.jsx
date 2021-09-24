@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap"
 import Overall from "./Overall.jsx"
 import Characteristics from "./Characteristics.jsx"
@@ -23,9 +23,17 @@ const Btn = styled.button`
 const AddButton = (props) => {
   const { productInfo, addReview } = useReviews()
   const { displayedProduct } = useProducts()
-  const [reviewData, setReviewData] = useState({ product_id: 42366 })
+  const [reviewData, setReviewData] = useState({})
   const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    if (Object.keys(displayedProduct).length > 0) {
+      setReviewData({ product_id: displayedProduct.id })
+    }
+  }, [displayedProduct])
+
   const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
 
   const submitData = (data) => {
     setReviewData(Object.assign(reviewData, data))
@@ -56,28 +64,23 @@ const AddButton = (props) => {
     )
   }
 
-  const AddModal = () => {
-    const handleClose = () => setShow(false)
-
-    return (
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Container>
-            <Row>
-              <h3>Write Your Review</h3>
-            </Row>
-            <Row>
-              <h5>{`About the ${displayedProduct.name}`}</h5>
-              {/* <h5>About the Camo Onesie</h5> */}
-            </Row>
-          </Container>
-        </Modal.Header>
-        <Modal.Body>
-          <AddForm />
-        </Modal.Body>
-      </Modal>
-    )
-  }
+  const AddModal = () => (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Container>
+          <Row>
+            <h3>Write Your Review</h3>
+          </Row>
+          <Row>
+            <h5>{`About the ${displayedProduct.name}`}</h5>
+          </Row>
+        </Container>
+      </Modal.Header>
+      <Modal.Body>
+        <AddForm />
+      </Modal.Body>
+    </Modal>
+  )
 
   return (
     <Col>
