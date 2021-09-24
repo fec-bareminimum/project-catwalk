@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Modal, Form, Button } from "react-bootstrap"
 import useQA from "../../../../../contexts/QAContext.jsx"
+import useProducts from "../../../../../contexts/ProductsContext.jsx"
 import styled from "styled-components"
 import Img from "react-cool-img"
 import axios from "axios"
@@ -36,8 +37,16 @@ const AnswerModal = (props) => {
   const [files, setFiles] = useState([])
   const [photos, setPhotos] = useState([])
   const [validated, setValidated] = useState(false)
+  const [product_name, setProduct_name] = useState("")
 
-  const context = useQA()
+  const { postAnswer } = useQA()
+  const { displayedProduct } = useProducts()
+
+  useEffect(() => {
+    if (Object.keys(displayedProduct).length > 0) {
+      setProduct_name(displayedProduct.name)
+    }
+  }, [displayedProduct])
 
   const handleClose = () => setShow(false)
   const handleShow = () => {
@@ -65,7 +74,7 @@ const AnswerModal = (props) => {
     const form = event.currentTarget
     if (form.checkValidity() === true) {
       // console.log(form.checkValidity())
-      context.postAnswer(
+      postAnswer(
         props.questionId,
         answerBody,
         nickname,
@@ -93,7 +102,6 @@ const AnswerModal = (props) => {
         <Form.Control
           type="file"
           onChange={(e) => {
-            // console.log(e.target.files)
             setPhotoPreviews([
               ...photoPreviews,
               URL.createObjectURL(e.target.files[0]),
@@ -142,7 +150,7 @@ const AnswerModal = (props) => {
 
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Subtitle>[Product Name]: {props.questionBody}</Subtitle>
+            <Subtitle>{`${product_name}: ${props.questionBody}`}</Subtitle>
             <Form.Group className="mb-3" controlId="AnswerForm.AnswerTextArea">
               <Form.Label>Your Answer:</Form.Label>
               <Form.Control
