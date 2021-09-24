@@ -48,11 +48,11 @@ function ProductDetails(props) {
       </Row>
       <div className="productDetail">
         {" "}
-        <b className="styleBold">STYLE</b>
+        <b className="styleBold">STYLE{" > "}</b>
         {props.selectedStyle && props.selectedStyle.name !== null ? (
           props.selectedStyle.name
         ) : (
-          <p> No style selected</p>
+          <div> No style selected</div>
         )}
       </div>
       <Row className="flex-row">
