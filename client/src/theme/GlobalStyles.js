@@ -10,6 +10,10 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.link.text};
   }
 
+  // .card-themed {
+  //   bg: ${({ theme }) => theme};
+  // }
+
   // button {
   //   background: ${({ theme }) => theme.colors.button.background};
   //   color: ${({ theme }) => theme.colors.button.text};
