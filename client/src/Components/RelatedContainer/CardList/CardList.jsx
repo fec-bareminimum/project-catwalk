@@ -10,6 +10,26 @@ const Header = styled.h3`
   margin: 20px 0;
 `
 
+const ScrollButton = styled.button`
+  padding: 0.2em 0.6em;
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  color: #dfdfdf;
+  font-size: 2em;
+  background: dimgrey;
+`
+
+const CustomRightArrow = ({ onClick, ...rest }) => {
+  const {
+    onMove,
+    carouselState: { currentSlide, deviceType }
+  } = rest;
+  // onMove means if dragging or swiping in progress.
+  return <button onClick={() => onClick()} />;
+};
+{/* <Carousel  />; */ }
+
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -43,10 +63,11 @@ const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
       : [{ id: 123 }, { id: 123 }, { id: 123 }]
 
   return (
-    <Container className="cardList p-4">
+    <Container className="cardList p-4" style={{ position: "relative" }}>
       <Header>{listTitle}</Header>
 
-      <Carousel responsive={responsive} showDots={false} arrows={true}>
+      <ScrollButton>{"<"}</ScrollButton>
+      <Carousel responsive={responsive} draggable={true} showDots={false}>
         {FirstCard && (
           <Card
             style={{
@@ -69,6 +90,7 @@ const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
           />
         ))}
       </Carousel>
+      <ScrollButton style={{ right: "5%" }}>{">"}</ScrollButton>
     </Container>
   )
 }
