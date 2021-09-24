@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
-import Placeholder from "react-bootstrap/Placeholder"
+import { Placeholder } from "react-bootstrap"
 import StarRating from "react-star-ratings"
 import useProducts from "../../../../contexts/ProductsContext.jsx"
 import useReviews from "../../../../contexts/ReviewsContext.jsx"
@@ -21,22 +21,17 @@ const ProductCard = (props) => {
     fetchProductStyles,
     selectedStyleIndex,
   } = useProducts()
-  const { reviews } = useReviews()
+  const { getAverageRating } = useReviews()
   const [styleShownIndex, setStyleShownIndex] = useState(0)
 
   useEffect(() => {
-    if (!props["id"] && fetchProductInfo) {
-      return fetchProductInfo(props["id"])
+    if (!props["name"] && fetchProductInfo) {
+      fetchProductInfo(props["id"])
     }
   }, [props["name"]])
 
-  useEffect(() => {
-    if (!props["styles"] && fetchProductStyles) {
-      return fetchProductStyles(props["id"])
-    }
-  }, [props["styles"]])
-
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     updateDisplayedProduct(props)
   }
 
@@ -52,7 +47,8 @@ const ProductCard = (props) => {
     >
       <Img
         variant="top"
-        style={{ height: "15rem" }}
+        alt={props.name || "Product Thumbnail"}
+        style={{ height: "15rem", width: "14.9rem", background: "#eaeaea" }}
         src={extractThumbnailLink(props, styleShownIndex)}
       />
 
@@ -72,12 +68,11 @@ const ProductCard = (props) => {
 
           <Card.Subtitle>
             <StarRating
-              rating={getAverageRating(reviews)}
+              rating={getAverageRating(props.id)}
               starDimension="15px"
               starSpacing="0"
             />
           </Card.Subtitle>
-          <ActionBtn thisProduct={props} />
         </Card.Body>
       ) : (
         <Card.Body>
@@ -89,6 +84,7 @@ const ProductCard = (props) => {
           </Placeholder>
         </Card.Body>
       )}
+      <ActionBtn thisProduct={props} />
     </Card>
   )
 }

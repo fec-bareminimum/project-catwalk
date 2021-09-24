@@ -12,10 +12,14 @@ const Helpful = styled.span`
   margin-right: 10px;
 `
 
-const SmallDiv = styled.div`
-  font-size: small;
-  margin-bottom: 10px;
-`
+// const SmallDiv = styled.div`
+//   font-size: small;
+//   margin-bottom: 10px;
+// `
+
+// const smallA = styled.a`
+//   font-size: small;
+// `
 
 const AnswersListEntry = (props) => {
   const [answerHelpfulness, setAnswerHelpfulness] = useState(
@@ -29,25 +33,29 @@ const AnswersListEntry = (props) => {
 
   function handleHelpfulChange(e) {
     // sends a request to change the value of the helpful key to add 1 to the current helpfulness and only allow the click to happen once per visit
-    context.markAnswerHelpful(props.answer.answer_id, (response) => {
-      setAnswerHelpfulness(answerHelpfulness + 1)
-      setHelpfulnessClicked(true)
-    })
+    if (!helpfulnessClicked) {
+      context.markAnswerHelpful(props.answer.answer_id, (response) => {
+        setAnswerHelpfulness(answerHelpfulness + 1)
+        setHelpfulnessClicked(true)
+      })
+    }
   }
 
   function handleReport() {
     // sends a request to change the value of the report key to true and only allow the click to happen once per visit
-    context.reportAnswer(props.answer.answer_id, (response) => {
-      setReportedAnswerClicked(true)
-    })
+    if (!reportedAnswerClicked) {
+      context.reportAnswer(props.answer.answer_id, (response) => {
+        setReportedAnswerClicked(true)
+      })
+    }
   }
 
   function Report() {
     // function is used to report answer and change report to reported
     if (!reportedAnswerClicked) {
-      return <u onClick={handleReport}>Report</u>
+      return <a onClick={handleReport}>Report</a>
     } else {
-      return <u>Reported</u>
+      return <a>Reported</a>
     }
   }
 
@@ -57,10 +65,10 @@ const AnswersListEntry = (props) => {
     return (
       <span>
         {textArray.map((item, index) => (
-          <>
+          <React.Fragment key={index}>
             {item}
-            {index !== textArray.length - 1 && <b key={index}>{shouldBeBold}</b>}
-          </>
+            {index !== textArray.length - 1 && <b>{shouldBeBold}</b>}
+          </React.Fragment>
         ))}
       </span>
     )
@@ -73,33 +81,33 @@ const AnswersListEntry = (props) => {
         {props.answer.body}
         <div>
           {props.answer.photos.map((photo) => (
-            <Img key={photo.id} src={photo.url} alt="" width="200" height="200" />
+            <Img key={photo.id} src={photo.url} alt="" width="100" height="100" />
           ))}
         </div>
-        <SmallDiv>
+        <div>
           by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />
-          , {props.answer.date.substr(1, 10)}
+          , {props.answer.date.substr(0, 10)}
           <Dash>|</Dash>
           <Helpful>Helpful?</Helpful>
-          <u onClick={handleHelpfulChange}>Yes({answerHelpfulness})</u>
+          <a onClick={handleHelpfulChange}>Yes({answerHelpfulness})</a>
           <Dash>|</Dash>
           <Report />
-        </SmallDiv>
+        </div>
       </div>
     )
   }
   return (
     <div>
       {props.answer.body}
-      <SmallDiv>
-        by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />,
-        {props.answer.date}
+      <div>
+        by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />,{" "}
+        {props.answer.date.substr(0, 10)}
         <Dash>|</Dash>
         <Helpful>Helpful?</Helpful>
-        <u onClick={handleHelpfulChange}>Yes({answerHelpfulness})</u>
+        <a onClick={handleHelpfulChange}>Yes({answerHelpfulness})</a>
         <Dash>|</Dash>
         <Report />
-      </SmallDiv>
+      </div>
     </div>
   )
 }

@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react"
 import { Container, Row, Col, Card, Image, Modal } from "react-bootstrap"
 import StarRatings from "react-star-ratings"
 import useReviews from "../../../contexts/ReviewsContext.jsx"
+import styled from "styled-components"
+
+const Dash = styled.span`
+  margin-right: 10px;
+  margin-left: 10px;
+`
 
 const ReviewTile = (props) => {
   const { markReviewHelpful, reportReview } = useReviews()
@@ -69,10 +75,13 @@ const ReviewTile = (props) => {
   const Footer = () => (
     <Card.Footer>
       {"Helpful? "}
+      <Dash />
       <Card.Link className="helpful" onClick={handleHelpful}>
         {`Yes (${props.helpfulness})`}
       </Card.Link>
-      {" |"}
+      <Dash />
+      {"|"}
+      <Dash />
       <Card.Link className="report" onClick={handleReport}>
         {"Report"}
       </Card.Link>

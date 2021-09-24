@@ -9,10 +9,14 @@ module.exports = {
     path: path.resolve(__dirname, "client", "build"),
     filename: "[name].[chunkhash].bundle.js",
   },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
   plugins: [
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, "client", "public", "index.html"),
       filename: "./index.html",
+      favicon: path.resolve(__dirname, "client", "public", "favicon.ico"),
       title: "Project Catwalk",
       meta: {
         viewport:

@@ -1,20 +1,25 @@
 import React, { useState, useContext, useEffect } from "react"
 import ProductDescription from "./ProductDescription.jsx"
 import { ProductsContext } from "../../contexts/ProductsContext.jsx"
-import { Navbar, Container, Row, Col } from "react-bootstrap"
+import { Navbar, Container, Row, Col, Placeholder } from "react-bootstrap"
 import ProductCarouselList from "./ProductCarouselList.jsx"
 import ProductDetails from "./ProductDetails/ProductDetails.jsx"
 import useProducts from "../../contexts/ProductsContext.jsx"
 import useCart, { CartProvider } from "../../contexts/CartContext.jsx"
 import Img from "react-cool-img"
 
-// Main Product Page
-
 function ProductMainView(props) {
-  const context = useContext(ProductsContext)
-  const [styleList, setStyleList] = useState([])
   const [selectedStyle, setStyle] = useState(null)
-  const [info, setInfo] = useState([])
+  const { displayedProduct } = useProducts()
+  const styleList = (displayedProduct.styles || {}).results || []
+
+  useEffect(() => {
+    if (displayedProduct.styles !== undefined) {
+      setStyle(styleList[0])
+    }
+  }, [styleList, displayedProduct])
+
+  const info = displayedProduct
   const [index, setIndex] = useState(0)
   const [visibleCarThumb, setVisibleCarThumb] = useState([])
   const [stylePhotos, setStylePhotos] = useState([])
@@ -22,17 +27,6 @@ function ProductMainView(props) {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex)
   }
-
-  useEffect(() => {
-    context.fetchProductStyles(42366, (response) => {
-      setStyleList(response.styles.results)
-      setStyle(response.styles.results[0])
-    })
-    context.fetchProductInfo(42366, (response) => {
-      setInfo(response)
-    })
-  }, [])
-
   useEffect(() => {
     if (selectedStyle) {
       setStylePhotos(selectedStyle.photos)
@@ -50,14 +44,12 @@ function ProductMainView(props) {
   }
 
   const updateThumbnailHandlerBackward = () => {
-    setIndex(0) //change me - anything but 0 breaks
+    setIndex(0)
     setVisibleCarThumb((prev) => {
       let endpos = selectedStyle.photos.indexOf(prev[0])
       return selectedStyle.photos.slice(endpos < 0 ? 0 : endpos - 4, endpos)
     })
   }
-
-  //breaking on 9th image backwards if setindex is 0
 
   const updateThumbnailHandlerForward = () => {
     setIndex(0)

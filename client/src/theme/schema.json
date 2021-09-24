@@ -15,21 +15,21 @@
           "opacity": 1
         }
       },
-      "font": "Tinos"
+      "font": "Ubuntu"
     },
     "dark": {
-      "id": "T_007",
+      "id": "X1Sr26A8eA",
       "name": "Dark",
       "colors": {
-        "body": "#9be7ff",
-        "text": "#0d47a1",
+        "body": "#2e2a29",
+        "text": "#cfcfcf",
         "button": {
-          "text": "#ffffff",
-          "background": "#0d47a1"
+          "text": "#0081c2",
+          "background": "#fcfcfc"
         },
         "link": {
-          "text": "#0d47a1",
-          "opacity": 0.8
+          "text": "#dbaa24",
+          "opacity": 1
         }
       },
       "font": "Ubuntu"

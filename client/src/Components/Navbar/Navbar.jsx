@@ -1,7 +1,7 @@
 import React from "react"
 import ThemeToggler from "./ThemeToggler/ThemeToggler.jsx"
 import styled from "styled-components"
-import { Navbar } from "react-bootstrap"
+import { Navbar, Container } from "react-bootstrap"
 
 const NavStyle = styled.div`
   position: absolute;
@@ -19,7 +19,10 @@ const Search = styled.div`
 `
 
 const Logo = styled.div`
-  margin-left: 30px;
+  margin-left: 805px;
+  text-center: 1.1em;
+  text-size: 1.5em;
+  font-style: italic;
 `
 
 const Nav = ({ toggleTheme, isLightMode }) => {
@@ -33,7 +36,7 @@ const Nav = ({ toggleTheme, isLightMode }) => {
       {/* <img src="./project_logo" alt="Project Logo"></img> */}
       <Logo>
         <Navbar.Brand style={{ color: "white" }} href="#home">
-          Logo
+          The Bare Minimum
         </Navbar.Brand>
       </Logo>
       <Navbar.Collapse className="justify-content-end" style={{ color: "white" }}>

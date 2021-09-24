@@ -4,6 +4,18 @@ import { Row, Col, Dropdown, Button, DropdownButton, Form } from "react-bootstra
 import { CartContext } from "../../../contexts/CartContext.jsx"
 import uniqid from "uniqid"
 import Stylesheet from "../styles.css"
+import styled from "styled-components"
+
+const Button1 = styled.button`
+  margin-right: 15px;
+  border-radius: 0px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+`
 
 function ProductForm(props) {
   const cartCtx = useContext(CartContext)
@@ -117,15 +129,15 @@ function ProductForm(props) {
         <Row>
           <Col>
             <div className="d-grid gap-2" bg="white" style={{ color: "grey" }}>
-              <Button
+              <Button1
                 bg="white"
                 size="lg"
                 variant="secondary"
                 className="d-grid gap-2 w-30 mt-3 p-0.5 p-0.5"
                 onClick={submitHandler}
               >
-                Add To Bag
-              </Button>
+                ADD TO BAG
+              </Button1>
             </div>
           </Col>
         </Row>

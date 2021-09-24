@@ -5,10 +5,10 @@ import { Card, Container } from "react-bootstrap"
 import styled from "styled-components"
 import "react-multi-carousel/lib/styles.css"
 
-const Header = styled.h5`
-  color: gray;
+const Header = styled.h3`
+  color: ${({ theme }) => theme.colors.text};
+  margin: 20px 0;
 `
-const ListContainer = styled.div``
 
 const responsive = {
   superLargeDesktop: {
@@ -34,21 +34,19 @@ const responsive = {
   },
 }
 
-const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
+const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
   const validProductList = products && products.length > 0
 
   const productsToRender =
-    products.length > 0 ? products : [{ id: 123 }, { id: 123 }, { id: 123 }]
+    products.length > 0 || loading === false
+      ? products
+      : [{ id: 123 }, { id: 123 }, { id: 123 }]
 
   return (
     <Container className="cardList p-4">
       <Header>{listTitle}</Header>
 
-      <Carousel
-        responsive={responsive}
-        itemClass="carousel-item-padding-40-px"
-        showDots={false}
-      >
+      <Carousel responsive={responsive} showDots={false} arrows={true}>
         {FirstCard && (
           <Card
             style={{

@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import StarRatings from "react-star-ratings"
-import axios from "axios"
 import Stylesheet from "../styles.css"
+import useReviews from "../../../contexts/ReviewsContext.jsx"
 
-function Star({ average }) {
+function Star(props) {
+  const { getAverageRating } = useReviews()
+
   return (
-    <div className="star-rating">
-      <StarRatings
-        starSpacing={"2px"}
-        rating={3.5}
-        starRatedColor="rgb(0,0,0)"
-        numberOfStars={5}
-        starDimension="15px"
-      />
-    </div>
+    <StarRatings
+      starSpacing={"2px"}
+      rating={getAverageRating(props.id)}
+      starRatedColor="rgb(0,0,0)"
+      numberOfStars={5}
+      starDimension="15px"
+      className="star-rating"
+    />
   )
 }
 

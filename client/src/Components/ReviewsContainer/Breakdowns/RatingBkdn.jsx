@@ -28,7 +28,7 @@ const RatingBkdn = (props) => {
       <Col xs={12} md={6}>
         <ProgressBar
           variant="success"
-          max={props.count}
+          max={reviews.length}
           now={reviewMetadata.ratings[props.rating]}
         ></ProgressBar>
       </Col>
@@ -61,8 +61,8 @@ const RatingBkdn = (props) => {
     <Row>
       <Col>
         {`${
-          props.count > 0
-            ? Math.round((reviewMetadata.recommended.true / props.count) * 100)
+          reviews.length > 0
+            ? Math.round((reviewMetadata.recommended.true / reviews.length) * 100)
             : 0
         }% of reviews recommend this product `}
       </Col>
@@ -74,7 +74,7 @@ const RatingBkdn = (props) => {
       {filters.length > 0 ? <Filters /> : null}
       <Average />
       {[5, 4, 3, 2, 1].map((rating, i) => (
-        <Bar key={i} rating={Math.abs(i - 5)} filterReviews={props.filterReviews} />
+        <Bar key={i} rating={rating} filterReviews={props.filterReviews} />
       ))}
       <Recs />
     </Container>

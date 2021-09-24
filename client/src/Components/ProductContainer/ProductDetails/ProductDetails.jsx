@@ -1,20 +1,11 @@
-import React, { useState } from "react"
-import {
-  Image,
-  Row,
-  Col,
-  Container,
-  Dropdown,
-  DropdownButton,
-  Form,
-} from "react-bootstrap"
+import React from "react"
+import { Row, Col } from "react-bootstrap"
 import RightThumbOverlay from "./RightThumbOverlay.jsx"
 import ProductForm from "./ProductForm.jsx"
 import Star from "./ProductStar.jsx"
 import ShareSocial from "./ShareSocial.jsx"
 import uniqid from "uniqid"
 import Stylesheet from "../styles.css"
-// import RatingsAvgs from "../../ReviewsContainer/Breakdowns/RatingsAvgs"
 
 function ProductDetails(props) {
   return (
@@ -22,11 +13,10 @@ function ProductDetails(props) {
       <Row>
         <Col>
           <div className="sameline">
-            <Star />
-            {/* <RatingAvgs  */}
-            <span className="reviews" href="#reviews">
+            <Star id={props.infoData.id} />
+            <a className="reviews" href="#ratings-reviews">
               Read All Reviews
-            </span>
+            </a>
           </div>
         </Col>
       </Row>
@@ -35,14 +25,26 @@ function ProductDetails(props) {
         <h1 className="productTitle">{props.infoData.name}</h1>
       </Col>
       <Row>
-        <p className="productDetail">
+        <div className="productDetail styleText ">
           {props.selectedStyle && props.selectedStyle.sale_price !== null
             ? props.selectedStyle &&
               props.selectedStyle.sale_price && (
-                <s className="redStrike">{props.selectedStyle.original_price}</s>
+                <>
+                  <span>
+                    <s className="redStrike styleText">
+                      {props.selectedStyle.original_price}
+                    </s>
+                  </span>
+                  <span className="styleText">
+                    {" "}
+                    {props.selectedStyle.sale_price}
+                  </span>{" "}
+                </>
               )
-            : props.selectedStyle && <h4>{props.selectedStyle.original_price}</h4>}
-        </p>
+            : props.selectedStyle && (
+                <div className="styleText">{props.selectedStyle.original_price}</div>
+              )}
+        </div>
       </Row>
       <div className="productDetail">
         {" "}
@@ -75,14 +77,12 @@ function ProductDetails(props) {
         stylePhotos={props.stylePhotos}
         stylesData={props.styleList}
         infoData={props.info}
-        setStyle={props.updateStyleHandler}
+        setStyle={props.setStyle}
       />
-      <br></br>
       <h4 className="social">Share on social media</h4>
       <div className="App">
         <ShareSocial />
       </div>
-      <Row></Row>
     </div>
   )
 }
