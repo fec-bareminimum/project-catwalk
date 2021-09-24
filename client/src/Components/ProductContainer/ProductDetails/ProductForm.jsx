@@ -129,16 +129,14 @@ function ProductForm(props) {
         <Row>
           <Col>
             <div className="d-grid gap-2" bg="white" style={{ color: "grey" }}>
-              <Button1>
-                <Button
-                  bg="white"
-                  size="lg"
-                  variant="secondary"
-                  className="d-grid gap-2 w-30 mt-3 p-0.5 p-0.5"
-                  onClick={submitHandler}
-                >
-                  Add To Bag
-                </Button>
+              <Button1
+                bg="white"
+                size="lg"
+                variant="secondary"
+                className="d-grid gap-2 w-30 mt-3 p-0.5 p-0.5"
+                onClick={submitHandler}
+              >
+                ADD TO BAG
               </Button1>
             </div>
           </Col>
