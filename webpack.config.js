@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   watch: true,
-  mode: "none",
+  mode: "production",
   entry: path.resolve(__dirname, "client", "src", "index.jsx"),
   output: {
     path: path.resolve(__dirname, "client", "build"),
