@@ -5,7 +5,7 @@ const morgan = require("morgan")
 const compression = require("compression")
 const mcache = require("memory-cache")
 
-const config = require("../config")
+const config = require("../config.js")
 const app = express()
 const port = 3000
 
