@@ -6,6 +6,7 @@ import Review from "./Review.jsx"
 import Upload from "./Upload.jsx"
 import UserInfo from "./UserInfo.jsx"
 import useReviews from "../../../../contexts/ReviewsContext.jsx"
+import useProducts from "../../../../contexts/ProductsContext.jsx"
 import styled from "styled-components"
 
 const Btn = styled.button`
@@ -21,7 +22,7 @@ const Btn = styled.button`
 
 const AddButton = (props) => {
   const { productInfo, addReview } = useReviews()
-  // const [product_id, setProduct_id] = useState(productInfo.id)
+  const { displayedProduct } = useProducts()
   const [reviewData, setReviewData] = useState({ product_id: 42366 })
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
@@ -66,8 +67,8 @@ const AddButton = (props) => {
               <h3>Write Your Review</h3>
             </Row>
             <Row>
-              {/* <h5>{`About the ${productInfo.name}`}</h5> */}
-              <h5>About the Camo Onesie</h5>
+              <h5>{`About the ${displayedProduct.name}`}</h5>
+              {/* <h5>About the Camo Onesie</h5> */}
             </Row>
           </Container>
         </Modal.Header>
