@@ -8,7 +8,6 @@ import useProducts from "../../contexts/ProductsContext.jsx"
 import useCart, { CartProvider } from "../../contexts/CartContext.jsx"
 import Img from "react-cool-img"
 
-
 function ProductMainView(props) {
   const [selectedStyle, setStyle] = useState(null)
   const { displayedProduct } = useProducts()
@@ -16,7 +15,7 @@ function ProductMainView(props) {
 
   useEffect(() => {
     if (displayedProduct.styles !== undefined) {
-       setStyle(styleList[0])
+      setStyle(styleList[0])
     }
   }, [styleList, displayedProduct])
 
