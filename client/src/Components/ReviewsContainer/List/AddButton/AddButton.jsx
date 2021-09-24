@@ -82,7 +82,7 @@ const AddButton = (props) => {
     <Col>
       <Col>
         <Btn className="add" onClick={handleShow} style={{ float: "right" }}>
-          Add a review
+          ADD A REVIEW +
         </Btn>
         <AddModal />
       </Col>

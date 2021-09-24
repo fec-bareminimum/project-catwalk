@@ -26,7 +26,7 @@ const ReviewTile = (props) => {
             />
           </Col>
           <Col className="name-date">
-            <Card.Text>
+            <Card.Text style={{ float: "right" }}>
               {`${props.reviewer_name},
               ${new Date(props.date).toLocaleDateString("en-US", {
                 year: "numeric",
