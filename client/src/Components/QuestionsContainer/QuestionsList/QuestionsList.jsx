@@ -22,12 +22,14 @@ const QuestionsList = (props) => {
   // accepts list of questions: load up to four questions
   // in return statement will map over list of questions in component QuestionsListEntry
   // FOR NOW will contain the "more answered Questions" and "Add a Question" button underneath
+  var isMounted = false
   const [questionListData, setQuestionListData] = useState([])
   const [renderQuestionsListData, setRenderQuestionsListData] = useState([])
   const [questionsCount, setQuestionsCount] = useState(4)
   const [hasMore, setHasMore] = useState(true)
   const [filterBySearch, setFilterBySearch] = useState("")
   const [searchValue, setSearchValue] = useState("")
+  const [questionsHeight, setQuestionsHeight] = useState(1)
 
   const context = useQA()
 
@@ -41,8 +43,9 @@ const QuestionsList = (props) => {
 
   useEffect(() => {
     // sets the questions to be rendered; as questionsCount increases the more questions that are rendered
-    if (questionListData.length > 0) {
+    if (questionListData[0]) {
       getRenderData()
+      setQuestionsHeight(250)
     }
   }, [questionsCount, questionListData])
 
@@ -96,12 +99,23 @@ const QuestionsList = (props) => {
     }
   }
 
+  const MoreAnswersButton = () => {
+    if (questionsHeight > 1) {
+      return (
+        <Button1 onClick={handleShowMoreQuestions}>MORE ANSWERED QUESTIONS</Button1>
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
     <>
       <SearchBar
         searchValue={searchValue}
         setFilterBySearch={setFilterBySearch}
         setSearchValue={setSearchValue}
+        questionsHeight={questionsHeight}
       />
       <div>
         <InfiniteScroll
@@ -109,7 +123,7 @@ const QuestionsList = (props) => {
           next={fetchMoreQuestions}
           hasMore={hasMore}
           loader={<h4>Loading...</h4>}
-          height={200}
+          height={questionsHeight}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>There are no more questions!</b>
@@ -120,7 +134,7 @@ const QuestionsList = (props) => {
             <QuestionListEntry question={question} key={question.question_id} />
           ))}
         </InfiniteScroll>
-        <Button1 onClick={handleShowMoreQuestions}>MORE ANSWERED QUESTIONS</Button1>
+        <MoreAnswersButton />
         <QuestionModal productId={props.displayedProduct.id} getData={getData} />
       </div>
     </>

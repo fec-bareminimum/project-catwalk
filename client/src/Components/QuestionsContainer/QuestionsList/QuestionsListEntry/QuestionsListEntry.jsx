@@ -41,12 +41,16 @@ const QuestionsListEntry = (props) => {
   const context = useQA()
 
   useEffect(() => {
-    getAnswersData()
-    setQuestionHelpfulness(props.question.question_helpfulness)
+    if (props.question !== undefined) {
+      getAnswersData()
+      setQuestionHelpfulness(props.question.question_helpfulness)
+    }
   }, [])
 
   useEffect(() => {
-    getAnswersRenderData()
+    if (answersListData[0]) {
+      getAnswersRenderData()
+    }
   }, [answersCount, answersListData])
 
   function handleHelpfulChange(e) {
