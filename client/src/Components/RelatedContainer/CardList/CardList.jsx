@@ -18,17 +18,8 @@ const ScrollButton = styled.button`
   color: #dfdfdf;
   font-size: 2em;
   background: dimgrey;
+  border-radius: 0.2em;
 `
-
-const CustomRightArrow = ({ onClick, ...rest }) => {
-  const {
-    onMove,
-    carouselState: { currentSlide, deviceType }
-  } = rest;
-  // onMove means if dragging or swiping in progress.
-  return <button onClick={() => onClick()} />;
-};
-{/* <Carousel  />; */ }
 
 const responsive = {
   superLargeDesktop: {
@@ -66,8 +57,14 @@ const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
     <Container className="cardList p-4" style={{ position: "relative" }}>
       <Header>{listTitle}</Header>
 
-      <ScrollButton>{"<"}</ScrollButton>
-      <Carousel responsive={responsive} draggable={true} showDots={false}>
+      {!FirstCard && <ScrollButton>{"<"}</ScrollButton>}
+      <Carousel
+        responsive={responsive}
+        ssr={true}
+        style={{ overflowX: "scroll !important" }}
+        draggable={true}
+        showDots={false}
+      >
         {FirstCard && (
           <Card
             style={{
