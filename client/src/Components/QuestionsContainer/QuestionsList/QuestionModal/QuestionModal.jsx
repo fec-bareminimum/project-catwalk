@@ -52,10 +52,17 @@ const QuestionModal = (props) => {
     // post if all sections are valid
     const form = event.currentTarget
     if (form.checkValidity() === true) {
-      context.postQuestion(questionBody, nickname, email, 42370, (response) => {
-        setShow(false)
-        props.getData()
-      })
+      context.postQuestion(
+        questionBody,
+        nickname,
+        email,
+        props.productId,
+        (response) => {
+          setShow(false)
+
+          props.getData()
+        }
+      )
     }
   }
 

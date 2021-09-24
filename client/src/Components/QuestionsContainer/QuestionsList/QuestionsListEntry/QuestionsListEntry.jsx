@@ -33,9 +33,7 @@ const QuestionsListEntry = (props) => {
   // uses component AnswersList to list answers for each question
   // will contain action ('helpfulness' & 'Add Answer') buttons
   // Display up to two answers for each question
-  const [questionHelpfulness, setQuestionHelpfulness] = useState(
-    props.question.question_helpfulness
-  )
+  const [questionHelpfulness, setQuestionHelpfulness] = useState(0)
   const [helpfulnessClicked, setHelpfulnessClicked] = useState(false)
   const [answersListData, setAnswersListData] = useState([])
   const [renderedAnswersListData, setRenderedAnswersListData] = useState([])
@@ -44,6 +42,7 @@ const QuestionsListEntry = (props) => {
 
   useEffect(() => {
     getAnswersData()
+    setQuestionHelpfulness(props.question.question_helpfulness)
   }, [])
 
   useEffect(() => {
