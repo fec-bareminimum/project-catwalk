@@ -51,7 +51,7 @@ function ProductCarouselList(props) {
       </Button>
       {props.photos && showExpanded ? (
         <>
-          <ProductModal onHideZoom={toggleExpandedHandler}>
+          <ProductModal className="modal-body" onHideZoom={toggleExpandedHandler}>
             <Carousel
               className="px-2"
               interval={null}

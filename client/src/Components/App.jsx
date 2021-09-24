@@ -12,6 +12,7 @@ import { ThemeProvider } from "styled-components"
 import WebFont from "webfontloader"
 import { GlobalStyles } from "../theme/GlobalStyles"
 import { useTheme } from "../theme/useTheme"
+import InfiniteScroll from "react-infinite-scroll-component"
 
 const App = () => {
   const { theme, themeMode, themeLoaded, getFonts, toggleTheme } = useTheme()

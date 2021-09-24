@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import Card from "react-bootstrap/Card"
-import Placeholder from "react-bootstrap/Placeholder"
+import { Placeholder } from "react-bootstrap"
 import StarRating from "react-star-ratings"
 import useProducts from "../../../../contexts/ProductsContext.jsx"
+import useReviews from "../../../../contexts/ReviewsContext.jsx"
 import {
   getAverageRating,
   extractPriceString,
@@ -20,27 +21,17 @@ const ProductCard = (props) => {
     fetchProductStyles,
     selectedStyleIndex,
   } = useProducts()
+  const { getAverageRating } = useReviews()
   const [styleShownIndex, setStyleShownIndex] = useState(0)
-
-  // useEffect(() => {
-  //   if (!props["name"] && fetchProductInfo) {
-  //     // fetchProductInfo(props["id"])
-  //     console.log("I need to fetch details")
-  //   }
-  //   if (!props["styles"] && fetchProductStyles) {
-  //     // fetchProductStyles(props["id"])
-  //     console.log("I need to fetch styles")
-  //   }
-  // }, [props])
 
   useEffect(() => {
     if (!props["name"] && fetchProductInfo) {
       fetchProductInfo(props["id"])
-      console.log("I need to fetch details")
     }
   }, [props["name"]])
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     updateDisplayedProduct(props)
   }
 
@@ -77,7 +68,7 @@ const ProductCard = (props) => {
 
           <Card.Subtitle>
             <StarRating
-              rating={getAverageRating(props.ratings)}
+              rating={getAverageRating(props.id)}
               starDimension="15px"
               starSpacing="0"
             />

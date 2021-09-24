@@ -13,10 +13,10 @@ function ProductDetails(props) {
       <Row>
         <Col>
           <div className="sameline">
-            <Star />
-            <span className="reviews" href="#reviews">
+            <Star id={props.infoData.id} />
+            <a className="reviews" href="#reviews">
               Read All Reviews
-            </span>
+            </a>
           </div>
         </Col>
       </Row>
@@ -31,12 +31,19 @@ function ProductDetails(props) {
               props.selectedStyle.sale_price && (
                 <>
                   <span>
-                    <s className="redStrike styleText">{props.selectedStyle.original_price}</s>
+                    <s className="redStrike styleText">
+                      {props.selectedStyle.original_price}
+                    </s>
                   </span>
-                  <span className="styleText">  {props.selectedStyle.sale_price}</span>{" "}
+                  <span className="styleText">
+                    {" "}
+                    {props.selectedStyle.sale_price}
+                  </span>{" "}
                 </>
               )
-            : props.selectedStyle && <div className="styleText">{props.selectedStyle.original_price}</div>}
+            : props.selectedStyle && (
+                <div className="styleText">{props.selectedStyle.original_price}</div>
+              )}
         </div>
       </Row>
       <div className="productDetail">
@@ -54,8 +61,8 @@ function ProductDetails(props) {
             props.stylesData.map((item) => {
               return (
                 <RightThumbOverlay
-                  selectedStyle={props.selectedStyle}
-                  updateStyle={props.updateStyle}
+                   selectedStyle={props.selectedStyle}
+                   updateStyle={props.updateStyle}
                   name={item.name}
                   item={item.photos[0].thumbnail_url}
                   id={item.style_id}
@@ -70,7 +77,7 @@ function ProductDetails(props) {
         stylePhotos={props.stylePhotos}
         stylesData={props.styleList}
         infoData={props.info}
-        setStyle={props.updateStyleHandler}
+        setStyle={props.setStyle}
       />
       <h4 className="social">Share on social media</h4>
       <div className="App">

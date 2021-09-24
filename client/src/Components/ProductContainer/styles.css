@@ -172,17 +172,23 @@
   top: 1vh;
   left: 12%;
   width: 75vw;
+  height: 100%;
   background-color: white;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 100;
   overflow: hidden;
   animation: slide-down 300ms ease-out forwards;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .productmodal img:hover {
   cursor: crosshair;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 .productZoom {
@@ -255,4 +261,15 @@
 
 .styleText {
   font-size: 23px;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

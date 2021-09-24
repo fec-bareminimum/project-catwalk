@@ -21,29 +21,35 @@ export const ProductsProvider = ({ children }) => {
   const [relatedProductIds, _setRelatedIds] = useState([])
   const [selectedStyleIndex, _setSelectedStyleIndex] = useState(0)
 
-  const exisitingListProduct = (productList, productObj) => {
-    return productList[
-      productList.map((e) => parseInt(e.id)).indexOf(parseInt(productObj["id"]))
-    ]
+  const existingListProduct = (productList, productObj) => {
+    return productList[productList.map((e) => e.id).indexOf(productObj["id"])]
   }
+  //  productList.map((e) => parseInt(e.id) ).indexOf((productObj["id"]))
 
   const _extendExistingProductInList = (productObj) => {
-    _setProductList((prevList) => {
-      // Also update the displayed product value
-      if (productObj["id"] === displayedProduct["id"]) {
-        _setDisplayedProduct({ ...displayedProduct, ...productObj })
-      }
+    setTimeout(() => {
+      _setProductList((prevList) => {
+        // Also update the displayed product value
 
-      if (exisitingListProduct(prevList, productObj)) {
-        return prevList.map((product) =>
-          parseInt(product["id"]) !== parseInt(productObj["id"])
-            ? product
-            : { ...product, ...productObj }
-        )
-      } else {
-        return [...prevList, productObj]
-      }
-    })
+        _setDisplayedProduct((prevObj) => {
+          if (productObj["id"] === prevObj["id"]) {
+            return { ...prevObj, ...productObj }
+          } else {
+            return prevObj
+          }
+        })
+
+        if (existingListProduct(prevList, productObj)) {
+          return prevList.map((product) =>
+            product["id"] !== productObj["id"]
+              ? product
+              : { ...product, ...productObj }
+          )
+        } else {
+          return [...prevList, productObj]
+        }
+      })
+    }, 0)
   }
 
   const fetchProducts = (page, count, callback) => {
@@ -74,7 +80,6 @@ export const ProductsProvider = ({ children }) => {
   const fetchProductStyles = (product_id, callback) => {
     fetch(`/products/${product_id}/styles`, { product_id }, (stylesObj) => {
       _extendExistingProductInList({ id: product_id, styles: stylesObj })
-
       // extra ---------
       if (callback) {
         callback(stylesObj)
@@ -108,9 +113,14 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const updateDisplayedProduct = (newProduct) => {
-    if (newProduct && newProduct["id"] !== displayedProduct["id"]) {
+    if (
+      (newProduct && newProduct["id"] !== displayedProduct["id"]) ||
+      Object.keys(displayedProduct).length === 0
+    ) {
       _setDisplayedProduct(newProduct)
       fetchProductRelatedIds(newProduct["id"])
+      fetchProductStyles(newProduct["id"])
+      fetchProductInfo(newProduct["id"])
       fetchProductReviews(newProduct["id"])
       changeSelectedStyleIndex(0)
     }
