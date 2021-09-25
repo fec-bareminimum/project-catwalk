@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import QuestionsList from "./QuestionsList/QuestionsList.jsx"
 import { Container } from "react-bootstrap"
+import { QAProvider } from "../../contexts/QAContext.jsx"
 import styled from "styled-components"
 
 const Title = styled.h3`
@@ -9,10 +10,14 @@ const Title = styled.h3`
 
 const QuestionsContainer = () => {
   return (
-    <Container>
-      <Title>QUESTIONS AND ANSWERS</Title>
-      <QuestionsList />
-    </Container>
+    <React.Fragment>
+      <QAProvider>
+        <Container>
+          <Title>QUESTIONS AND ANSWERS</Title>
+          <QuestionsList />
+        </Container>
+      </QAProvider>
+    </React.Fragment>
   )
 }
 

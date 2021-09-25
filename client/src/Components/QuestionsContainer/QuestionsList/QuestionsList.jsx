@@ -119,7 +119,7 @@ const QuestionsList = (props) => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <SearchBar
         searchValue={searchValue}
         setFilterBySearch={setFilterBySearch}
@@ -146,7 +146,7 @@ const QuestionsList = (props) => {
         <MoreAnswersButton />
         <QuestionModal productId={product_id} getData={getData} />
       </div>
-    </>
+    </React.Fragment>
   )
 }
 
