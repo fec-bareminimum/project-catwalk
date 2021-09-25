@@ -36,7 +36,7 @@ const AnswerModal = (props) => {
   const [files, setFiles] = useState([])
   const [photos, setPhotos] = useState([])
   const [validated, setValidated] = useState(false)
-
+  // want to show that photos are uploaded once photos[0] is defined
   const context = useQA()
 
   const handleClose = () => setShow(false)
