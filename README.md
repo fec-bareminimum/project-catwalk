@@ -11,12 +11,12 @@
 
 ## Overview
 
-Project Catwalk is a MVP client-facing retail web-portal. Browse catalog products with a modern customer experience.
+Project Catwalk is a MVP client-facing retail web-portal. Browse catalog products with a modern customer experience. Check out the [Trello Board](https://trello.com/b/PaLWmxg6/trello-project-catwalk) to see the ticket system used during the project
 
 ## Setup tasks
 
 - run `npm install` in this directory to install the dependencies.
-- run `npm run build` and `npm start` in separate terminals to start webpack and express.
+- run `npm run build:watch` and `npm start` in separate terminals to start webpack and express.
 - use the `config.example.js` file to create your own `config.js` and add your github API token to attach as an "Authorization" header in requests.
 
 ## Tests
