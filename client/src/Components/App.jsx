@@ -9,6 +9,7 @@ import QuestionsContainer from "./QuestionsContainer/QuestionsContainer.jsx"
 import ReviewsContainer from "./ReviewsContainer/ReviewsContainer.jsx"
 import { GlobalStyles } from "../theme/GlobalStyles"
 import { ThemeProvider } from "styled-components"
+import WebFont from "webfontloader"
 import { useTheme } from "../theme/useTheme"
 import InfiniteScroll from "react-infinite-scroll-component"
 

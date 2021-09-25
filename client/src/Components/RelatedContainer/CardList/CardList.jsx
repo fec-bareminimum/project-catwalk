@@ -10,16 +10,7 @@ const Header = styled.h3`
   margin: 20px 0;
 `
 
-const ScrollButton = styled.button`
-  padding: 0.2em 0.6em;
-  position: absolute;
-  z-index: 99;
-  top: 50%;
-  color: #dfdfdf;
-  font-size: 2em;
-  background: dimgrey;
-  border-radius: 0.2em;
-`
+const ListContainer = styled.div``
 
 const responsive = {
   superLargeDesktop: {
@@ -45,24 +36,19 @@ const responsive = {
   },
 }
 
-const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
+const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
   const validProductList = products && products.length > 0
 
   const productsToRender =
-    products.length > 0 || loading === false
-      ? products
-      : [{ id: 123 }, { id: 123 }, { id: 123 }]
+    products.length > 0 ? products : [{ id: 123 }, { id: 123 }, { id: 123 }]
 
   return (
-    <Container className="cardList p-4" style={{ position: "relative" }}>
+    <Container className="cardList p-4">
       <Header>{listTitle}</Header>
 
-      {!FirstCard && <ScrollButton>{"<"}</ScrollButton>}
       <Carousel
         responsive={responsive}
-        ssr={true}
-        style={{ overflowX: "scroll !important" }}
-        draggable={true}
+        itemClass="carousel-item-padding-40-px"
         showDots={false}
       >
         {FirstCard && (
@@ -87,7 +73,6 @@ const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
           />
         ))}
       </Carousel>
-      <ScrollButton style={{ right: "5%" }}>{">"}</ScrollButton>
     </Container>
   )
 }
