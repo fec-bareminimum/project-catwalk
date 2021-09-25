@@ -4,6 +4,7 @@ import QuestionListEntry from "./QuestionsListEntry/QuestionsListEntry.jsx"
 import SearchBar from "../SearchBar/SearchBar.jsx"
 import QuestionModal from "./QuestionModal/QuestionModal.jsx"
 import useQA from "../../../contexts/QAContext.jsx"
+import useProducts from "../../../contexts/ProductsContext.jsx"
 import styled from "styled-components"
 import InfiniteScroll from "react-infinite-scroll-component"
 
@@ -22,7 +23,6 @@ const QuestionsList = (props) => {
   // accepts list of questions: load up to four questions
   // in return statement will map over list of questions in component QuestionsListEntry
   // FOR NOW will contain the "more answered Questions" and "Add a Question" button underneath
-  var isMounted = false
   const [questionListData, setQuestionListData] = useState([])
   const [renderQuestionsListData, setRenderQuestionsListData] = useState([])
   const [questionsCount, setQuestionsCount] = useState(4)
@@ -30,16 +30,25 @@ const QuestionsList = (props) => {
   const [filterBySearch, setFilterBySearch] = useState("")
   const [searchValue, setSearchValue] = useState("")
   const [questionsHeight, setQuestionsHeight] = useState(1)
+  const [product_id, setProduct_id] = useState(null)
 
+  // const context = useQA()
   const context = useQA()
+  const { displayedProduct } = useProducts()
 
   useEffect(() => {
-    if (props.displayedProduct.id !== undefined) {
+    if (Object.keys(displayedProduct).length > 0) {
+      setProduct_id(displayedProduct.id)
+    }
+  }, [displayedProduct])
+
+  useEffect(() => {
+    if (product_id) {
       getData()
       setQuestionsCount(4)
       setHasMore(true)
     }
-  }, [props.displayedProduct])
+  }, [product_id])
 
   useEffect(() => {
     // sets the questions to be rendered; as questionsCount increases the more questions that are rendered
@@ -57,7 +66,7 @@ const QuestionsList = (props) => {
   }, [filterBySearch])
 
   const getData = () => {
-    context.fetchQuestions(props.displayedProduct.id, 1, 50, (response) => {
+    context.fetchQuestions(product_id, 1, 50, (response) => {
       setQuestionListData(response.data.results)
     })
   }
@@ -135,7 +144,7 @@ const QuestionsList = (props) => {
           ))}
         </InfiniteScroll>
         <MoreAnswersButton />
-        <QuestionModal productId={props.displayedProduct.id} getData={getData} />
+        <QuestionModal productId={product_id} getData={getData} />
       </div>
     </>
   )
