@@ -54,16 +54,20 @@ const ProductCard = (props) => {
 
       {props.name ? (
         <Card.Body onClick={handleClick}>
-          <Card.Subtitle>{props.category}</Card.Subtitle>
-          <Card.Subtitle>{props.name}</Card.Subtitle>
+          <Card.Subtitle style={{ color: "rgb(118 115 120)" }}>
+            {props.category}
+          </Card.Subtitle>
+          <Card.Subtitle style={{ color: "#28242B" }}>{props.name}</Card.Subtitle>
 
           {salePrice ? (
-            <Card.Subtitle>
+            <Card.Subtitle style={{ color: "rgb(22 130 99)" }}>
               {formatPriceStr(salePrice)}
               <span style={strikeThroughStyles}>{defaultPrice}</span>
             </Card.Subtitle>
           ) : (
-            <Card.Subtitle>{defaultPrice}</Card.Subtitle>
+            <Card.Subtitle style={{ color: "rgb(22 130 99)" }}>
+              {defaultPrice}
+            </Card.Subtitle>
           )}
 
           <Card.Subtitle>

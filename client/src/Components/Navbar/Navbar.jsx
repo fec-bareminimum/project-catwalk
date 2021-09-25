@@ -18,27 +18,13 @@ const Search = styled.div`
   padding-left: 0.5rem;
 `
 
-const Logo = styled.div`
-  margin-left: 805px;
-  text-center: 1.1em;
-  text-size: 1.5em;
-  font-style: italic;
-`
-
 const Nav = ({ toggleTheme, isLightMode }) => {
   return (
-    <Navbar
-      className="navbar-fixed-top"
-      bg="dark"
-      variant="light"
-      style={{ color: "white" }}
-    >
+    <Navbar className="navbar-fixed-top" bg="dark" variant="dark">
       {/* <img src="./project_logo" alt="Project Logo"></img> */}
-      <Logo>
-        <Navbar.Brand style={{ color: "white" }} href="#home">
-          The Bare Minimum
-        </Navbar.Brand>
-      </Logo>
+      <Navbar.Brand style={{ marginLeft: "20px", color: "white" }} href="#home">
+        The Bare Minimum
+      </Navbar.Brand>
       <Navbar.Collapse className="justify-content-end" style={{ color: "white" }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

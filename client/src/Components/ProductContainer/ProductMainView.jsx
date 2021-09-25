@@ -71,7 +71,7 @@ function ProductMainView(props) {
           <Container>
             <p className="siteHeader">
               SITE-WIDE ANNOUNCEMENT MESSAGE! -- SALE/DISCOUNT <b>OFFER</b> --{" "}
-              <u>NEW PRODUCT HIGHLIGHT</u>
+              <a className="highlight">NEW PRODUCT HIGHLIGHT</a>
             </p>
           </Container>
           <div>

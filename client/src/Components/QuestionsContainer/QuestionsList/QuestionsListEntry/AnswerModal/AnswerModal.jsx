@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Modal, Form, Button } from "react-bootstrap"
 import useQA from "../../../../../contexts/QAContext.jsx"
+import useProducts from "../../../../../contexts/ProductsContext.jsx"
 import styled from "styled-components"
 import Img from "react-cool-img"
 import axios from "axios"
@@ -38,6 +39,14 @@ const AnswerModal = (props) => {
   const [validated, setValidated] = useState(false)
   // want to show that photos are uploaded once photos[0] is defined
   const context = useQA()
+  const [product_name, setProduct_name] = useState("")
+  const { displayedProduct } = useProducts()
+
+  useEffect(() => {
+    if (Object.keys(displayedProduct).length > 0) {
+      setProduct_name(displayedProduct.name)
+    }
+  }, [displayedProduct])
 
   const handleClose = () => setShow(false)
   const handleShow = () => {
@@ -93,7 +102,6 @@ const AnswerModal = (props) => {
         <Form.Control
           type="file"
           onChange={(e) => {
-            // console.log(e.target.files)
             setPhotoPreviews([
               ...photoPreviews,
               URL.createObjectURL(e.target.files[0]),
@@ -142,7 +150,7 @@ const AnswerModal = (props) => {
 
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Subtitle>[Product Name]: {props.questionBody}</Subtitle>
+            <Subtitle>{`${product_name}: ${props.questionBody}`}</Subtitle>
             <Form.Group className="mb-3" controlId="AnswerForm.AnswerTextArea">
               <Form.Label>Your Answer:</Form.Label>
               <Form.Control

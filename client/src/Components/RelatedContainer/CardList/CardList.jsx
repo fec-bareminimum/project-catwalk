@@ -10,6 +10,8 @@ const Header = styled.h3`
   margin: 20px 0;
 `
 
+const ListContainer = styled.div``
+
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -34,19 +36,21 @@ const responsive = {
   },
 }
 
-const CardList = ({ FirstCard, products, listTitle, ActionBtn, loading }) => {
+const CardList = ({ FirstCard, products, listTitle, ActionBtn }) => {
   const validProductList = products && products.length > 0
 
   const productsToRender =
-    products.length > 0 || loading === false
-      ? products
-      : [{ id: 123 }, { id: 123 }, { id: 123 }]
+    products.length > 0 ? products : [{ id: 123 }, { id: 123 }, { id: 123 }]
 
   return (
     <Container className="cardList p-4">
       <Header>{listTitle}</Header>
 
-      <Carousel responsive={responsive} showDots={false} arrows={true}>
+      <Carousel
+        responsive={responsive}
+        itemClass="carousel-item-padding-40-px"
+        showDots={false}
+      >
         {FirstCard && (
           <Card
             style={{

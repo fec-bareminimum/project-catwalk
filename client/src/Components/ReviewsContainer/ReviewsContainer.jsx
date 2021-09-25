@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap"
 import Breakdowns from "./Breakdowns/Breakdowns.jsx"
 import List from "./List/List.jsx"
 import useReviews from "../../contexts/ReviewsContext.jsx"
+import useProducts from "../../contexts/ProductsContext.jsx"
 import useClickLogger from "../../hooks/useClickLogger.jsx"
 import styled from "styled-components"
 
@@ -12,15 +13,28 @@ const Title = styled.h3`
 
 const ReviewsContainer = () => {
   const { fetchReviews, fetchReviewMetadata, filters, setFilters } = useReviews()
+  const { displayedProduct } = useProducts()
   const [sort, setSort] = useState("relevant")
-  const [product_id, setProduct_id] = useState(42366)
+  const [product_id, setProduct_id] = useState(null)
+  const [product_name, setProduct_name] = useState("")
 
   useEffect(() => {
-    fetchReviews(1, 100, sort, product_id, filters, (data) => {})
+    if (Object.keys(displayedProduct).length > 0) {
+      setProduct_id(displayedProduct.id)
+      setProduct_name(displayedProduct.name)
+    }
+  }, [displayedProduct])
+
+  useEffect(() => {
+    if (product_id) {
+      fetchReviews(1, 100, sort, product_id, filters, (data) => null)
+    }
   }, [sort, product_id, filters])
 
   useEffect(() => {
-    fetchReviewMetadata(product_id)
+    if (product_id) {
+      fetchReviewMetadata(product_id)
+    }
   }, [product_id])
 
   const sortReviews = (option) => {
@@ -45,7 +59,7 @@ const ReviewsContainer = () => {
   }
 
   return (
-    <Container className="reviews" id="reviews">
+    <Container className="reviews" id="ratings-reviews">
       <Title>RATINGS &#38; REVIEWS</Title>
       <Row>
         <Col xs={2} md={4}>

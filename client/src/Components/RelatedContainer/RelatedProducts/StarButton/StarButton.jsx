@@ -8,6 +8,7 @@ const ButtonWrapper = styled.button`
   top: 0;
   right: 0.5em;
   padding: 0;
+  border: none;
   border-radius: 50%;
   background: transparent;
 `

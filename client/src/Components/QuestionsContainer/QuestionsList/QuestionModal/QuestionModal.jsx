@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Modal, Form } from "react-bootstrap"
 import useQA from "../../../../contexts/QAContext.jsx"
+import useProducts from "../../../../contexts/ProductsContext.jsx"
 import styled from "styled-components"
 
 const Button1 = styled.button`
@@ -26,8 +27,18 @@ const QuestionModal = (props) => {
   const [nickname, setNickname] = useState("")
   const [questionBody, setQuestionBody] = useState("")
   const [validated, setValidated] = useState(false)
+  const [product_id, setProduct_id] = useState(null)
+  const [product_name, setProduct_name] = useState("")
 
-  const context = useQA()
+  const { postQuestion } = useQA()
+  const { displayedProduct } = useProducts()
+
+  useEffect(() => {
+    if (Object.keys(displayedProduct).length > 0) {
+      setProduct_id(displayedProduct.id)
+      setProduct_name(displayedProduct.name)
+    }
+  }, [displayedProduct])
 
   const handleClose = () => setShow(false)
   const handleShow = () => {
@@ -77,7 +88,7 @@ const QuestionModal = (props) => {
         </Modal.Header>
 
         <Modal.Body>
-          <Subtitle>About the [Product Name Here]</Subtitle>
+          <Subtitle>{`About the ${product_name}`}</Subtitle>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="QuestionForm.QuestionTextArea">
               <Form.Label>Question:</Form.Label>

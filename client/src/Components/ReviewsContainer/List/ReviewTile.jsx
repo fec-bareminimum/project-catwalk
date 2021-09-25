@@ -26,7 +26,7 @@ const ReviewTile = (props) => {
             />
           </Col>
           <Col className="name-date">
-            <Card.Text>
+            <Card.Text style={{ float: "right", color: "#28242B" }}>
               {`${props.reviewer_name},
               ${new Date(props.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -41,13 +41,15 @@ const ReviewTile = (props) => {
   )
 
   const Recommend = () => (
-    <Card.Text className="recommend">&#10003; I recommend this product!</Card.Text>
+    <Card.Text className="recommend" style={{ color: "#28242B" }}>
+      &#10003; I recommend this product!
+    </Card.Text>
   )
 
   const Response = () => (
     <Card className="response">
       <Card.Title>Response from seller</Card.Title>
-      <Card.Text>{props.response}</Card.Text>
+      <Card.Text style={{ color: "#28242B" }}>{props.response}</Card.Text>
     </Card>
   )
 
@@ -108,8 +110,8 @@ const ReviewTile = (props) => {
         <Card className="reviewTile">
           <Header />
           <Card.Body>
-            <Card.Title>{props.summary}</Card.Title>
-            <Card.Text>{props.body}</Card.Text>
+            <Card.Title style={{ color: "#28242B" }}>{props.summary}</Card.Title>
+            <Card.Text style={{ color: "#28242B" }}>{props.body}</Card.Text>
             {props.recommend ? <Recommend /> : null}
             {props.response ? <Response /> : null}
             {props.photos.length > 0 ? <Photos /> : null}
