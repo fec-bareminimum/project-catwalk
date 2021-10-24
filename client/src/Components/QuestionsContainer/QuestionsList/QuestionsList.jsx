@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { ListGroup, Button } from "react-bootstrap"
 import QuestionListEntry from "./QuestionsListEntry/QuestionsListEntry.jsx"
+import SearchBar from "../SearchBar/SearchBar.jsx"
 import QuestionModal from "./QuestionModal/QuestionModal.jsx"
 import useQA from "../../../contexts/QAContext.jsx"
 import useProducts from "../../../contexts/ProductsContext.jsx"
@@ -26,9 +27,13 @@ const QuestionsList = (props) => {
   const [renderQuestionsListData, setRenderQuestionsListData] = useState([])
   const [questionsCount, setQuestionsCount] = useState(4)
   const [hasMore, setHasMore] = useState(true)
+  const [filterBySearch, setFilterBySearch] = useState("")
+  const [searchValue, setSearchValue] = useState("")
+  const [questionsHeight, setQuestionsHeight] = useState(1)
   const [product_id, setProduct_id] = useState(null)
 
-  const { fetchQuestions } = useQA()
+  // const context = useQA()
+  const context = useQA()
   const { displayedProduct } = useProducts()
 
   useEffect(() => {
@@ -38,24 +43,30 @@ const QuestionsList = (props) => {
   }, [displayedProduct])
 
   useEffect(() => {
-    // collecting entire Question List for a certain product ID
     if (product_id) {
       getData()
+      setQuestionsCount(4)
+      setHasMore(true)
     }
   }, [product_id])
 
   useEffect(() => {
     // sets the questions to be rendered; as questionsCount increases the more questions that are rendered
-    getRenderData()
+    if (questionListData[0]) {
+      getRenderData()
+      setQuestionsHeight(250)
+    }
   }, [questionsCount, questionListData])
 
   useEffect(() => {
     // filters the questions by the value being searched in the search bar
-    filterData()
-  }, [props.filterBySearch])
+    if (renderQuestionsListData.length > 0) {
+      filterData()
+    }
+  }, [filterBySearch])
 
   const getData = () => {
-    fetchQuestions(product_id, 1, 50, (response) => {
+    context.fetchQuestions(product_id, 1, 50, (response) => {
       setQuestionListData(response.data.results)
     })
   }
@@ -66,10 +77,10 @@ const QuestionsList = (props) => {
 
   const filterData = () => {
     // filter the list or set the rendering questions list back to its previous state
-    if (props.filterBySearch.length > 2) {
+    if (filterBySearch.length > 2) {
       setRenderQuestionsListData(
         questionListData.filter((question) =>
-          question.question_body.includes(props.filterBySearch)
+          question.question_body.includes(filterBySearch)
         )
       )
     } else {
@@ -97,33 +108,45 @@ const QuestionsList = (props) => {
     }
   }
 
-  const searchFilter = () => {
-    if (props.searchValue > 2) {
-      props.setFilterBySearch(props.searchValue)
+  const MoreAnswersButton = () => {
+    if (questionsHeight > 1) {
+      return (
+        <Button1 onClick={handleShowMoreQuestions}>MORE ANSWERED QUESTIONS</Button1>
+      )
+    } else {
+      return null
     }
   }
 
   return (
-    <div>
-      <InfiniteScroll
-        dataLength={questionsCount}
-        next={fetchMoreQuestions}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-        height={200}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>There are no more questions!</b>
-          </p>
-        }
-      >
-        {renderQuestionsListData.map((question) => (
-          <QuestionListEntry question={question} key={question.question_id} />
-        ))}
-      </InfiniteScroll>
-      <Button1 onClick={handleShowMoreQuestions}>MORE ANSWERED QUESTIONS</Button1>
-      <QuestionModal getData={getData} />
-    </div>
+    <React.Fragment>
+      <SearchBar
+        searchValue={searchValue}
+        setFilterBySearch={setFilterBySearch}
+        setSearchValue={setSearchValue}
+        questionsHeight={questionsHeight}
+      />
+      <div>
+        <InfiniteScroll
+          dataLength={questionsCount}
+          next={fetchMoreQuestions}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          height={questionsHeight}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>There are no more questions!</b>
+            </p>
+          }
+        >
+          {renderQuestionsListData.map((question) => (
+            <QuestionListEntry question={question} key={question.question_id} />
+          ))}
+        </InfiniteScroll>
+        <MoreAnswersButton />
+        <QuestionModal productId={product_id} getData={getData} />
+      </div>
+    </React.Fragment>
   )
 }
 

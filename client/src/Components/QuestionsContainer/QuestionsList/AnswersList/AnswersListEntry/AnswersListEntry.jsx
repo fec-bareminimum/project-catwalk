@@ -12,14 +12,14 @@ const Helpful = styled.span`
   margin-right: 10px;
 `
 
-// const SmallDiv = styled.div`
-//   font-size: small;
-//   margin-bottom: 10px;
-// `
+const SmallDiv = styled.div`
+  font-size: small;
+  margin-bottom: 10px;
+`
 
-// const smallA = styled.a`
-//   font-size: small;
-// `
+const smallA = styled.a`
+  font-size: small;
+`
 
 const AnswersListEntry = (props) => {
   const [answerHelpfulness, setAnswerHelpfulness] = useState(
@@ -33,6 +33,7 @@ const AnswersListEntry = (props) => {
 
   function handleHelpfulChange(e) {
     // sends a request to change the value of the helpful key to add 1 to the current helpfulness and only allow the click to happen once per visit
+    e.preventDefault()
     if (!helpfulnessClicked) {
       context.markAnswerHelpful(props.answer.answer_id, (response) => {
         setAnswerHelpfulness(answerHelpfulness + 1)
@@ -41,8 +42,9 @@ const AnswersListEntry = (props) => {
     }
   }
 
-  function handleReport() {
+  function handleReport(e) {
     // sends a request to change the value of the report key to true and only allow the click to happen once per visit
+    e.preventDefault()
     if (!reportedAnswerClicked) {
       context.reportAnswer(props.answer.answer_id, (response) => {
         setReportedAnswerClicked(true)
@@ -53,9 +55,17 @@ const AnswersListEntry = (props) => {
   function Report() {
     // function is used to report answer and change report to reported
     if (!reportedAnswerClicked) {
-      return <a onClick={handleReport}>Report</a>
+      return (
+        <a href="#" onClick={handleReport}>
+          Report
+        </a>
+      )
     } else {
-      return <a>Reported</a>
+      return (
+        <a href="#" onClick={handleReport}>
+          Reported
+        </a>
+      )
     }
   }
 
@@ -84,30 +94,34 @@ const AnswersListEntry = (props) => {
             <Img key={photo.id} src={photo.url} alt="" width="100" height="100" />
           ))}
         </div>
-        <div>
+        <SmallDiv>
           by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />
           , {props.answer.date.substr(0, 10)}
           <Dash>|</Dash>
           <Helpful>Helpful?</Helpful>
-          <a onClick={handleHelpfulChange}>Yes({answerHelpfulness})</a>
+          <a href="#" onClick={handleHelpfulChange}>
+            Yes({answerHelpfulness})
+          </a>
           <Dash>|</Dash>
           <Report />
-        </div>
+        </SmallDiv>
       </div>
     )
   }
   return (
     <div>
       {props.answer.body}
-      <div>
+      <SmallDiv>
         by <BoldedText text={props.answer.answerer_name} shouldBeBold={"Seller"} />,{" "}
         {props.answer.date.substr(0, 10)}
         <Dash>|</Dash>
         <Helpful>Helpful?</Helpful>
-        <a onClick={handleHelpfulChange}>Yes({answerHelpfulness})</a>
+        <a href="#" onClick={handleHelpfulChange}>
+          Yes({answerHelpfulness})
+        </a>
         <Dash>|</Dash>
         <Report />
-      </div>
+      </SmallDiv>
     </div>
   )
 }

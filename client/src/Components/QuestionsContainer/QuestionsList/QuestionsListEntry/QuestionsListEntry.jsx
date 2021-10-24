@@ -33,9 +33,7 @@ const QuestionsListEntry = (props) => {
   // uses component AnswersList to list answers for each question
   // will contain action ('helpfulness' & 'Add Answer') buttons
   // Display up to two answers for each question
-  const [questionHelpfulness, setQuestionHelpfulness] = useState(
-    props.question.question_helpfulness
-  )
+  const [questionHelpfulness, setQuestionHelpfulness] = useState(0)
   const [helpfulnessClicked, setHelpfulnessClicked] = useState(false)
   const [answersListData, setAnswersListData] = useState([])
   const [renderedAnswersListData, setRenderedAnswersListData] = useState([])
@@ -43,11 +41,16 @@ const QuestionsListEntry = (props) => {
   const context = useQA()
 
   useEffect(() => {
-    getAnswersData()
+    if (props.question !== undefined) {
+      getAnswersData()
+      setQuestionHelpfulness(props.question.question_helpfulness)
+    }
   }, [])
 
   useEffect(() => {
-    getAnswersRenderData()
+    if (answersListData[0]) {
+      getAnswersRenderData()
+    }
   }, [answersCount, answersListData])
 
   function handleHelpfulChange(e) {

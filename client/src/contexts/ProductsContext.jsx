@@ -108,7 +108,6 @@ export const ProductsProvider = ({ children }) => {
     }
   }
 
-
   const fetchProductRelatedIds = (product_id) => {
     fetch(`/products/${product_id}/related`, { product_id }, (relatedProducts) => {
       _setRelatedIds(relatedProducts)
