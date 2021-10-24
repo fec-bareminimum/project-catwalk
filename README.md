@@ -1,45 +1,78 @@
-# Project Catwalk
-
-![CircleCI](https://circleci.com/gh/fec-bareminimum/project-catwalk/tree/main.svg?style=shield)
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Setup tasks](#setup-tasks)
-- [Contributors](#contributors)
-- [Tech Stack](#tech-stack)
+# Atelier ![CircleCI](https://circleci.com/gh/fec-bareminimum/project-catwalk/tree/main.svg?style=shield) [Demo](https://project-atelier.herokuapp.com/)
 
 ## Overview
 
-Project Catwalk is a MVP client-facing retail web-portal. Browse catalog products with a modern customer experience. Check out the [Trello Board](https://trello.com/b/PaLWmxg6/trello-project-catwalk) to see the ticket system used during the project
+Atelier (Project Catwalk) is a MVP retail e-commerce client for browsing catalog products with a modern customer experience. This frontend project is built to serve product records from an external API. This was a group project with a group of 4 engineers, each working on one the of the four modules (see [Features](#features))
 
-## Setup tasks
-
-- run `npm install` in this directory to install the dependencies.
-- run `npm run build:watch` and `npm start` in separate terminals to start webpack and express.
-- use the `config.example.js` file to create your own `config.js` and add your github API token to attach as an "Authorization" header in requests.
-
-## Tests
-
-- run `npm run test:watch`. To test every change after saving.
-- run `npm run test` To manually test.
+![Demo GIF](./resources/assets/demo.gif)
 
 ## Contributors
 
-- [Andy Chen](https://github.com/andy-ch3n)
-- [Gabrielle Guo](https://github.com/ggbbi)
-- [Lawrence Sun](https://github.com/lawsun03)
-- [Spencer Lepine](https://github.com/spencerlepine) ([Journal](https://gist.github.com/spencerlepine/964affee95497d2009f96c0f778a3a41))
+- [Andy Chen](https://github.com/andy-ch3n) ([LinkedIn](https://www.linkedin.com/in/andych3n/))
+- [Gabrielle Guo](https://github.com/ggbbi) ([LinkedIn](https://www.linkedin.com/in/ggbbi/))
+- [Lawrence Sun](https://github.com/lawsun03) ([LinkedIn](https://www.linkedin.com/in/lsun0/))
+- [Spencer Lepine](https://github.com/spencerlepine) ([LinkedIn](https://www.linkedin.com/in/spencer-lepine/))
+
+## Setup
+
+```sh
+cp config.example.js config.js
+npm install
+npm run build
+npm start # new window
+```
 
 ## Tech Stack
 
 - [React](https://reactjs.org/)
-- [Axios](https://www.npmjs.com/package/axios)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [Styled-components](https://styled-components.com/)
 - [Express](https://expressjs.com/)
 - [Node.js](https://nodejs.org/en/)
 - [Jest](https://jestjs.io/)
 - [React Test Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Google Lighthouse](https://developers.google.com/web/tools/lighthouse)
 
-## API Docs
+## Features
+
+This project was broken down into four modules: Products Overview, Related/Outfit, Question/Answers, and Rating/Reviews. The entire group worked together to build a minimal Express server forwarding requests to an external (pre-built) products API. There was also collaboration to implement a light/dark theme with dynamic styling.
+
+### Products Overview
+
+- View and scroll through product display images.
+- See details like ratings, sales price, and available item styles.
+- Select a size to be added to the cart.
+
+![Products Overview Screenshot](./resources/assets/product_overview.png)
+
+### Related and Outfit
+
+- Click on a card body to open that product in the overview section.
+- Related: see products similar to the product currently displayed in the "overview" modules.
+- Related: Click the star button to open the comparison modal.
+- Outfit: carousel view for a personal outfit list of saved products
+- Outfit: remove or add products to list (stored in browser local storage)
+
+![Related and Outfit Screenshot](./resources/assets/related_outfit.png)
+
+### Question and Answers
+
+- View/search product questions with feedback
+- Submit questions in a pop-up form
+- Answer questions in a pop-up form
+
+![Question and Answers Screenshot](./resources/assets/question_answer.png)
+![Question and Answers Modal Screenshot](./resources/assets/question_answer_modal.png)
+
+### Rating and Reviews
+
+- Product rating breakdown
+- Sort product ratings
+- Write your review in a pop-up form
+
+![Rating and Reviews Screenshot](./resources/assets/ratings_reviews.png)
+![Rating and Reviews Modal Screenshot](./resources/assets/ratings_reviews_modal.png)
+
+## External API Documentation
 
 - [Atelier API](https://gist.github.com/trentgoing/d69849d6c16b82d279ffc4ecd127f49f)
