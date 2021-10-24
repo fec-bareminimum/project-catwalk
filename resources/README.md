@@ -5,4 +5,4 @@
 
 ## Engineering Journals
 
-- Spencer Lepine: [GitHub Gist](https://gist.github.com/spencerlepine/964affee95497d2009f96c0f778a3a41)
+- Spencer Lepine: [Markdown File](./journals/SPENCER_JOURNAL.md) | [GitHub Gist](https://gist.github.com/spencerlepine/964affee95497d2009f96c0f778a3a41)

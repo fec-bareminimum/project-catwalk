@@ -8,8 +8,6 @@ Atelier (Project Catwalk) is a MVP retail e-commerce client for browsing catalog
 
 ## Contributors
 
-Check out the [Trello Board](https://trello.com/b/PaLWmxg6/trello-project-catwalk) to see the ticket system used during the project
-
 - [Andy Chen](https://github.com/andy-ch3n) ([LinkedIn](https://www.linkedin.com/in/andych3n/))
 - [Gabrielle Guo](https://github.com/ggbbi) ([LinkedIn](https://www.linkedin.com/in/ggbbi/))
 - [Lawrence Sun](https://github.com/lawsun03) ([LinkedIn](https://www.linkedin.com/in/lsun0/))
