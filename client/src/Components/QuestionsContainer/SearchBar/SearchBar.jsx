@@ -19,20 +19,24 @@ const SearchBar = (props) => {
     }
   }
 
-  return (
-    <Search>
-      <Col>
-        <InputGroup className="searchBar" size="lg">
-          <FormControl
-            type="text"
-            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-            onChange={handleSearchChange}
-            value={props.searchValue}
-          />
-        </InputGroup>
-      </Col>
-    </Search>
-  )
+  if (props.questionsHeight > 1) {
+    return (
+      <Search>
+        <Col>
+          <InputGroup className="searchBar" size="lg">
+            <FormControl
+              type="text"
+              placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+              onChange={handleSearchChange}
+              value={props.searchValue}
+            />
+          </InputGroup>
+        </Col>
+      </Search>
+    )
+  } else {
+    return null
+  }
 }
 
 export default SearchBar

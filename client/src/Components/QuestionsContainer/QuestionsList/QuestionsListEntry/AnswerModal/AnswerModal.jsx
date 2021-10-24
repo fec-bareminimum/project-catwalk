@@ -37,9 +37,9 @@ const AnswerModal = (props) => {
   const [files, setFiles] = useState([])
   const [photos, setPhotos] = useState([])
   const [validated, setValidated] = useState(false)
+  // want to show that photos are uploaded once photos[0] is defined
+  const context = useQA()
   const [product_name, setProduct_name] = useState("")
-
-  const { postAnswer } = useQA()
   const { displayedProduct } = useProducts()
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const AnswerModal = (props) => {
     const form = event.currentTarget
     if (form.checkValidity() === true) {
       // console.log(form.checkValidity())
-      postAnswer(
+      context.postAnswer(
         props.questionId,
         answerBody,
         nickname,

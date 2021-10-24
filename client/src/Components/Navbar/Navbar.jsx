@@ -23,7 +23,7 @@ const Nav = ({ toggleTheme, isLightMode }) => {
     <Navbar className="navbar-fixed-top" bg="dark" variant="dark">
       {/* <img src="./project_logo" alt="Project Logo"></img> */}
       <Navbar.Brand style={{ marginLeft: "20px", color: "white" }} href="#home">
-        The Bare Minimum
+        Atelier
       </Navbar.Brand>
       <Navbar.Collapse className="justify-content-end" style={{ color: "white" }}>
         <svg
