@@ -2,7 +2,7 @@
 
 ## Overview
 
-Atelier (Project Catwalk) is a MVP retail e-commerce client for browsing catalog products with a modern customer experience. This frontend project is built to serve product records from an external API. This was a group project with a group of 4 engineers, each working on one the of the four modules (see [Features](#features))
+Atelier (Project Catwalk) is a MVP retail e-commerce client for browsing catalog products with a modern customer experience. This frontend project is built to serve product records from an external API. This was a group project with a group of 4 engineers, each working on one the of the four modules (see [Features](#features)) over a span of two weeks.
 
 ![Demo GIF](./resources/assets/demo.gif)
 
@@ -26,11 +26,12 @@ npm start # new window
 
 - [React](https://reactjs.org/)
 - [React-Bootstrap](https://react-bootstrap.github.io/)
-- [Styled-components](https://styled-components.com/)
+- [Styled Components](https://styled-components.com/)
+- [Webpack](https://webpack.js.org/)
 - [Express](https://expressjs.com/)
 - [Node.js](https://nodejs.org/en/)
 - [Jest](https://jestjs.io/)
-- [React Test Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Google Lighthouse](https://developers.google.com/web/tools/lighthouse)
 
 ## Features
